@@ -1,0 +1,62 @@
+<!-- /snippets/breadcrumbs.liquid -->
+{% comment %}
+  Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+
+{% capture sock_type %}{% render 'render-tag', key: 'type', tags: product.tags %}{% endcapture %}
+{% assign sock_type_arr = sock_type | lstrip | split: ' ' %}
+{% capture sock_type_url %}{{ sock_type_url }}{% for item in sock_type_arr %} {{ item | capitalize }}{% endfor %}{% endcapture %}
+{% assign sock_type_url =  sock_type_url | lstrip | handleize %}
+
+{% if sock_type_url == 'merino-10' or sock_type_url == 'merino10' %}
+  {% assign sock_type_url = 'merino-socks-collection' %}
+{% elsif sock_type_url == 'plantar-fasciitis-relief' or sock_type_url == "pf-relief"  %}
+  {% assign sock_type_url = 'plantar-fasciitis-styles' %}
+{% elsif sock_type_url == 'everyday' %}
+  {% assign sock_type_url = 'everyday-socks' %}
+{% elsif sock_type_url == 'compression' or sock_type_url == "graduated-compression"  %}
+  {% assign sock_type_url = 'graduated-compression-socks-collection' %}
+{% elsif sock_type_url == 'elite' %}
+  {% assign sock_type_url = 'elite-socks-collection' %}
+{% elsif sock_type_url == 'high-performance' %}
+  {% assign sock_type_url = 'high-performance-socks-collection' %}
+{% elsif sock_type_url == 'therapeutic' %}
+  {% assign sock_type_url = 'therapeutic-socks-collection' %}
+{% elsif sock_type_url == 'merch' or sock_type_url == 'accessories'  %}
+  {% assign sock_type_url = Nil %}
+  {% assign sock_type = Nil %}
+{% endif %}
+
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  {% if template contains 'product' %}
+    
+    {% if collection.handle contains "women" %}
+      {% assign gender = "Womens" %}
+    {% else %}
+      {% assign gender = "Mens" %}
+    {% endif %}
+    {% assign gender_handle = gender | handleize %}
+    
+    {% if collection.handle contains "youth" %}
+      <a href="/collections/youth">
+        Youth
+      </a>
+    {% else %}
+      <a href="/collections/all-{{ gender_handle }}-socks">
+        {{ gender }}
+      </a>
+  	{% endif %}
+    {% if sock_type != blank %}
+    <span aria-hidden="true">-</span>
+      {% capture collection_link %}/collections/{{ gender_handle }}-{{ sock_type_url }}{% endcapture %}
+      <a href="{{ collection_link }}">
+        {{ sock_type }}
+      </a>
+    {% elsif product.title contains 'Tee' %}
+      <span aria-hidden="true">-</span>
+      <a href="/collections/performance-tee">
+        Performance Tee
+      </a>
+    {% endif %}
+  {% endif %}
+</nav>

@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "article-banner": {
+      "type": "article-banner",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "settings": {
+      }
+    },
+    "feetures_product_carousel_qWRdNq": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Shop Feetures Running Socks",
+        "collection": "mens-running-socks",
+        "cta_btn_text": "",
+        "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": "shopify:\/\/collections\/womens-merino-socks-collection"
+      }
+    },
+    "blog-author": {
+      "type": "article-author",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "article-banner",
+    "main",
+    "feetures_product_carousel_qWRdNq",
+    "blog-author"
+  ]
+}

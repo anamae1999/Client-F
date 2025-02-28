@@ -1,0 +1,45 @@
+<section class="feeturesImageNextToText">
+    <img class="feeturesImageNextToText__img" src="{{section.settings.image | img_url: 'master' }}">
+
+    <div class="feeturesImageNextToText__content">
+        <h3 class="feeturesImageNextToText__headline">{{section.settings.headline}}</h3>
+        <p class="feeturesImageNextToText__body rte">
+            {{section.settings.body_copy}}
+        </p>
+    </div>
+</section>
+
+{% schema %}
+{
+"name": "Image Next to Text",
+"settings": [
+    {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline"
+    },
+    {
+        "type": "richtext",
+        "id": "body_copy",
+        "label": "Body Copy"
+    },
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+    }
+],
+"presets": [
+    {
+        "name": "Image Next to Text",
+        "category": "Feetures"
+    }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,193 @@
+<!--TikTok-->
+<script> !function (w, d, t) { w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)}; ttq.load('C1MV7CC98FMC4VRTLB9G'); ttq.page(); }(window, document, 'ttq'); </script>
+
+<!-- Hotjar Tracking Code for www.feetures.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1192052,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+
+
+{% if first_time_accessed %}
+
+<!-- Yotpo convetion code -->
+<script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/Gk39EhlYyu8rWfcHw8xp7auOG1OW7eXYcCZOaqhg/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script><script>yotpoTrackConversionData = {orderId: "{{order_name|handleize}}", orderAmount: "{{subtotal_price|money_without_currency}}", orderCurrency: "{{shop.currency }}"}</script><noscript><img src="//api.yotpo.com/conversion_tracking.gif?app_key=Gk39EhlYyu8rWfcHw8xp7auOG1OW7eXYcCZOaqhg&order_id={{order_name|handleize}}&order_amount={{subtotal_price|money_without_currency}}&order_currency={{ shop.currency }}" width="1" height="1"></noscript>
+<!-- Google Code for Orders Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 939316220;
+var google_conversion_label = "eekZCLSLxGQQ_KfzvwM";
+var google_conversion_value = {{ subtotal_price | money | remove:'$'  }};
+var google_conversion_currency = "USD";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/939316220/?value={{ subtotal_price | money | remove:'$'  }}&amp;currency_code=USD&amp;label=eekZCLSLxGQQ_KfzvwM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- BING UET TAG AND CONVERSION TRACKING -->
+<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"5713263"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+
+<!-- Bing Passing Sales Value Only Place This On Confirmation Page After Checkout Below The Above Bing Code -->
+<script>
+window.uetq = window.uetq || [];
+window.uetq.push('event', '', { 'revenue_value': '{{subtotal_price|money_without_currency}}', 'currency': 'USD' });
+</script>
+
+<!-- outbrain pixel-->
+  <script data-obct type="text/javascript">
+    /** DO NOT MODIFY THIS CODE**/
+    !function(_window, _document) {
+      var OB_ADV_ID='00a99a9dab5f0d8df12bc4eb23ce4923fb';
+      if (_window.obApi) {var toArray = function(object) {return Object.prototype.toString.call(object) === '[object Array]' ? object : [object];};_window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(toArray(OB_ADV_ID));return;}
+      var api = _window.obApi = function() {api.dispatch ? api.dispatch.apply(api, arguments) : api.queue.push(arguments);};api.version = '1.1';api.loaded = true;api.marketerId = OB_ADV_ID;api.queue = [];var tag = _document.createElement('script');tag.async = true;tag.src = '//amplify.outbrain.com/cp/obtp.js';tag.type = 'text/javascript';var script = _document.getElementsByTagName('script')[0];script.parentNode.insertBefore(tag, script);
+    }(window, document);
+      obApi('track', 'PAGE_VIEW');
+      obApi('track', 'Purchase', {orderValue:'{{ total_price | money_without_currency }}', currency: 'USD'});
+  </script>
+
+<!-- end of outbrain pixel-->
+
+<script type="text/javascript"> !function(e){if(!window.pintrk){window.pintrk=function() {window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefor e(t,r)}}
+("https://s.pinimg.com/ct/core.js");
+pintrk('load','​2614251127641​', { em: '{{ customer.email }}', }); pintrk('page');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?tid=​2614251127641​&noscript=1" /> </noscript>
+<script>
+pintrk('track', 'checkout',{
+value: {{ total_price | money_without_currency }},
+order_quantity:1
+});
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?tid=​2614251127641&event=checkout&noscript=1"/>
+</noscript>
+<script>
+pintrk('track', 'AddToCart',{
+value: {{ total_price | money_without_currency }},
+order_quantity:1
+});
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?tid=​2614251127641&event=AddToCart&noscript=1"/>
+</noscript>
+
+
+<!-- Taboola Pixel Code -->
+<script type='text/javascript'>
+  window._tfa = window._tfa || [];
+  window._tfa.push({notify: 'event', name: 'page_view', id: 1290647});
+  !function (t, f, a, x) {
+         if (!document.getElementById(x)) {
+            t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
+         }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/unip/1290647/tfa.js',
+  'tb_tfa_script');
+</script>
+<noscript>
+  <img src='https://trc.taboola.com/1290647/log/3/unip?en=page_view'
+      width='0' height='0' style='display:none'/>
+</noscript>
+<!-- End of Taboola Pixel Code -->
+
+
+<!-- Taboola Pixel Code -->
+<script>
+    _tfa.push({notify: 'event', name: 'make_purchase', id: 1290647, currency: '{{ shop.currency }}', orderid: '{{ order_number }}', revenue: '{{ total_price | money_without_currency }}'});
+</script>
+<noscript>
+    <img src='https://trc.taboola.com/1290647/log/3/unip?en=make_purchase'
+        width='0' height='0' style='display:none'/>
+</noscript>
+<!-- End of Taboola Pixel Code -->
+
+
+
+{% endif %}
+
+<!--- AvantLink Checkout Script --!>
+<script type="text/javascript">
+var _AvantMetrics = _AvantMetrics || [];
+_AvantMetrics.push(['order',{ order_id:'{{order_number}}', amount:'{{subtotal_price | money_without_currency}}', state:'{{billing_address.province_code}}', country:'{{billing_address.country_code}}' }]);
+{% for line in line_items %}
+_AvantMetrics.push(['item',{ order_id:'{{order_number}}', variant_sku:'{{line.product.id}}', price:'{{line.price | money_without_currency}}', qty:'{{line.quantity}}' }]);
+{% endfor %}
+</script>
+
+<script type="text/javascript">
+(function() {
+var avm = document.createElement('script'); avm.type = 'text/javascript'; avm.async = true;
+avm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.avmws.com/1016253/';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(avm, s);
+})();
+</script>
+
+<!-- StackAdapt -->
+<script>!function(s,a,e,v,n,t,z){if(s.saq)return;n=s.saq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!s._saq)s._saq=n;n.push=n;n.loaded=!0;n.version='1.0';n.queue=[];t=a.createElement(e);t.async=!0;t.src=v;z=a.getElementsByTagName(e)[0];z.parentNode.insertBefore(t,z)}(window,document,'script','https://tags.srv.stackadapt.com/events.js');saq('rt','EBsOjDqTjjsUKx97puimpw');</script><noscript><img src="https://tags.srv.stackadapt.com/rt?sid=EBsOjDqTjjsUKx97puimpw" width="1" height="1"/></noscript>
+<script>!function(s,a,e,v,n,t,z){if(s.saq)return;n=s.saq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!s._saq)s._saq=n;n.push=n;n.loaded=!0;n.version='1.0';n.queue=[];t=a.createElement(e);t.async=!0;t.src=v;z=a.getElementsByTagName(e)[0];z.parentNode.insertBefore(t,z)}(window,document,'script','https://tags.srv.stackadapt.com/events.js');saq('lal','chIDTQxQxsi_MYZNLeJ6Jg');</script><noscript><img src="https://tags.srv.stackadapt.com/lal?sid=chIDTQxQxsi_MYZNLeJ6Jg" width="1" height="1"/></noscript>
+<script>!function(s,a,e,v,n,t,z){if(s.saq)return;n=s.saq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!s._saq)s._saq=n;n.push=n;n.loaded=!0;n.version='1.0';n.queue=[];t=a.createElement(e);t.async=!0;t.src=v;z=a.getElementsByTagName(e)[0];z.parentNode.insertBefore(t,z)}(window,document,'script','https://tags.srv.stackadapt.com/events.js');saq('rt','YRP2HEY0IjdfjyRvMI2cBg');</script><noscript><img src="https://tags.srv.stackadapt.com/rt?sid=YRP2HEY0IjdfjyRvMI2cBg" width="1" height="1"/></noscript>
+<script>!function(s,a,e,v,n,t,z){if(s.saq)return;n=s.saq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!s.saq)s.saq=n;n.push=n;n.loaded=!0;n.version='1.0';n.queue=[];t=a.createElement(e);t.async=!0;t.src=v;z=a.getElementsByTagName(e)[0];z.parentNode.insertBefore(t,z)}(window,document,'script','https://tags.srv.stackadapt.com/events.js');saq('conv','Ko8ZhHH0Kq-2zd_7fxVUkQ', {'order_value': {{subtotal_price|money_without_currency}} });</script>
+
+
+<!--=================================Thank You=================================================-->
+
+<!-- Global Site Tag (gtag.js) - Google AdWords: 939316220 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-939316220"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-939316220', {'send_page_view': false});
+</script>
+
+<!-- google dynamic remarketing tag for order confirmation page -->
+<script type="text/javascript">
+  var id = new Array();
+  {% for line_item in order.line_items %}
+  id.push('shopify_US_{{line_item.product.id}}_{{line_item.variant.id}}');
+   {% endfor %}
+   var google_tag_params = {
+     ecomm_prodid: id,
+     ecomm_pagetype: 'purchase',
+     ecomm_totalvalue: parseFloat('{{ subtotal_price | money_without_currency | remove: ","}}')
+   };
+</script>
+<script>
+  gtag('event', 'page_view', {'send_to': 'AW-939316220',
+                              'ecomm_prodid':window.google_tag_params.ecomm_prodid,
+                              'ecomm_pagetype': window.google_tag_params.ecomm_pagetype,
+                              'ecomm_totalvalue':window.google_tag_params.ecomm_totalvalue
+                             });
+</script>
+
+<!-- Event snippet for Orders conversion page -->
+<script>
+  gtag('event', 'conversion', {
+      'send_to': 'AW-939316220/eekZCLSLxGQQ_KfzvwM',
+      'value': 0.0,
+      'currency': 'USD',
+      'transaction_id': ''
+  });
+</script>
+
+
+
+
+
+<!-- Attentive -->
+<script src="https://cdn.attn.tv/feetures/dtag.js"></script>

@@ -1,0 +1,600 @@
+<!-- /templates/customers/addressess.liquid -->
+{% comment %}
+  Template note:
+    - There are instances of inline JS below. Best practices advise separating this
+      into an external JS file
+    - There are separate 'add new' and 'edit' address forms
+{% endcomment %}
+<div class="wrapper-account">
+  <div class="container-nav-account">
+    <header>
+      <h1>{{ 'customer.account.title' | t }}</h1>
+    </header>
+    <div class="nav-header-account">
+      <div class="nav-header-circle">
+        <span>
+          {{ customer.first_name | first | upcase -}}
+          {{- customer.last_name | first | upcase }}
+        </span>
+      </div>
+      <div class="nav-header-content">
+        <span
+          >Hi {{ customer.first_name }}
+          {{ customer.last_name | first | upcase }}.</span
+        >
+        <span class="account-subtitle"
+          ><strong><span data-lion-points>...</span></strong> rewards points</span
+        >
+      </div>
+    </div>
+    <div class="nav-links-account">
+      <a href="/account/" data-content="order-history">My Account</a>
+      <a class="active" href="/account/addresses" data-content="addresses">Addresses</a>
+      <a href="/pages/rewards" data-content="rewards">Rewards</a>
+      <a href="/account?view=buy-it-again" data-content="buy-it-again">Buy it Again</a>
+    </div>
+    <div class="nav-logout account-subtitle">
+      {{ 'layout.customer.log_out' | t | customer_logout_link }}
+    </div>
+  </div>
+  <div class="container-content-account">
+    <header>
+      <h1>{{ 'customer.account.title' | t }}</h1>
+    </header>
+    <div class="content-account active" data-content="addresses">
+      <a href="#" class="btn" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">
+        {{- 'customer.addresses.add_new' | t -}}
+      </a>
+      <br>
+      <div id="AddAddress" class="form-vertical" style="display: none;">
+        {% form 'customer_address', customer.new_address %}
+          <h4>{{ 'customer.addresses.add_new' | t }}</h4>
+          <div class="grid grid--small">
+            <div class="grid__item one-half small--one-whole">
+              <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+              <input
+                type="text"
+                id="AddressFirstNameNew"
+                class="input-full"
+                name="address[first_name]"
+                value="{{form.first_name}}"
+                autocapitalize="words"
+              >
+            </div>
+            <div class="grid__item one-half small--one-whole">
+              <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+              <input
+                type="text"
+                id="AddressLastNameNew"
+                class="input-full"
+                name="address[last_name]"
+                value="{{form.last_name}}"
+                autocapitalize="words"
+              >
+            </div>
+          </div>
+          <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+          <input
+            type="text"
+            id="AddressCompanyNew"
+            class="input-full"
+            name="address[company]"
+            value="{{form.company}}"
+            autocapitalize="words"
+          >
+          <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+          <input
+            type="text"
+            id="AddressAddress1New"
+            class="input-full"
+            name="address[address1]"
+            value="{{form.address1}}"
+            autocapitalize="words"
+          >
+          <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+          <input
+            type="text"
+            id="AddressAddress2New"
+            class="input-full"
+            name="address[address2]"
+            value="{{form.address2}}"
+            autocapitalize="words"
+          >
+          <div class="grid grid--small">
+            <div class="grid__item large--one-half">
+              <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+              <input
+                type="text"
+                id="AddressCityNew"
+                class="input-full"
+                name="address[city]"
+                value="{{form.city}}"
+                autocapitalize="words"
+              >
+            </div>
+            <div class="grid__item large--one-half">
+              <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+              <select id="AddressCountryNew" class="input-full" name="address[country]" data-default="{{form.country}}">
+                {{ all_country_option_tags }}
+              </select>
+            </div>
+            <div class="grid__item" id="AddressProvinceContainerNew" style="display:none">
+              <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+              <select
+                id="AddressProvinceNew"
+                class="input-full"
+                name="address[province]"
+                data-default="{{form.province}}"
+              ></select>
+            </div>
+            <div class="grid__item large--one-half">
+              <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+              <input
+                type="text"
+                id="AddressZipNew"
+                class="input-full"
+                name="address[zip]"
+                value="{{form.zip}}"
+                autocapitalize="characters"
+              >
+            </div>
+            <div class="grid__item large--one-half">
+              <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+              <input type="tel" id="AddressPhoneNew" class="input-full" name="address[phone]" value="{{form.phone}}">
+            </div>
+          </div>
+          <p>
+            {{ form.set_as_default_checkbox }}
+            <label for="address_default_address_new" class="inline">{{ 'customer.addresses.set_default' | t }}</label>
+          </p>
+          <p><input type="submit" class="btn" value="{{ 'customer.addresses.add' | t }}"></p>
+          <p>
+            <a href="#" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">
+              {{- 'customer.addresses.cancel' | t -}}
+            </a>
+          </p>
+        {% endform %}
+      </div>
+      <h4>{{ 'customer.addresses.title' | t }}</h4>
+      {% paginate customer.addresses by 5 %}
+        <div class="address-row">
+          {% for address in customer.addresses %}
+            <div class="address-box">
+              {% if address == customer.default_address %}
+                <p>
+                  <strong>{{ 'customer.addresses.default' | t }}</strong>
+                </p>
+              {% endif %}
+              {{ address | format_address }}
+              <p>
+                {{ 'customer.addresses.edit' | t | edit_customer_address_link: address.id }} |
+                {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.url }}
+              </p>
+            </div>
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+      {% endpaginate %}
+      <div class="address-form-row">
+        {% for address in customer.addresses %}
+          <div id="EditAddress_{{address.id}}" class="form-vertical" style="display:none;">
+            {% form 'customer_address', address %}
+              <h2 class="h4">{{ 'customer.addresses.edit_address' | t }}</h2>
+              <div class="grid grid--small">
+                <div class="grid__item one-half small--one-whole">
+                  <label for="AddressFirstName_{{form.id}}">{{ 'customer.addresses.first_name' | t }}</label>
+                  <input
+                    type="text"
+                    id="AddressFirstName_{{form.id}}"
+                    class="input-full"
+                    name="address[first_name]"
+                    value="{{form.first_name}}"
+                    autocapitalize="words"
+                  >
+                </div>
+                <div class="grid__item one-half small--one-whole">
+                  <label for="AddressLastName_{{form.id}}">{{ 'customer.addresses.last_name' | t }}</label>
+                  <input
+                    type="text"
+                    id="AddressLastName_{{form.id}}"
+                    class="input-full"
+                    name="address[last_name]"
+                    value="{{form.last_name}}"
+                    autocapitalize="words"
+                  >
+                </div>
+              </div>
+              <label for="AddressCompany_{{form.id}}">{{ 'customer.addresses.company' | t }}</label>
+              <input
+                type="text"
+                id="AddressCompany_{{form.id}}"
+                class="input-full"
+                name="address[company]"
+                value="{{form.company}}"
+                autocapitalize="words"
+              >
+              <label for="AddressAddress1_{{form.id}}">{{ 'customer.addresses.address1' | t }}</label>
+              <input
+                type="text"
+                id="AddressAddress1_{{form.id}}"
+                class="input-full"
+                name="address[address1]"
+                value="{{form.address1}}"
+                autocapitalize="words"
+              >
+              <label for="AddressAddress2_{{form.id}}">{{ 'customer.addresses.address2' | t }}</label>
+              <input
+                type="text"
+                id="AddressAddress2_{{form.id}}"
+                class="input-full"
+                name="address[address2]"
+                value="{{form.address2}}"
+                autocapitalize="words"
+              >
+              <label for="AddressCity_{{form.id}}">{{ 'customer.addresses.city' | t }}</label>
+              <input
+                type="text"
+                id="AddressCity_{{form.id}}"
+                class="input-full"
+                name="address[city]"
+                value="{{form.city}}"
+                autocapitalize="words"
+              >
+              <label for="AddressCountry_{{form.id}}">{{ 'customer.addresses.country' | t }}</label>
+              <select
+                id="AddressCountry_{{form.id}}"
+                class="input-full"
+                name="address[country]"
+                data-default="{{form.country}}"
+              >
+                {{ all_country_option_tags }}
+              </select>
+              <div id="AddressProvinceContainer_{{form.id}}" style="display:none">
+                <label for="AddressProvince_{{form.id}}">{{ 'customer.addresses.province' | t }}</label>
+                <select
+                  id="AddressProvince_{{form.id}}"
+                  class="input-full"
+                  name="address[province]"
+                  data-default="{{form.province}}"
+                ></select>
+              </div>
+              <div class="grid grid--small">
+                <div class="grid__item one-half small--one-whole">
+                  <label for="AddressZip_{{form.id}}">{{ 'customer.addresses.zip' | t }}</label>
+                  <input
+                    type="text"
+                    id="AddressZip_{{form.id}}"
+                    class="input-full"
+                    name="address[zip]"
+                    value="{{form.zip}}"
+                    autocapitalize="characters"
+                  >
+                </div>
+                <div class="grid__item one-half small--one-whole">
+                  <label for="AddressPhone_{{form.id}}">{{ 'customer.addresses.phone' | t }}</label>
+                  <input
+                    type="tel"
+                    id="AddressPhone_{{form.id}}"
+                    class="input-full"
+                    name="address[phone]"
+                    value="{{form.phone}}"
+                  >
+                </div>
+              </div>
+              <p>
+                {{ form.set_as_default_checkbox }}
+                <label for="address_default_address_{{form.id}}" class="inline">
+                  {{- 'customer.addresses.set_default' | t -}}
+                </label>
+              </p>
+              <p><input type="submit" class="btn" value="{{ 'customer.addresses.update' | t }}"></p>
+              <p>
+                <a href="#" onclick="Shopify.CustomerAddress.hideForm({{form.id}}); return false;">
+                  {{- 'customer.addresses.cancel' | t -}}
+                </a>
+              </p>
+            {% endform %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wrapper-account {
+    width: 100%;
+    min-height: 75vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: stretch;
+    padding-top: 4rem;
+  }
+  .container-nav-account {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-right: 3rem;
+  }
+  .container-nav-account header {
+    display: none;
+  }
+  .nav-header-account {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+    padding-right: 3rem;
+  }
+  .nav-header-circle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #224b50;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  .nav-header-circle span {
+    margin: 0;
+    padding: 0;
+  }
+  .nav-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .nav-links-account {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .nav-links-account a {
+    cursor: pointer;
+    padding-top: 0.25rem;
+    border: 2px solid white;
+  }
+  .nav-links-account a.active {
+    font-weight: bold;
+  }
+  .account-subtitle {
+    font-size: 14px;
+  }
+  .nav-logout {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .container-content-account {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .container-content-account header {
+    display: block;
+  }
+  .content-account {
+    width: 100%;
+    display: none;
+  }
+  .content-account.active {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  @media (max-width: 800px) {
+    .wrapper-account {
+      flex-direction: column;
+      padding-top: 2rem;
+    }
+    .container-nav-account {
+      width: 100%;
+      align-items: center;
+    }
+    .container-nav-account header {
+      display: block;
+    }
+    .nav-header-account {
+      padding-right: 0;
+    }
+    .nav-links-account {
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      border: none;
+      padding: 0;
+    }
+    .nav-links-account a {
+      width: calc(50% - 0.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f3f0eb;
+      margin: 0.25rem;
+      padding-bottom: 0.25rem;
+      font-size: 14px;
+    }
+    .nav-links-account a.active {
+      border: 2px solid black;
+      font-weight: normal;
+    }
+    .nav-logout {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: underline;
+      font-size: 0.9rem;
+      padding: 0 0 2rem 0;
+    }
+    .container-content-account {
+      width: 100%;
+    }
+    .container-content-account header {
+      display: none;
+    }
+    .content-account .btn {
+      width: 100%;
+    }
+
+    .container-content-account .table-wrap {
+      width: 100%;
+    }
+  }
+
+  .address-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .address-box {
+    width: calc(20% - 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: #f3f0eb;
+    margin-right: 2rem;
+    padding: 0.5rem;
+  }
+  .address-box p:last-child {
+    margin-bottom: 0;
+  }
+  .address-form-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+  }
+  .address-form-row .form-vertical {
+    width: 100%;
+  }
+  @media (max-width: 800px) {
+    .wrapper-account {
+      flex-direction: column;
+      padding-top: 2rem;
+    }
+    .container-nav-account {
+      width: 100%;
+      align-items: center;
+    }
+    .container-nav-account header {
+      display: block;
+    }
+    .nav-header-account {
+      padding-right: 0;
+    }
+    .nav-links-account {
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      border: none;
+      padding: 0;
+    }
+    .nav-links-account a {
+      width: calc(50% - 0.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f3f0eb;
+      margin: 0.25rem;
+    }
+    .nav-links-account a.active {
+      border: 2px solid black;
+    }
+    .nav-logout {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: underline;
+      font-size: 0.9rem;
+      padding: 0 0 2rem 0;
+    }
+    .container-content-account {
+      width: 100%;
+    }
+    .container-content-account header {
+      display: none;
+    }
+    .content-account .btn {
+      width: 100%;
+    }
+    .address-row {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .address-box {
+      width: 100%;
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Initialize observers on address selectors
+  new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
+    hideElement: 'AddressProvinceContainerNew'
+  });
+
+  // Setup province selector on each customer address
+  {% for address in customer.addresses %}
+    new Shopify.CountryProvinceSelector('AddressCountry_{{address.id}}', 'AddressProvince_{{address.id}}', {
+      hideElement: 'AddressProvinceContainer_{{address.id}}'}
+    );
+  {% endfor %}
+
+  // Modified contents of customer_area.js (global asset)
+  Shopify.CustomerAddress = {
+    toggleForm: function(id) {
+      let allAddressForms = document.querySelectorAll('[id^=EditAddress_]');
+      for (let i = 0 ; i < allAddressForms.length; i++) {
+        let addressForm = allAddressForms[i];
+        addressForm.style.display = 'none';
+      };
+      let editEl = document.getElementById('EditAddress_'+id);
+      editEl.style.display = editEl.style.display == 'none' ? '' : 'none';
+      return false;
+    },
+
+    hideForm: function(id) {
+      let editEl = document.getElementById('EditAddress_'+id);
+      editEl.style.display = 'none';
+      return false;
+    },
+
+    toggleNewForm: function() {
+      let el = document.getElementById('AddAddress');
+      el.style.display = el.style.display == 'none' ? '' : 'none';
+      return false;
+    },
+
+    destroy: function(url, confirm_msg) {
+      if (confirm(confirm_msg || "Are you sure you wish to delete this address?")) {
+        Shopify.postLink(url, {'parameters': {'_method': 'delete'}});
+      }
+    }
+  }
+</script>

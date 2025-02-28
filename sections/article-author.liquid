@@ -1,0 +1,63 @@
+<div class="author-block container">
+  <p class="written-by">Written by</p>
+  {% if article.author == 'Joe Gaither' %}
+    <h2><a href="https://feetures.com/pages/joseph-gaither">Joseph Gaither</a></h2>
+  {% elsif article.author == 'Alexis Mendible' %}
+    <h2><a href="https://feetures.com/pages/alexis-mendible">Alexis Mendible</a></h2>
+  {% elsif article.user.homepage %}
+    <h2>
+      <a href="{{article.user.homepage}}">{{ article.author }}</a>
+    </h2>
+  {% else %}
+    <h2>{{ article.author }}</h2>
+  {% endif %}
+
+  {% if article.author == 'Joe Gaither' %}
+    <p>
+      Joe Gaither is the Chief Marketing Officer at Feetures. After graduating from UNC (go 'heels!) Joe joined the
+      ranks alongside father/Feetures CEO Hugh Gaither and brother/Feetures COO John Gaither, developing the very best
+      performance socks designed to support the many ways humans are meant to move. After work, you can find Joe with
+      his dog-son, Louis, or running in his favorite Feetures
+      <a href="https://feetures.com/collections/all-mens-socks\">men's socks</a>–the
+      <a href="https://feetures.com/collections/mens-running-socks/products/elite-ultra-light-no-show-tab-sock?variant=39512374280264"
+        >Elite Ultra Light No Shows</a
+      >!
+    </p>
+  {% elsif article.author == 'Alexis Mendible' %}
+    <p>
+      Alexis Mendible is the Senior Digital Marketing Specialist at Feetures. A lifelong northern Californian and proud
+      traveler, Alexis has a vested interest in all things movement and adventure. Combined with her passion for digital
+      marketing, Alexis offers fresh and authentic ideas to help others pursue healthy, active lifestyles. Off the
+      clock, you can catch Alexis working out in her favorite
+      <a href="https://feetures.com/collections/all-womens-socks">women's socks</a>, the
+      <a href="https://feetures.com/collections/mens-running-socks/products/elite-ultra-light-no-show-tab-sock?variant=39512374280264"
+        >Elite Ultra Light No Shows</a
+      >!
+    </p>
+  {% elsif article.user.bio %}
+    <p>{{ article.user.bio }}</p>
+  {% endif %}
+</div>
+<style>
+  .author-block {
+    background: whitesmoke;
+    padding: 24px 64px;
+    margin-top: 40px;
+  }
+  .author-block a {
+    text-decoration: underline !important;
+  }
+</style>
+
+<ul class="tags tags--article inline-list">
+  {% include 'tags-article' %}
+</ul>
+
+{% if section.settings.social_sharing_blog %}
+  {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+{% endif %}
+
+<hr class="hr--medium hr--clear">
+<div>
+  <a href="{{ blog.url }}" class="return-link">&larr; {{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
+</div>

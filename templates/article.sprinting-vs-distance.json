@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "article-banner": {
+      "type": "article-banner",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "settings": {
+      }
+    },
+    "advanced_content_HLie7Y": {
+      "type": "advanced-content",
+      "blocks": {
+        "html_7KfecE": {
+          "type": "html",
+          "settings": {
+            "code": "<h2><span style=\"font-weight: 400;\">The Best Socks for Sprinting<\/span><\/h2>\n<p><span style=\"font-weight: 400;\">Socks are a touchy subject for sprinters. Some believe socks disrupt the tight fit between the shoe and the feet and add unnecessary weight, opting to go sockless. <\/span><\/p>\n<p><span style=\"font-weight: 400;\">However, the right pair of sprinting socks should feel almost non-existent while providing compression, moisture-wicking, and cushioning qualities. Socks also help prevent blisters caused by the interior construction of sprinting spikes. A pair of <\/span><a href=\"https:\/\/feetures.com\/collections\/mens-high-performance-socks-collection\"><span style=\"font-weight: 400;\">high-performance socks for men<\/span><\/a><span style=\"font-weight: 400;\"> and women can aid in making sprinters more comfortable.<\/span><\/p>\n<p><span style=\"font-weight: 400;\">To reduce weight, sprinters should wear ankle or <\/span><a href=\"https:\/\/feetures.com\/collections\/womens-no-show-socks\"><span style=\"font-weight: 400;\">no-show socks<\/span><\/a><span style=\"font-weight: 400;\">. Feetures Elite sprinting socks are ultra-lightweight, anatomically designed, and slightly cushioned for comfort. <\/span><\/p>\n<p><span style=\"font-weight: 400;\">They feature iWick technology to wick moisture away from the feet, keeping them cool and comfortable while sprinting. Some models include a cushioned heel tab to prevent the common heel and ankle blisters sprinting shoes cause. <\/span><\/p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "html_7KfecE"
+      ],
+      "settings": {
+      }
+    },
+    "feetures_product_carousel_V4WQn4": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Shop Feetures Elite Ultra Light Running Socks",
+        "collection": "elite-ultra-light",
+        "cta_btn_text": "",
+        "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": "shopify:\/\/collections\/womens-merino-socks-collection"
+      }
+    },
+    "advanced_content_M3mJmi": {
+      "type": "advanced-content",
+      "blocks": {
+        "html_wQ3aLq": {
+          "type": "html",
+          "settings": {
+            "code": "<h2><span style=\"font-weight: 400;\">The Best Long-Distance Running Socks<\/span><\/h2>\n<p><span style=\"font-weight: 400;\">Long-distance running socks have more leeway in terms of size, thickness, and cushioning than sprinting socks. Different runners have varying preferences for how much cushioning they prefer, and Feetures offers all levels, from extra light cushioning to max cushioning. <\/span><\/p>\n<p><span style=\"font-weight: 400;\">Compression is a key element of the best running socks for long distances. The compression elements in quality long-distance running socks help improve circulation, allowing blood to flow more freely to the heart and oxygen to the lungs and muscles. Compression socks can help long-distance runners breathe and run more efficiently. <\/span><\/p>\n<p><span style=\"font-weight: 400;\">The best long-distance running socks feature breathable, moisture-wicking materials that keep feet cool and dry. Some runners may opt for knee-high compression socks for superior support and circulation when logging miles. <\/span><\/p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "html_wQ3aLq"
+      ],
+      "settings": {
+      }
+    },
+    "feetures_product_carousel_CUyap3": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Shop Feetures Long Distance Running Socks",
+        "collection": "mens-running-socks",
+        "cta_btn_text": "",
+        "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": "shopify:\/\/collections\/womens-merino-socks-collection"
+      }
+    },
+    "advanced_content_dcgPmY": {
+      "type": "advanced-content",
+      "blocks": {
+        "html_8iCNHN": {
+          "type": "html",
+          "settings": {
+            "code": "<h2><span style=\"font-weight: 400;\">Bonus Tip: The Best Socks for Trail Running<\/span><\/h2>\n<p><span style=\"font-weight: 400;\">Trail running is an entirely different running category that often involves running over, around, or under obstacles like trees, boulders, and other objects found along the trail. Feetures' new line of men's and women's trail running socks are for athletes who frequently run off-road. <\/span><\/p>\n<p><span style=\"font-weight: 400;\">Ideally, trail running socks would be similar to <\/span><a href=\"https:\/\/feetures.com\/collections\/mens-hiking-socks\"><span style=\"font-weight: 400;\">hiking socks<\/span><\/a><span style=\"font-weight: 400;\">, offering additional cushioning and protection around the ankle to protect it from jagged boulders, branches, and other debris. They're also moisture-wicking to keep feet dry, even when crossing streams or muddy terrain. <\/span><\/p>\n<p><span style=\"font-weight: 400;\">The best women's and men's trail running socks offer additional cushioning on the soles of the feet to protect against sharp rocks and sticks that are often underfoot. <\/span><\/p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "html_8iCNHN"
+      ],
+      "settings": {
+      }
+    },
+    "feetures_product_carousel_XBYGc4": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Shop Feetures Trail Socks",
+        "collection": "trail",
+        "cta_btn_text": "",
+        "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": "shopify:\/\/collections\/womens-merino-socks-collection"
+      }
+    },
+    "advanced_content_tbEmEF": {
+      "type": "advanced-content",
+      "blocks": {
+        "html_ixzbUR": {
+          "type": "html",
+          "settings": {
+            "code": "<h2><span style=\"font-weight: 400;\">Socks for All Types of Running<\/span><\/h2>\n<p><span style=\"font-weight: 400;\">Running is a diverse sport that involves numerous disciplines. Each running style requires a top-quality pair of socks to promote optimal performance. At Feetures, it's our mission to offer socks that help you perform your best. <\/span><\/p>\n<p><span style=\"font-weight: 400;\">Feetures has been passionately supporting runners for more than 20 years. Our mission is to engineer products that help you perform at your peak. We prioritize fit above all else, ensuring a comfortable run every time.<\/span><\/p>\n<p><span style=\"font-weight: 400;\">We stand behind every product we make, and our <\/span><a href=\"https:\/\/feetures.com\/pages\/lifetime-guarantee\"><span style=\"font-weight: 400;\">lifetime guarantee<\/span><\/a><span style=\"font-weight: 400;\"> allows you to find your perfect sock risk-free. Whether you're sprinting 50 meters or conquering a 50-mile trail, Feetures has you covered with the <\/span><a href=\"https:\/\/feetures.com\/collections\/womens-running-socks\"><span style=\"font-weight: 400;\">best running socks for women<\/span><\/a><span style=\"font-weight: 400;\"> and the<\/span><a href=\"https:\/\/feetures.com\/collections\/mens-running-socks\"> <span style=\"font-weight: 400;\">best running socks for men<\/span><\/a><span style=\"font-weight: 400;\">.<\/span><\/p>\n<p><span style=\"font-weight: 400;\">But we understand that with so many great options, choosing the perfect pair can be a challenge. That's why we've created a tool to make it easier for you. Try our <\/span><a href=\"https:\/\/feetures.com\/pages\/which-feetures\"><span style=\"font-weight: 400;\">Sock Finder Quiz <\/span><\/a><span style=\"font-weight: 400;\">to discover your best match! It's a quick and fun way to find the perfect Feetures sock for your running style and needs. So why wait? Start your journey to a more comfortable run today!<\/span><\/p>\n<p> <\/p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "html_ixzbUR"
+      ],
+      "settings": {
+      }
+    },
+    "feetures_product_carousel_qWRdNq": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Shop Feetures Running Socks",
+        "collection": "mens-running-socks",
+        "cta_btn_text": "",
+        "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": "shopify:\/\/collections\/womens-merino-socks-collection"
+      }
+    },
+    "blog-author": {
+      "type": "article-author",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "article-banner",
+    "main",
+    "advanced_content_HLie7Y",
+    "feetures_product_carousel_V4WQn4",
+    "advanced_content_M3mJmi",
+    "feetures_product_carousel_CUyap3",
+    "advanced_content_dcgPmY",
+    "feetures_product_carousel_XBYGc4",
+    "advanced_content_tbEmEF",
+    "feetures_product_carousel_qWRdNq",
+    "blog-author"
+  ]
+}

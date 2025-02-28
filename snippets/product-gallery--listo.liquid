@@ -1,0 +1,484 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<style>
+  .product-gallery-wrapper {
+    width: 100%;
+    position: sticky;
+    top: 116px;
+    align-self: start;
+    padding-top: 25px;
+  }
+
+  .product-gallery-wrapper .media-store {
+      display: none;
+    }
+
+    .swipers-container {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 5px;
+    }
+
+    .swiper-main {
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .swiper-main .swiper-wrapper {
+      width: 100%;
+      display: flex;
+      --image-scale-factor: 1.5;
+    }
+
+    .swiper-main .swiper-button-next svg,
+    .swiper-main .swiper-button-prev svg {
+      width: 21px;
+      height: auto;
+    }
+
+    .swiper-main .swiper-button-next:after,
+    .swiper-main .swiper-button-prev:after {
+      display: none;
+    }
+
+    .swiper-main .swiper-button-prev {
+      transform: rotate(180deg);
+    }
+
+    .swiper-main .swiper-button-disabled {
+      opacity: 0;
+      pointer-events: unset;
+    }
+
+    .product-image-container {
+      width: 100%;
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .swiper-main .product-image-container {
+      cursor: zoom-in;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 4px;
+    }
+
+    .product-zoom-frame {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+    }
+
+    .product-zoom-input {
+      display: none;
+    }
+
+    .product-image-container:has(.product-zoom-frame input:checked) {
+      cursor: zoom-in;
+    }
+
+    .product-image-container:has(.product-zoom-frame input:checked) img.product-image {
+      -webkit-transform: scale(var(--image-scale-factor));
+      -ms-transform: scale(var(--image-scale-factor));
+      -o-transform: scale(var(--image-scale-factor));
+      transform: scale(var(--image-scale-factor));
+    }
+
+    .product-image-container:has(.product-image.video-link) {
+      cursor: pointer;
+    }
+
+    .product-image-container:has(.product-image.video-link):before {
+      content: ' ';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      background: url({{ 'icon-play.svg' | asset_url }}) no-repeat center center;
+      pointer-events: none;
+    }
+
+    .product-video-container {
+      width: 100%;
+      aspect-ratio: 0.75;
+      position: relative;
+    }
+
+    .product-video-container.landscape {
+      aspect-ratio: 1.25;
+      grid-column: span 2;
+    }
+
+    .product-video {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .swiper-thumbs {
+      width: 10%;
+      flex-shrink: 0;
+    }
+
+    .swiper-thumbs .swiper-slide {
+      height: min-content !important;
+      border-radius: 4px;
+    }
+
+    .swiper-slide-thumb-active {
+      outline: 2px solid #000;
+    }
+
+    .swiper-thumbs .product-image-container:has(.product-image.video-link):before {
+      background-size: 50%;
+  }
+
+  .swiper-thumbs .product-image {
+    border-radius: 4px;
+  }
+
+  @media screen and (max-width: 1075px) {
+    .product-gallery-wrapper {
+      width: calc(100% + 30px);
+      position: relative;
+      top: 0;
+      padding-top: 5px;
+      margin-left: -15px;
+      padding-bottom: 15px;
+    }
+
+      .swipers-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .swiper-thumbs {
+        width: 100%;
+        padding-top: 7px;
+        padding-buttom: 2px;
+      }
+    }
+
+  .swiper-main .model-info {
+    position: absolute;
+    bottom: 5px;
+    background: white;
+    border-radius: 5px;
+    left: 5px;
+    padding: 0 5px 3px 5px;
+    font-size: 14px;
+  }
+</style>
+
+<div class="product-gallery-wrapper" data-product-gallery>
+  <div class="media-store" data-media-storage>
+    {% for media in product.media %}
+      {% case media.media_type %}
+        {% when 'image' %}
+          <div class="swiper-slide">
+            <div class="product-image-container">
+              {%- render 'media' with media,
+                enable_image_zoom: true,
+                featured: featured,
+                width: width,
+                height: height,
+                product_title: product.title
+              %}
+              {% unless media.alt contains 'youtube.com' %}
+                <div class="product-zoom-frame">
+                  <input
+                    class="product-zoom-input"
+                    type="checkbox"
+                    tabindex="-1"
+                  >
+                </div>
+              {% endunless %}
+              {% if product.title contains 'Tee' %}
+                {% if media.alt contains 'model' %}
+                  <span class="model-info">{{ media.alt | split: ' | ' | last | remove: 'model:'}}</span>
+                  {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        {% when 'video' %}
+          <div class="swiper-slide">
+            <div class="product-video-container{% if media.aspect_ratio > 1 %} landscape{% endif %}">
+              {%- render 'media' with media,
+                enable_image_zoom: true,
+                featured: featured,
+                width: width,
+                height: height,
+                product_title: product.title
+              %}
+            </div>
+          </div>
+        {% when 'external_video' %}
+          <div class="swiper-slide">
+            <div class="product-video-container">
+              {%- render 'media' with media,
+                enable_image_zoom: true,
+                featured: featured,
+                width: width,
+                height: height,
+                product_title: product.title
+              %}
+            </div>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+  <div class="swipers-container">
+    <div class="swiper-main">
+      <div class="swiper-wrapper"></div>
+      <div class="swiper-button-prev">
+        {% render 'product-gallery-caret--listo' %}
+      </div>
+      <div class="swiper-button-next">
+        {% render 'product-gallery-caret--listo' %}
+      </div>
+    </div>
+ 
+    <div class="swiper-thumbs">
+      <div class="swiper-wrapper"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // If wrapper to scope variables for load in from section rendering API
+  if (true) {
+    let script = document.currentScript;
+    let productGallery = script.previousElementSibling;
+
+    /*
+    IMAGE ZOOM LOGIC - START
+    */
+
+    // Define function to track mouse movement and map to media tranform
+    let trackMouse = function (event, frame, image, scaleFactor) {
+      // Define offset based on event type
+      let offsetX = 0;
+      let offsetY = 0;
+      let boundingClientRectangle = event.target.getBoundingClientRect();
+      offsetX = event.clientX - boundingClientRectangle.left;
+      offsetY = event.clientY - boundingClientRectangle.top;
+
+      // Define frame and image height & width
+      let frameWidth = frame.offsetWidth;
+      let frameHeight = frame.offsetHeight;
+      let frameWidthHalf = frameWidth / 2;
+      let frameHeightHalf = frameHeight / 2;
+      let scaledImageWidth = frameWidth * scaleFactor;
+      let scaledImageHeight = frameHeight * scaleFactor;
+      let scaledImageWidthHalf = scaledImageWidth / 2;
+      let scaledImageHeightHalf = scaledImageHeight / 2;
+
+      // Calculate of mouse relative to center of scaled image
+      let centerOffsetX = Math.abs(offsetX * scaleFactor - scaledImageWidthHalf);
+      let centerOffsetY = Math.abs(offsetY * scaleFactor - scaledImageHeightHalf);
+
+      // Use relation of mouse offset to frame with half to determine positive/negetive offset
+      let scaledOffsetX = offsetX > frameWidthHalf ? centerOffsetX * -1 : centerOffsetX;
+      let scaledOffsetY = offsetY > frameHeightHalf ? centerOffsetY * -1 : centerOffsetY;
+
+      // Set min/max for offsets
+      scaledOffsetX =
+        scaledOffsetX + frameWidthHalf > scaledImageWidthHalf ? scaledImageWidthHalf - frameWidthHalf : scaledOffsetX;
+      scaledOffsetX =
+        scaledOffsetX - frameWidthHalf < scaledImageWidthHalf * -1
+          ? (scaledImageWidthHalf - frameWidthHalf) * -1
+          : scaledOffsetX;
+
+      scaledOffsetY =
+        scaledOffsetY + frameHeightHalf > scaledImageHeightHalf
+          ? scaledImageHeightHalf - frameHeightHalf
+          : scaledOffsetY;
+      scaledOffsetY =
+        scaledOffsetY - frameHeightHalf < scaledImageHeightHalf * -1
+          ? (scaledImageHeightHalf - frameHeightHalf) * -1
+          : scaledOffsetY;
+
+      // Compose and style to zoomed image
+      let styleString = `left:${scaledOffsetX}px;top:${scaledOffsetY}px;`;
+      image.setAttribute('style', styleString);
+    };
+
+    let resetPosition = function (frame, image) {
+      image.setAttribute('style', '');
+    };
+
+    let initZoom = function () {
+      let productGalleryGrid = productGallery.querySelector('[data-product-gallery] .swiper-main .swiper-wrapper');
+      let productGalleryImages = productGalleryGrid.querySelectorAll('.product-image');
+      let scaleFactor = getComputedStyle(productGalleryGrid).getPropertyValue('--image-scale-factor');
+
+      // Loop through images
+      for (let i = 0; i < productGalleryImages.length; i++) {
+        let productGalleryImage = productGalleryImages[i];
+        let productGalleryImageContainer = productGalleryImage.parentElement;
+        let productGalleryImageZoomFrame = productGalleryImageContainer.querySelector('.product-zoom-frame');
+        if (productGalleryImageZoomFrame) {
+          let productGalleryImageZoomFrameInput = productGalleryImageZoomFrame.querySelector('input');
+
+          // Add click event to zoom frame
+          productGalleryImageZoomFrame.addEventListener('click', function (event) {
+            productGalleryImage.click();
+          });
+
+          // add mouse enter event to zoom frame
+          productGalleryImageZoomFrame.addEventListener('mouseenter', function (event) {
+            productGalleryImageZoomFrameInput.checked = true;
+          });
+
+          // Add tracking effect to mouse on zoom
+          productGalleryImageZoomFrame.addEventListener('mousemove', function (event) {
+            if (productGalleryImageZoomFrameInput.checked) {
+              trackMouse(event, productGalleryImageZoomFrame, productGalleryImage, scaleFactor);
+            }
+          });
+
+          // Add mouseleave event to reset frame
+          productGalleryImageZoomFrame.addEventListener('mouseleave', function (event) {
+            productGalleryImageZoomFrameInput.checked = false;
+            resetPosition(productGalleryImageZoomFrame, productGalleryImage);
+          });
+        }
+      }
+    };
+    /*
+    IMAGE ZOOM LOGIC - END
+    */
+
+    /*
+    VARIANT CHANGE SHOW/HIDE - START
+    */
+    let showHideImages = function () {
+      let swiperMain = productGallery.querySelector('.swiper-main');
+      let swiperThumbs = productGallery.querySelector('.swiper-thumbs');
+      let swiperMainWrapper = swiperMain.querySelector('.swiper-wrapper');
+      let swiperThumbsWrapper = swiperThumbs.querySelector('.swiper-wrapper');
+      let activeColorInput = document.querySelector(
+        'form[data-product-form] * input[data-option-name="Color"]:checked'
+      );
+      let activeColorValue = activeColorInput ? activeColorInput.value : null;
+      let activeColorImages;
+      if (activeColorValue) {
+        activeColorImages = document.querySelectorAll(
+          `[data-media-storage] * [data-color="${activeColorValue}"],[data-media-storage] * [data-color=""]`
+        );
+      } else {
+        activeColorImages = document.querySelectorAll(`[data-media-storage] * [data-color]`);
+      }
+      swiperMain.swiper.removeAllSlides();
+      swiperThumbs.swiper.removeAllSlides();
+      for (let i = 0; i < activeColorImages.length; i++) {
+        let imageContainer = activeColorImages[i].closest('.swiper-slide');
+        let clonedImage = imageContainer.cloneNode(true);
+        let clonedImageThumb = imageContainer.cloneNode(true);
+        swiperMainWrapper.append(clonedImage);
+        swiperThumbsWrapper.append(clonedImageThumb);
+      }
+      swiperMain.swiper.update();
+      swiperThumbs.swiper.update();
+      // Add Magnific listener to each photo
+      $('.swiper-main .swiper-wrapper').magnificPopup({
+        delegate: '[data-mfp-src]',
+        type: 'image',
+        mainClass: 'mfp-fade',
+        closeOnBgClick: true,
+        closeBtnInside: false,
+        closeOnContentClick: true,
+        tClose: theme.strings.zoomClose,
+        removalDelay: 500,
+        gallery: {
+          enabled: true,
+          navigateByImgClick: false,
+          arrowMarkup:
+            '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><span class="mfp-chevron mfp-chevron-%dir%"></span></button>',
+        },
+        callbacks: {
+          elementParse: function (item) {
+            if (item.el[0].alt.includes('www.youtube.com')) {
+              item.type = 'iframe';
+            } else {
+              item.type = 'image';
+            }
+          },
+        },
+      });
+    };
+    /*
+    VARIANT CHANGE SHOW/HIDE - END
+    */
+
+    /*
+    IMAGE SLIDER LOGIC - START
+    */
+    let initSwipers = function () {
+      let swiperThumbnails = new Swiper('.swiper-thumbs', {
+        spaceBetween: 8,
+        slidesPerView: 6.25,
+        watchSlidesProgress: true,
+        breakpoints: {
+          1075: { direction: 'vertical' },
+        },
+      });
+      let swiperMain = new Swiper('.swiper-main', {
+        spaceBetween: 5,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        thumbs: {
+          swiper: swiperThumbnails,
+        },
+      });
+    };
+    /*
+    IMAGE SLIDER LOGIC - END
+    */
+
+    /*
+    ONLOAD - START
+    */
+    document.addEventListener('DOMContentLoaded', function () {
+      let colorInputs = document.querySelectorAll('form[data-product-form] * input[data-option-name="Color"]');
+      for (let i = 0; i < colorInputs.length; i++) {
+        let colorInput = colorInputs[i];
+        colorInput.addEventListener('click', function (event) {
+          showHideImages();
+          initSwipers();
+          initZoom();
+        });
+      }
+      initSwipers();
+      showHideImages();
+      initZoom();
+    });
+    /*
+    ONLOAD - END
+    */
+  }
+</script>

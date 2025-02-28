@@ -1,0 +1,425 @@
+{% if section.blocks.size > 0 %}
+  {%- style -%}
+    {%- if section.settings.cta_top_margin != blank -%}
+        #shopify-section-{{section.id}} .feeturesHero__cta {
+            margin-top: {{section.settings.cta_top_margin}};
+        }
+
+    {%- endif -%}
+
+    #shopify-section-{{section.id}} .feeturesHero__img--mobile {
+      object-fit: cover;
+    }
+  {%- endstyle -%}
+
+  <section class="feeturesHero section-{{section.id}} {% if section.settings.desktop_image_dimensions == '1920x800' %} feeturesHero--tall{%endif%}">
+    {% for block in section.blocks %}
+      {% if block.type == 'desktop_image' %}
+        {% if block.settings.desktop_image_url != blank %}
+          HEY
+          <a href="{{block.settings.desktop_image_url}}">
+        {% endif %}
+        {{
+          block.settings.desktop_image.src
+          | image_url: width: 1920
+          | image_tag: class: 'feeturesHero__img feeturesHero__img--desktop', preload: true
+        }}
+        {% if block.settings.desktop_image_url != blank %}
+          </a>
+        {% endif %}
+      {% endif %}
+      {% if block.type == 'mobile_image' %}
+        {% if block.settings.mobile_image_url != blank %}
+          <a href="{{block.settings.mobile_image_url}}">
+        {% endif %}
+        {{
+          block.settings.mobile_image.src
+          | image_url: width: 1400
+          | image_tag: class: 'feeturesHero__img feeturesHero__img--mobile', preload: true
+        }}
+        {% if block.settings.mobile_image_url != blank %}
+          </a>
+        {% endif %}
+      {% endif %}
+
+      {% if block.type == 'video' %}
+        {{
+          block.settings.video
+          | video_tag:
+            autoplay: 'true',
+            loop: 'true',
+            class: 'feeturesHero__img',
+            style: 'width: 100%; height: 100%; object-fit: cover;'
+        }}
+      {% endif %}
+    {% endfor %}
+    {% if section.blocks.size > 2%}
+    <div class="wrapper">
+      <div
+        class="
+          feeturesHero__inner
+          {% if section.settings.horizontal_alignment_desktop == 'left' %}md-items-start{%endif%}
+          {% if section.settings.horizontal_alignment_desktop == 'center' %}md-items-center{%endif%}
+          {% if section.settings.horizontal_alignment_desktop == 'right' %}md-items-end{%endif%}
+          {% if section.settings.vertical_alignment_desktop == 'top' %}md-justify-start{%endif%}
+          {% if section.settings.vertical_alignment_desktop == 'center' %}md-justify-center{%endif%}
+          {% if section.settings.vertical_alignment_desktop == 'bottom' %}md-justify-end{%endif%}
+          {% if section.settings.horizontal_alignment_mobile == 'left' %}items-start{%endif%}
+          {% if section.settings.horizontal_alignment_mobile == 'center' %}items-center{%endif%}
+          {% if section.settings.horizontal_alignment_mobile == 'right' %}items-end{%endif%}
+          {% if section.settings.vertical_alignment_mobile == 'top' %}justify-start{%endif%}
+          {% if section.settings.vertical_alignment_mobile == 'center' %}justify-center{%endif%}
+          {% if section.settings.vertical_alignment_mobile == 'bottom' %}justify-end{%endif%}
+        "
+      >
+        {% for block in section.blocks %}
+          {% if block.type == 'eyebrow_text' %}
+            {%- if block.settings.eyebrow_text != blank -%}
+              <span
+                class="
+                  feeturesHero__eyebrow_text
+                  {% if section.settings.horizontal_alignment_desktop == 'left' %}md-text-left{%endif%}
+                  {% if section.settings.horizontal_alignment_desktop == 'center' %}md-text-center{%endif%}
+                  {% if section.settings.horizontal_alignment_desktop == 'right' %}md-text-right{%endif%}
+                  {% if section.settings.horizontal_alignment_mobile == 'left' %}text-left{%endif%}
+                  {% if section.settings.horizontal_alignment_mobile == 'center' %}text-center{%endif%}
+                  {% if section.settings.horizontal_alignment_mobile == 'right' %}text-right{%endif%}
+                "
+                {% if block.settings.eyebrow_color != blank or block.settings.eyebrow_size != blank %}
+                  style="color:{{block.settings.eyebrow_color}}; font-weight: bold; font-size: clamp({{block.settings.eyebrow_mobile_size | divided_by: 16.0 }}rem, 2vw, {{block.settings.eyebrow_size | divided_by: 16.0 }}rem);"
+                {% endif %}
+              >
+                {{ block.settings.eyebrow_text }}
+              </span>
+            {%- endif -%}
+          {% endif %}
+
+          {% if block.type == 'headline' %}
+            {%- if block.settings.headline != blank -%}
+              <h1
+                class="
+                  feeturesHero__heading
+                  {% if section.settings.horizontal_alignment_desktop == 'left' %}md-text-left{%endif%}
+                  {% if section.settings.horizontal_alignment_desktop == 'center' %}md-text-center{%endif%}
+                  {% if section.settings.horizontal_alignment_desktop == 'right' %}md-text-right{%endif%}
+                  {% if section.settings.horizontal_alignment_mobile == 'left' %}text-left{%endif%}
+                  {% if section.settings.horizontal_alignment_mobile == 'center' %}text-center{%endif%}
+                  {% if section.settings.horizontal_alignment_mobile == 'right' %}text-right{%endif%}
+                "
+                {% if block.settings.headline_color != blank or block.settings.headline_size != blank %}
+                  style="font-weight: bold; color:{{block.settings.headline_color}}; font-size: clamp({{block.settings.headline_mobile_size | divided_by: 16.0 }}rem, 3vw, {{block.settings.headline_size | divided_by: 16.0 }}rem) !important;"
+                {% endif %}
+              >
+                {{ block.settings.headline }}
+              </h1>
+            {%- else -%}
+              <h1 class="hide">Feetures</h1>
+            {%- endif -%}
+          {% endif %}
+
+          {% if block.type == 'body_copy' %}
+            <p
+              class="
+                feeturesHero__text
+                md-text-left
+                {% if section.settings.horizontal_alignment_desktop == 'left' %}md-text-left{%endif%}
+                  {% if section.settings.horizontal_alignment_desktop == 'center' %}md-text-center{%endif%}
+                  {% if section.settings.horizontal_alignment_desktop == 'right' %}md-text-right{%endif%}
+                {% if section.settings.horizontal_alignment_mobile == 'left' %}text-left{%endif%}
+                {% if section.settings.horizontal_alignment_mobile == 'center' %}text-center{%endif%}
+                {% if section.settings.horizontal_alignment_mobile == 'right' %}text-right{%endif%}
+              "
+              {% if block.settings.body_copy_color != blank or block.settings.body_size != blank %}
+                style="color:{{block.settings.body_copy_color}}; font-size: clamp({{block.settings.body_mobile_size | divided_by: 16.0 }}rem, 2vw, {{block.settings.body_size | divided_by: 16.0 }}rem) !important;"
+              {% endif %}
+            >
+              {{ block.settings.body_copy }}
+            </p>
+          {% endif %}
+        {% endfor %}
+        <div class="feeturesHero__cta">
+          {% for block in section.blocks %}
+            {% if block.type == 'cta_btn' %}
+              <a
+                class="btn"
+                href="{{block.settings.cta_btn_url}}"
+                {% if block.settings.new_tab %}
+                  target="_blank"
+                {% endif %}
+                style="{%if block.settings.cta_btn_text_color != blank%} color:{{block.settings.cta_btn_text_color}};{%endif%} {%if block.settings.cta_btn_bg_color != blank%} background-color:{{block.settings.cta_btn_bg_color}}{%endif%}"
+              >
+                {{- block.settings.cta_btn_text -}}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Feetures Hero",
+  "settings": [
+    {
+      "type": "select",
+      "id": "desktop_image_dimensions",
+      "options": [
+        { "value": "1920x600", "label": "1920x600 (default)" },
+        { "value": "1920x800", "label": "1920x800" }
+      ],
+      "label": "Desktop Image Dimensions"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment_desktop",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "label": "Vertical alignment (Desktop)"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment_desktop",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "label": "Horizontal alignment (Desktop)"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment_mobile",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "label": "Vertical alignment (Mobile)"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment_mobile",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "label": "Horizontal alignment (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "cta_top_margin",
+      "label": "CTA Top Margin on Mobile",
+      "info": "Adjust CTAs top margin on mobile in pixels. e.g. 150px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "video"
+        }
+      ]
+    },
+    {
+      "type": "desktop_image",
+      "name": "Desktop Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "desktop image"
+        },
+        {
+          "type": "url",
+          "id": "desktop_image_url",
+          "label": "desktop image url"
+        }
+      ]
+    },
+    {
+      "type": "mobile_image",
+      "name": "Mobile Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "mobile image"
+        },
+        {
+          "type": "url",
+          "id": "mobile_image_url",
+          "label": "mobile image url"
+        }
+      ]
+    },
+    {
+      "type": "eyebrow_text",
+      "name": "Eyebrow Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow_text",
+          "label": "eyebrow text"
+        },
+        {
+          "type": "color",
+          "id": "eyebrow_color",
+          "label": "eyebrow color"
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_mobile_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Eyebrow Mobile Font Size (in pixels)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Eyebrow Desktop Font Size (in pixels)",
+          "default": 16
+        }
+      ]
+    },
+    {
+      "type": "headline",
+      "name": "Headline",
+      "settings": [
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "headline"
+        },
+        {
+          "type": "color",
+          "id": "headline_color",
+          "label": "headline color"
+        },
+        {
+          "type": "range",
+          "id": "headline_mobile_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Headline Mobile Font Size (in pixels)",
+          "default": 36
+        },
+        {
+          "type": "range",
+          "id": "headline_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Headline Desktop Font Size (in pixels)",
+          "default": 36
+        }
+      ]
+    },
+    {
+      "type": "body_copy",
+      "name": "Body Copy",
+      "settings": [
+        {
+          "type": "text",
+          "id": "body_copy",
+          "label": "body copy"
+        },
+        {
+          "type": "color",
+          "id": "body_copy_color",
+          "label": "body copy color"
+        },
+        {
+          "type": "range",
+          "id": "body_mobile_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Body Mobile Font Size (in pixels)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "body_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Body Desktop Font Size (in pixels)",
+          "default": 20
+        }
+      ]
+    },
+
+    {
+      "type": "cta_btn",
+      "name": "CTA Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "cta_btn_text",
+          "label": "CTA Button Text"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "new_tab",
+          "label": "Open in New Tab?"
+        },
+        {
+          "type": "color",
+          "id": "cta_btn_text_color",
+          "label": "CTA Button Text Color"
+        },
+        {
+          "type": "color",
+          "id": "cta_btn_bg_color",
+          "label": "CTA Button Background Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures Hero",
+      "category": "Feetures",
+      "blocks": [
+        {
+          "type": "desktop_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

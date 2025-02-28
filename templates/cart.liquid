@@ -1,0 +1,240 @@
+<!-- /templates/cart.liquid -->
+{% comment %}
+For info on test orders:
+- General http://docs.shopify.com/manual/your-store/orders/test-orders
+- Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+{% endcomment %}{% comment %}
+Set logic to gather total compare at price info for cart
+{% endcomment %}{% assign cart_total_compare_at = '0' %}
+{% assign cart_discount = false %}
+{% assign discount_title = '' %}
+{% assign discount_amount = '' %}
+
+  {% for item in cart.items %}
+    {% if item.variant.compare_at_price > item.price %}
+      {% assign item_total = item.variant.compare_at_price | times: item.quantity %}
+      {% assign cart_total_compare_at = cart_total_compare_at
+      | plus: item_total %}
+    {% elsif item.discounted_price != item.original_price %}
+      {% assign item_total = item.original_price | times: item.quantity %}
+      {% assign cart_total_compare_at = cart_total_compare_at | plus: item_total %}
+    {% else %}
+      {% assign item_total = item.price | times: item.quantity %}
+      {% assign cart_total_compare_at = cart_total_compare_at | plus: item_total %}
+    {% endif %}
+
+{% endfor %}
+
+
+{%- if cart.cart_level_discount_applications != blank -%}
+  {% assign cart_discount = true %}
+  {% assign cart_total_compare_at = cart.original_total_price %}
+  {% assign discount_title = cart.cart_level_discount_applications[0].title %}
+  {% assign discount_amount = cart.cart_level_discount_applications[0].total_allocated_amount | money %}
+{%- endif -%}
+
+<form
+  action="{{ routes.cart_url }}"
+  method="post"
+  novalidate
+  class="cart">
+  <h1 class="cart__header">{{ 'cart.general.title' | t }}</h1>
+  {% if cart.item_count > 0 %}
+    <div class="cart__items">
+      {% for item in cart.items %}
+        <div class="cart-item">
+          <a href="{{ item.url | within: collections.all }}" class="cart-item__image">
+            <img src="{{ item | img_url: '270x270' }}" alt="{{ item.title | escape }}">
+          </a>
+          <div class="cart-item__info">
+            <div class="cart-item__top">
+              <a href="{{ item.url }}" class="cart-item__name">
+                {{ item.product.title }}
+              </a>
+
+              <a class="cart-item__remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">
+                {% include 'icon-trash.svg' %}
+                <span class="visually-hidden">{{ 'cart.general.remove' | t }}</span>
+              </a>
+            </div>
+            <div class="cart-item__variant-details">
+              {% if item.variant.option2 != blank %}
+                {% comment %}for gift cards and other non-standard products{% endcomment %}
+                <div>
+                  <b>Size</b>
+                  {{ item.variant.option2 | downcase }}</div>
+              {% endif %}
+              <div>
+                {% assign lowerCaseProductTitle = item.product.title | downcase %}
+                {% unless lowerCaseProductTitle == 'gift card' %}
+                  <b>Color</b>
+                {% endunless %}
+                {{ item.variant.option1 | downcase }}
+              </div>
+            </div>
+            <div class="cart-item__bottom">
+              <div>
+                <label for="updates_{{ item.key }}" class="visually-hidden">{{ 'cart.label.quantity' | t }}</label>
+                <input
+                  type="number"
+                  name="updates[]"
+                  id="updates_{{ item.key }}"
+                  class="cart__product-qty"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  data-id="{{ item.key }}">
+              </div>
+              <div>
+                {%- if item.variant.compare_at_price -%}
+                  {%- if item.discounted_price < item.original_price -%}
+                    <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                    <del class="cart-item__compare_price">{{ item.original_line_price | money }}</del>
+                    <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                    <span class="order-discount cart-item__price">
+                      {{- item.line_price | money -}}
+                    </span>
+                  {%- else -%}
+                    <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                    <del class="cart-item__compare_price">{{ item.variant.compare_at_price | times: item.quantity | money }}</del>
+                    <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                    <span class="order-discount cart-item__price">{{ item.final_line_price | money }}</span>
+                  {%- endif -%}
+                {%- else -%}
+                  {%- if item.discounted_price < item.original_price -%}
+                    <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                    <del class="cart-item__compare_price">{{ item.original_line_price | money }}</del>
+                    <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                    <span class="order-discount cart-item__price">
+                      {{- item.line_price | money -}}
+                    </span>
+                  {%- else -%}
+                    <span class="cart-item__price">{{ item.original_line_price | money }}</span>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% if settings.cart_notes_enable %}
+        <div class="cart__note">
+          <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+          <textarea
+            name="note"
+            class="input-full"
+            id="CartSpecialInstructions">{{ cart.note }}</textarea>
+        </div>
+      {% endif %}
+    </div>
+
+    {% assign reachedFreeShipGoal = false %}
+    {% assign freeShipGoal = 5500.00 %}
+    {% assign amountUntilFreeShip = freeShipGoal | minus: cart.total_price %}
+    {% assign freeShipPercentReached = cart.total_price | divided_by: freeShipGoal | times: 100 | floor %}
+    {% if amountUntilFreeShip < 0 %}
+      {% assign reachedFreeShipGoal = true %}
+    {% endif %}
+    <div class="cart__right">
+      <div class="cart-sidebar">
+        <div class="cart-sidebar__ship">
+          <div class="cart-sidebar__ship-msg">
+            {% if reachedFreeShipGoal %}
+              Free shipping applied!
+            {% else %}
+              You're just {{ amountUntilFreeShip | money }} from free shipping!
+            {% endif %}
+          </div>
+          <div class="cart-sidebar__ship-bar">
+            <div class="drawer__ship-bar-inner" style="width: {{freeShipPercentReached}}%;"></div>
+          </div>
+        </div>
+
+        <div class="cart-sidebar__subtotal">
+          Subtotal
+          <span class="right">
+            {{ cart_total_compare_at | money }}
+          </span>
+        </div>
+        {% if cart_discount %}
+          <div class="cart-sidebar__savings">
+            Savings ({{ discount_title }})
+            <span class="right">
+              -{{ discount_amount }}
+            </span>
+          </div>
+        {% else %}
+          {% assign total_discount_check = cart_total_compare_at | minus: cart.total_price %}
+          {% unless total_discount_check < 100 %}
+            <div class="cart-sidebar__savings">
+              Savings
+              <span class="right">
+                -{{ cart_total_compare_at | minus: cart.total_price | money }}
+              </span>
+            </div>
+          {% endunless %}
+        {% endif %}
+
+        <div class="cart-sidebar__shipping">
+          Shipping
+          <span class="right">
+            {% if reachedFreeShipGoal %}
+              FREE
+            {% else %}
+              $4.95
+            {% endif %}
+          </span>
+        </div>
+        {% unless cart_discount %}
+          <div class="cart-sidebar__discount_text">Discount codes calculated at checkout</div>
+        {% endunless %}
+        <div class="cart-sidebar__total">
+          Est. Total
+          <span class="right">
+            {% if reachedFreeShipGoal %}
+              {{ cart.total_price | money }}
+            {% else %}
+              {{ cart.total_price | plus: 495 | money }}
+            {% endif %}
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          name="checkout"
+          class="btn cart-sidebar__btn cart__checkout">Checkout</button>
+        <afterpay-placement
+          data-locale="en_US"
+          data-currency="USD"
+          {% if reachedFreeShipGoal %}
+          data-amount="{{ cart.total_price | divided_by: 100.00 }}"
+          {% else %}
+          data-amount="{{ cart.total_price | plus: 495 | divided_by: 100.00 }}"
+          {% endif %}
+          data-size="sm"></afterpay-placement>
+      </div>
+      {% comment %}
+      {%- capture taxes_shipping_checkout -%}
+      {%- if shop.taxes_included and shop.shipping_policy.body != blank -%}
+      {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+      {%- elsif shop.taxes_included -%}
+      {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+      {%- elsif shop.shipping_policy.body != blank -%}
+      {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+      {%- else -%}
+      {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
+      {%- endif -%}
+      {%- endcapture -%}
+      <p class="rte"><em>{{ taxes_shipping_checkout }}</em></p>
+      {% endcomment %}
+    </div>
+  {% else %}
+    {% comment %}
+    The cart is empty
+    {% endcomment %}
+    <p class="cart__empty-message">{{ 'cart.general.empty' | t }}</p>
+    <p class="cart__continue-browsing">{{ 'cart.general.continue_browsing_html' | t: link: routes.root_url }}</p>
+    <p class="cookie-message">{{ 'cart.general.cookies_required' | t }}</p>
+  {% endif %}
+</form>
+<!-- /cart -->
+{% section 'product-recommendations' %}

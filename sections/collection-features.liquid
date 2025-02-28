@@ -1,0 +1,168 @@
+{% style %}
+
+.collection-features-main-wrapper {
+  background: #FFFFFF;
+  padding: 50px 0;
+  margin-bottom: 50px;
+}
+.collection-features-main-wrapper h3 {
+  margin-bottom: 0px;
+}
+.collection-features-card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .collection-features-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+  }
+
+  .collection-feature-card {
+    width: 70%;
+    min-width: 300px;
+  }
+}
+
+.collection-feature-card img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-bottom: 10px;
+  height: auto;
+  width: 100%;
+}
+
+{% endstyle %}
+
+
+<section class="collection-features-main-wrapper">
+  <div class="wrapper">
+
+  {% liquid
+    comment
+      DEFINE SECTION HEADINGS BASED ON type: tag
+    endcomment
+    assign heading = "Product Features"
+    assign subheading = ""
+    assign tags = product.tags
+
+    if tags contains 'type: elite'
+      assign heading = "Feetures Elite"
+      assign subheading = "Designed to be the best active socks you’ve ever worn."
+    elsif tags contains 'type: high performance'
+      assign heading = "Feetures High Performance"
+      assign subheading = "The one that started it all. Performance without left and right specific compression."
+    elsif tags contains 'type: merino 10'
+      assign heading = "Feetures Merino 10"
+      assign subheading = "A Merino wool game-changing sock that's comfier, stretchier, drier, and more durable than ever before."
+    elsif tags contains 'type: pf relief'
+      assign heading = "Feetures Plantar Fasciitis Relief"
+      assign subheading = "Innovative technology providing intense compression for relief from heel & arch pain."
+    elsif tags contains 'type: golf'
+      assign heading = "Feetures Golf"
+      assign subheading = "All-day comfort and support on the course."
+    elsif tags contains 'type: trail'
+      assign heading = "Feetures Trail"
+      assign subheading = "Hit the trails with max cushion, support, & style."
+    elsif tags contains 'type: graduated compression'
+      assign heading = "A better fitting compression sock, for all-day wear, travel and ultimate recovery."
+      assign subheading = "Hit the trails with max cushion, support, & style."
+    elsif tags contains 'type: therapeutic'
+      assign heading = "Feetures Therapeutic"
+      assign subheading = "Unsurpassed comfort for active people living with special foot care needs or diabetes."
+    elsif tags contains 'type: everyday'
+      assign heading = "Feetures Everyday"
+      assign subheading = "Style meets the ultimate combination of comfort and support."
+    endif
+
+
+    assign feature_1_image = product.metafields.custom.feature_image_1
+    assign feature_1_title = product.metafields.custom.feature_heading_1
+    assign feature_1_text = product.metafields.custom.feature_text_1
+
+    assign feature_2_image = product.metafields.custom.feature_image_2
+    assign feature_2_title = product.metafields.custom.feature_heading_2
+    assign feature_2_text = product.metafields.custom.feature_text_2
+
+    assign feature_3_image = product.metafields.custom.feature_image_3
+    assign feature_3_title = product.metafields.custom.feature_heading_3
+    assign feature_3_text = product.metafields.custom.feature_text_3
+
+    assign feature_4_image = product.metafields.custom.feature_image_4
+    assign feature_4_title = product.metafields.custom.feature_heading_4
+    assign feature_4_text = product.metafields.custom.feature_text_4
+
+    assign feature_5_image = product.metafields.custom.feature_image_5
+    assign feature_5_title = product.metafields.custom.feature_heading_5
+    assign feature_5_text = product.metafields.custom.feature_text_5
+
+    assign feature_6_image = product.metafields.custom.feature_image_6
+    assign feature_6_title = product.metafields.custom.feature_heading_6
+    assign feature_6_text = product.metafields.custom.feature_text_6
+  %}
+
+
+  {% if heading %}<h3>{{ heading }}</h3>{% endif %}
+  {% if subheading %}<p>{{ subheading }}</p>{% endif %}
+  <div class="collection-features-card-wrapper">
+    {% comment %} {% for block in section.blocks %}
+      <div class="collection-feature-card card-{{ block.id }}">
+        {% if block.settings.image %}{{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+        {% if block.settings.title %}<h4>{{ block.settings.title }}</h4>{% endif %}
+        {% if block.settings.text %}<p>{{ block.settings.text }}</p>{%  endif %}
+      </div>
+    {% endfor %} {% endcomment %}
+
+    <div class="collection-feature-card card-feature-wrapper">
+      {% if feature_1_image %}{{ feature_1_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if feature_1_title %}<h4>{{ feature_1_title }}</h4>{% endif %}
+      {% if feature_1_text %}<p>{{ feature_1_text }}</p>{% endif %}
+    </div>
+
+    <div class="collection-feature-card card-feature-wrapper">
+      {% if feature_2_image %}{{ feature_2_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if feature_2_title %}<h4>{{ feature_2_title }}</h4>{% endif %}
+      {% if feature_2_text %}<p>{{ feature_2_text }}</p>{% endif %}
+    </div>
+
+    <div class="collection-feature-card card-feature-wrapper">
+      {% if feature_3_image %}{{ feature_3_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if feature_3_title %}<h4>{{ feature_3_title }}</h4>{% endif %}
+      {% if feature_3_text %}<p>{{ feature_3_text }}</p>{% endif %}
+    </div>
+
+    <div class="collection-feature-card card-feature-wrapper">
+      {% if feature_4_image %}{{ feature_4_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if feature_4_title %}<h4>{{ feature_4_title }}</h4>{% endif %}
+      {% if feature_4_text %}<p>{{ feature_4_text }}</p>{% endif %}
+    </div>
+
+    <div class="collection-feature-card card-feature-wrapper">
+      {% if feature_5_image %}{{ feature_5_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if feature_5_title %}<h4>{{ feature_5_title }}</h4>{% endif %}
+      {% if feature_5_text %}<p>{{ feature_5_text }}</p>{% endif %}
+    </div>
+
+    <div class="collection-feature-card card-feature-wrapper">
+      {% if feature_6_image %}{{ feature_6_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if feature_6_title %}<h4>{{ feature_6_title }}</h4>{% endif %}
+      {% if feature_6_text %}<p>{{ feature_6_text }}</p>{% endif %}
+    </div>
+
+
+  </div>
+</div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Collection Features",
+  "settings": [],
+}
+{% endschema %}

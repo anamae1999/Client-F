@@ -1,0 +1,321 @@
+{% if section.settings.enable_sale_bar %}
+  {% style %}
+    .sale-banner-wrapper {
+      padding: 15px;
+      color: {{ section.settings.text_color }};
+      background: {{ section.settings.background_color }};
+      position: relative;
+      transition: all 0.5 ease-in-out;
+      display: none;
+    }
+
+    .sale-banner-inside-wrapper {
+      display: flex;
+      align-items: center;
+      {% if section.settings.enable_countdown_timer %}
+        justify-content: space-between;
+      {% else %}
+        justify-content: space-evenly;
+      {% endif %}
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sale-banner-inside-wrapper p {
+      margin-bottom: 0px;
+    }
+
+    .sale-banner-heading {
+      font-size: 20px;
+    }
+
+    .sale-banner-subheading {
+      font-size: 16px;
+    }
+
+    .sale-banner-cta-wrapper {
+      display: flex;
+    }
+
+    .sale-banner-cta-wrapper a {
+      margin-left: 10px;
+    }
+    .sale-banner-cta-wrapper .btn {
+      padding: 9px 15px 9px 15px;
+    }
+    .sale-banner-timer {
+      padding: 0 10px;
+    }
+    .countdown-data {
+      display: flex;
+    }
+    .countdown-number {
+      font-size: 20px;
+      margin-bottom: 0px;
+      line-height: 20px;
+    }
+
+    .countdown-spacer {
+      padding: 0 7px;
+      font-weight: bold;
+    }
+    .countdown-element {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .sale-banner-cta-wrapper .btn {
+      background: {{ section.settings.btn_color }};
+      color: {{ section.settings.btn_text }};
+    }
+
+    .sale-banner-cta-wrapper .btn:hover {
+      background: {{ section.settings.btn_color | color_modify: 'alpha', 0.9 }};
+      color: {{ section.settings.btn_text }};
+    }
+
+    #dismissButton {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .sale-banner-inside-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .countdown-data {
+        order: 2;
+      }
+
+      .sale-banner-heading {
+        order: 1;
+      }
+
+      .sale-banner-subheading {
+        order: 3;
+      }
+
+      .sale-banner-cta-wrapper {
+        padding-top: 10px;
+        order: 4;
+      }
+
+      #dismissButton {
+        display: block;
+      }
+
+      #dismissButton svg {
+        fill: #fff;
+        width: 15px;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+      }
+    }
+  {% endstyle %}
+
+  {% if template.name == 'index' or template.name == 'collection' or template.name == 'cart' %}
+    <div class="sale-banner-wrapper" id="saleBar">
+      <button id="dismissButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+        </svg>
+      </button>
+
+      <div class="sale-banner-inside-wrapper">
+        <div class="sale-banner-heading">{{ section.settings.header }}</div>
+       
+        {% if section.settings.enable_countdown_timer %}
+        <div class="sale-banner-timer">
+          <div id="countdown">
+            <div class="countdown-data">
+              <div class="countdown-element">
+                <div class="countdown-number" id="countdown-days">00</div>
+                DAYS
+              </div>
+              <div class="countdown-spacer">:</div>
+              <div class="countdown-element">
+                <div class="countdown-number" id="countdown-hours">00</div>
+                HRS
+              </div>
+              <div class="countdown-spacer">:</div>
+              <div class="countdown-element">
+                <div class="countdown-number" id="countdown-minutes">00</div>
+                MINS
+              </div>
+              <div class="countdown-spacer">:</div>
+              <div class="countdown-element">
+                <div class="countdown-number" id="countdown-seconds">00</div>
+                SECS
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="sale-banner-subheading">{{ section.settings.subheader }}</div>
+        {% if section.settings.cta_1_link %}
+          <div class="sale-banner-cta-wrapper">
+            <a class="btn" href="{{ section.settings.cta_1_link }}">{{ section.settings.cta_1_text }}</a>
+            {% if section.settings.cta_2_link -%}
+              <a class="btn" href="{{ section.settings.cta_2_link }}">{{ section.settings.cta_2_text }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.settings.enable_countdown_timer %}
+    <script>
+      // top header bar countdown logic
+      document.addEventListener('DOMContentLoaded', function () {
+        var countdownDateOriginal = '{{ section.settings.countdown_date }}T03:00:00';
+
+        // var countdownDate = '2023-11-25T03:00:00';
+        var isoCountdownDate = new Date(countdownDateOriginal);
+        console.log(isoCountdownDate);
+        var countdownInterval = setInterval(function () {
+          var now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+          var currentTime = new Date(now).getTime();
+          var timeRemaining = isoCountdownDate - currentTime;
+
+          var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+          document.getElementById('countdown-days').innerHTML = days;
+          document.getElementById('countdown-hours').innerHTML = hours;
+          document.getElementById('countdown-minutes').innerHTML = minutes;
+          document.getElementById('countdown-seconds').innerHTML = seconds;
+
+          // Stop timer if the countdown is complete
+          if (timeRemaining < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById('countdown').innerHTML = '';
+          }
+        }, 1000);
+      });
+    </script>
+  {% endif %}
+
+  <script>
+    // Function to dismiss the sale bar
+    function dismissSaleBar() {
+      document.getElementById('saleBar').style.display = 'none';
+
+      // Set a cookie to remember the dismissal
+      document.cookie = 'dismissed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+    }
+
+    // Check if the sale bar should be displayed based on the cookie
+    function checkCookie() {
+      const cookies = document.cookie.split(';');
+      for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'dismissed' && value === 'true') {
+          // Sale bar has been dismissed, so hide it
+          document.getElementById('saleBar').style.display = 'none';
+          return;
+        } else {
+          document.getElementById('saleBar').style.display = 'block';
+        }
+      }
+    }
+
+    // Attach event listener to the dismiss button
+    document.getElementById('dismissButton').addEventListener('click', dismissSaleBar);
+
+    // Check the cookie when the page loads
+    window.addEventListener('load', checkCookie);
+  </script>
+{% endif %}
+{% schema %}
+{
+  "name": "Sale Header Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_sale_bar",
+      "label": "Show Sale Top Bar",
+      "default": true
+    },
+    {
+      "id": "header",
+      "type": "richtext",
+      "label": "Header",
+      "default": "<p><strong>BLACK FRIDAY</strong> 25% off sitewide</p>"
+    },
+    {
+      "id": "subheader",
+      "type": "richtext",
+      "label": "Subheader",
+      "default": "<p>Sale applied automatically at checkout</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#bb3820",
+      "info": "Choose the background color for this section."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff",
+      "info": "Choose the text color for this section."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_countdown_timer",
+      "label": "Show Countdown Timer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_date",
+      "label": "Countdown To Date (Time always set to 03:00 AM EST)",
+      "default": "2024-01-01",
+      "info": "e.g. YYYY-MM-DD"
+    },
+    {
+      "type": "url",
+      "id": "cta_1_link",
+      "label": "CTA 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_1_text",
+      "label": "CTA 1 Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_2_link",
+      "label": "CTA 2 Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_2_text",
+      "label": "CTA 2 Text"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Button Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_text",
+      "label": "Button Text Color",
+      "default": "#000"
+    }
+  ]
+}
+{% endschema %}

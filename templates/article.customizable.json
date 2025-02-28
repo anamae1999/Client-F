@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "article-banner": {
+      "type": "article-banner",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "settings": {
+      }
+    },
+    "blog-author": {
+      "type": "article-author",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "article-banner",
+    "main",
+    "blog-author"
+  ]
+}

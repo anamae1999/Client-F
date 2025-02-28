@@ -1,0 +1,91 @@
+<script>
+  window.addEventListener('load', function() {
+    (() => {
+      const s = {};
+  
+      Object.assign(s, {
+        {%- for variant in product.variants %}
+          {{ variant.id }}: {{ variant.inventory_quantity }},
+        {%- endfor %}
+      });
+  
+      {% for product in collection.products -%}
+        Object.assign(s, {
+          {%- for variant in product.variants %}
+            {{ variant.id }}: {{ variant.inventory_quantity }},
+          {%- endfor %}
+        });
+      {% endfor -%}
+  
+      {% for product in recommendations.products %}
+        Object.assign(s, {
+          {%- for variant in product.variants %}
+            {{ variant.id }}: {{ variant.inventory_quantity }},
+          {%- endfor %}
+        });
+      {% endfor -%}
+  
+      {% for product in search.results -%}
+        Object.assign(s, {
+          {%- for variant in product.variants %}
+            {{ variant.id }}: {{ variant.inventory_quantity }},
+          {%- endfor %}
+        });
+      {% endfor -%}
+  
+      window.PurpleDotConfig = {
+        apiKey: '{{ settings.purpledot_api_key }}',
+        variantStockMap: s,
+        checkoutMethod: 'SEPARATE_CART',
+        shopifyCart: {{ cart | json }},
+        currency: {{ cart.currency.iso_code | json }},
+        pdp: {
+          variantSelector: {
+            selector: '.single-option-selector__radio, .single-option-selector__label, select[name="id"]',
+            disabledClass: 'unavailable' 
+          },
+          hide: ['.product-single__inventory-msg--oos', 'afterpay-placement', '.lcly-is-closed', '.product-single__icon--shipping'],
+          show: ['.product-single__icon--preorder-shipping']
+        },
+        plp: {
+          quickAdd: {
+            sizeSelector: '.grid-product-size',
+            disabledClass: 'disabled',
+          },
+          collectionItemSelector: '.collectionGrid-item-product'
+        },
+        cart: {
+          fill: '#000',
+          strokeWidth: '2px',
+          width: '25px',
+          height: '35px',
+          placeElement: (cartElement, cartLink) => {
+            cartElement.classList.add(...cartLink.classList);
+            cartLink.insertAdjacentElement('afterend', cartElement);
+            return cartElement;
+          },
+        },
+      };
+  
+      const preLoadStyle = document.createElement('style');
+      preLoadStyle.id = 'pd-preload-style';
+      preLoadStyle.innerHTML = `
+        form[action^='/cart'] *[type='submit'] {
+          pointer-events: none !important;
+        }
+      `;
+      document.head.appendChild(preLoadStyle);
+  
+      const pdScript = document.createElement('script');
+      pdScript.src = 'https://www.purpledotprice.com/api/v1/shopify-script.js';
+      pdScript.onerror = () => preLoadStyle.remove();
+      document.head.appendChild(pdScript);
+    })();
+    console.log("Purple dot loaded")
+  })
+</script>
+<style>
+.product-single__icon--preorder-shipping svg {
+  width: 35px;
+}
+</style>

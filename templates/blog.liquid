@@ -1,0 +1,57 @@
+<!-- /templates/blog.liquid -->
+{% paginate blog.articles by 8 %}
+
+{% if blog.metafields.accentuate.hero_image != blank %}
+    <div class="blog-page-hero" style="background-image:url({{blog.metafields.accentuate.hero_image}})">
+        <h1 class="blog-page-hero__title" {% if blog.metafields.accentuate.hero_text_color != blank %}style="color:{{blog.metafields.accentuate.hero_text_color}}"{% endif %}>
+          {% if current_tags %}
+          {{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
+        {% else %}
+          {{ blog.title }}
+        {% endif %}
+        </h1>
+    </div>
+{% else %}
+
+<div class="section-header text-center">
+  <h1>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
+    {% else %}
+      {{ blog.title }}
+    {% endif %}
+  </h1>
+  <hr class="hr--small">
+</div>
+{% endif %}
+
+{% assign feeturesBlogID = 111405075 %}
+{% assign meantToMoveBlogID = 77170606152 %}
+
+{% if blog.id == feeturesBlogID or blog.id == meantToMoveBlogID %}
+<nav class="blog-page-nav">
+  <ul>
+    <li><a href="/blogs/feetures-blog" {% if blog.id == feeturesBlogID %}class="active"{% endif %}>The Run Down</a></li>
+    <li><a href="/blogs/meant-to-move" {% if blog.id == meantToMoveBlogID %}class="active"{% endif %}>Meant to Move</a></li>
+  </ul>
+</nav>
+{% endif %}
+
+<div class="collections-loaded">
+  <div class="collectionGrid collectionGrid--articles">
+
+    {% for article in blog.articles %}
+
+      {% assign article_content = article.excerpt_or_content %}
+
+      {% include 'article-grid-item' %}
+
+    {% endfor %}
+  </div>
+</div>
+{% if paginate.pages > 1 %}
+  {% include 'pagination' %}
+{% endif %}
+
+
+{% endpaginate %}

@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "article-banner": {
+      "type": "article-banner",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "settings": {
+      }
+    },
+    "feetures_product_carousel_niBBna": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Shop Now",
+        "collection": "best-sellers",
+        "cta_btn_text": "Shop Mens",
+        "cta_btn_url": "shopify:\/\/collections\/all-mens-socks",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "advanced_content_BRGtmG": {
+      "type": "advanced-content",
+      "blocks": {
+        "html_nFF7da": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:left;\">\n<h2>Add in extra text section here!<\/h2>\n<p>Fully customizable HTML so you can set SEO tags within this block. And stack as many as you would like in a blog post.<\/p>\n<\/div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "html_nFF7da"
+      ],
+      "settings": {
+      }
+    },
+    "blog-author": {
+      "type": "article-author",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "article-banner",
+    "main",
+    "feetures_product_carousel_niBBna",
+    "advanced_content_BRGtmG",
+    "blog-author"
+  ]
+}

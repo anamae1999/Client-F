@@ -1,0 +1,194 @@
+<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+
+<predictive-search
+  class="predictive-search-header hidden"
+>
+  <div class="predictive-search-overlay"></div>
+  <form
+    action="{{ routes.search_url }}"
+    class="search-box input-group search-bar search-bar--page"
+    method="get"
+    role="search"
+    autocomplete="off"
+  >
+    <div class="search-input--wrapper">
+      <input
+        id="Search"
+        class="input-group-field"
+        type="search"
+        name="q"
+        value="{{ search.q | escape }}"
+        role="combobox"
+        aria-expanded="false"
+        aria-owns="predictive-search-results"
+        aria-controls="predictive-search-results"
+        aria-haspopup="listbox"
+        aria-autocomplete="list"
+      >
+      <input name="options[prefix]" type="hidden" value="last">
+      <span class="search--interaction">
+        <span class="icon icon-search" aria-hidden="true"></span>
+      </span>
+      <span class="">
+        <div type="cancel" class="btn btn--cancel icon-fallback-text">
+          <span class="icon icon-x" aria-hidden="true"></span>
+          <span class="fallback-text">X</span>
+        </div>
+      </span>
+    </div>
+    <div id="predictive-search" tabindex="-1"></div>
+  </form>
+</predictive-search>
+
+<style>
+  .input-group-field,
+  .btn .icon-fallback-text {
+    border-radius: 0 !important;
+  }
+
+  .search-bar--page {
+    position: relative;
+    max-width: 100%;
+    width: 100%;
+    background-color: white !important;
+    margin: 0 auto;
+    padding: 10px 0px;
+  }
+
+  .search-input--wrapper {
+    display: flex;
+    width: 97%;
+    margin: 0 auto;
+  }
+
+  .search-input--wrapper input#Search {
+    width: 95%;
+  }
+
+  .predictive-search-header {
+    position: fixed;
+    top: 90px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 999999;
+    background: white;
+    display: flex;
+  }
+
+  .icon-search {
+    color: white;
+    font-size: 20px;
+  }
+
+  .btn--cancel {
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 20px;
+    font-size: 22px;
+  }
+  input#Search:focus {
+    outline: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .input-group-field {
+    width: 100%;
+  }
+
+  .predictive-search-overlay {
+    width: 120vw;
+    height: 120vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #000;
+    opacity: 0.5;
+  }
+
+  .predictive-search-btn-clear {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .btn--search {
+    border-radius: 0px;
+  }
+
+  .search-bar .icon-search {
+    background-color: transparent;
+    border-radius: 0px;
+    display: flex;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    line-height: 20px;
+    font-size: 22px;
+    right: 95px;
+    top: 20px;
+    position: absolute;
+    width: 40px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 767px) {
+    .predictive-search-header {
+      top: 130px;
+    }
+
+    .search-bar .icon-search {
+      right: 110px;
+    }
+  }
+
+  @media (min-width: 1075px) {
+    .predictive-search-header {
+      top: 115px;
+    }
+
+    .search-box {
+      max-width: 90%;
+    }
+  }
+
+  @media (min-width: 1792px) {
+    .search-box {
+      max-width: 70%;
+    }
+  }
+</style>
+<script>
+  // Wrap the code in a document ready function
+  document.addEventListener('DOMContentLoaded', function () {
+    // Check if the element with the class 'predictive-search-header' exists
+    let predictiveSearchHeader = document.querySelector('.predictive-search-header');
+
+    if (predictiveSearchHeader) {
+      // Element exists, so proceed with event listeners
+      let predictiveSearchInput = predictiveSearchHeader.querySelector('form input');
+      let predictiveSearchClearButton = predictiveSearchHeader.querySelector('form .input-group-btn');
+      let predictiveSearchOverlay = predictiveSearchHeader.querySelector('.predictive-search-overlay');
+
+      predictiveSearchOverlay.addEventListener('click', function (event) {
+        event.preventDefault();
+        predictiveSearchHeader.classList.toggle('hidden');
+      });
+
+      {% comment %} predictiveSearchClearButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        predictiveSearchInput.value = '';
+        let newChange = new Event('input', {
+          bubbles: true,
+          cancelable: true,
+        });
+        predictiveSearchInput.dispatchEvent(newChange);
+      }); {% endcomment %}
+    }
+  });
+</script>

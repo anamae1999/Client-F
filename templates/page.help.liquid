@@ -1,0 +1,157 @@
+{% render 'shogun-products', content: page %}
+{% if page.metafields.accentuate.hero_image != blank %}
+    <div class="help-page-hero" style="background-image:url({{page.metafields.accentuate.hero_image}})">
+        <h2 class="help-page-hero__title" {% if page.metafields.accentuate.hero_text_color != blank %}style="color:{{page.metafields.accentuate.hero_text_color}}"{% endif %}>
+            {{ page.title }}
+        </h2>
+    </div>
+{% endif %}
+<div class="help-page">
+    <div class="help-page__left">
+        <div class="help-page-nav">
+            <h6 class="help-page-nav__title">Help Menu</h6>
+            <ul class="help-page-nav__list">
+                {% for link in linklists["help-sidebar"].links %}
+                <li>
+                    <a href="{{ link.url }}" class="{% if link.url == page.url %}active{% endif %}">{{link.title}} </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="help-page__right">
+        {% unless page.metafields.accentuate.hero_image != blank %}
+            <h1 class="help-page__title">
+                {{ page.title }}
+            </h1> 
+        {% endunless %}
+        <label for="help-menu" class="help-page-dropdown-nav-label visually-hidden">
+            Help Menu
+        </label>
+        <select class="help-page-dropdown-nav js-select-nav" name="help-menu"> 
+            <option value="" selected="selected">Help Menu</option> 
+            {% for link in linklists["help-sidebar"].links %}
+                <option value="{{ link.url }}">{{link.title}}</option> 
+            {% endfor %}
+        </select> 
+
+        <div class="rte rte--nomargin rte--indented-images">
+          <div class="help-page-content">{{ page.content }}</div>
+          
+          {%  if page.handle contains 'contact' %}
+            
+            <h3 class="text-center">Get in touch</h3>
+            <div class="contact-row">
+              <div class="contact-column">
+                <img src="https://cdn.shopify.com/s/files/1/0515/0434/9337/files/Email_Icon_27fd7e50-8683-4928-bf12-2ef0efe0d093.jpg?v=1618010519" class="contact-icon" loading="lazy" width="50" height="50">
+                <a href="mailto:{{ 'contact.header.email' | t }}"><strong>{{ 'contact.header.email' | t }}</strong></a>
+                <p>{{ 'contact.header.email-text' | t }}</p>
+              </div>
+              <div class="contact-column">
+                <img src="https://cdn.shopify.com/s/files/1/0515/0434/9337/files/Phone_Icon_9e6c632d-3fac-470f-8b1e-1d7d0ca78402.jpg?v=1618010531" class="contact-icon" loading="lazy" width="50" height="50">
+                <a href="tel:{{ 'contact.header.phone' | t }}"><strong>{{ 'contact.header.phone' | t }}</strong></a>
+                <p>{{ 'contact.header.phone-text' | t }}</p>
+              </div>
+              <div class="contact-column">
+                <img src="https://cdn.shopify.com/s/files/1/0515/0434/9337/files/Email_Icon_27fd7e50-8683-4928-bf12-2ef0efe0d093.jpg?v=1618010519" class="contact-icon" loading="lazy" width="50" height="50">
+                <p><strong>{{ 'contact.header.calendar' | t }}</strong></p>
+                <p>{{ 'contact.header.calendar-text' | t }}</p>
+              </div>
+            </div>
+            
+            <h3 class="text-center">{{  page.title }}</h3>
+            
+            {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
+                <div class="contact__fields">
+                  <div class="field">
+                    <label class="field__label" for="ContactForm-name">{{ 'contact.form.name' | t }}</label>
+                    <input
+                      class="field__input"
+                      autocomplete="name"
+                      type="text"
+                      id="ContactForm-name"
+                      name="contact[{{ 'contact.form.name' | t }}]"
+                      value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                      placeholder=""
+                    >
+                  </div>
+                  <div class="field field--with-error">
+                    <label class="field__label" for="ContactForm-email">
+                        {{- 'contact.form.email' | t }}
+                        <span aria-hidden="true">*</span></label
+                      >  
+                    <input
+                      autocomplete="email"
+                      type="email"
+                      id="ContactForm-email"
+                      class="field__input"
+                      name="contact[email]"
+                      spellcheck="false"
+                      autocapitalize="off"
+                      value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                      aria-required="true"
+                      {% if form.errors contains 'email' %}
+                        aria-invalid="true"
+                        aria-describedby="ContactForm-email-error"
+                      {% endif %}
+                      placeholder=""
+                    >
+                  </div>
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="ContactForm-issue">{{ 'contact.form.issue' | t }}</label>
+                    <select name="contact[{{ 'contact.form.issue' | t }}]">
+                        <option value="empty"></option>
+                        <option value="cancel">Cancel / Change Order</option>
+                        <option value="discount">Discount / Promotion</option>
+                        <option value="return">Return / Lifetime Guarantee</option>
+                        <option value="shipping">Shipping</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label class="form__label field__label" for="ContactForm-body">
+                        {{- 'contact.form.message' | t -}}
+                    </label>
+                  <textarea
+                    rows="10"
+                    id="ContactForm-body"
+                    class="text-area field__input"
+                    name="contact[{{ 'contact.form.message' | t }}]"
+                    placeholder=""
+                  >
+                    {{- form.body -}}
+                  </textarea>
+                
+                </div>
+                <div class="contact__button">
+                  <button type="submit" class="button btn btn--full">
+                    {{ 'contact.form.send' | t }}
+                  </button>
+                </div>
+
+                {%- if form.posted_successfully? -%}
+                    <p class="form-status success form-status-list form__message" tabindex="-1" autofocus>
+                      {{ 'contact.form.post_success' | t }}
+                    </p>
+                  {%- elsif form.errors -%}
+                    <div class="form__message error">
+                      <p class="form-status  caption-large text-body" role="alert" tabindex="-1" autofocus>
+                        {{ 'contact.form.post_error' | t }}
+                      </p>
+                    
+                      {{ form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email }}
+                    </div>
+                  {%- endif -%}
+
+              {%- endform -%}
+            {% endif %}
+
+        </div>
+        
+    </div>
+</div>
+{{ page.metafields.shogun.optimizer }}

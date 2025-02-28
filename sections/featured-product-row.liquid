@@ -1,0 +1,154 @@
+
+{% liquid
+  assign image = product.metafields.custom.flex_section_1_image
+  assign heading = product.metafields.custom.flex_section_1_headline
+  assign subheading = product.metafields.custom.flex_section_1_paragraph | metafield_tag
+  assign image_side = section.settings.image_side
+%}
+
+{% if heading and subheading %}
+
+{% style %}
+
+.featured-product-row-wrapper {
+  background: #F5F2EE;
+  padding: 50px 0;
+  margin-bottom: 50px;
+}
+.featured-product-row-wrapper h3 {
+  margin-bottom: 0px;
+}
+
+.featured-product-image-wrapper {
+  max-height: 550px;
+  overflow: hidden;
+   border-radius: 4px;
+}
+
+  .featured-product-image-wrapper img {
+    border-radius: 4px;
+  }
+
+  
+{% if image_side == 'left' %}
+  .featured-product-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+{% else %}
+  .featured-product-row {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+{% endif %}
+.featured-product-left {
+  width: 40%;
+  padding-right: 5%;
+}
+
+.featured-product-right {
+  width: 60%;
+}
+
+
+@media (max-width: 767px) {
+
+  .featured-product-row-wrapper {
+    padding: 0 0 30px 0;
+  }
+{% if image_side == 'left' %}
+  .featured-product-row {
+    flex-direction: column-reverse; 
+    padding: 0px;
+  }
+{% else %}
+
+.featured-product-row {
+    flex-direction: column; 
+    padding: 0px;
+  }
+{% endif %}
+
+
+  .featured-product-left, .featured-product-right {
+    width: 100%;
+  }
+
+  .featured-product-left {
+    padding: 30px 30px 0 30px;
+  }
+
+  .featured-product-row {}
+
+}
+
+.featured-product-row-wrapper img {
+  object-fit: cover;
+}
+
+{% endstyle %}
+
+
+
+<section class="featured-product-row-wrapper">
+  <div class="wrapper featured-product-row">
+  <div class="featured-product-left">
+  {% if heading %}<h3>{{ heading }}</h3>{% endif %}
+  {% if subheading %}<p>{{ subheading }}</p>{% endif %}
+  </div>
+  <div class="featured-product-right">
+    <div class="featured-product-image-wrapper">
+      {% if image != blank %}
+        {{ image | image_url: width: '1200' | image_tag: loading: 'lazy' }}
+      {% else %}
+        <img src="https://placehold.co/600x400@2x.png" />
+      {% endif %}
+    </div>
+  </div>
+</div>
+</section>
+
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Feetures Product Row",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Section Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "label": "Vertical alignment (Desktop)"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Feetures Product Row",
+      "category": "Feetures"
+    }
+  ]
+}
+{% endschema %}

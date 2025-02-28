@@ -1,0 +1,120 @@
+{% if collection_ad.size == 'single' %}
+  {% assign collection_ad_width = 'single' %}
+{% else %}
+  {% assign collection_ad_width = 'double' %}
+{% endif %}
+
+<style>
+  .collection-ad-grid-item-wrapper {
+    margin-bottom: 2.625rem;
+  }
+  .single {
+    grid-column: span 1;
+  }
+  .double {
+    grid-column: span 2;
+  }
+  .collection-ad-grid-item-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: #fbfaf8;
+  }
+  .collection-ad-grid-item-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .collection-ad-grid-item-content img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .single * .collection-ad-grid-item-content img {
+    aspect-ratio: 1;
+  }
+  .double * .collection-ad-grid-item-content img {
+    aspect-ratio: 2;
+  }
+  .collection-ad-grid-item-content .title {
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .collection-ad-grid-item-content .body {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .collection-ad-grid-item-content .bottom-section {
+    padding: 1.5625rem;
+  }
+  span.shop-now {
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 1332px) {
+    .collection-ad-grid-item-content .title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .collection-ad-grid-item-content .body {
+      font-size: 0.85rem;
+    }
+    .collection-ad-grid-item-content .bottom-section {
+      padding: 1.25rem;
+    }
+    span.shop-now {
+      font-size: 0.85rem;
+    }
+  }
+  @media screen and (max-width: 1075px) {
+    .collection-ad-grid-item-wrapper {
+      margin-bottom: 0;
+    }
+    .collection-ad-grid-item-content .title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .collection-ad-grid-item-content .body {
+      font-size: 0.75rem;
+    }
+    .collection-ad-grid-item-content .bottom-section {
+      padding: 0.625rem;
+    }
+    span.shop-now {
+      font-size: 0.75rem;
+    }
+  }
+</style>
+
+<a
+  class="collection-ad-grid-item-wrapper {{ collection_ad_width }}"
+  {% if collection_ad.link and collection_ad.link != '' %}
+    href="{{ collection_ad.link }}"
+  {% endif %}
+>
+  <div class="collection-ad-grid-item-container">
+    <div class="collection-ad-grid-item-content">
+      <img
+        class="ls-is-cached lazyloaded"
+        alt="{{ collection_ad.title }}"
+        src="{{ collection_ad.image }}"
+        loading="lazy"
+      >
+      <div class="bottom-section">
+        <div class="title">{{ collection_ad.title }}</div>
+        <div class="body">
+          {{ collection_ad.body }}
+        </div>
+        {% if collection_ad.link and collection_ad.link != '' %}
+          <span class="shop-now">Shop Now</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,394 @@
+{% unless customer %}
+  <div class="rewards-not-logged-in">
+    To view your points and information, you need to be logged in.
+    <a href="/account/login?checkout_url=/pages/rewards">login</a>
+  </div>
+{% endunless %}
+<div class="rewards">
+  {% if section.settings.image != blank %}
+    <div class="page-hero page-hero--main">
+      <img
+        src="{{ section.settings.image | img_url: '1920x' }}"
+        alt="{{ block.settings.image.alt }}"
+        class="rewards-hero--image hero--desktop">
+
+      <img
+        src="{{ section.settings.image_mobile | img_url: '800x' }}"
+        alt="{{ block.settings.image.alt }}"
+        class="rewards-hero--image hero--mobile">
+
+      <div class="page-hero__content">
+        <div>
+          {% if section.settings.headline != blank %}
+            <h1 class="page-hero__title">
+              {{ section.settings.headline }}
+            </h1>
+          {% endif %}
+          {% if customer %}
+            <p class="page-hero__text">
+              Welcome back
+              {%- if customer.name != blank %}
+                {{ customer.name | split: ' ' | first | prepend: ', ' -}}{% endif -%}
+              !
+              <strong>You have
+                <span data-lion-points></span>
+                points.</strong>
+              Scroll down to redeem.
+            </p>
+          {% else %}
+            {% if section.settings.text != blank %}
+              <p class="page-hero__text">
+                {{ section.settings.text }}
+              </p>
+            {% endif %}
+            {% if section.settings.button != blank %}
+              <a href="{{section.settings.button_link}}" class="page-hero__button">
+                {{ section.settings.button }}
+              </a>
+            {% endif %}
+            {% if section.settings.subtext != blank %}
+              <p class="page-hero__subtext">
+                {{ section.settings.subtext }}
+              </p>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="wrapper">
+    <div class="rewards__section">
+      {% if section.settings.section1_text != blank %}
+        <h2 class="rewards__subtitle">{{ section.settings.section1_text }}</h2>
+      {% endif %}
+      <div class="rewards-section--columns">
+        {% if section.settings.section1_block1_title != blank %}
+          <div class="rewards-block--type-1">
+            <span>1</span>
+            <div>
+              <h3>{{ section.settings.section1_block1_title }}</h3>
+              {% if section.settings.section1_block1_text != blank %}
+                <p>{{ section.settings.section1_block1_text }}</p>
+              {% endif %}
+              {% if section.settings.section1_block1_cta != blank %}
+                <a href="{{ section.settings.section1_block1_cta_url }}" class="rewards-block-cta">
+                  {{- section.settings.section1_block1_cta -}}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.section1_block2_title != blank %}
+          <div class="rewards-block--type-1">
+            <span>2</span>
+            <div>
+              <h3>{{ section.settings.section1_block2_title }}</h3>
+              {% if section.settings.section1_block2_text != blank %}
+                <p>{{ section.settings.section1_block2_text }}</p>
+              {% endif %}
+              {% if section.settings.section1_block2_cta != blank %}
+                <a href="{{ section.settings.section1_block2_cta_url }}" class="rewards-block-cta">
+                  {{- section.settings.section1_block2_cta -}}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.section1_block3_title != blank %}
+          <div class="rewards-block--type-1">
+            <span>3</span>
+            <div>
+              <h3>{{ section.settings.section1_block3_title }}</h3>
+              {% if section.settings.section1_block3_text != blank %}
+                <p>{{ section.settings.section1_block3_text }}</p>
+              {% endif %}
+              {% if section.settings.section1_block3_cta != blank %}
+                <a href="{{ section.settings.section1_block3_cta_url }}" class="rewards-block-cta">
+                  {{- section.settings.section1_block3_cta -}}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div id="earn-points" class="rewards__section rewards-section--type-2">
+    <div class="wrapper">
+      {% if section.settings.section2_title != blank %}
+        <h2 class="rewards__subtitle">{{ section.settings.section2_title }}</h2>
+        {{ section.settings.section2_component }}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="rewards__points">
+    {% if customer %}
+      <div class="rewards__your-points">
+        <h2 class="rewards__subtitle">Your Points</h2>
+        <div class="wrapper">
+          <div class="rewards__points--wrapper">
+            <div>
+              <h4>Approved</h4>
+              <!-- customer's approved (redeemable) points -->
+              <span data-lion-points="approved"></span>
+            </div>
+
+            <div>
+              <h4>Pending</h4>
+              <!-- customer's pending points -->
+              <span data-lion-points="pending"></span>
+            </div>
+
+            <div>
+              <h4>Spent</h4>
+              <!-- customer's spent points -->
+              <span data-lion-points="spent"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="redeem-points" class="rewards__section rewards-section--type-2">
+        <div class="rewards__list--wrapper">
+          <h2 class="rewards__subtitle no-top-padding">Your Past Rewards</h2>
+          <div data-lion-claimed-rewards-list></div>
+          <h2 class="rewards__subtitle">Redeem Points for Rewards</h2>
+          <div data-lion-rewards-list></div>
+        </div>
+      </div>
+    {% else %}
+      <div id="redeem-points" class="rewards__section rewards-section--type-2">
+        <div class="rewards__list--wrapper">
+          <h2 class="rewards__subtitle">Redeem Points for Rewards</h2>
+          <div data-lion-rewards-list></div>
+        </div>
+      </div>
+    {% endif %}
+    <!-- rewards list -->
+    <div class="rewards-tier-columns">
+      {% if section.settings.section3_title != blank %}
+        <h2 class="rewards__subtitle">Spend More + Earn Rewards Faster</h2>
+      {% endif %}
+      <div data-lion-tier-overview></div>
+    </div>
+  </div>
+
+  {% if section.settings.image_section4 != blank %}
+    <div class="page-hero page-hero--section4">
+      <div class="page-hero__content page-hero__content--half-right">
+        <div class="refer-text-wrapper">
+          {% if section.settings.section4_title != blank %}
+            <h1 class="page-hero__title">
+              {{ section.settings.section4_title }}
+            </h1>
+          {% endif %}
+          {% if section.settings.section4_text != blank %}
+            <p class="page-hero__text page-hero__text--section4">
+              {{ section.settings.section4_text }}
+            </p>
+          {% endif %}
+          {% if section.settings.section4_button != blank %}
+            <a
+              href="{{section.settings.section4_button_link}}"
+              data-lion-refer
+              class="page-hero__button button__refer">
+              {{ section.settings.section4_button }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      <img
+        src="{{ section.settings.image_section4 | img_url: '1920x' }}"
+        alt="{{ block.settings.image.alt }}"
+        class="rewards-hero--image hero--desktop"
+        loading="lazy">
+
+      <img
+        src="{{ section.settings.image_section4_mobile | img_url: '700x' }}"
+        alt="{{ block.settings.image.alt }}"
+        class="rewards-hero--image hero--mobile"
+        loading="lazy">
+
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Rewards Page Content",
+    "class": "page-content",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Header Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Header Image (Mobile)"
+      },
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "Heading"
+      }, {
+        "type": "text",
+        "id": "text",
+        "label": "Text"
+      }, {
+        "type": "text",
+        "id": "button",
+        "label": "Button text"
+      }, {
+        "type": "text",
+        "id": "subtext",
+        "label": "Subtext",
+        "default": "Or <a href='account'>login</a> to view your points."
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }, {
+        "type": "header",
+        "content": "Section 1"
+      }, {
+        "type": "text",
+        "id": "section1_text",
+        "label": "Title"
+      }, {
+        "type": "text",
+        "id": "section1_block1_title",
+        "label": "Block 1 - Title"
+      }, {
+        "type": "text",
+        "id": "section1_block1_text",
+        "label": "Block 1 - Text"
+      }, {
+        "type": "text",
+        "id": "section1_block1_cta",
+        "label": "Block 1 - CTA"
+      }, {
+        "type": "url",
+        "id": "section1_block1_cta_url",
+        "label": "Block 1 - CTA URL"
+      }, {
+        "type": "text",
+        "id": "section1_block2_title",
+        "label": "Block 2 - Title"
+      }, {
+        "type": "text",
+        "id": "section1_block2_text",
+        "label": "Block 2 - Text"
+      }, {
+        "type": "text",
+        "id": "section1_block2_cta",
+        "label": "Block 2 - CTA"
+      }, {
+        "type": "url",
+        "id": "section1_block2_cta_url",
+        "label": "Block 2 - CTA URL"
+      }, {
+        "type": "text",
+        "id": "section1_block3_title",
+        "label": "Block 3 - Title"
+      }, {
+        "type": "text",
+        "id": "section1_block3_text",
+        "label": "Block 3 - Text"
+      }, {
+        "type": "text",
+        "id": "section1_block3_cta",
+        "label": "Block 3 - CTA"
+      }, {
+        "type": "url",
+        "id": "section1_block3_cta_url",
+        "label": "Block 3 - CTA URL"
+      }, {
+        "type": "header",
+        "content": "Section 2"
+      }, {
+        "type": "text",
+        "id": "section2_title",
+        "label": "Title"
+      }, {
+        "type": "text",
+        "id": "section2_component",
+        "label": "Component"
+      }, {
+        "type": "header",
+        "content": "Section 3"
+      }, {
+        "type": "text",
+        "id": "section3_title",
+        "label": "Title"
+      }, {
+        "type": "image_picker",
+        "id": "section3_block1_image",
+        "label": "Block 1 - Image"
+      }, {
+        "type": "text",
+        "id": "section3_block1_title",
+        "label": "Block 1 - Title"
+      }, {
+        "type": "image_picker",
+        "id": "section3_block2_image",
+        "label": "Block 2 - Image"
+      }, {
+        "type": "text",
+        "id": "section3_block2_title",
+        "label": "Block 2 - Title"
+      }, {
+        "type": "image_picker",
+        "id": "section3_block3_image",
+        "label": "Block 3 - Image"
+      }, {
+        "type": "text",
+        "id": "section3_block3_title",
+        "label": "Block 3 - Title"
+      }, {
+        "type": "header",
+        "content": "Tier chart"
+      }, {
+        "type": "text",
+        "id": "tier_component",
+        "label": "Component"
+      }, {
+        "type": "header",
+        "content": "Section 4"
+      }, {
+        "type": "image_picker",
+        "id": "image_section4",
+        "label": "Refer a Friend Image"
+      }, {
+        "type": "image_picker",
+        "id": "image_section4_mobile",
+        "label": "Refer a Friend Image (Mobile)"
+      }, {
+        "type": "text",
+        "id": "section4_title",
+        "label": "Title"
+      }, {
+        "type": "text",
+        "id": "section4_text",
+        "label": "Text"
+      }, {
+        "type": "text",
+        "id": "section4_button",
+        "label": "Button text"
+      }, {
+        "type": "url",
+        "id": "section4_button_link",
+        "label": "Button link"
+      }
+    ]
+  }
+{% endschema %}

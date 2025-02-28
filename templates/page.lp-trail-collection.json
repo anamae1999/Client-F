@@ -1,0 +1,130 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "20aaffe2-c7e5-442f-8239-bd6c54213e50": {
+      "type": "feetures-hero",
+      "blocks": {
+        "template--14610749587528__20aaffe2-c7e5-442f-8239-bd6c54213e50-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Trail_header_for_Alexis_2.png"
+          }
+        },
+        "d9fa9f31-b6c8-48e1-85a3-ad646ff15a68": {
+          "type": "headline",
+          "settings": {
+            "headline": "Introducing Trail",
+            "headline_color": "#ffffff",
+            "headline_size": 36
+          }
+        },
+        "7f012fb4-06e6-4442-8382-b66513e7e1f8": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/Trail_header_for_Alexis_2.png"
+          }
+        }
+      },
+      "block_order": [
+        "template--14610749587528__20aaffe2-c7e5-442f-8239-bd6c54213e50-desktop_image-1",
+        "d9fa9f31-b6c8-48e1-85a3-ad646ff15a68",
+        "7f012fb4-06e6-4442-8382-b66513e7e1f8"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x600",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "top",
+        "horizontal_alignment_mobile": "left",
+        "cta_top_margin": ""
+      }
+    },
+    "f2fcac85-cc39-44ec-89f1-ed22b5268e54": {
+      "type": "featured-row",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Illustrations_PDP_Trail.png",
+        "layout": "left",
+        "title": "Trail",
+        "text": "<p>We took 20 years of innovation and applied it to making the ultimate trail sock, so now, America's #1 Running Sock is  in touch with its wild side. We built a sock with recycled yarn that wicks away moisture, keeping the feet cool and dry, using maximum cushion so that same comfort and protection you’ve come to expect from us is with you every step of the way. Then, we added nylon reinforcement in high wear areas for durability. So, see how your socks do with less traffic and more roots.<\/p>",
+        "button_label": "Shop Trail",
+        "button_link": "shopify:\/\/collections\/trail"
+      }
+    },
+    "62136624-c9f9-45d4-8e8a-3ea2dea4318e": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Trail Collection",
+        "collection": "trail",
+        "cta_btn_text": "Shop Now",
+        "cta_btn_url": "shopify:\/\/collections\/trail",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "da0d3580-40cf-499e-9db2-48b2b11d43b8": {
+      "type": "feetures-mini-callouts",
+      "blocks": {
+        "5987bfcf-61fa-4cee-8e37-1e09db21a170": {
+          "type": "callout",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Tech_Icons_for_PDP_Trail_TC.png",
+            "headline": "Targeted compression in the arch provides superior comfort and support",
+            "text": ""
+          }
+        },
+        "d54694fa-696b-4018-8ebb-03105d4746be": {
+          "type": "callout",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Tech_Icons_for_PDP_Trail_Reinforced_Zones.png",
+            "headline": "Reinforced high wear zones for durability",
+            "text": ""
+          }
+        },
+        "2eb05345-b5d1-45df-b0f6-68e75c3b4789": {
+          "type": "callout",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Tech_Icons_for_PDP_Trail_iWick.png",
+            "headline": "iWick fibers move moisture to keep feet cool and dry",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "5987bfcf-61fa-4cee-8e37-1e09db21a170",
+        "d54694fa-696b-4018-8ebb-03105d4746be",
+        "2eb05345-b5d1-45df-b0f6-68e75c3b4789"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "d37e299b-0fbd-4b6d-a8f9-c64755f083b6": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "",
+        "image1": "shopify:\/\/shop_images\/EC901649-3_ef0b26d4-8f03-441a-a941-aab23d045388.jpg",
+        "image2": "shopify:\/\/shop_images\/EC901650-3_a7e5f9fb-ae9f-483b-a150-2e70a94049be.jpg",
+        "image3": "shopify:\/\/shop_images\/EC902642-3_0561c4c0-b986-4a3e-a44a-7ae63aea4e5b.jpg",
+        "image4": "shopify:\/\/shop_images\/EC902641-4.jpg",
+        "padding_top": 20,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "20aaffe2-c7e5-442f-8239-bd6c54213e50",
+    "f2fcac85-cc39-44ec-89f1-ed22b5268e54",
+    "62136624-c9f9-45d4-8e8a-3ea2dea4318e",
+    "da0d3580-40cf-499e-9db2-48b2b11d43b8",
+    "d37e299b-0fbd-4b6d-a8f9-c64755f083b6"
+  ]
+}

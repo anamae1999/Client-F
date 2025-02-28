@@ -1,0 +1,581 @@
+<!-- /snippets/product-grid-item.liquid -->
+{% comment %}
+  This snippet is used to showcase each product during the loop,
+  'for product in collection.products' in collection.liquid.
+
+  A liquid variable (grid_item_width) is set just before the this
+  snippet is included to change the size of the container.
+  Once the variable is set on a page, all future instances of this
+  snippet will use that width. Overwrite the variable to adjust this.
+
+  Example
+    - assign grid_item_width = 'large--one-quarter medium--one-half'
+{% endcomment %}
+
+<style>
+  .grid-product__wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: #fbfaf8;
+  }
+  .grid-product__image-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    margin-bottom: 0;
+  }
+  .grid-product__image-wrapper .grid-product__image-link .product--image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .grid-product__meta {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+  .grid-product__sale-msg {
+    height: 19.19px;
+  }
+  .grid-product__variants {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .grid-product__variants button.variant-selector {
+    display: flex;
+    margin: 4px;
+    padding: 0;
+    line-height: normal;
+  }
+  .grid-product__variants .hidden-count {
+    display: none;
+    font-weight: 500;
+  }
+  .grid-product__controls {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background-color: #fff !important;
+    margin-top: auto;
+    background: #fff;
+    opacity: 1;
+  }
+  .grid-product__add-to-cart.btn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    z-index: 3;
+  }
+  .grid-product__sizes {
+    display: flex;
+    opacity: 0;
+  }
+  .grid-product__sizes.hidden {
+    display: none !important;
+  }
+  .grid-product__sizes button.grid-product-size {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    line-height: normal;
+    padding: 12px;
+    z-index: 2;
+  }
+  .grid-product__sizes .grid-product-size[disabled] {
+    cursor: not-allowed;
+    color: #d3d3d3;
+    background: #fbfaf8;
+    border: 1px solid #d3d3d3;
+    text-decoration: line-through;
+    z-index: 1;
+  }
+  .grid-product__wrapper:hover * .grid-product__add-to-cart.btn,
+  .grid-product__wrapper:hover * .grid-product__sizes {
+    opacity: 1 !important;
+  }
+  .grid-product__add-to-cart.btn:hover {
+    height: 0px;
+  }
+  .grid-product__wrapper:after {
+    height: 0px;
+  }
+  .grid-product__wrapper:has(button.variant-selector:focus) * .grid-product__add-to-cart.btn,
+  .grid-product__wrapper:has(button.grid-product-size:focus) * .grid-product__add-to-cart.btn,
+  .grid-product__wrapper:has(button.variant-selector:focus) * .grid-product__sizes,
+  .grid-product__wrapper:has(button.grid-product-size:focus) * .grid-product__sizes {
+    opacity: 1 !important;
+  }
+  .grid-product__wrapper:has(button.grid-product-size:focus) * .grid-product__add-to-cart.btn {
+    height: 0px !important;
+    padding: 0px !important;
+    border: none !important;
+  }
+
+  @media screen and (max-width: 767px) {
+    .grid-product__variants > :nth-child(n + 5) {
+      display: none !important;
+    }
+    .grid-product__variants .hidden-count:not(:empty) {
+      display: flex !important;
+    }
+  }
+</style>
+
+{% if width %}
+  {%- assign theWidth = width | append: 'x' -%}
+{% else %}
+  {%- assign theWidth = 600 | append: 'x' -%}
+{% endif %}
+
+{% if height %}
+  {%- assign theHeight = height | prepend: 'x' -%}
+{% else %}
+  {%- assign theHeight = 830 | prepend: 'x' -%}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {%- unless product.tags contains 'exclude-sale' -%}
+    {% assign on_sale = true %}
+  {%- endunless -%}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+{% assign color_filter = collection.filters | where: 'label', 'Color' %}
+{% assign active_color_filter = color_filter.first.active_values | first %}
+
+{% assign default_color = '' %}
+{% if active_color_filter %}
+  {% for variant in product.variants %}
+    {% assign mapping_colors = variant.metafields.custom.collection_filter_color.value %}
+    {% if mapping_colors contains active_color_filter.value %}
+      {% assign default_color = variant.option1 %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% comment %} NEED TO LINK active_color_filter.value to the variant metafield mapping value somehow {% endcomment %}
+  {% if default_color == '' %}
+    {% assign default_color = product.variants.first.option1 %}
+  {% endif %}
+{% elsif collection.handle contains 'womens' %}
+  {% assign collection_type = 'womens' %}
+  {% if product.metafields.accentuate.womens_default_color %}
+    {% assign default_color = product.metafields.accentuate.womens_default_color %}
+    {% assign default_variant = product.variants | where: 'option1', default_color %}
+    {% unless default_variant.size > 0 %}
+      {% assign default_color = product.variants.first.option1 %}
+    {% endunless %}
+  {% else %}
+    {% assign default_color = product.variants.first.option1 %}
+  {% endif %}
+{% elsif collection.handle contains 'mens' %}
+  {% assign collection_type = 'mens' %}
+  {% if product.metafields.accentuate.mens_default_color %}
+    {% assign default_color = product.metafields.accentuate.mens_default_color %}
+    {% assign default_variant = product.variants | where: 'option1', default_color %}
+    {% unless default_variant.size > 0 %}
+      {% assign default_color = product.variants.first.option1 %}
+    {% endunless %}
+  {% else %}
+    {% assign default_color = product.variants.first.option1 %}
+  {% endif %}
+{% else %}
+  {% assign default_color = product.variants.first.option1 %}
+{% endif %}
+
+{%- assign default_variant = product.variants | where: 'option1', default_color | first %}
+
+{% capture img_id_class %}ProductImage-{{ default_variant.featured_media.id }}{% endcapture %}
+{% capture img_wrapper_id %}ProductImageWrapper-{{ default_variant.featured_media.id }}{% endcapture %}
+{%- assign featured_image = default_variant.featured_media.preview_image %}
+{%- assign img_url = featured_image | img_url: theWidth -%}
+{%- capture sale_msg -%}
+  {%- if product.title contains "Pack" -%}
+    Bundle Savings
+  {%- elsif on_sale -%}
+    Select Colors {{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}% off
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="grid-product__wrapper" data-product-handle="{{ product.handle }}">
+  <div class="grid-product__image-wrapper">
+    <a
+      class="grid-product__image-link"
+      href="{{ product.url | within: collection }}"
+      data-image-link
+    >
+      <img
+        class="product--image {{ img_id_class }}"
+        src="{{ img_url }}"
+        loading="lazy"
+        src="{{ featured_image | img_url: theWidth }}"
+        alt="{{ product.title }} - {{ featured_image.alt | escape }}"
+        data-image
+      >
+    </a>
+
+    {% if sold_out %}
+      <div class="grid-product__sold-out">
+        <p>{{ 'products.product.sold_out_html' | t }}</p>
+      </div>
+    {% elsif on_sale %}
+      <div class="grid-product__on-sale">
+        <p>Sale</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <a href="{{ product.url | within: collection }}" class="grid-product__meta">
+    <span class="grid-product__title">{{ product.title }}</span>
+    <div class="grid__price">
+      {% if settings.show_pdp_sale_text %}
+          {% assign theme_discount_percent = settings.sale_discount_percent %}
+          {% assign theme_price_multiplier = 100 | minus: theme_discount_percent | divided_by: 100.0 %}
+          <div data-theme-discount-info>
+            <span data-discounted-price>
+              {%  if product.selected_or_first_available_variant.compare_at_price %}
+                {{ product.selected_or_first_available_variant.compare_at_price | times: theme_price_multiplier | money -}}
+              {% else %}
+              {{ product.selected_or_first_available_variant.price | times: theme_price_multiplier | money -}}
+              {% endif %}</span><strike class="grid__price-compare">
+              {% if default_variant.compare_at_price > default_variant.price %}
+              {{- default_variant.compare_at_price | money -}}
+              {% else  %}
+                {{- default_variant.price | money -}}
+              {% endif %}
+            </strike>
+          </div>
+          <style>
+            .price-container {
+              margin-bottom: 0px
+            }
+            .grid__price-compare {
+              margin-left: 5px;
+            }
+            
+            [data-theme-discount-info] {
+              color: #bb3820;
+              margin-bottom: 10px;
+            }
+            [data-theme-discount-info] [data-discounted-price] {
+              font-size: 20px;
+              font-weight: 700;
+            }
+          </style>
+        {%  else %}
+      
+      <span class="grid__price-actual">{{ default_variant.price | money }}</span>
+      <strike class="grid__price-compare">
+        {{- default_variant.compare_at_price | money -}}
+      </strike>
+    {% endif %}
+
+    </div>
+    {% unless settings.show_pdp_sale_text %}
+      <div class="grid-product__sale-msg">{{ sale_msg }}</div>
+    {% endunless %}
+
+    {% if section.settings.product_vendor_enable %}
+      <p class="grid-product__vendor">{{ product.vendor }}</p>
+    {% endif %}
+  </a>
+  <div class="grid-product__variants">
+    {% assign color_array = '' | split: ',' %}
+    {% for variant in product.variants %}
+      {% assign color = variant.option1 %}
+      {% unless color_array contains color %}
+        {% assign color_variants = product.variants | where: 'option1', color %}
+        {% if color_variants.size == 1 and collection_type == 'womens' and variant.option2 == 'XLARGE' %}
+        {% elsif color_variants.size == 1 and collection_type == 'mens' and variant.option2 == 'SMALL' %}
+        {% else %}
+          {% assign color_upcase = color | upcase %}
+          {% assign variant_images = '' | split: ',' %}
+          {% assign hover_image = '' %}
+          {% for image in product.images %}
+            {% assign image_alt_upcase = image.alt | strip | upcase %}
+            {% if image_alt_upcase == color_upcase %}
+              {% assign image_to_add = image | img_url: theWidth | split: ',' %}
+              {% assign variant_images = variant_images | concat: image_to_add %}
+            {% endif %}
+          {% endfor %}
+          {% if variant_images.size >= 3 %}
+            {% assign hover_image = variant_images[2] %}
+          {% elsif variant_images.size >= 2 %}
+            {% assign hover_image = variant_images[1] %}
+          {% endif %}
+          {% if collection_type == 'womens' %}
+            {% assign default_size_color_variants = color_variants | where: 'option2', 'MEDIUM' %}
+          {% elsif collection_type == 'mens' %}
+            {% assign default_size_color_variants = color_variants | where: 'option2', 'LARGE' %}
+          {% endif %}
+          {% if default_size_color_variants.size > 0 %}
+            {% assign default_size_color_variant = default_size_color_variants | first %}
+          {% else %}
+            {% assign default_size_color_variant = variant %}
+          {% endif %}
+          <button
+            class="variant-selector{% if color == default_color %} variant-selector--selected{% endif %}"
+            data-variant-id="{{ default_size_color_variant.id }}"
+            data-variant-url="{{ default_size_color_variant.url | within: collection }}"
+            data-variant-compare-at-price="{{ variant.compare_at_price | money }}"
+            data-variant-price="{{ variant.price | money }}"
+            data-variant-image="{{ variant.featured_image | img_url: theWidth }}"
+            data-variant-image-alt="{{ variant.featured_image.alt | escape }}"
+            data-variant-new-style="false"
+            data-variant-hover-image="{{ hover_image }}"
+            data-variant-color="{{ variant.option1 | handleize }}"
+            data-variant-size="{{ variant.option2 }}"
+            data-variant-qty="{{ variant.inventory_quantity }}"
+            aria-label="Select {{ color }} {{ product.title }}"
+          >
+            <img
+              loading="lazy"
+              src="//feetures.com/cdn/shop/t/204/assets/swatch-{{ variant.option1 | handleize }}.png"
+              alt="{{ variant.option1 }}"
+              onerror="this.onerror=null; this.src='//cdn.shopify.com/s/files/1/2256/2959/t/202/assets/swatch-white.png'"
+            >
+          </button>
+        {% endif %}
+        {% assign color_to_add = color | split: ',' %}
+        {% assign color_array = color_array | concat: color_to_add %}
+      {% endunless %}
+    {% endfor %}
+    <a class="hidden-count variant-selector-extra-count" href="{{ product.url }}">
+      {%- if color_array.size > 4 %}+{{ color_array.size | minus: 4 }}{% endif -%}
+    </a>
+  </div>
+
+  <div class="grid-product__controls">
+    <div class="grid-product__add-to-cart btn">Add To Cart</div>
+    {% for color in color_array %}
+      {% assign size_variants = product.variants | where: 'option1', color %}
+      <div
+        class="grid-product__sizes{%if default_color != '' %}{% if color == default_color %}{% else %} hidden{% endif %}{% else %}{% unless forloop.first %} hidden{% endunless %}{% endif %}"
+        data-variant-color="{{ color | handleize }}"
+      >
+        {% for size_variant in size_variants %}
+          {% capture display_order %}
+            {% if size_variant.option2 == "XSMALL" %}
+              1
+            {% elsif size_variant.option2 == "SMALL" %}
+              2
+            {% elsif size_variant.option2 == "MEDIUM" %}
+              3
+            {% elsif size_variant.option2 == "LARGE" %}
+              4
+            {% elsif size_variant.option2 == "XLARGE" %}
+              5
+            {% endif %}
+          {% endcapture %}
+          {% if collection_type == 'womens' and size_variant.option2 == 'XLARGE' %}
+          {% elsif collection_type == 'mens' and size_variant.option2 == 'SMALL' %}
+
+          {% else %}
+            <button
+              class="grid-product-size"
+              data-size="{{ size_variant.option2 | handleize }}"
+              data-variant-id="{{ size_variant.id }}"
+              style="order: {{ display_order | strip }}"
+              {% unless size_variant.available %}
+                disabled
+              {% endunless %}
+              aria-label="Add {{ size_variant.option2 | capitalize }} {{ color }} {{ product.title }} to cart"
+            >
+              {{ size_variant.option2 | first -}}
+              {%- if size_variant.option2 contains 'x' or size_variant.option2 contains 'X' -%}
+                {{- size_variant.option2 | slice: 1 -}}
+              {%- endif %}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script
+  data-grid-item-script
+  data-product-handle="{{ product.handle }}"
+>
+  'use strict';
+  if (true) {
+    // Base variables and components
+    let script = document.currentScript;
+    let productHandle = script.getAttribute('data-product-handle');
+    let gridItem = document.querySelector(`.grid-product__wrapper[data-product-handle="${productHandle}"]`);
+    let productImage = gridItem.querySelector('.product--image');
+    let colorSwatches = gridItem.querySelectorAll('.variant-selector');
+    let sizeButtonRows = gridItem.querySelectorAll('.grid-product__sizes');
+    let sizeButtons = gridItem.querySelectorAll('.grid-product__sizes .grid-product-size');
+
+    // Define function to swap main image on hover
+    function swapHoverImage(hoverState) {
+      let activeSwatch = gridItem.querySelector('.variant-selector.variant-selector--selected');
+      let newMainImage = activeSwatch.dataset.variantImage;
+      if (hoverState) {
+        newMainImage = activeSwatch.dataset.variantHoverImage;
+      }
+      if (newMainImage) {
+        productImage.src = newMainImage;
+      }
+    }
+
+    // Define function to swap swatch image on hover
+    function onHoverSwapSwatchImage(activeSwatch) {
+      if (!activeSwatch) {
+        activeSwatch = gridItem.querySelector('.variant-selector.variant-selector--selected');
+      }
+      let newMainImage = activeSwatch.dataset.variantImage;
+      let newMainImageAlt = activeSwatch.dataset.variantImageAlt;
+      productImage.src = newMainImage;
+      productImage.alt = newMainImageAlt;
+    }
+
+    // Define function to update product images
+    function updateProductImages(activeSwatch) {
+      let newMainImage = activeSwatch.dataset.variantImage;
+      let newMainImageAlt = activeSwatch.dataset.variantImageAlt;
+      productImage.src = newMainImage;
+      productImage.alt = newMainImageAlt;
+    }
+
+    // Define function to update product details
+    function updateProductDetails(activeSwatch) {
+      // do not run if sale text is enabled
+      {% unless settings.show_pdp_sale_text %}
+        let newUrl = activeSwatch.dataset.variantUrl;
+        let newPrice = activeSwatch.dataset.variantPrice;
+        let newCompareAtPrice = activeSwatch.dataset.variantCompareAtPrice;
+      
+        let productAnchors = gridItem.querySelectorAll('a');
+        let productPrice = gridItem.querySelector('.grid__price .grid__price-actual');
+        let productCompareAtPrice = gridItem.querySelector('.grid__price .grid__price-compare');
+        productPrice.innerHTML = newPrice;
+        productCompareAtPrice.innerHTML = newCompareAtPrice;
+        for (let i = 0; i < productAnchors.length; i++) {
+          let anchor = productAnchors[i];
+          anchor.href = newUrl;
+        }
+      {% endunless %}
+    }
+
+    // Define function to handle swatch borders
+    function updateColorSwatches(activeSwatch) {
+      for (let i = 0; i < colorSwatches.length; i++) {
+        let swatch = colorSwatches[i];
+        swatch.classList.remove('variant-selector--selected');
+        if (swatch.dataset.variantColor == activeSwatch.dataset.variantColor) {
+          swatch.classList.add('variant-selector--selected');
+        }
+      }
+    }
+
+    // Define function to update size buttons
+    function updateSizeButtons(activeSwatch) {
+      for (let i = 0; i < sizeButtonRows.length; i++) {
+        let sizeButtonRow = sizeButtonRows[i];
+        sizeButtonRow.classList.add('hidden');
+        if (sizeButtonRow.dataset.variantColor == activeSwatch.dataset.variantColor) {
+          sizeButtonRow.classList.remove('hidden');
+        }
+      }
+    }
+
+    // Define function to add variant to cart
+    async function addVariantToCart(clickedButton) {
+      let variantId = clickedButton.dataset.variantId;
+      let formData = {
+        items: [
+          {
+            id: variantId,
+            quantity: 1,
+            // properties: { ...properties },
+          },
+        ],
+      };
+      try {
+        let response = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+        let cart = await response.json();
+        return cart;
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    }
+
+    // Product image hover logic
+    productImage.addEventListener('mouseenter', function () {
+      swapHoverImage(true);
+    });
+    productImage.addEventListener('mouseleave', function () {
+      swapHoverImage(false);
+    });
+
+    // Variant swatch logic
+    for (let i = 0; i < colorSwatches.length; i++) {
+      let colorSwatch = colorSwatches[i];
+      colorSwatch.addEventListener('mouseenter', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        onHoverSwapSwatchImage(colorSwatch);
+      });
+      colorSwatch.addEventListener('mouseleave', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        onHoverSwapSwatchImage();
+      });
+      colorSwatch.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        updateProductImages(colorSwatch);
+        updateProductDetails(colorSwatch);
+        updateColorSwatches(colorSwatch);
+        updateSizeButtons(colorSwatch);
+      });
+    }
+
+    // Size button click logic
+    for (let i = 0; i < sizeButtons.length; i++) {
+      let sizeButton = sizeButtons[i];
+      sizeButton.addEventListener('click', async function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        let cart = await addVariantToCart(sizeButton);
+        if (cart && cart.items) {
+          ajaxCart.load();
+        }
+      });
+    }
+  }
+</script>

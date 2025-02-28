@@ -1,0 +1,20 @@
+{% render 'shogun-products', content: page %}
+<div class="ourstory">
+    {% section 'feetures-hero' %}
+    <div class="wrapper">
+      {% section 'feetures-story' %}
+    </div>
+{%  comment %}
+    {% section 'feetures-product-lines' %}{%  endcomment %}
+
+    <div class="wrapper">
+      {% section 'feetures-image-text' %}
+      {% section 'feetures-video-with-quote' %}
+      {% section 'feetures-mini-callouts' %}
+      {% section 'feetures-image-next-to-text' %}
+    </div>
+  </div>
+  
+  {% section 'feetures-find-your' %}
+  {% section 'feetures-ugc-images' %}
+</div>{{ page.metafields.shogun.optimizer }}

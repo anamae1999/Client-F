@@ -1,0 +1,1389 @@
+{%- style -%}
+  {%- assign logo_max_width = section.settings.logo_max_width -%}
+  {%- assign header_color = section.settings.header_color -%}
+  {%- assign secondary_color = settings.color_secondary -%}
+
+  {%- if section.settings.transparent_header_enable and request.page_type == 'index' -%}
+    {%- assign header_color_transparent = section.settings.transparent_header_color -%}
+
+    .header-wrapper.header-wrapper--transparent .site-nav__link,
+    .header-wrapper.header-wrapper--transparent .site-header__logo a {
+      color: {{ header_color_transparent }};
+    }
+    {% comment %}
+    .header-wrapper.header-wrapper--transparent .site-header__logo a:hover,
+    .header-wrapper.header-wrapper--transparent .site-nav__link:hover,
+    .header-wrapper.header-wrapper--transparent .site-nav__link:focus,
+    .header-wrapper.header-wrapper--transparent .site-header__logo a:focus {
+      color: {{ header_color_transparent | color_modify: 'alpha', 0.75 }};
+    }
+    {% endcomment %}
+    .header-wrapper.header-wrapper--transparent .site-header__logo a:hover,
+    .header-wrapper.header-wrapper--transparent .site-nav__link:hover,
+    .header-wrapper.header-wrapper--transparent .site-nav__link:focus,
+    .header-wrapper.header-wrapper--transparent .site-header__logo a:focus {
+      color: {{secondary_color}};
+    }
+    .header-wrapper.header-wrapper--transparent .site-nav--has-dropdown.nav-hover > .site-nav__link {
+      color: {{ header_color }};
+    }
+
+    .header-wrapper.header-wrapper--transparent .burger-icon,
+    .header-wrapper.header-wrapper--transparent .site-nav__link:hover .burger-icon {
+      background: {{ header_color_transparent }};
+    }
+  {%- endif -%}
+
+  .header-wrapper .site-nav__link,
+  .header-wrapper .site-header__logo a,
+  .header-wrapper .site-nav__dropdown-link,
+  .header-wrapper .site-nav--has-dropdown > a.nav-focus {
+  {% comment %}
+  .header-wrapper .site-nav--has-dropdown.nav-hover > a,
+  .header-wrapper .site-nav--has-dropdown:hover > a {
+  {% endcomment %}
+    color: {{ header_color }};
+  }
+  .header-wrapper .site-nav--has-dropdown.nav-hover > a,
+  .header-wrapper .site-nav--has-dropdown:hover > a {
+    color: {{secondary_color}};
+  }
+
+  {% comment %}
+  .header-wrapper .site-header__logo a:hover,
+  .header-wrapper .site-header__logo a:focus,
+  .header-wrapper .site-nav__link:hover,
+  .header-wrapper .site-nav__link:focus,
+  .header-wrapper .site-nav--has-dropdown a:hover,
+  .header-wrapper .site-nav--has-dropdown > a.nav-focus:hover,
+  .header-wrapper .site-nav--has-dropdown > a.nav-focus:focus,
+  .header-wrapper .site-nav--has-dropdown .site-nav__link:hover,
+  .header-wrapper .site-nav--has-dropdown .site-nav__link:focus,
+  .header-wrapper .site-nav--has-dropdown.nav-hover > a:hover,
+  .header-wrapper .site-nav__dropdown a:focus {
+    color: {{ header_color | color_modify: 'alpha', 0.75 }};
+  }
+  {% endcomment %}
+  .header-wrapper .site-header__logo a:hover,
+  .header-wrapper .site-header__logo a:focus,
+  .header-wrapper .site-nav__link:hover,
+  .header-wrapper .site-nav__link:focus,
+  .header-wrapper .site-nav--has-dropdown a:hover,
+  .header-wrapper .site-nav--has-dropdown > a.nav-focus:hover,
+  .header-wrapper .site-nav--has-dropdown > a.nav-focus:focus,
+  .header-wrapper .site-nav--has-dropdown .site-nav__link:hover,
+  .header-wrapper .site-nav--has-dropdown .site-nav__link:focus,
+  .header-wrapper .site-nav--has-dropdown.nav-hover > a:hover,
+  .header-wrapper .site-nav__dropdown a:focus {
+    color: {{secondary_color}};
+  }
+
+  .header-wrapper .site-nav--has-dropdown .site-nav__link:hover .dropdown-icon svg path,
+  .header-wrapper .site-nav--has-dropdown .site-nav__link:focus .dropdown-icon svg path {
+    stroke: {{secondary_color}};
+  }
+
+  .header-wrapper .burger-icon,
+  .header-wrapper .site-nav--has-dropdown > a.nav-focus:before {
+    background: {{ header_color }};
+  }
+
+  .header-wrapper .site-nav__link:hover .burger-icon {
+    background: {{ header_color | color_modify: 'alpha', 0.75 }};
+  }
+
+  .site-header__logo img {
+    max-width: {{ logo_max_width | append: 'px' }};
+  }
+
+  @media screen and (max-width: 768px) {
+    .site-header__logo img {
+      max-width: 100%;
+    }
+  }
+
+  .site-nav__dropdown {
+    width: max-content;
+    min-width: auto;
+    padding: 0;
+    top: 116.95px;
+    left: auto;
+    right: auto;
+    margin-left: -25px;
+  }
+
+  .site-nav__dropdown * a[href="#"]:hover{
+    color: inherit;
+  }
+
+  .site-nav__dropdown .dropdown-section {
+    margin: 0;
+  }
+
+  .site-nav__dropdown.nav-outside {
+    left: 0;
+    right: 0;
+  }
+
+  .site-nav__dropdown .dropdown-section--primary {
+    margin-right: 0px !important;
+  }
+
+  .wrapper-nav {
+    width: max-content;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .wrapper-primary-nav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 15px 25px 15px 30px
+  }
+
+  .wrapper-secondary-nav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 15px 25px;
+  }
+
+  .wrapper-secondary-nav .dropdown-section--secondary {
+    margin-bottom: 1rem;
+  }
+
+  .wrapper-terciary-nav {
+    justify-self: flex-end;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: stretch;
+    margin-left: 25px;
+  }
+
+  .wrapper-terciary-nav .wrapper-image {
+    height: 100%;
+    aspect-ratio: 1;
+  }
+
+  .wrapper-terciary-nav .wrapper-image img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wrapper-terciary-nav .dropdown-section--terciary {
+    height: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #F5F2EE;
+    padding: 15px;
+  }
+
+  .wrapper-terciary-nav .dropdown-section--terciary a {
+    font-weight: bold;
+    padding: 4px 0px;
+  }
+
+  .link-height {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .height-image-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    overflow: hidden;
+    transition: all .25s;
+  }
+
+  .link-height svg {
+    width: 60px;
+    height: 60px;
+    transition: all .25s;
+  }
+
+  .link-height:hover svg{
+    transform: scale(1.1);
+  }
+
+  .link-height span {
+    font-size: 20px;
+    margin-left: .5rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .site-nav__dropdown {
+      left: 0;
+      margin-left: 0;
+    }
+  }
+
+  @media screen and (max-width: 1075px) {
+    .site-nav__dropdown {
+      top: 148px;
+    }
+  }
+
+  @media screen and (max-width: 909px) {
+    .wrapper-terciary-nav {
+      display: none;
+    }
+
+    .mobile-nav__sublist {
+      z-index: 999;
+      overflow: scroll;
+    }
+  }
+{%- endstyle -%}
+<div data-section-id="{{ section.id }}" data-section-type="header-section" data-template="{{ request.page_type }}">
+  <div id="NavDrawer" class="drawer drawer--left">
+    {% include 'drawer-menu' %}
+  </div>
+  <div class="header-container drawer__header-container">
+    <div class="header-placeholder"></div>
+    <div class="header-wrapper" data-header-wrapper>
+      {% if section.settings.show_announcement %}
+        <div data-announcement-bar-attach></div>
+      {% endif %}
+      <header
+        class="site-header"
+        role="banner"
+        {% if section.settings.transparent_header_enable %}
+          data-transparent-header="true"
+        {% endif %}
+      >
+        <div class="wrapper">
+          <div class="site-header-main">
+            <div class="large--hide">
+              <div class="site-nav--open site-nav--mobile">
+                <button
+                  type="button"
+                  class="icon-fallback-text site-nav__link site-nav__link--burger js-drawer-open-button-left"
+                  aria-controls="NavDrawer"
+                >
+                  <span class="burger-icon burger-icon--top"></span>
+                  <span class="burger-icon burger-icon--mid"></span>
+                  <span class="burger-icon burger-icon--bottom"></span>
+                  <span class="visually-hidden">{{ 'general.drawers.navigation' | t }}</span>
+                </button>
+
+              </div>
+            </div>
+
+            <div class="site-header-logo-wrapper">
+              {% comment %}
+                Use the uploaded logo from theme settings if enabled.
+                Site name gets precedence with H1 tag on homepage, div on other pages.
+              {% endcomment %}
+              {% if request.page_type == 'index' %}
+                <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+              {% else %}
+                <div class="h1 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+              {% endif %}
+              {% capture image_size %}{{ logo_max_width | escape }}x{% endcapture %}
+
+              <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo-link">
+                <!--
+                  <img class="site-header__logo-image" src="{{ section.settings.logo | img_url: image_size }}" srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo">
+                -->
+                <svg class="site-header__logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200.999 41.153">
+                  <defs/><g data-name="Group 244"><g data-name="Group 234"><path fill="#231f20" d="M194.966 38.151a3.017 3.017 0 113.016 3 2.989 2.989 0 01-3.016-3zm5.572 0a2.555 2.555 0 10-2.556 2.54 2.561 2.561 0 002.556-2.54zm-1.124 1.624h-.554l-.985-1.516h-.554v1.516h-.461v-3.289h1.43c.593 0 1.17.161 1.17.869 0 .647-.454.886-1.038.9zm-1.539-1.978c.408 0 1.124.077 1.124-.446 0-.339-.447-.4-.8-.4h-.877v.847z" data-name="Path 48"/></g><g fill="#231f20" data-name="Group 243"><g data-name="Group 235"><path d="M94.956 15.03h-10.2v14.939c0 2.668 1.245 3.557 3.912 3.557h6.284v4.98h-7c-5.335 0-8.418-3.557-8.418-9.189V2.936h5.217v7.114h10.2z" data-name="Path 49"/><path d="M95.286 38.833h-7.325c-5.395 0-8.745-3.646-8.745-9.516V2.609h5.87v7.114h10.2v5.634h-10.2v14.612c0 2.354.972 3.23 3.587 3.23h6.61zM79.87 3.263v26.054c0 5.549 3.024 8.862 8.091 8.862h6.668v-4.326h-5.956c-2.973 0-4.241-1.162-4.241-3.884V14.703h10.2v-4.326h-10.2V3.263z" data-name="Path 50"/></g><g data-name="Group 236"><path d="M122.76 10.05v16.6c0 7.47-5.217 12.45-12.154 12.45s-12.152-4.98-12.152-12.45v-16.6h5.216v16.6c0 4.387 3.2 7.47 6.936 7.47s6.937-3.083 6.937-7.47v-16.6z" data-name="Path 51"/><path d="M110.606 39.426c-7.347 0-12.479-5.254-12.479-12.777V9.723h5.871v16.926c0 4.005 2.9 7.143 6.608 7.143s6.61-3.138 6.61-7.143V9.723h5.87v16.926c0 7.523-5.132 12.777-12.48 12.777zM98.781 10.377v16.272c0 7.137 4.863 12.123 11.825 12.123s11.826-4.986 11.826-12.123V10.377h-4.562v16.272c0 4.372-3.19 7.8-7.264 7.8s-7.262-3.425-7.262-7.8V10.377z" data-name="Path 52"/></g><g data-name="Group 237"><path d="M126.257 10.05h4.98v3.261h.118c1.779-2.787 4.209-3.854 7.707-3.854h1.186v4.98h-.771c-5.039 0-8 3.083-8 10.789v13.28h-5.217z" data-name="Path 53"/><path d="M131.8 38.833h-5.87V9.723h5.634v2.715c1.727-2.281 4.076-3.308 7.5-3.308h1.513v5.634h-1.1c-5.166 0-7.678 3.422-7.678 10.463zm-5.216-.654h4.562V25.227c0-7.481 2.725-11.118 8.332-11.118h.443V9.786h-.859c-3.552 0-5.775 1.107-7.431 3.7l-.1.151h-.625v-3.26h-4.32z" data-name="Path 54"/></g><g data-name="Group 238"><path d="M169.257 33.526h14.583c2.431 0 3.38-.948 3.38-2.727 0-5.217-17.963-3.2-17.963-13.042 0-5.039 3.5-7.707 9.722-7.707h12.272v4.98h-13.165c-2.549 0-3.32.711-3.38 2.49-.059 4.92 17.963 2.845 17.963 13.042 0 5.4-3.794 7.944-8.833 7.944h-14.579z" data-name="Path 55"/><path d="M183.84 38.833h-14.91v-5.634h14.91c2.14 0 3.053-.718 3.053-2.4 0-1.951-3.078-2.833-6.642-3.855-5.044-1.446-11.321-3.246-11.321-9.187 0-5.181 3.569-8.034 10.049-8.034h12.6v5.634h-13.493c-2.534 0-3 .7-3.052 2.173-.022 1.761 2.92 2.58 6.326 3.529 5.184 1.444 11.636 3.241 11.636 9.5.004 5.182-3.42 8.274-9.156 8.274zm-14.254-.654h14.256c5.326 0 8.506-2.848 8.506-7.618 0-5.764-6.187-7.487-11.158-8.872-3.665-1.021-6.832-1.9-6.8-4.174.068-2.051 1.072-2.812 3.706-2.812h12.833v-4.326h-11.95c-4.286 0-9.395 1.28-9.395 7.38 0 5.448 5.763 7.1 10.847 8.558 3.818 1.094 7.116 2.04 7.116 4.484 0 2.055-1.213 3.054-3.707 3.054h-14.254z" data-name="Path 56"/></g><g data-name="Group 239"><path d="M46.701 25.701a16.2 16.2 0 00.07-1.423 14.762 14.762 0 10-29.524 0 14.779 14.779 0 0028.739 4.893h-5.762a8.9 8.9 0 01-8.215 4.948 9.054 9.054 0 01-9.216-8.418zM32.009 14.437a8.912 8.912 0 018.751 6.284h-17.5a8.914 8.914 0 018.749-6.284z" data-name="Path 57"/><path d="M32.009 39.426a15.148 15.148 0 1115.089-15.148c0 .437-.023.9-.071 1.452l-.027.3H23.167a8.715 8.715 0 008.842 7.764 8.52 8.52 0 007.922-4.767l.09-.181h6.418l-.143.43a14.959 14.959 0 01-14.287 10.15zm0-29.642a14.494 14.494 0 1013.516 19.714h-5.1a9.273 9.273 0 01-8.415 4.948 9.378 9.378 0 01-9.541-8.707l-.042-.365h23.972c.03-.4.044-.759.044-1.1A14.31 14.31 0 0032.009 9.786zm9.2 11.264H22.806l.141-.429a9.255 9.255 0 019.062-6.51 9.255 9.255 0 019.062 6.51zm-17.492-.654h16.581a8.606 8.606 0 00-8.289-5.63 8.606 8.606 0 00-8.289 5.63z" data-name="Path 58"/></g><g data-name="Group 240"><path d="M77.743 25.701a16.2 16.2 0 00.07-1.423 14.762 14.762 0 10-29.523 0 14.778 14.778 0 0028.738 4.893h-5.761a8.9 8.9 0 01-8.216 4.948 9.055 9.055 0 01-9.216-8.418zM63.051 14.437a8.914 8.914 0 018.752 6.284h-17.5a8.913 8.913 0 018.748-6.284z" data-name="Path 59"/><path d="M63.051 39.426A15.148 15.148 0 1178.14 24.278c0 .444-.023.9-.07 1.452l-.027.3H54.21a8.713 8.713 0 008.841 7.764 8.522 8.522 0 007.923-4.767l.09-.181h6.422l-.143.43a14.957 14.957 0 01-14.292 10.15zm0-29.642a14.494 14.494 0 1013.516 19.714h-5.1a9.276 9.276 0 01-8.416 4.948 9.378 9.378 0 01-9.54-8.707l-.042-.365h23.973c.03-.4.044-.755.044-1.1A14.311 14.311 0 0063.051 9.786zm9.2 11.264H53.848l.141-.429a9.562 9.562 0 0118.124 0zm-17.492-.654H71.34a8.917 8.917 0 00-16.578 0z" data-name="Path 60"/></g><g data-name="Group 241"><path d="M168.219 25.701c.041-.467.069-.939.069-1.423a14.762 14.762 0 10-29.523 0 14.779 14.779 0 0028.739 4.893h-5.762a8.9 8.9 0 01-8.215 4.948 9.054 9.054 0 01-9.216-8.418zm-14.692-11.264a8.913 8.913 0 018.751 6.284h-17.5a8.914 8.914 0 018.749-6.284z" data-name="Path 61"/><path d="M153.527 39.426a15.148 15.148 0 1115.089-15.148c0 .437-.023.9-.071 1.452l-.027.3h-23.832a8.715 8.715 0 008.842 7.764 8.52 8.52 0 007.922-4.767l.09-.181h6.417l-.143.43a14.956 14.956 0 01-14.287 10.15zm0-29.642a14.494 14.494 0 1013.516 19.714h-5.1a9.273 9.273 0 01-8.415 4.948 9.378 9.378 0 01-9.541-8.707l-.042-.365h23.973c.03-.4.045-.759.045-1.1a14.311 14.311 0 00-14.436-14.488zm9.2 11.264h-18.403l.14-.429a9.563 9.563 0 0118.125 0zm-17.493-.654h16.582a8.918 8.918 0 00-16.579 0z" data-name="Path 62"/></g><g data-name="Group 242"><path d="M.327 38.506V14.259C.327 5.425 5.127.327 13.191.327h6.877v5.217h-6.047c-5.158 0-8.122 2.371-8.122 8.122v1.6h9.369v5.22H5.899v18.02z" data-name="Path 63"/><path d="M6.226 38.833H0V14.259C0 5.331 4.931 0 13.191 0h7.2v5.872h-6.37c-5.245 0-7.8 2.549-7.8 7.794v1.274h9.369v5.871H6.226zm-5.572-.654h4.918V20.157h9.369v-4.563H5.572v-1.928c0-5.606 2.843-8.448 8.449-8.448h5.719V.654h-6.554C5.219.654.649 5.614.649 14.259z" data-name="Path 64"/></g></g></g>
+                </svg>
+                <span class="sr-only">{{ shop.name }}</span>
+                <!--
+                  {% if request.page_type == 'index' and section.settings.transparent_header_enable %}
+                    {% if section.settings.transparent_logo == blank %}
+                      {%- assign transparent_logo = section.settings.logo -%}
+                    {% else %}
+                      {%- assign transparent_logo = section.settings.transparent_logo -%}
+                    {% endif %}
+
+                    <img class="site-header__logo-image site-header__logo-image--transparent" src="{{ transparent_logo | img_url: image_size }}" srcset="{{ transparent_logo | img_url: image_size }} 1x, {{ transparent_logo | img_url: image_size, scale: 2 }} 2x" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo">
+                  {% endif %}
+                -->
+              </a>
+              {% if request.page_type == 'index' %}
+                </h1>
+              {% else %}
+                </div>
+              {% endif %}
+            </div>
+            <nav class="medium-down--hide" id="nav-left" role="navigation">
+              <ul class="site-nav site-nav--left {% if request.page_type == "collection" %}site-nav--init{% endif %}">
+                {% for link in linklists[section.settings.main_menu_link_list].links %}
+                  {% if link.links != blank %}
+                    {% assign parent_index = forloop.index %}
+                    <li
+                      class="site-nav__item site-nav--has-dropdown {% if link.active %}site-nav--active{% endif %}"
+                      aria-haspopup="true"
+                      data-meganav-type="parent"
+                      tabindex="0"
+                    >
+                      <a
+                        href="{{ link.url }}"
+                        class="site-nav__link"
+                        data-meganav-type="parent"
+                        aria-controls="LeftMenuParent-{{ parent_index }}"
+                        aria-expanded="false"
+                        {% unless request.page_type == 'index' %}
+                          {%- if link.active %}aria-current="page"{% endif -%}
+                        {% endunless %}
+                      >
+                        {{ link.title | escape }}
+                        <span class="dropdown-icon">{% include 'chevron-right.svg' %}</span>
+                      </a>
+                      <div
+                        id="LeftMenuParent-{{ parent_index }}"
+                        class="site-nav__dropdown {% if link.levels == 2 %}site-nav--has-grandchildren{% endif %}"
+                        data-meganav-dropdown
+                      >
+                        <div class="wrapper-nav">
+                          <div class="wrapper-primary-nav">
+                            <ul class="dropdown-section dropdown-section--primary">
+                              {% for childlink in link.links %}
+                                {% if childlink.links != blank %}
+                                  {% assign child_index = forloop.index %}
+                                  {% if childlink.url contains '-socks-by-height' %}
+                                    {% for grandchild_link in childlink.links %}
+                                      {% capture snippet_name %}icon-{{ grandchild_link.title | downcase | handleize }}{% endcapture %}
+                                      <li>
+                                        <a href="{{ grandchild_link.url }}" class="link-height">
+                                          <span class="height-image-wrapper">
+                                            {% include snippet_name %}
+                                          </span>
+                                          <span>{{ grandchild_link.title }}</span>
+                                        </a>
+                                      </li>
+                                    {% endfor %}
+                                  {% else %}
+                                    <li
+                                      class="site-nav__item site-nav--has-dropdown site-nav--has-dropdown-grandchild {% if childlink.active %}site-nav--active{% endif %}"
+                                      aria-haspopup="true"
+                                    >
+                                      <a
+                                        href="{{ childlink.url }}"
+                                        class="site-nav__dropdown-link"
+                                        aria-controls="MenuChildren-{{ parent_index }}-{{ child_index }}"
+                                        data-meganav-type="parent"
+                                        {% unless request.page_type == 'index' %}
+                                          {%- if childlink.active %}aria-current="page"{% endif -%}
+                                        {% endunless %}
+                                        tabindex="-1"
+                                      >
+                                        {{ childlink.title | escape }}
+                                        <span class="dropdown-icon">{% include 'chevron-right.svg' %}</span>
+                                      </a>
+                                    </li>
+                                  {% endif %}
+                                {% else %}
+                                  {% unless link.url contains '-socks-by-height' %}
+                                    <li
+                                      {% if childlink.active %}
+                                        class="site-nav--active"
+                                      {% endif %}
+                                    >
+                                      <a
+                                        href="{{ childlink.url }}"
+                                        class="site-nav__dropdown-link"
+                                        data-meganav-type="child"
+                                        {% if childlink.active %}
+                                          aria-current="page"
+                                        {% endif %}
+                                      >
+                                        {{ childlink.title | escape }}
+                                      </a>
+                                    </li>
+                                  {% endunless %}
+                                {% endif %}
+                              {% endfor %}
+                              {% assign accentuate_dropdown_image_link = link.title
+                                | downcase
+                                | prepend: 'dropdown_image_link_'
+                              %}
+                              {% if shop.metafields.accentuate[accentuate_dropdown_image_link] %}
+                                <li class="site-nav--compressed-image-section">
+                                  <a
+                                    href="{{shop.metafields.accentuate[accentuate_dropdown_image_link].href}}"
+                                    class="site-nav__dropdown-link"
+                                    data-meganav-type="child"
+                                  >
+                                    {{ shop.metafields.accentuate[accentuate_dropdown_image_link].link_text }}
+                                  </a>
+                                </li>
+                              {% endif %}
+                            </ul>
+                          </div>
+                          <div class="wrapper-secondary-nav">
+                            {% assign secondary_nav_handle = link.title | downcase | prepend: 'dev-menu-' %}
+                            {% for linklist in linklists %}
+                              {% if linklist.handle == secondary_nav_handle %}
+                                {% for link in linklists[linklist.handle].links %}
+                                  <ul class="dropdown-section dropdown-section--secondary">
+                                    <li>
+                                      <a href="{{link.url}}"
+                                        ><strong>{{ link.title }}</strong></a
+                                      >
+                                    </li>
+                                    {% if link.links != blank %}
+                                      {% for child_link in link.links %}
+                                        {% liquid
+                                          if child_link.title contains '::'
+                                            assign link_title = child_link.title | split: '::' | first
+                                            assign feature_text = child_link.title | split: '::' | last
+                                          else 
+                                            assign link_title = child_link.title
+                                            assign feature_text = ""
+                                          endif
+                                        %}
+                                        <li>
+                                          <a href="{{ child_link.url }}">{{ link_title }} {% if feature_text.size > 1 %}<span class="featured-badge" style="color: white; background-color: #BB3820; padding: 0 3px 2px 3px;     font-size: 14px;     margin-left: 3px;     font-weight: 600;">{{ feature_text }}</span>{% endif %}</a>
+                                        </li>
+                                      {% endfor %}
+                                    {% endif %}
+                                  </ul>
+                                {% endfor %}
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                          <div class="wrapper-secondary-nav">
+                            {% assign secondary_nav_handle = link.title
+                              | downcase
+                              | prepend: 'dev-menu-'
+                              | append: '-secondary'
+                            %}
+                            {% for linklist in linklists %}
+                              {% if linklist.handle == secondary_nav_handle %}
+                                {% for link in linklists[linklist.handle].links %}
+                                  <ul class="dropdown-section dropdown-section--secondary">
+                                    <li>
+                                      <a href="{{link.url}}"
+                                        ><strong>{{ link.title }}</strong></a
+                                      >
+                                    </li>
+                                    {% if link.links != blank %}
+                                      {% for child_link in link.links %}
+                                        <li>
+                                          <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                                        </li>
+                                      {% endfor %}
+                                    {% endif %}
+                                  </ul>
+                                {% endfor %}
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                          {%- comment -%}
+                            {% assign accentuate_dropdown_image_link = link.title|downcase|prepend: "dropdown_image_link_" %}
+                            {% if shop.metafields.accentuate[accentuate_dropdown_image_link]%}
+                              <div class="dropdown-section dropdown-section--image">
+                                <a href="{{shop.metafields.accentuate[accentuate_dropdown_image_link].href}}">
+                                  <img src="{{shop.metafields.accentuate[accentuate_dropdown_image_link].image_url}}" alt="Which Feetures?">
+                                  <span>{{shop.metafields.accentuate[accentuate_dropdown_image_link].link_text}}</span>
+                                </a>
+                              </div>
+                            {% endif %}
+                          {%- endcomment -%}
+                          {%- liquid
+                            assign cta_block = null
+                            for block in section.blocks
+                              if block.settings.parent == link.title and block.settings.image != blank and block.settings.image_url != blank
+                                assign cta_block = block
+                                break
+                              endif
+                            endfor
+                          -%}
+                          {%- if cta_block != blank -%}
+                            <div class="wrapper-terciary-nav">
+                              <a class="wrapper-image" href="{{ cta_block.settings.image_url }}">
+                                <img
+                                  src="{{cta_block.settings.image | image_url: width: 300}}"
+                                  loading="lazy"
+                                  alt="Which Feetures?"
+                                >
+                              </a>
+                              <div class="dropdown-section--terciary">
+                                {%- if cta_block.settings.link_text_1 != blank -%}
+                                  <a href="{{ cta_block.settings.url_1 }}">
+                                    {{ cta_block.settings.link_text_1 }}
+                                  </a>
+                                {%- endif -%}
+                                {%- if cta_block.settings.link_text_2 != blank -%}
+                                  <a href="{{ cta_block.settings.url_2 }}">
+                                    {{ cta_block.settings.link_text_2 }}
+                                  </a>
+                                {%- endif -%}
+                                {%- if cta_block.settings.link_text_3 != blank -%}
+                                  <a href="{{ cta_block.settings.url_3 }}">
+                                    {{ cta_block.settings.link_text_3 }}
+                                  </a>
+                                {%- endif -%}
+                              </div>
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </li>
+                  {% else %}
+                    <li class="site-nav__item{% if link.active %} site-nav--active{% endif %} nav-{{ link.title }}">
+                      <a
+                        href="{{ link.url }}"
+                        class="site-nav__link"
+                        data-meganav-type="child"
+                        {% unless request.page_type == 'index' %}
+                          {%- if link.active %}aria-current="page"{% endif -%}
+                        {% endunless %}
+                      >
+                        {{ link.title | split: '::' | first | escape }}
+                        {% if link.title contains '::' %}<span class="featured-badge" style="color: white; background-color: #BB3820; padding: 0 3px 2px 3px;     font-size: 14px;     margin-left: 2px;     font-weight: 600;">{{ link.title | split: '::' | last }}</span>{% endif %}
+
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </nav>
+
+            <nav class="medium-down--hide nav-desktop--right" role="navigation">
+              {% comment %}
+                List out your main-menu linklist (default)
+
+                More info on linklists:
+                  - http://docs.shopify.com/themes/liquid-variables/linklists
+              {% endcomment %}
+              <!-- begin site-nav -->
+
+              <!-- <h1>{{section.settings}}</h1> -->
+              <ul
+                class="site-nav site-nav--right {% if request.page_type == "collection" %}site-nav--init{% endif %}"
+                id="AccessibleNav"
+              >
+                {% for link in linklists[section.settings.drawer_bottom_link_list].links %}
+                  {% if link.links != blank %}
+                    {% assign parent_index = forloop.index %}
+                    <li
+                      class="site-nav__item site-nav--has-dropdown {% if link.active %}site-nav--active{% endif %}"
+                      aria-haspopup="true"
+                      data-meganav-type="parent"
+                    >
+                      <a
+                        href="{{ link.url }}"
+                        class="site-nav__link"
+                        data-meganav-type="parent"
+                        aria-controls="RightMenuParent-{{ parent_index }}"
+                        aria-expanded="false"
+                        {% unless request.page_type == 'index' %}
+                          {%- if link.active %}aria-current="page"{% endif -%}
+                        {% endunless %}
+                      >
+                        {{ link.title | escape }}
+                        <span class="dropdown-icon">{% include 'chevron-right.svg' %}</span>
+                      </a>
+                      <ul
+                        id="RightMenuParent-{{ parent_index }}"
+                        class="site-nav__dropdown {% if link.levels == 2 %}site-nav--has-grandchildren{% endif %}"
+                        data-meganav-dropdown
+                      >
+                        {% for childlink in link.links %}
+                          {% if childlink.links != blank %}
+                            {% assign child_index = forloop.index %}
+                            <li
+                              class="site-nav__item site-nav--has-dropdown site-nav--has-dropdown-grandchild {% if childlink.active %}site-nav--active{% endif %}"
+                              aria-haspopup="true"
+                            >
+                              <a
+                                href="{{ childlink.url }}"
+                                class="site-nav__dropdown-link"
+                                aria-controls="MenuChildren-{{ parent_index }}-{{ child_index }}"
+                                data-meganav-type="parent"
+                                {% unless request.page_type == 'index' %}
+                                  {%- if childlink.active %}aria-current="page"{% endif -%}
+                                {% endunless %}
+                                tabindex="-1"
+                              >
+                                {{ childlink.title | escape }}
+                                <span class="dropdown-icon">{% include 'chevron-right.svg' %}</span>
+                              </a>
+                              <div class="site-nav__dropdown-grandchild">
+                                <ul
+                                  id="MenuChildren-{{ parent_index }}-{{ child_index }}"
+                                  data-meganav-dropdown
+                                >
+                                  {% for grandchildlink in childlink.links %}
+                                    <li
+                                      {% if grandchildlink.active %}
+                                        class="site-nav--active"
+                                      {% endif %}
+                                    >
+                                      <a
+                                        href="{{ grandchildlink.url }}"
+                                        class="site-nav__dropdown-link"
+                                        data-meganav-type="child"
+                                        {% unless request.page_type == 'index' %}
+                                          {%- if grandchildlink.active %}aria-current="page"{% endif -%}
+                                        {% endunless %}
+                                        tabindex="-1"
+                                      >
+                                        {{ grandchildlink.title | escape }}
+                                      </a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                            </li>
+                          {% else %}
+                            <li
+                              {% if childlink.active %}
+                                class="site-nav--active"
+                              {% endif %}
+                            >
+                              <a
+                                href="{{ childlink.url }}"
+                                class="site-nav__dropdown-link"
+                                data-meganav-type="child"
+                                {% if childlink.active %}
+                                  aria-current="page"
+                                {% endif %}
+                                tabindex="-1"
+                              >
+                                {{ childlink.title | escape }}
+                              </a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li class="site-nav__item{% if link.active %} site-nav--active{% endif %}">
+                      <a
+                        href="{{ link.url }}"
+                        class="site-nav__link"
+                        data-meganav-type="child"
+                        {% unless request.page_type == 'index' %}
+                          {%- if link.active %}aria-current="page"{% endif -%}
+                        {% endunless %}
+                      >
+                        {{ link.title | escape }}
+                       {% if link.title contains '::' %}<span class="featured-badge" style="color: white; background-color: #BB3820; padding: 0 3px 2px 3px;     font-size: 14px;     margin-left: 5px;     font-weight: 600;">{{ link.title | split: '::' | last }}</span>{% endif %}
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+
+                {% if shop.customer_accounts_enabled %}
+                  <li class="site-nav__item site-nav__expanded-item site-nav__item--compressed">
+                    <a class="site-nav__link site-nav__link--icon" href="{{ routes.account_url }}">
+                      <span class="icon-fallback-text">
+                        <span class="icomoon icomoon-customer" aria-hidden="true"></span>
+                        <span class="visually-hidden">
+                          {% if customer %}
+                            {{ 'layout.customer.account' | t }}
+                          {% else %}
+                            {{ 'layout.customer.log_in' | t }}
+                          {% endif %}
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                {% endif %}
+
+                <li class="site-nav__item site-nav__item--compressed">
+                  <a
+                    href="{{ routes.cart_url }}"
+                    class="site-nav__link site-nav__link--icon cart-link js-drawer-open-button-right"
+                    aria-controls="CartDrawer"
+                  >
+                    <span class="icon-fallback-text">
+                      <span class="icomoon icomoon-cart" aria-hidden="true"></span>
+                      <span class="visually-hidden">{{ 'layout.cart.title' | t }}</span>
+                    </span>
+
+                    <span
+                      class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"
+                    ></span>
+                  </a>
+                </li>
+              </ul>
+              <!-- //site-nav -->
+            </nav>
+            <div class="large--hide">
+              <div class="site-nav site-nav--mobile text-right">
+                <a class="site-nav__link site-nav__link--icon" href="{{ routes.account_url }}">
+                  <span class="icon-fallback-text">
+                    <span class="icomoon icomoon-customer" aria-hidden="true"></span>
+                    <span class="visually-hidden">
+                      {% if customer %}
+                        {{ 'layout.customer.account' | t }}
+                      {% else %}
+                        {{ 'layout.customer.log_in' | t }}
+                      {% endif %}
+                    </span>
+                  </span>
+                </a>
+                <a
+                  href="{{ routes.cart_url }}"
+                  class="site-nav__link site-nav__link--icon cart-link js-drawer-open-button-right"
+                  aria-controls="CartDrawer"
+                >
+                  <span class="icon-fallback-text">
+                    <span class="icomoon icomoon-cart" aria-hidden="true"></span>
+                    <span class="visually-hidden">{{ 'layout.cart.title' | t }}</span>
+                  </span>
+
+                  <span
+                    class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"
+                  ></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": {
+    "cs": "Záhlaví",
+    "da": "Overskrift",
+    "de": "Header",
+    "en": "Header",
+    "es": "Encabezado",
+    "fi": "Ylätunniste",
+    "fr": "En-tête",
+    "it": "header",
+    "ja": "ヘッダー",
+    "ko": "헤더",
+    "nb": "Header",
+    "nl": "Koptekst",
+    "pl": "Nagłówek",
+    "pt-BR": "Cabeçalho",
+    "pt-PT": "Cabeçalho",
+    "sv": "Rubrik",
+    "th": "ส่วนหัว",
+    "tr": "Üstbilgi",
+    "vi": "Đầu trang",
+    "zh-CN": "标头",
+    "zh-TW": "標頭"
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "cs": "Logo",
+        "da": "Logo",
+        "de": "Logo",
+        "en": "Logo",
+        "es": "Logo",
+        "fi": "Logo",
+        "fr": "Logo",
+        "it": "Logo",
+        "ja": "ロゴ",
+        "ko": "로고",
+        "nb": "Logo",
+        "nl": "Logo",
+        "pl": "Logo",
+        "pt-BR": "Logotipo",
+        "pt-PT": "Logótipo",
+        "sv": "Logotyp",
+        "th": "โลโก้",
+        "tr": "Logo",
+        "vi": "Logo",
+        "zh-CN": "logo",
+        "zh-TW": "商標"
+      }
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": {
+        "cs": "Šířka vlastního loga",
+        "da": "Tilpasset logobredde",
+        "de": "Logobreite",
+        "en": "Custom logo width",
+        "es": "Ancho del logo personalizado",
+        "fi": "Mukautetun logon leveys",
+        "fr": "Largeur personnalisée du logo",
+        "it": "Larghezza logo personalizzato",
+        "ja": "ロゴの幅をカスタマイズする",
+        "ko": "사용자 지정 로고 폭",
+        "nb": "Tilpasset logobredde",
+        "nl": "Aangepaste logo-breedte",
+        "pl": "Niestandardowa szerokość logo",
+        "pt-BR": "Largura do logotipo personalizado",
+        "pt-PT": "Largura de logótipo personalizada",
+        "sv": "Anpassad logotypsbredd",
+        "th": "ความกว้างของโลโก้ที่กำหนดเอง",
+        "tr": "Özel logo genişliği",
+        "vi": "Chiều rộng logo tùy chỉnh",
+        "zh-CN": "自定义 logo 宽度",
+        "zh-TW": "自訂商標寬度"
+      },
+      "min": 50,
+      "max": 260,
+      "step": 5,
+      "unit": "px",
+      "default": 180
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": {
+        "cs": "Odkazy a ikony",
+        "da": "Links og ikoner",
+        "de": "Links und Symbole",
+        "en": "Links and icons",
+        "es": "Enlaces e íconos",
+        "fi": "Linkit ja kuvakkeet",
+        "fr": "Liens et icônes",
+        "it": "Link e icone",
+        "ja": "リンクとアイコン",
+        "ko": "링크와 아이콘",
+        "nb": "Koblinger og ikoner",
+        "nl": "Links en pictogrammen",
+        "pl": "Linki i ikony",
+        "pt-BR": "Links e ícones",
+        "pt-PT": "Ligações e ícones",
+        "sv": "Länkar och ikoner",
+        "th": "ลิงก์และไอคอน",
+        "tr": "Bağlantılar ve simgeler",
+        "vi": "Liên kết và biểu tượng",
+        "zh-CN": "链接和图标",
+        "zh-TW": "連結與圖示"
+      },
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": {
+        "cs": "Průhledné záhlaví",
+        "da": "Gennemsigtigt sidehoved",
+        "de": "Transparenter Header",
+        "en": "Transparent header",
+        "es": "Encabezado transparente",
+        "fi": "Läpinäkyvä ylätunniste",
+        "fr": "En-tête transparent",
+        "it": "Header trasparente",
+        "ja": "透過ヘッダー",
+        "ko": "투명 헤더",
+        "nb": "Gjennomsiktig overskrift",
+        "nl": "Transparante koptekst",
+        "pl": "Nagłówek transparentny",
+        "pt-BR": "Cabeçalho transparente",
+        "pt-PT": "Cabeçalho transparente",
+        "sv": "Genomskinlig rubrik",
+        "th": "ส่วนหัวโปร่งใส",
+        "tr": "Şeffaf üstbilgi",
+        "vi": "Đầu trang trong suốt",
+        "zh-CN": "透明标题",
+        "zh-TW": "透明標頭"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_header_enable",
+      "label": {
+        "cs": "Zapnout průhledné záhlaví na domovské stránce",
+        "da": "Aktivér gennemsigtigt sidehoved på startsiden",
+        "de": "Transparenten Header auf der Startseite aktivieren",
+        "en": "Enable transparent header on the homepage",
+        "es": "Habilitar encabezado transparente en la página de inicio",
+        "fi": "Ota läpinäkyvä ylätunniste käyttöön kotisivulla",
+        "fr": "Activer l'en-tête transparent de la page d'accueil",
+        "it": "Abilita header trasparente nella home page",
+        "ja": "ホームページの透過ヘッダーを有効にする",
+        "ko": "홈 페이지에서 투명 헤더를 사용합니다.",
+        "nb": "Aktiver gjennomsiktig overskrift på hjemmesiden",
+        "nl": "Transparante koptekst inschakelen op de startpagina",
+        "pl": "Włącz nagłówek transparentny na stronie głównej",
+        "pt-BR": "Habilitar cabeçalho transparente na página inicial.",
+        "pt-PT": "Ativar cabeçalho transparente na página inicial",
+        "sv": "Klicka på aktivera transparent rubrik på startsidan.",
+        "th": "เปิดใช้ส่วนหัวแบบโปร่งใสในหน้าแรก",
+        "tr": "Ana sayfada şeffaf üstbilgiyi etkinleştir",
+        "vi": "Bật đầu trang trong suốt trên trang chủ",
+        "zh-CN": "在主页上启用透明标题",
+        "zh-TW": "啟用首頁上的透明標頭"
+      },
+      "info": {
+        "cs": "Platí pro případy, kdy horní sekce představuje prezentaci.",
+        "da": "Gælder, når det øverste afsnit er et diasshow.",
+        "de": "Anwendbar, wenn der obere Abschnitt eine Slideshow ist.",
+        "en": "Applicable when the top section is a slideshow.",
+        "es": "Aplica cuando la sección superior es una presentación de diapositivas.",
+        "fi": "Sovelletaan, kun yläosa on diaesitys.",
+        "fr": "Applicable lorsque la partie supérieure est un diaporama.",
+        "it": "Disponibile quando la sezione superiore è una presentazione.",
+        "ja": "上部のセクションがスライドショーの場合に適用されます。",
+        "ko": "상단 섹션이 슬라이드 쇼인 경우 적용 가능합니다.",
+        "nb": "Gjelder når toppseksjonen er en lysbildefremvisning.",
+        "nl": "Van toepassing wanneer het bovenste gedeelte een diavoorstelling is.",
+        "pl": "Ma zastosowanie, gdy górna sekcja jest pokazem slajdów.",
+        "pt-BR": "Aplicável quando a seção superior é uma apresentação de slides.",
+        "pt-PT": "Aplicável quando a secção superior é uma apresentação de diapositivos.",
+        "sv": "Tillämplig när det övre avsnittet är ett bildspel.",
+        "th": "สามารถใช้งานได้เมื่อส่วนบนเป็นสไลด์โชว์",
+        "tr": "Üst bölüm slayt gösterisi olduğunda geçerlidir.",
+        "vi": "Áp dụng khi có bản trình chiếu ở phần trên cùng.",
+        "zh-CN": "在顶部部分是幻灯片时适用。",
+        "zh-TW": "可於頂端區段為輪播投影片時套用。"
+      },
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "transparent_logo",
+      "label": {
+        "cs": "Průhledné logo",
+        "da": "Gennemsigtigt logo",
+        "de": "Transparentes Logo",
+        "en": "Transparent logo",
+        "es": "Logo transparente",
+        "fi": "Läpinäkyvä logo",
+        "fr": "Logo transparent",
+        "it": "Logo trasparente",
+        "ja": "透明なロゴ",
+        "ko": "투명 로고",
+        "nb": "Gjennomsiktig logo",
+        "nl": "Transparant logo",
+        "pl": "Logo transparentne",
+        "pt-BR": "Logotipo transparente",
+        "pt-PT": "Logótipo transparente",
+        "sv": "Transparent logotyp",
+        "th": "โลโก้โปร่งใส",
+        "tr": "Şeffaf logo",
+        "vi": "Logo trong suốt",
+        "zh-CN": "透明的 logo",
+        "zh-TW": "透明商標"
+      },
+      "info": {
+        "cs": "Zobrazí se v případě zapnutí průhledného záhlaví.",
+        "da": "Vises, når det gennemsigtige sidehoved aktiveres.",
+        "de": "Wird angezeigt, wenn ein transparenter Header aktiviert ist.",
+        "en": "Displayed when transparent header is enabled.",
+        "es": "Se muestra cuando el encabezado transparente está habilitado.",
+        "fi": "Näytetään silloin, kun läpinäkyvä ylätunniste ei ole käytössä.",
+        "fr": "Affiché lorsque l'en-tête transparent est activé.",
+        "it": "Visualizzato quando l'header trasparente è abilitato.",
+        "ja": "透明なヘッダーが有効になっている場合に表示されます。",
+        "ko": "투명 헤더가 사용 가능한 경우 표시됩니다.",
+        "nb": "Vises når gjennomsiktig topptekst er aktivert.",
+        "nl": "Weergegeven wanneer transparante kop is ingeschakeld.",
+        "pl": "Wyświetlane przy włączonym nagłówku transparentnym.",
+        "pt-BR": "Exibido quando o cabeçalho transparente está habilitado.",
+        "pt-PT": "Apresentado quando o cabeçalho transparente é ativado.",
+        "sv": "Visas när transparent rubrik är aktiverad.",
+        "th": "จะแสดงเมื่อมีการใช้ส่วนหัวแบบโปร่งใส",
+        "tr": "Şeffaf üstbilgi etkin olduğunda görüntülenir.",
+        "vi": "Hiển thị khi bật đầu trang trong suốt.",
+        "zh-CN": "在启用透明标题时显示。",
+        "zh-TW": "在透明標頭啟用時顯示。"
+      }
+    },
+    {
+      "type": "color",
+      "id": "transparent_header_color",
+      "label": {
+        "cs": "Odkazy a ikony průhledného záhlaví",
+        "da": "Links og ikoner til gennemsigtigt sidehoved",
+        "de": "Transparente Header-Links und -Symbole",
+        "en": "Transparent header links and icons",
+        "es": "Enlaces e íconos de encabezado transparentes",
+        "fi": "Läpinäkyvän ylätunnisteen linkit ja kuvakkeet",
+        "fr": "Liens et icônes d'en-tête transparents",
+        "it": "Link e icone header trasparenti",
+        "ja": "透明なヘッダーのリンクとアイコン",
+        "ko": "투명 헤더 링크와 아이콘",
+        "nb": "Gjennomsiktige topptekstkoblinger og ikoner",
+        "nl": "Transparante koptekstkoppelingen en pictogrammen",
+        "pl": "Transparentne linki i ikony nagłówka",
+        "pt-BR": "Links e ícones de cabeçalho transparentes",
+        "pt-PT": "Ligações e ícones de cabeçalho transparentes",
+        "sv": "Transparenta rubriklänkar och ikoner",
+        "th": "ลิงก์และไอคอนของส่วนหัวแบบโปร่งใส",
+        "tr": "Şeffaf üstbilgi bağlantıları ve simgeleri",
+        "vi": "Liên kết và biểu tượng đầu trang trong suốt",
+        "zh-CN": "透明的标题链接和图标",
+        "zh-TW": "透明標頭連結與圖示"
+      },
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu_link_list",
+      "label": {
+        "cs": "Nabídka",
+        "da": "Menu",
+        "de": "Menü",
+        "en": "Menu",
+        "es": "Menú",
+        "fi": "Valikko",
+        "fr": "Menu",
+        "it": "Menu",
+        "ja": "メニュー",
+        "ko": "메뉴",
+        "nb": "Meny",
+        "nl": "Menu",
+        "pl": "Menu",
+        "pt-BR": "Menu",
+        "pt-PT": "Menu",
+        "sv": "Meny",
+        "th": "เมนู",
+        "tr": "Menü",
+        "vi": "Menu",
+        "zh-CN": "菜单",
+        "zh-TW": "選單"
+      },
+      "default": "main-menu",
+      "info": {
+        "cs": "Nabídka se sbalí do nabídkového tlačítka v případě, že odkazy jsou příliš dlouhé. [Další informace](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "da": "Menuen komprimeres til en menuknap, hvis linkene er for lange. [Få mere at vide](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "de": "Wenn Links zu lang sind, wird das Menü eingeklappt und als Menü-Schaltfläche angezeigt. [Mehr Informationen](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "en": "The menu will collapse into a menu button if links are too long. [Learn more](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "es": "El menú se contraerá en un botón de menú si los enlaces son demasiado largos. [Más información](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "fi": "Valikko kutistuu valikkopainikkeeksi, jos linkit ovat liian pitkiä. [Lisätietoja](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "fr": "Le menu sera réduit à un bouton de menu si les liens sont trop longs. [En savoir plus](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "it": "Il menu si ridurrà a un pulsante menu se i link sono troppo lunghi. [Maggiori informazioni](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "ja": "リンクが長すぎる場合、メニューがメニューボタンに折りたたまれます。[詳しくはこちら](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "ko": "링크가 너무 길면 메뉴가 메뉴 버튼으로 축소됩니다. [자세히 알아보기](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "nb": "Menyen slås sammen til en menyknapp hvis koblingene er for lange. [Finn ut mer](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "nl": "Het menu zal inklappen tot een menuknop als de links te lang zijn. [Meer informatie](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "pl": "Menu zwinie się do postaci przycisku Menu, jeśli linki będą zbyt długie. [Dowiedz się więcej](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "pt-BR": "O menu ficará oculto em um botão de menu se os links forem longos demais. [Saiba mais](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "pt-PT": "O menu será fechado num botão de menu se as ligações forem demasiado compridas. [Saiba mais](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "sv": "Menyn kommer att kollapsa till en menyknapp om länkarna är för långa. [Läs mer](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "th": "เมนูนี้จะย่อลงเป็นปุ่มเมนูในกรณีที่ลิงก์ยาวเกินไป [ดูข้อมูลเพิ่มเติม](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "tr": "Bağlantılar çok uzun olduğunda menü daralarak menü düğmesine dönüşür. [Daha fazla bilgi edinin](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "vi": "Menu sẽ được thu nhỏ thành nút menu nếu liên kết quá dài. [Tìm hiểu thêm](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "zh-CN": "如果链接过长，菜单将折叠成菜单按钮。[了解详细信息](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)",
+        "zh-TW": "如果連結太長，選單會收合為選單按鈕。[深入瞭解](https://help.shopify.com/manual/using-themes/themes-by-shopify/brooklyn#navigation-tips-tips-specific)"
+      }
+    },
+    {
+      "type": "link_list",
+      "id": "drawer_bottom_link_list",
+      "label": {
+        "cs": "Vedlejší nabídka v postranní liště",
+        "da": "Sekundær sidebjælkemenu",
+        "de": "Zusätzliches Menü",
+        "en": "Secondary sidebar menu",
+        "es": "Menú adicional",
+        "fi": "Sivupalkkivalikko",
+        "fr": "Menu supplémentaire",
+        "it": "Menu aggiuntivo",
+        "ja": "追加メニュー",
+        "ko": "보조 사이드바 메뉴",
+        "nb": "Sekundær meny i sidefeltet",
+        "nl": "Secundair zijbalkmenu",
+        "pl": "Dodatkowe menu paska bocznego",
+        "pt-BR": "Menu adicional",
+        "pt-PT": "Menu lateral secundário",
+        "sv": "Sekundär sidofältsmeny",
+        "th": "เมนูแถบด้านข้างรอง",
+        "tr": "İkincil kenar çubuğu menüsü",
+        "vi": "Menu thanh bên thứ cấp",
+        "zh-CN": "辅助侧边栏菜单",
+        "zh-TW": "次要側邊欄選單"
+      },
+      "default": "footer"
+    },
+    {
+      "type": "header",
+      "content": {
+        "cs": "Panel oznámení",
+        "da": "Meddelelseslinje",
+        "de": "Ankündigungsleiste",
+        "en": "Announcement bar",
+        "es": "Barra de anuncios",
+        "fi": "Ilmoituspalkki",
+        "fr": "Barre d'annonces",
+        "it": "Barra degli annunci",
+        "ja": "告知バー",
+        "ko": "공지 표시줄",
+        "nb": "Kunngjøringslinje",
+        "nl": "Aankondigingsbalk",
+        "pl": "Pasek ogłoszeń",
+        "pt-BR": "Barra de avisos",
+        "pt-PT": "Barra de comunicado",
+        "sv": "Meddelandefält",
+        "th": "แถบประกาศ",
+        "tr": "Duyuru çubuğu",
+        "vi": "Thanh thông báo",
+        "zh-CN": "公告栏",
+        "zh-TW": "公告列"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": {
+        "cs": "Zobrazit oznámení",
+        "da": "Vis meddelelse",
+        "de": "Ankündigung anzeigen",
+        "en": "Show announcement",
+        "es": "Mostrar anuncio",
+        "fi": "Näytä ilmoitus",
+        "fr": "Afficher l'annonce",
+        "it": "Mostra annuncio",
+        "ja": "告知を表示する",
+        "ko": "공지 표시",
+        "nb": "Vis kunngjøring",
+        "nl": "Aankondiging weergeven",
+        "pl": "Pokaż ogłoszenie",
+        "pt-BR": "Exibir comunicado",
+        "pt-PT": "Mostrar comunicado",
+        "sv": "Visa tillkännagivande",
+        "th": "แสดงประกาศ",
+        "tr": "Duyuruyu göster",
+        "vi": "Hiển thị thông báo",
+        "zh-CN": "显示公告",
+        "zh-TW": "顯示公告"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": {
+        "cs": "Jen domovská stránka",
+        "da": "Kun startside",
+        "de": "Nur Startseite",
+        "en": "Home page only",
+        "es": "Solo página de inicio",
+        "fi": "Vain etusivu",
+        "fr": "Page d'accueil uniquement",
+        "it": "Solo home page",
+        "ja": "ホームページのみ",
+        "ko": "홈페이지만",
+        "nb": "Kun på startsiden",
+        "nl": "Alleen homepage",
+        "pl": "Tylko strona główna",
+        "pt-BR": "Apenas na página inicial",
+        "pt-PT": "Apenas a página inicial",
+        "sv": "Endast hemsida",
+        "th": "หน้าแรกเท่านั้น",
+        "tr": "Yalnızca ana sayfa",
+        "vi": "Chỉ trang chủ",
+        "zh-CN": "仅主页",
+        "zh-TW": "僅限首頁"
+      },
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": {
+        "cs": "Text",
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "tr": "Metin",
+        "vi": "Văn bản",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "cs": "Tady můžete zadat oznámení",
+        "da": "Meddel noget her",
+        "de": "Hier Ankündigung platzieren",
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí",
+        "fi": "Ilmoita jotakin tässä",
+        "fr": "Annoncer quelque chose ici",
+        "it": "Annuncia qualcosa qui",
+        "ja": "ここで告知してください",
+        "ko": "여기에 공지하십시오",
+        "nb": "Kunngjør noe her",
+        "nl": "Kondig hier iets aan",
+        "pl": "Ogłoś coś tutaj",
+        "pt-BR": "Anuncie algo aqui",
+        "pt-PT": "Anunciar algo aqui",
+        "sv": "Meddela något här",
+        "th": "ประกาศข้อความที่นี่",
+        "tr": "Buraya bir duyuru ekleyin",
+        "vi": "Thông báo điều gì đó tại đây",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
+      }
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": {
+        "cs": "Odkaz",
+        "da": "Link",
+        "de": "Link",
+        "en": "Link",
+        "es": "Enlace",
+        "fi": "Linkki",
+        "fr": "Lien",
+        "it": "Link",
+        "ja": "リンク",
+        "ko": "링크",
+        "nb": "Kobling",
+        "nl": "Link",
+        "pl": "Link",
+        "pt-BR": "Link",
+        "pt-PT": "Ligação",
+        "sv": "Länk",
+        "th": "ลิงก์",
+        "tr": "Bağlantı",
+        "vi": "Liên kết",
+        "zh-CN": "链接",
+        "zh-TW": "連結"
+      }
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": {
+        "cs": "Panel",
+        "da": "Bjælke",
+        "de": "Leiste",
+        "en": "Bar",
+        "es": "Barra",
+        "fi": "Palkki",
+        "fr": "Barre",
+        "it": "Barra",
+        "ja": "バー",
+        "ko": "바",
+        "nb": "Felt",
+        "nl": "Balk",
+        "pl": "Pasek",
+        "pt-BR": "Barra",
+        "pt-PT": "Barra",
+        "sv": "Fält",
+        "th": "แถบ",
+        "tr": "Çubuk",
+        "vi": "Thanh",
+        "zh-CN": "栏",
+        "zh-TW": "橫條"
+      },
+      "default": "#1c1d1d"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": {
+        "cs": "Text",
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "tr": "Metin",
+        "vi": "Văn bản",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_cta",
+      "name": "CTA Image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent",
+          "label": "CTA Menu Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "CTA Image"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "CTA Image URL"
+        },
+        {
+          "type": "text",
+          "id": "link_text_1",
+          "label": "CTA Link 1 Text",
+          "default": "Sock Finder Quiz"
+        },
+        {
+          "type": "url",
+          "id": "url_1",
+          "label": "CTA Link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_text_2",
+          "label": "CTA Link 2 Text",
+          "default": "Our Sock Tech"
+        },
+        {
+          "type": "url",
+          "id": "url_2",
+          "label": "CTA Link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_text_3",
+          "label": "CTA Link 3 Text",
+          "default": "Compare Socks"
+        },
+        {
+          "type": "url",
+          "id": "url_3",
+          "label": "CTA Link 3 URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

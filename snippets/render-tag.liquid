@@ -1,0 +1,42 @@
+{% capture output %}
+	{% for tag in tags %}
+		{% if tag contains key %}
+			{% assign value = tag | split: ':' | last | lstrip %}
+			{% assign value_arr = value | split: ' ' %}
+			{% for value in value_arr %}
+				{{ value | strip | strip_newlines | capitalize | replace: 'Cushion', '' }}
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+{% endcapture %}
+{% assign output = output | replace: '  ',' ' | strip | strip_newlines %}
+{% assign outputHandle = output | handleize %}
+{% if key == 'cushion' %}
+	{% if output == '' %}
+		Cushion
+	{% else %}
+		{% case output %}
+			 {% when 'Max' %}
+			 	{{ output }} Cushion
+			 {% when 'Light' %}
+			 	{{ output }} Cushion
+			 {% else %}
+			 	{{ output }}
+		{% endcase %}
+	{% endif %}
+{% elsif key == 'height' %}
+	{% for link in linklists['filters-height'].links %}
+		{% assign linkHandle = link.title | handleize %}
+		{% if linkHandle == outputHandle %}
+			{% capture icon %}{{ link.handle }}.png{% endcapture %}
+		{% endif %}
+	{% endfor %}
+	{% comment %}
+	{% if icon != '' %}
+	<img class="icon-default" src="{{ icon | asset_img_url: '80x' }}"/>
+	{% endif %}
+	{% endcomment %}
+	{{ output }}
+{% else %}
+{{ output }}
+{% endif %}

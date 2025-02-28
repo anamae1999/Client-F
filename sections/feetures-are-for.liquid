@@ -1,0 +1,267 @@
+<style>
+  .feetures-are-for-wrapper {
+    width: 100vw;
+    position: relative;
+    left: calc(50% - 50vw);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .feetures-are-for-wrapper .swiper-images {
+    width: 100%;
+  }
+
+  .feetures-are-for-wrapper .image-slide {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feetures-are-for-wrapper .image-wrapper {
+    width: 50%;
+    aspect-ratio: 1;
+    position: relative;
+    background: #ececec;
+  }
+
+  .feetures-are-for-wrapper .image-wrapper:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.25;
+    background: #000;
+  }
+
+  .feetures-are-for-wrapper .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feetures-are-for-wrapper .container-text {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .feetures-are-for-wrapper h1 {
+    color: #fff;
+    font-size: 48px;
+    margin: 0;
+  }
+
+  .feetures-are-for-wrapper .swiper-text {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .feetures-are-for-wrapper .swiper-text h1 {
+    font-size: 72px;
+  }
+
+  .feetures-are-for-wrapper .swiper-text .swiper-slide {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feetures-are-for-wrapper .swiper-text .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0 !important;
+  }
+
+  .feetures-are-for-wrapper .swiper-text .swiper-slide.swiper-slide-active {
+    opacity: 1 !important;
+  }
+
+  .feetures-are-for-wrapper .links {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .feetures-are-for-wrapper .container-text a {
+    background: #fff;
+    color: #000;
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 580px) {
+    .feetures-are-for-wrapper .image-slide {
+      flex-direction: column;
+    }
+
+    .feetures-are-for-wrapper .image-wrapper {
+      width: 100%;
+    }
+
+    .feetures-are-for-wrapper .container-text {
+      margin-top: -20px;
+    }
+  }
+</style>
+
+<div class="feetures-are-for-wrapper">
+  <div class="swiper-images">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div class="image-slide">
+            <div class="image-wrapper">
+              {% if block.settings.image_1 %}
+                {{ block.settings.image_1 | image_url: width: '1200' | image_tag }}
+              {% endif %}
+            </div>
+            <div class="image-wrapper">
+              {% if block.settings.image_2 %}
+                {{ block.settings.image_2 | image_url: width: '1200' | image_tag }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="container-text">
+    <h1>Feetures Are For</h1>
+    <div class="swiper-text">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <h1>{{ block.settings.text }}</h1>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="links">
+      <a href="{{ section.settings.cta_url_1 }}">{{ section.settings.cta_text_1 }}</a>
+      <a href="{{ section.settings.cta_url_2 }}">{{ section.settings.cta_text_2 }}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // If wrapper to scope variables for load in from section rendering API
+  if (true) {
+    let script = document.currentScript;
+    let parentSection = script.parentElement;
+    let sectionId = parentSection.id;
+
+    let initSwiper = function () {
+      let swiperImages = new Swiper(`[id="${sectionId}"] .swiper-images`, {
+        allowTouchMove: false,
+        effect: 'fade',
+        loop: true,
+        spaceBetween: 0,
+        slidesPerView: 1,
+        watchSlidesProgress: true,
+        mousewheel: {
+          forceToAxis: true,
+        },
+        autoplay: {
+          delay: 2000,
+        },
+      });
+      let swiperText = new Swiper(`[id="${sectionId}"] .swiper-text`, {
+        allowTouchMove: false,
+        effect: 'fade',
+        loop: true,
+        spaceBetween: 0,
+        slidesPerView: 1,
+        watchSlidesProgress: true,
+        mousewheel: {
+          forceToAxis: true,
+        },
+      });
+
+      swiperImages.controller.control = swiperText;
+      swiperText.controller.control = swiperImages;
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initSwiper();
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Feature Are For",
+  "settings": [
+    {
+      "type": "url",
+      "id": "cta_url_1",
+      "label": "CTA URL 1"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_1",
+      "label": "CTA Text 1",
+      "default": "CTA 1"
+    },
+    {
+      "type": "url",
+      "id": "cta_url_2",
+      "label": "CTA URL 2"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_2",
+      "label": "CTA Text 2",
+      "default": "CTA 2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "activity_block",
+      "name": "Activity",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Activity Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Are For"
+    }
+  ]
+}
+{% endschema %}

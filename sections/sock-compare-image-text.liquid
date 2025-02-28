@@ -1,0 +1,308 @@
+<style>
+  .comparison-image-text-wrapper[data-comparison-image-text] {
+    width: 100vw;
+    position: relative;
+    left: calc(50% - 50vw);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: #f5f8f8;
+
+    .section-header {
+      display: none;
+    }
+
+    .comparison-image-text-card {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comparison-image-text-card .section-header {
+      display: flex;
+    }
+
+    .comparison-image-text-card.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .comparison-image-text-card-image {
+      width: 43%;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: stretch;
+      background: lightgrey;
+    }
+
+    .comparison-image-text-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .comparison-image-text-card-text {
+      width: 57%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 0vw 7vw;
+    }
+
+    .comparison-image-text-card-text h1 {
+      max-width: 75%;
+      font-size: 2.1vw;
+      margin-top: 0px;
+      margin-bottom: 5vw;
+    }
+
+    .comparison-image-text-card-text h3 {
+      font-size: 1.5vw;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .comparison-image-text-card-text span {
+      max-width: 75%;
+      font-size: 1.1vw;
+    }
+
+    .comparison-image-text-card-header {
+      margin-bottom: 0;
+    }
+
+    .comparison-image-text-icon-row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 2.85vw;
+      margin-top: 2.85vw;
+    }
+
+    .comparison-image-text-icon-row .icon-wrapper {
+      content: '';
+      width: 5.7vw;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: stretch;
+      border: 1px solid lightgrey;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .comparison-image-text-icon-row .icon-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .comparison-image-text-icon-row .text-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .comparison-image-text-icon-row .text-wrapper span {
+      max-width: 100%;
+    }
+
+    .comparison-image-text-icon-row .text-wrapper span:nth-child(1) {
+      font-weight: 500;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .comparison-image-text-wrapper[data-comparison-image-text] {
+      .section-header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .comparison-image-text-card,
+      .comparison-image-text-card.reverse {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      .comparison-image-text-card .section-header {
+        display: none;
+      }
+
+      .comparison-image-text-card-image {
+        width: 100%;
+      }
+
+      .comparison-image-text-card-text {
+        width: 100%;
+        padding: 4vw;
+      }
+
+      .comparison-image-text-card-text h3 {
+        font-size: 5.6vw;
+      }
+
+      .comparison-image-text-card-text span {
+        max-width: 100%;
+        font-size: 3.7vw;
+      }
+
+      .comparison-image-text-icon-row .icon-wrapper {
+        width: 19.2vw;
+      }
+
+      .comparison-image-text-icon-row {
+        gap: 7vw;
+        margin-top: 7vw;
+      }
+    }
+  }
+</style>
+
+<div class="comparison-image-text-wrapper" data-comparison-image-text>
+  <div class="section-header">
+    <h3>{{ section.settings.section_header }}</h3>
+  </div>
+  {% assign card_blocks = section.blocks | where: 'type', 'image_text_card' %}
+  {% for card_block in card_blocks %}
+    {% assign current_card_id = forloop.index %}
+    <div class="comparison-image-text-card{% if card_block.settings.reverse_order %} reverse{% endif %}">
+      <div class="comparison-image-text-card-image">
+        {% if card_block.settings.image %}
+          {{ card_block.settings.image | image_url: width: '800' | image_tag }}
+        {% endif %}
+      </div>
+      <div class="comparison-image-text-card-text">
+        {% if forloop.first %}
+          <h1 class="section-header">{{ section.settings.section_header }}</h1>
+        {% endif %}
+        <h3 class="comparison-image-text-card-header">
+          {{- card_block.settings.header -}}
+        </h3>
+        <span class="comparison-image-text-card-body">
+          {{- card_block.settings.body -}}
+        </span>
+        {% assign start_card_found = false %}
+        {% for block in section.blocks %}
+          {% if block.id == card_block.id %}
+            {% assign start_card_found = true %}
+            {% continue %}
+          {% endif %}
+          {% unless start_card_found %}
+            {% continue %}
+          {% endunless %}
+          {% if block.type == 'image_text_card' %}
+            {% break %}
+          {% endif %}
+          <div class="comparison-image-text-icon-row">
+            <div class="icon-wrapper">
+              {% if block.settings.image %}
+                <img
+                  width="300"
+                  height="300"
+                  src="{{ block.settings.image | image_url }}"
+                >
+              {% endif %}
+            </div>
+            <div class="text-wrapper">
+              <span>{{- block.settings.header -}}</span>
+              <span>{{- block.settings.body -}}</span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script data-comparison-image-text></script>
+
+{% schema %}
+{
+  "name": "Sock Compare Image Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_header",
+      "label": "Section Header",
+      "default": "Section Header Goes Here"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_text_card",
+      "name": "Image Text Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (square aspect ratio will be applied bassed on center)"
+        },
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Card header",
+          "default": "Card Header Goes Here"
+        },
+        {
+          "type": "text",
+          "id": "body",
+          "label": "Card body",
+          "default": "Card Body Goes Here"
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse_order",
+          "label": "Reverse Image/Text order",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "icon_row",
+      "name": "Icon Row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (square aspect ratio will be applied bassed on center)"
+        },
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Card header",
+          "default": "Card Header Goes Here"
+        },
+        {
+          "type": "text",
+          "id": "body",
+          "label": "Card body",
+          "default": "Card Body Goes Here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sock Compare Image Text"
+    }
+  ]
+}
+{% endschema %}

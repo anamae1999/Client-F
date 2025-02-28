@@ -1,0 +1,177 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BP2STFC6VQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BP2STFC6VQ');
+</script>
+
+{% comment %} Add to theme.liquid {% endcomment %}
+<!-- GA4 Ecommerce Tracking -->
+{% if template contains 'collection' %}
+  <script>
+    gtag("event", "view_item_list", {
+      item_list_id: "{{ collection.id }}",
+      item_list_name: "{{ collection.title }}",
+      items: [
+        {% for product in collection.products %}
+          {
+            item_id: "{{ product.id }}",
+            item_name: "{{ product.title | remove: "'" | remove: '"' }}",
+            currency: "{{ shop.currency }}",
+            price: {{ product.price | times: 0.01 }},
+            item_category: "{{ product.type }}",
+            item_brand: "{{ product.vendor }}"
+          },
+        {% endfor %}
+      ]
+    });
+  </script>
+
+{% elsif template contains 'product' %}
+  {% assign product_collection = product.collections | first %}
+  <script>
+    gtag("event", "view_item", {
+      currency: "{{ shop.currency }}",
+      value: {{ product.price | times: 0.01 }},
+      items: [
+        {
+          item_id: "{{ product.id }}",
+          item_name: "{{ product.title | remove: "'" | remove: '"' }}",
+          item_category: "{{ product.type }}",
+          item_brand: "{{ product.vendor }}",
+          item_list_id: "{{ product_collection.id }}",
+          item_list_name: "{{ product_collection.title }}"
+        }
+      ]
+    });
+  </script>
+
+{% elsif template contains 'cart' %}
+<script>
+  gtag("event", "view_cart", {
+    currency: "{{ cart.currency }}",
+    value: {{ cart.total_price | times: 0.01 }},
+    items: [
+      {% for line_item in cart.items %}
+        {
+          item_id: "{{ line_item.id }}",
+          item_name: "{{ line_item.title | remove: "'" | remove: '"' }}",
+          price: {{ line_item.price | times: 0.01 }},
+          item_category: "{{ line_item.type }}",
+          item_brand: "{{ line_item.vendor }}",
+          quantity: {{ line_item.quantity }}
+        },
+      {% endfor %}
+    ]
+  });
+</script>
+{% endif %}
+
+{% comment %} Change below to false if the buttons use ID instead {% endcomment %}
+{% assign atc_btn_uses_class = false %}
+{% assign rfc_btn_uses_class = true %}
+{% assign atc_btn = "AddToCart--product-template" %}
+{% assign rfc_btn = "ajaxcart__qty--remove" %}
+<!-- Add to cart -->
+<script>
+  {% if template contains 'product' %}
+    window.addEventListener("load", function(){
+      {% if atc_btn_uses_class %}
+        var atcClassName = '{{ atc_btn }}';
+        var atcBtns = document.getElementsByClassName(atcClassName)
+        if (atcBtns) {
+          for (atcBtn of atcBtns) {
+            atcBtn.addEventListener("click", function() {
+              console.log("Added product to cart");
+              {% assign product_collection = product.collections | first %}
+              gtag("event", "add_to_cart", {
+                currency: "{{ shop.currency }}",
+                value: {{ product.price | times: 0.01 }},
+                items: [
+                  {
+                    item_id: "{{ product.id }}",
+                    item_name: "{{ product.title | remove: "'" | remove: '"' }}",
+                    item_category: "{{ product.type }}",
+                    item_brand: "{{ product.vendor }}",
+                    item_list_id: "{{ product_collection.id }}",
+                    item_list_name: "{{ product_collection.title }}"
+                  }
+                ]
+              });
+            })
+          }
+        }
+      {% else %}
+        var atcId = '{{ atc_btn }}';
+        var atcBtn = document.getElementById(atcId)
+        if (atcBtn) {
+          atcBtn.addEventListener("click", function() {
+            console.log("Added product to cart");
+            {% assign product_collection = product.collections | first %}
+            gtag("event", "add_to_cart", {
+              currency: "{{ shop.currency }}",
+              value: {{ product.price | times: 0.01 }},
+              items: [
+                {
+                  item_id: "{{ product.id }}",
+                  item_name: "{{ product.title | remove: "'" | remove: '"' }}",
+                  item_category: "{{ product.type }}",
+                  item_brand: "{{ product.vendor }}",
+                  item_list_id: "{{ product_collection.id }}",
+                  item_list_name: "{{ product_collection.title }}"
+                }
+              ]
+            });
+          })
+        }
+      {% endif %}
+    })
+  {% endif %}
+</script>
+
+<!-- Remove from cart -->
+<script>
+  function bindRemoveFromCart() {
+    setTimeout(function() {
+      {% if rfc_btn_uses_class %}
+        var rfcClassName = '{{ rfc_btn }}';
+        var rfcBtns = document.getElementsByClassName(rfcClassName)
+        if (rfcBtns) {
+          for (rfcBtn of rfcBtns) {
+            rfcBtn.addEventListener("click", function() {
+              console.log("Removed product from cart");
+              gtag("event", "remove_from_cart", {
+                currency: "{{ shop.currency }}",
+                items: []
+              });
+            })
+          }
+        }
+      {% else %}
+        var rfcId = '{{ rfc_btn }}';
+        var rfcBtn = document.getElementById(rfcId)
+        if (rfcBtn) {
+          rfcBtn.addEventListener("click", function() {
+            console.log("Removed product from cart");
+            gtag("event", "remove_from_cart", {
+              currency: "{{ shop.currency }}",
+              items: []
+            });
+          })
+        }
+      {% endif %}
+    }, 1000)
+  }
+
+  window.addEventListener("load", function(){
+    var cartBtns = document.getElementsByClassName("icomoon-cart");
+    for (cartBtn of cartBtns) {
+      cartBtn.addEventListener("click", function(){
+        bindRemoveFromCart();
+      })
+    }
+  })
+</script>

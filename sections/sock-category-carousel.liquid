@@ -1,0 +1,208 @@
+{% style %}
+
+
+.feeturesSockCategoryCarousel {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+
+.sock-category-carousel-section-wrapper {
+    text-align: center;
+  }
+  
+  .sock-category-carousel {
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sock-category-title {
+    margin: 10px;
+    max-width: 80px;
+  }
+
+  .sock-height-item-wrapper {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 10px;
+  }
+
+  .sock-item-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .sock-item-button-wrapper a:first-of-type {
+    margin-right: 5px;
+  }
+
+{% endstyle %}
+
+<section class="feeturesSockCategoryCarousel"> 
+<div class="wrapper">
+<div class="sock-category-carousel-section-wrapper">
+  <h2>Get to Know Our Collections</h2>
+
+  <div class="sock-category-carousel">
+    {% for block in section.blocks %}
+      <div class="sock-category-title" onClick="$('.feeturesSockCategoryCarouselSlider').slick('slickGoTo', {{ forloop.index }})">
+        {{ block.settings.category_title }}
+      </div>
+    {% endfor %}
+  </div>
+
+
+  <div class="sock-carousel-wrapper feeturesSockCategoryCarouselSlider" data-section-type="sock-category-carousel">
+
+    {% for block in section.blocks %}
+
+      <div class="sock-height-item-wrapper feeturesSockCategoryCarouselSlider__item">
+        <div class="sock-category-image-wrapper">
+          {{ block.settings.image | image_url: width: '500' | image_tag }}
+        </div>
+        <div class="sock-category-text-wrapper">
+        <h4>{{ block.settings.headline }}</h4>
+          <p>Low cut socks that sit below the ankle</p>
+          <div class="sock-item-button-wrapper">
+            <a href="#" class="btn">Shop No Show</a>
+            <a href="#" class="btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+    
+    <div class="feeturesSockCategoryCarouselSlider__controls"></div>
+
+  </div>
+</div>
+</div>
+</section>
+
+{% schema %}
+{
+  "name": "Sock Category Carousel",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sock_cateogry",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "label": "Category Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category image"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "headline"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_key_one",
+          "label": "Key Feature Icon - 1"
+        },
+        {
+          "type": "text",
+          "id": "key_feature_one_heading",
+          "label": "Key Feature heading - 1",
+          "default": "Key feature heading"
+        },
+        {
+          "type": "textarea",
+          "id": "key_feature_one_body",
+          "label": "Key Feature body - 1",
+          "default": "Key feature text here"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_key_two",
+          "label": "Key Feature Icon - 2"
+        },
+        {
+          "type": "text",
+          "id": "key_feature_two_heading",
+          "label": "Key Feature heading - 2",
+          "default": "Key feature heading"
+        },
+        {
+          "type": "textarea",
+          "id": "key_feature_two_body",
+          "label": "Key Feature body - 2",
+          "default": "Key feature text here"
+        },
+        {
+          "type": "richtext",
+          "id": "best_for_section_body",
+          "label": "Best for section text",
+          "default": "<p><strong>Best for:</strong> Running, walking, cycling, and daily wear</p>"
+        },
+        {
+          "type": "text",
+          "id": "cta_btn_text_1",
+          "label": "CTA Button Text - 1"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url_1",
+          "label": "CTA Button URL - 1"
+        },
+        {
+          "type": "text",
+          "id": "cta_btn_text_2",
+          "label": "CTA Button Text - 2"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url_2",
+          "label": "CTA Button URL - 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sock Category Carousel",
+      "category": "Feetures",
+      "blocks": [
+        {
+          "type": "sock_cateogry"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

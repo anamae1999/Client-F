@@ -1,0 +1,1969 @@
+<style>
+  [data-desktop-only] {
+    display: unset;
+  }
+  [data-mobile-only] {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    [data-desktop-only] {
+      display: none;
+    }
+    [data-mobile-only] {
+      display: unset;
+    }
+  }
+
+  div#lcly-button-0 {
+    margin-bottom: 20px;
+    width: 100%;
+    display: inline-block !important;
+  }
+
+  a.lcly-primary-trigger span {
+    line-height: 40px !important;
+    display: block;
+    background: white !important;
+    height: 45px !important;
+    text-align: center;
+    color: black !important;
+    font-size: 16px !important;
+    border-radius: 4px !important;
+    font-weight: 700 !important;
+    border: 1px solid black !important;
+  }
+
+  a.lcly-primary-trigger span:hover {
+    background: black !important;
+    color: white !important;
+  }
+
+  .section-features {
+    margin-top: 15px;
+  }
+
+  form:has(.product-single-gender-toggle [data-gender='women'].gender-toggle-item--selected)
+    .radio-wrapper
+    label[for^='ProductSelect-option-size-']:not(:has(.sizes-women)) {
+    display: none;
+  }
+
+  form:has(.product-single-gender-toggle [data-gender='men'].gender-toggle-item--selected)
+    .radio-wrapper
+    label[for^='ProductSelect-option-size-']:not(:has(.sizes-men)) {
+    display: none;
+  }
+
+  label.single-option-radio__label.Size {
+    display: none
+  }
+
+  .Size-SMALL {
+    display: block !important;
+  }
+
+  @media (max-width: 767px){
+    
+ 
+  .product-gallery-wrapper[data-product-gallery] {
+   overflow: hidden;
+  }
+    }
+
+ {% if product.title contains 'Tee' %}
+
+  label.single-option-radio__label.Size {
+  display: block;
+}
+.single-option-radio
+  label[for^="ProductSelect-option-size"].unavailable:before {
+  top: 50%;
+
+    .Size-XLARGE.hide {
+      display: block !important;
+    }
+}
+{% endif %}
+</style>
+
+
+<!-- /templates/product.liquid -->
+{%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+
+<div
+  id="ProductSection--{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-template"
+  data-image-zoom-type="{{ section.settings.enable_image_zoom }}"
+  data-enable-history-state="true"
+  data-stacked-layout="{% if section.settings.media_layout == "stacked" %}true{% else %}false{% endif %}"
+  {% if first_3d_model %}
+    data-has-model="true"
+  {% endif %}
+>
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_media | img_url: 'grande' }}">
+
+  <div id="defaultWomensColor" class="hide">{{ product.metafields.accentuate.womens_default_color }}</div>
+  <div id="defaultMensColor" class="hide">{{ product.metafields.accentuate.mens_default_color }}</div>
+
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign featured_media = current_variant.featured_media | default: product.featured_media %}
+
+  {% assign stacked = false %}
+  {% if section.settings.media_layout == 'stacked' %}{% assign stacked = true %}{% endif %}
+  {%- assign first_media = true -%}
+
+  <div class="wrapper">
+    <div class="productGrid product-single">
+      <div data-mobile-only>
+        {% unless product.gift_card? %}
+          {% render 'breadcrumbs' %}
+        {% endunless %}
+
+        {% if section.settings.product_vendor_enable %}
+          <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
+        {% endif %}
+
+        <div class="product-single__headline">
+          <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+          <div style="margin-bottom: 5px;"class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+
+          <button class="thirty-day-trial atc-benefits-button" style="padding: 0px; text-align: left;">30-day trial</button>
+        </div>
+      </div>
+
+      {% render 'product-gallery--listo', product: product %}
+
+      <div class="productGridItem--topContent">
+        <div data-desktop-only>
+          {% unless product.gift_card? %}
+            {% render 'breadcrumbs' %}
+          {% endunless %}
+
+          {% if section.settings.product_vendor_enable %}
+            <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
+          {% endif %}
+
+          <div class="product-single__headline">
+            <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+
+            <div style="margin-bottom: 5px;"class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+
+            <button class="thirty-day-trial atc-benefits-button" style="padding: 0px; text-align: left;">30-day trial</button>
+            
+          </div>
+        </div>
+
+
+        <dialog class="atc-feature-dialog"  id="30-day-trial-dialog">
+          <div id="30-day-trial-div">
+            <h3>30-day trial</h3>
+            <p>Try the Stride Flex Performance Tee risk-free. Put your new shirt to the test, and if you are unsatisfied with your tee within 30 days of purchase, we will give you a full refund no matter the wear.</p>  
+        </div>
+        </dialog>
+        <script>
+          const trialButtons = document.querySelectorAll('.thirty-day-trial');
+          const trialDialog = document.getElementById('30-day-trial-dialog');
+          const trialDiv = document.getElementById('30-day-trial-div');
+
+          trialButtons.forEach(button => {
+            button.addEventListener('click', () => trialDialog.showModal());
+          });
+
+          trialDialog.addEventListener('click', () => trialDialog.close());
+          
+          trialDiv.addEventListener('click', (event) => event.stopPropagation());
+        </script>
+
+      
+        {% comment %}
+          Optionally show the 'compare at' or original price of the product.
+        {% endcomment %}
+        {% render 'product-price', variant: current_variant %}
+
+        {% comment %} LISTO - Theme Discount - START {% endcomment %}
+        {% comment %}
+          {% if settings.sale_collection_handle != blank %}
+            {% assign show_on_scoped_collection = true %}
+
+            {% for collection in product.collections %}
+              {% if collection.handle == settings.sale_collection_handle %}
+                FOUND!
+                {% break %}
+              {% else %}
+
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endcomment %}
+
+        {% if settings.show_pdp_sale_text %}
+          {% unless product.title == 'Gift Card' %}
+            {% assign theme_discount_percent = settings.sale_discount_percent %}
+            {% assign theme_price_multiplier = 100 | minus: theme_discount_percent | divided_by: 100.0 %}
+            <div data-theme-discount-info>
+              <span data-discounted-price>
+                {{ product.selected_or_first_available_variant.price | times: theme_price_multiplier | money -}}</span
+              ><span data-discount-amount> after {{ settings.sale_discount_percent }}% off discount at checkout</span>
+            </div>
+            <style>
+              .price-container {
+                margin-bottom: 0px
+              }
+              .product-single__price {
+                text-decoration: line-through;
+                color: #646464;
+              }
+              [data-theme-discount-info] {
+                color: #bb3820;
+                margin-bottom: 10px;
+              }
+              [data-theme-discount-info] [data-discounted-price] {
+                font-size: 20px;
+                font-weight: 700;
+              }
+            </style>
+            <script
+              type="text/javascript"
+              data-discount-percentage="{{ settings.sale_discount_percent }}"
+            >
+              let themeDiscountPercentage = document
+                .querySelector('script[data-discount-percentage]')
+                .getAttribute('data-discount-percentage');
+              let priceMultiplier = (100 - themeDiscountPercentage) / 100;
+              let productPriceSpan = document.querySelector('[data-price-container] #ProductPrice');
+
+              // Options for the observer (which mutations to observe)
+              const config = { attributes: true, childList: true, subtree: true };
+
+              // Callback function to execute when mutations are observed
+              const callback = (mutationList, observer) => {
+                for (const mutation of mutationList) {
+                  if (mutation.type === 'childList') {
+                    let priceSpan = document.querySelector('[data-price-container] #ProductPrice');
+                    let newPrice = parseFloat(priceSpan.innerHTML.replace(/[^0-9.]/g, ''));
+                    let newSalePrice = (newPrice * priceMultiplier).toFixed(2);
+                    let displayPriceSpan = document.querySelector(
+                      '[data-theme-discount-info] span[data-discounted-price]'
+                    );
+                    displayPriceSpan.innerHTML = '$' + newSalePrice;
+                  }
+                }
+              };
+
+              // Create an observer instance linked to the callback function
+              const observer = new MutationObserver(callback);
+
+              // Start observing the target node for configured mutations
+              observer.observe(productPriceSpan, config);
+            </script>
+          {% endunless %}
+        {% endif %}
+
+        {% comment %} LISTO - Theme Discount - END {% endcomment %}
+
+        {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+          <div class="product-single__policies rte">
+            {%- if shop.taxes_included -%}
+              {{ 'products.general.include_taxes' | t }}
+            {%- endif -%}
+            {%- if shop.shipping_policy.body != blank -%}
+              {{ 'products.general.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <div class="product-single__meta">
+          <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+
+          {% capture "form_classes" %}
+              product-single__form{% if product.has_only_default_variant %} product-single__form--no-variants{% endif %}
+            {%- endcapture %}
+
+          {% capture "form_id" %}AddToCartForm--{{ section.id }}{%- endcapture %}
+
+          {% form 'product', product, class: form_classes, id: form_id, data-product-form: '' %}
+            {% unless product.has_only_default_variant %}
+              {% for option in product.options_with_values %}
+                {% comment %}
+                  Make variant option name consistent
+                  (in shopify-admin, some are named "Size" while others are "Size Description", etc)
+                {% endcomment %}
+                {% assign optionNameLowercase = option.name | downcase %}
+                {% if optionNameLowercase contains 'size' %}
+                  {% assign optionName = 'Size' %}
+                {% elsif optionNameLowercase contains 'color' %}
+                  {% assign optionName = 'Color' %}
+                {% else %}
+                  {% assign optionName = option.name %}
+                {% endif %}
+
+                {% unless product.title contains 'Tee' %}
+
+                {% if optionName == 'Size' %}
+                  {% unless product.title contains 'Men' or product.title contains 'Women' or product.gift_card? %}
+                    <div class="product-single-gender-toggle">
+                      <span
+                        data-gender="women"
+                        class="gender-toggle-item{% if collection %}{% if collection.handle contains 'womens-' %} gender-toggle-item--selected{% endif %}{% else %} gender-toggle-item--selected{%endif %}">Women's Size</span>
+                        <span
+                          data-gender="men"
+                          class="gender-toggle-item{% if collection %}{% unless collection.handle contains 'womens-' %} gender-toggle-item--selected{% endunless %}{% endif %}"
+                          >Men's Size</span>
+                    </div>
+                  {% endunless %}
+                {% endif %}
+
+                {% endunless %}
+                <div class="radio-wrapper js product-form__item">
+                  {%  if product.title contains 'Tee' and optionName == 'Size' %}
+                    <div class="size-title-wrapper">
+                  {% endif %}
+                  <label
+                    class="single-option-radio__label {{ optionName }}"
+                    for="ProductSelect-option-{{ forloop.index0 }}"
+                  >
+                    {{ optionName | escape }}
+                    <span class="single-option-selected-value">{{ option.selected_value | downcase }}</span>
+                    <span
+                      class="single-option-selected-value-helper {% if forloop.first %}  visually-hidden{% endif %}"
+                    >
+                    </span>
+                  </label>
+                  {% if product.title contains 'Tee' and optionName == 'Size' %}
+                    <button type="button" id="size-guide" class="size-guide-button">Size Guide</button>
+                    <dialog class="size-guide-dialog" id="size-guide-dialog">
+                      <div id="size-guide-div">{% if product.handle contains 'womens' %}{{ pages["size-chart-womens-performance-tee"].content }}{% else %}{{ pages["size-chart-mens-performance-tee"].content }}{% endif %}</div>
+                    </dialog>
+                    <script>
+                      const sizeGuideButton = document.getElementById('size-guide');
+                      sizeGuideButton.addEventListener('click', () => sizeGuideDialog.showModal());
+        
+                      const sizeGuideDialog = document.getElementById('size-guide-dialog');
+                      sizeGuideDialog.addEventListener('click', () => sizeGuideDialog.close());
+        
+                      const sizeGuideDiv = document.getElementById('size-guide-div');
+                      sizeGuideDiv.addEventListener('click', (event) => event.stopPropagation());
+                    </script>
+                    
+                  <style>
+                    .size-title-wrapper {
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: start;
+                    }
+                     .atc-feature-dialog:-internal-dialog-in-top-layer::backdrop {
+                background: #000000ab;
+              }
+
+              .size-guide-dialog:before {
+                content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>');
+                font-size: 2rem;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                line-height: 1rem;
+              }
+
+              .size-guide-dialog {
+                border: none;
+              }
+
+              .size-guide-dialog:before:hover {
+                cursor: pointer;
+              }
+
+      
+          
+
+              .size-guide-button {
+                font-size: 14px;
+                text-decoration: underline;
+                padding: 0px;
+              }
+
+              .size-guide-button:hover {
+                opacity: 0.6;
+              }
+
+              .size-guide-dialog div {
+              padding: 20px;
+              padding-top: 50px;
+            }
+
+
+              .size-guide-dialog {
+                width: fit-content;
+                height: fit-content;
+                max-width: 700px;
+                max-height: 700px;
+              }
+
+          
+
+              @media (max-width: 767px) {
+                .size-guide-dialog {
+                  max-width: 100%;
+                }
+              }
+                
+              .scroll-wrapper {
+                padding: 0px !important;
+                overflow-x: scroll;
+                scrollbar-color: #0003 #0000;
+                scrollbar-width: thin;
+                width: 100%;
+              }
+
+              .scroll-wrapper td {
+                width: 125px;
+                min-width: 80px !important;
+                font-size: 0.9rem;
+              }
+              
+              .single-option-radio label[for^=ProductSelect-option-color] {
+                width: 32px;
+                height: 32px;
+                border-radius: 100%;
+              }
+
+              .single-option-radio img {
+                border-radius: 100%;
+              }
+
+              .single-option-radio input[type=radio]:checked+label {
+                border-color: transparent;
+              }
+
+              .tee-swatch {
+                border-radius: 100%;
+              }
+
+              .single-option-radio input[type=radio]:checked+label {
+                box-shadow: 0 0 0 1px #fff, 0 0 0 3px #000;
+              }
+
+                </style>
+                  {% endif %}
+
+                 {%  if product.title contains 'Tee' and optionName == 'Size' %}
+                   </div>
+                  {% endif %}
+
+                
+                  {% if section.settings.product_selector == 'radio' %}
+                    <div
+                      class="single-option-radio {{ optionName }}"
+                      id="ProductSelect-option-{{ forloop.index0 }}"
+                    >
+                      {% assign option_index = forloop.index %}
+                      {% for value in option.values %}
+                        {% assign value_lower_cased = value | downcase %}
+                        {% assign variant_label_state = true %}
+                        {% if product.options.size == 1 %}
+                          {% unless product.variants[forloop.index0].available %}
+                            {% assign variant_label_state = false %}
+                          {% endunless %}
+                        {% endif %}
+                        <input
+                          type="radio"
+                          {% if option.selected_value == value %}
+                            checked="checked"
+                          {% endif %}
+                          {% unless variant_label_state %}
+                            disabled="disabled"
+                          {% endunless %}
+                          value="{{ value | escape }}"
+                          data-index="option{{ option_index }}"
+                          name="option{{ option.position }}"
+                          class="single-option-selector__radio{% unless variant_label_state %} disabled{% endunless %}"
+                          data-option-name="{{optionName}}"
+                          data-foobar="{{optionName}}"
+                          id="ProductSelect-option-{{ optionName | handleize | replace: " ","-" }}-{{ value | escape | replace: " ","-" }}"
+                        >
+                        <label
+                          class="single-option-selector__label {{ optionName }}-{{ value }}"
+                          for="ProductSelect-option-{{ optionName | handleize | replace: " ","-" }}-{{ value | escape | replace: " ","-" }}"
+                          {% unless variant_label_state %}
+                            class="disabled"
+                          {% endunless %}
+                          data-variant-value="{{value}}"
+                          {% for variant in product.variants %}
+                            {% if variant.option1 == value %}
+                              {% if variant.metafields.accentuate.exclusively_women %}
+                                data-exclusive-gender="women"
+                              {% endif %}
+                              {% if variant.metafields.accentuate.exclusively_men %}
+                                data-exclusive-gender="men"
+                              {% endif %}
+                              {% if variant.metafields.accentuate.new %}
+                                data-new
+                              {% endif %}
+                              {% if variant.compare_at_price > variant.price %}
+                                data-on-sale
+                              {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        >
+                          {% if product.gift_card? %}
+                            {{ value }}
+                          {% endif %}
+
+                          {% if optionNameLowercase contains 'color' %}
+                            {% assign count = 0 %}
+                            {% for image in product.images %}
+                              {% if image.alt == value %}
+                                {% if count < 1 %}
+                                  {% assign count = count | plus: 1 %}
+                                  <img
+                                    class="tee-swatch"
+                                    loading="lazy"
+                                    src="//feetures.com/cdn/shop/t/204/assets/swatch-tee-{{ value | handleize }}.png"
+                                    alt="{{ value }} swatch"
+                                    onerror="this.onerror=null; this.src='//cdn.shopify.com/s/files/1/2256/2959/t/202/assets/swatch-white.png'"
+                                  >
+                                {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                            {% if count == 0 %}
+                              {{ value | escape }}
+                            {% endif %}
+                          {% endif %}
+
+                          {% if optionNameLowercase contains 'size' %}
+                            {% if value contains 'X' or value contains 'x' %}
+                              {{ value | escape | slice: 0, 2 }}
+                            {% else %}
+                              {{ value | escape | slice: 0 }}
+                            {% endif %}
+                          {% endif %}
+                          
+                        </label>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <select
+                      class="single-option-selector__radio single-option-selector-{{ section.id }} product-form__input"
+                      id="SingleOptionSelector-{{ forloop.index0 }}"
+                      data-index="option{{ forloop.index }}"
+                    >
+                      {% for value in option.values %}
+                        <option
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}
+                            selected="selected"
+                          {% endif %}
+                        >
+                          {{ value | escape }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  {% endif %}
+                </div>
+              {% endfor %}
+
+              {% comment %} LISTO - PACK PRICING BUTTONS - START {% endcomment %}
+              {% if product.tags contains 'sock-bundle-eligible' %}
+                <div class="radio-wrapper js product-form__item">
+                  <label
+                    class="single-option-radio__label"
+                    for="ProductSelect-packsize"
+                  >
+                    Pack Size
+                    <strong class="single-option-selected-value">1 Pair</strong>
+                    <strong class="single-option-selected-value-helper"></strong>
+                    <span id="PackSavingsLower"></span>
+                  </label>
+                  <div class="single-option-radio" id="ProductSelect-packsize">
+                    <input
+                      type="radio"
+                      value="1 Pair"
+                      data-qty="1"
+                      data-index="optionsize"
+                      name="optionsize"
+                      class="pack-size-selector__radio"
+                      data-foobar="packsize"
+                      id="ProductSelect-packsize-single"
+                      checked="checked"
+                    >
+                    <label
+                      class="single-option-selector__label"
+                      for="ProductSelect-packsize-single"
+                      data-variant-value=""
+                    >
+                      <div class="single-option-selector-value single-pair">1 Pair</div>
+                      <div class="single-option-selector-value-helper">
+                        <span aria-label="Single pair price" class="packsize-price packsize-single">
+                          {{- current_variant.price | money -}}
+                        </span>
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      value="3 Pack"
+                      data-qty="3"
+                      data-index="optionsize"
+                      name="optionsize"
+                      class="pack-size-selector__radio"
+                      data-foobar="packsize"
+                      id="ProductSelect-packsize-three"
+                    >
+                    <label
+                      class="single-option-selector__label"
+                      for="ProductSelect-packsize-three"
+                      data-variant-value=""
+                    >
+                      <div class="single-option-selector-label-eyebrow">MOST POPULAR</div>
+                      <div class="single-option-selector-value">3 Pack</div>
+                      <div class="single-option-selector-value-helper">
+                        <span
+                          aria-label="3 pack compare at price {{- current_variant.price | times: 3 | money -}}"
+                          class="packsize-price packsize-price--compare"
+                        >
+                          {{- current_variant.price | times: 3 | money -}}
+                        </span>
+                        <span
+                          aria-label="3 pack discounted price  {{- current_variant.price | times: 3 | times: 0.95 | money -}}"
+                          class="packsize-price packsize-price--sale"
+                          data-savings-percent="5"
+                        >
+                          {{- current_variant.price | times: 3 | times: 0.95 | money -}}
+                        </span>
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      value="6 Pack"
+                      data-qty="6"
+                      data-index="optionsize"
+                      name="optionsize"
+                      class="pack-size-selector__radio"
+                      data-foobar="packsize"
+                      id="ProductSelect-packsize-six"
+                    >
+                    <label class="single-option-selector__label" for="ProductSelect-packsize-six" data-variant-value="">
+                      <div class="single-option-selector-label-eyebrow">BEST VALUE</div>
+                      <div class="single-option-selector-value">6 Pack</div>
+                      <div class="single-option-selector-value-helper">
+                        <span
+                          aria-label="6 pack compare at price  {{- current_variant.price | times: 6 | money -}}"
+                          class="packsize-price packsize-price--compare"
+                        >
+                          {{- current_variant.price | times: 6 | money -}}
+                        </span>
+                        <span
+                          aria-label="6 pack discounted price {{- current_variant.price | times: 6 | times: 0.9 | money -}}"
+                          class="packsize-price packsize-price--sale"
+                          data-savings-percent="10"
+                        >
+                          {{- current_variant.price | times: 6 | times: 0.9 | money -}}
+                        </span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              {% endif %}
+              {% comment %} LISTO - PACK PRICING BUTTONS - END {% endcomment %}
+            {% endunless %}
+
+            <select
+              name="id"
+              id="ProductSelect--{{ section.id }}"
+              class="product-single__variants visually-hidden no-js"
+              aria-label="hidden list of all skus with prices"
+            >
+              {% assign variant_color_checked = '' %}
+              {% for variant in product.variants %}
+                {% if variant.inventory_quantity > 6 or product.handle == 'gift-card' %}
+                  <option
+                    {% if variant == product.selected_or_first_available_variant %}
+                      selected="selected"
+                    {% endif %}
+                    data-sku="{{ variant.sku }}"
+                    data-variant-color="{{ variant.option1 | replace: ' ', '-' }}"
+                    data-variant-size="{{ variant.option2 }}"
+                    value="{{ variant.id }}"
+                  >
+                    {{ variant.title }} - {{ variant.price | money_with_currency }}
+                  </option>
+                {% else %}
+                  <option
+                    disabled="disabled"
+                    data-sku="{{ variant.sku }}"
+                    data-variant-color="{{ variant.option1 | replace: ' ', '-' }}"
+                    data-variant-size="{{ variant.option2 }}"
+                    value="{{ variant.id }}"
+                  >
+                    {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                  </option>
+                {% endif %}
+                {% unless variant.option1 == variant_color_checked %}
+                  {% assign all_variant_sizes = product.variants | where: 'option1', variant.option1 %}
+                  {% if all_variant_sizes.size < 4 %}
+                    {% assign sizes_to_add = 'small medium large xlarge ' %}
+                    {% for variant in all_variant_sizes %}
+                      {% assign size_downcase = variant.option2 | downcase %}
+                      {% if size_downcase == 'small' %}
+                        {% assign sizes_to_add = sizes_to_add | replace_first: 'small ', '' %}
+                      {% elsif size_downcase == 'medium' %}
+                        {% assign sizes_to_add = sizes_to_add | replace_first: 'medium ', '' %}
+                      {% elsif size_downcase == 'large' %}
+                        {% assign sizes_to_add = sizes_to_add | replace_first: 'large ', '' %}
+                      {% elsif size_downcase == 'xlarge' %}
+                        {% assign sizes_to_add = sizes_to_add | replace_first: 'xlarge ', '' %}
+                      {% else %}
+
+                      {% endif %}
+                    {% endfor %}
+                    {% assign sizes_to_add = sizes_to_add | strip | split: ' ' %}
+                    {% for size in sizes_to_add %}
+                      <option
+                        disabled="disabled"
+                        data-sku="sku-{{ variant.option1 | replace: ' ', '-' }}-{{ size | upcase }}"
+                        data-variant-color="{{ variant.option1 | replace: ' ', '-' }}"
+                        data-variant-size="{{ size | upcase }}"
+                        value="0000{{ forloop.index0 }}{{ variant.id }}"
+                      >
+                        {{ variant.option1 }} / {{ size | upcase }} - {{ 'products.product.sold_out' | t }}
+                      </option>
+                    {% endfor %}
+                  {% endif %}
+                  {% assign variant_color_checked = variant.option1 %}
+                {% endunless %}
+              {% endfor %}
+            </select>
+
+            {% unless product.gift_card? %}
+              <!--
+                variant inventory JS hack from: https://community.shopify.com/c/Technical-Q-A/My-variant-inventory-quantity-is-undefined/td-p/476917#U589834
+              -->
+              <div class="product-single__inventory-msg" style="display: none;">
+                <!-- {{ current_variant.inventory_quantity }} in stock -->
+              </div>
+            {% endunless %}
+
+            <script>
+              window._VARIANTS = {};
+              {% for variant in product.variants %}
+                window._VARIANTS[{{ variant.id }}] = {{ variant.inventory_quantity }}
+              {% endfor %}
+            </script>
+            <div class="product-single__controls-wrapper">
+              {% if section.settings.quantity_enabled %}
+     
+                <div class="product-single__quantity qty-selector" style="display: none;">
+                  <label for="Quantity" class="product-single__quantity-label js-quantity-selector sr-only">
+                    {{- 'products.product.quantity' | t -}}
+                  </label>
+                  <input
+                    type="number"
+                    hidden="hidden"
+                    id="Quantity"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    class="js-quantity-selector"
+                  >
+                </div>
+              {% endif %}
+
+              {% if product.tags contains 'sock-bundle-eligible' %}
+              <style>.qty-selector {display: none !important;}
+                </style>
+                {% endif %}
+
+              <div class="product-single__add-to-cart">
+                <button type="submit" name="add" id="AddToCart--{{ section.id }}" class="btn btn--add-to-cart">
+                  <span class="btn__text">
+                    {% if current_variant.inventory_quantity > 6 or product.handle == 'gift-card' %}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {% else %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% endif %}
+                  </span>
+                </button>
+              </div>
+            </div>
+          {% endform %}
+
+          {% render 'klaviyo-bis-custom' %}
+
+          <afterpay-placement
+            data-locale="en_US"
+            data-currency="USD"
+            data-amount="{{ current_variant.price | divided_by: 100.00 }}"
+            data-badge-theme="white-on-black"
+            style="margin:0; text-align: center;"
+            data-size="sm"
+          ></afterpay-placement>
+
+          {% comment %} LISTO - LIMITED EDITION COLORS - START {% endcomment %}
+          {% if shop.metafields.accentuate.le_colors %}
+            {% assign le_colors = shop.metafields.accentuate.le_colors %}
+            <div style="display:none;" data-le-colors>{{ le_colors }}</div>
+            <div style="display:none;margin-bottom:25px;" data-le-colors-oos>
+              <button style="width:100%;" class="btn btn--add-to-cart le-colors-oos disabled" disabled>
+                {{ 'products.product.sold_out' | t }}
+              </button>
+            </div>
+          {% endif %}
+          {% comment %} LISTO - LIMITED EDITION COLORS - END {% endcomment %}
+
+          {% liquid 
+              assign benefit_1_title = section.settings.atc_feature_title_1
+              assign benefit_2_title = section.settings.atc_feature_title_2
+              assign benefit_3_title = section.settings.atc_feature_title_3
+              assign benefit_1_content = section.settings.atc_feature_content_1
+              assign benefit_2_content = section.settings.atc_feature_content_2
+              assign benefit_3_content = section.settings.atc_feature_content_3
+          %}
+          <div class="below-atc-benefits">
+            <div class="atc-benefits-wrapper">
+              {% if benefit_1_title%}
+                <button id="{{ benefit_1_title | handle }}" class="atc-benefits-button">{{ benefit_1_title }}</button>
+                <dialog class="atc-feature-dialog"  id="{{ benefit_1_title | handle }}-dialog">
+                  <div id="{{ benefit_1_title | handle }}-div">{{ benefit_1_content }}</div>
+                </dialog>
+                <script>
+                  const myButton = document.getElementById('{{ benefit_1_title | handle }}');
+                  myButton.addEventListener('click', () => myDialog.showModal());
+    
+                  const myDialog = document.getElementById('{{ benefit_1_title | handle }}-dialog');
+                  myDialog.addEventListener('click', () => myDialog.close());
+    
+                  const myDiv = document.getElementById('{{ benefit_1_title | handle }}-div');
+                  myDiv.addEventListener('click', (event) => event.stopPropagation());
+                </script>
+              {% endif %}
+             
+
+              {% if benefit_2_title != blank %}
+                <button id="{{ benefit_2_title | handle }}" class="atc-benefits-button">{{ benefit_2_title }}</button>
+                <dialog class="atc-feature-dialog" id="{{ benefit_2_title | handle }}-dialog">
+                  <div id="{{ benefit_2_title | handle }}-div">{{ benefit_2_content }}</div>
+                </dialog>
+                <script>
+                  const myButton2 = document.getElementById('{{ benefit_2_title | handle }}');
+                  myButton2.addEventListener('click', () => myDialog2.showModal());
+    
+                  const myDialog2 = document.getElementById('{{ benefit_2_title | handle }}-dialog');
+                  myDialog2.addEventListener('click', () => myDialog2.close());
+    
+                  const myDiv2 = document.getElementById('{{ benefit_2_title | handle }}-div');
+                  myDiv2.addEventListener('click', (event) => event.stopPropagation());
+                </script>
+              {% endif %}
+
+
+              {% if benefit_3_title != blank %}
+                <button id="{{ benefit_3_title | handle }}" class="atc-benefits-button">{{ benefit_3_title }}</button>
+                <dialog class="atc-feature-dialog"  id="{{ benefit_3_title | handle }}-dialog">
+                  <div id="{{ benefit_3_title | handle }}-div">{{ benefit_3_content }}</div>
+                </dialog>
+                <script>
+                  const myButton3 = document.getElementById('{{ benefit_3_title | handle }}');
+                  myButton3.addEventListener('click', () => myDialog3.showModal());
+    
+                  const myDialog3 = document.getElementById('{{ benefit_3_title | handle }}-dialog');
+                  myDialog3.addEventListener('click', () => myDialog3.close());
+    
+                  const myDiv3 = document.getElementById('{{ benefit_3_title | handle }}-div');
+                  myDiv3.addEventListener('click', (event) => event.stopPropagation());
+                </script>
+              {% endif %}
+
+
+
+            </div>
+           
+
+            <style>
+              .atc-feature-dialog:-internal-dialog-in-top-layer::backdrop {
+                background: #000000ab;
+              }
+
+              .atc-feature-dialog:before {
+                content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>');
+                font-size: 2rem;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                line-height: 1rem;
+              }
+
+              .atc-feature-dialog {
+                border: none;
+              }
+
+              .atc-feature-dialog:before:hover {
+                cursor: pointer;
+              }
+
+      
+              .atc-benefits-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .atc-benefits-button {
+                font-size: 14px;
+                text-decoration: underline;
+                padding: 10px 15px;
+              }
+
+              .atc-benefits-button:hover {
+                opacity: 0.6;
+              }
+
+              .atc-feature-dialog div {
+              padding: 20px;
+              padding-top: 50px;
+            }
+
+              dialog div > p:last-of-type {
+                margin-bottom: 0px;
+              }
+
+              .atc-feature-dialog {
+                width: fit-content;
+                height: fit-content;
+                max-width: 700px;
+                max-height: 700px;
+              }
+
+              #myDialog {
+                width: 50%;
+                height: 50%;
+                padding: 0;
+              }
+
+              #myDiv {
+                width: 100%;
+                height: 100%;
+                padding: 1rem;
+              }
+
+              @media (max-width: 767px) {
+                .atc-feature-dialog {
+                  max-width: 80%;
+                }
+              }
+            </style>
+
+            
+          </div>
+
+          {% comment %}
+            <div class="product-single__icon-wrapper">
+              <div class="product-single__icon product-single__icon--shipping">
+                {% include 'icon-shipping.svg' %}
+                <div>Free Shipping $55+</div>
+              </div>
+              <div class="product-single__icon product-single__icon--guarantee">
+                {% include 'icon-guarantee.svg' %}
+                <div>Lifetime Guarantee</div>
+              </div>
+              {% if product.metafields.accentuate.made_in_usa %}
+                <div class="product-single__icon product-single__icon--usa">
+                  {% include 'icon-usa.svg' %}
+                  <div>Made in the USA</div>
+                </div>
+              {% endif %}
+            </div>
+          {% endcomment %}
+
+          {% if section.settings.enable_payment_button %}
+            <div>
+              {{ form | payment_button }}
+            </div>
+          {% endif %}
+
+          <!-- LOCALLY.COM WIDGET EMBED CODE -->
+          <div id="lcly-button-0">
+            <a id="lcly-link-0" href="https://brands.locally.com" target="_blank"> Product Locator by Locally </a>
+          </div>
+          <script id="lcly-script-0" async></script>
+          <script id="lcly-config-0">
+            var lcly_config_0 = {
+              company_name: 'Feetures',
+              button_text: 'Find it Locally',
+              button_id: 'HTML',
+              company_id: '1821',
+              css: '3',
+              button_toggles_all: '1',
+              upc: '{{ current_variant.barcode }}',
+              show_related_styles: '1',
+              n_related_styles: '3',
+              show_location_switcher: '1',
+              show_location_prompt: '1',
+              lang: 'en-us',
+              show_dealers: '1',
+              n_dealers: '3',
+              no_link: '1',
+            };
+            var lcly_query_0 = Object.keys(lcly_config_0)
+              .reduce(function (a, k) {
+                a.push(encodeURIComponent(k) + '=' + encodeURIComponent(lcly_config_0[k]));
+                return a;
+              }, [])
+              .join('&');
+            var lcly_endpoint_0 = 'https://Feetures.locally.com/stores/map.js?' + lcly_query_0;
+            document.getElementById('lcly-script-0').src = lcly_endpoint_0;
+          </script>
+
+          <div class="product-single__description rte" itemprop="description">
+            <!-- DESCRIPTION -->
+
+            <div class="product-single__accordion">
+              <div class="product-single__accordion-title active">
+                <strong>Details</strong>
+                <span class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17.996" height="2" viewBox="0 0 17.996 2">
+                    <g transform="translate(1 1)"><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(15.996) rotate(90)"></path></g>
+                  </svg>
+                </span>
+              </div>
+              <div class="single__accordion-content active">
+                {% if product.description %}
+                  <p>{{ product.description | split: '<ul' | first | strip_html }}</p>
+                {% endif %}
+
+                {% assign product_features = product.metafields.custom.features.value %}
+
+                {% if product_features %}
+                  <div class="section-features">
+                    <strong>Features</strong>
+
+                    {% for feature in product_features %}
+                      <div class="card-{{ feature | handleize }}" style="position: relative;">
+                        <button
+                          class="feature-button"
+                          id="button-{{ feature | handle }}"
+                          aria-label="Help?"
+                          aria-expanded="false"
+                          aria-controls="tooltip-{{ feature | handle }}"
+                          style="text-decoration: underline; margin-bottom: 3px; padding-left: 0px;"
+                        >
+                          {{ feature }}
+                        </button>
+                        <div
+                          class="tooltip"
+                          id="tooltip-{{ feature | handle }}"
+                          role="tooltip"
+                        >
+                          <button class="close-tooltip" aria-label="Close tooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg></button>
+
+                          <strong>{{ feature }} </strong><br>
+                          {% case feature %}
+                            {% when 'Anatomical Fit' %}
+                              Right and left foot design enhances fit, delivering maximum comfort and protection by helping to eliminate blisters.
+                            {% when 'Targeted Arch Compression' %}
+                              Our patented compressed arch support allows for more comfort and less irritation.
+                            {% when 'The Perfect Toe®' %}
+                              Crafted without an irritating toe seam to eliminate friction in a sensitive area.
+                            {% when 'Seamless Heel' %}
+                              Seamless, fitted heel cup eliminates bunching and rubbing for blister protection.
+                            {% when 'Made in the USA' %}
+                              Designed and produced locally in the USA.
+                            {% when '15-20 mmHg Graduated Compression' %}
+                              15-20 mmHg of compression at the ankle gradually lessens towards the top of the sock, providing increased blood flow for enhanced performance and faster recovery.
+                            {% when 'Non-binding Top' %}
+                              Reduced spandex in the cuff helps to reduce possible blood flow constriction.
+                            {% when 'APMA Approved for Diabetics' %}
+                              Approved by the American Podiatric Medical Association for active diabetics and people with special foot care needs.
+                            {% when 'Arch Support' %}
+                              Power bands of Lycra hug your entire foot for maximum support. This snug, supportive fit eliminates movement to prevent blisters.
+                            {% when 'Blister Tab' %}
+                              A double-thick tab at the heel that provides comfort and blister protection from friction caused at the back of the shoe.
+                            {% when 'Protective Tab' %}
+                                A double-thick tab at the heel that provides comfort and blister protection from friction caused at the back of the shoe.
+                            {% when 'Plantar Fascia Support' %}
+                              Targeted Compression in three critical zones of the foot lifts, stretches and stabilizes the plantar fascia and supports the Achilles tendon, easing heel and arch pain.
+                            {% when 'Reinforced Construction' %}
+                              Nylon reinforcement featured in high wear areas including the toe, ball of foot, heel, and boot for added durability.
+                            {% when 'Mesh Construction' %}
+                              Mesh construction on top of the sock provides ventilation for added breathability.
+                            {% when 'Moisture Wicking' %}
+                              Wicks moisture away, to keep cool and dry, while providing superior durability.
+                            {% when 'Merino Wool & TENCEL' %}
+                              A unique blend of rarefied 200-needle thread count merino wool spun with TENCEL fibers, for a game-changing sock that's comfier, stretchier, drier, and more durable than ever before.
+                            {% when 'Protective Tab' %}
+                              A double-thick tab at the heel that provides comfort and blister protection from friction caused at the back of the shoe.
+                            {% when 'Heel Hugger Technology' %}
+                              A band of high quality, self-fusing silicone tape that keeps the sock from slipping inside the shoe.
+                            {% when 'No-Slip Cuff' %}
+                              Gentle compression in the cuff so socks stay up without restricting blood flow.
+                            {% when "Perfect Women's Fit" %}
+                                Tailored fit with room where needed. Hits perfectly at the hip.
+                            {% when "Perfect Men's Fit" %}
+                                Tailored fit with extra room in the chest and waist. 
+                            {% when 'Ultra-Soft and Breathable' %}
+                              Technical fiber blend fuses comfort and performance.
+                            {% when 'All-Day Comfort' %}
+                              Minimal seam design. Doesn't stick, providing freedom from  rubbing and chafing.
+                            {% when 'Superior Sweat Wicking' %}
+                              Quick-drying fabric for advanced moisture wicking  to keep you cool and comfortable.  
+                            {% when 'Versatile Design' %}
+                              Perfectly designed for your toughest workout with everyday style.
+                            {% when 'Long-Lasting Odor Resistance' %}
+                              Anti-odor technology for all day wear.
+                          {% endcase %}
+                        </div>
+                      </div>
+                    {% endfor %}
+
+                    <script>
+                      document.addEventListener('DOMContentLoaded', function() {
+                        const buttons = document.querySelectorAll('.feature-button');
+                      
+                        buttons.forEach(button => {
+                          button.addEventListener('click', function() {
+                            const tooltipId = this.getAttribute('aria-controls');
+                            const tooltip = document.getElementById(tooltipId);
+                            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                      
+                            if (isExpanded) {
+                              tooltip.style.visibility = 'hidden';
+                              tooltip.style.height = '0px';
+                              this.setAttribute('aria-expanded', 'false');
+                            } else {
+                              tooltip.style.visibility = 'visible';
+                              tooltip.style.height = 'auto';
+                              this.setAttribute('aria-expanded', 'true');
+                            }
+                          });
+
+                          if (window.innerWidth > 768) {
+                            button.addEventListener('mouseover', function() {
+                              const tooltipId = this.getAttribute('aria-controls');
+                              const tooltip = document.getElementById(tooltipId);
+                              tooltip.style.visibility = 'visible';
+                              tooltip.style.height = 'auto';
+                              this.setAttribute('aria-expanded', 'true');
+                            });
+                        
+                            button.addEventListener('mouseout', function() {
+                              const tooltipId = this.getAttribute('aria-controls');
+                              const tooltip = document.getElementById(tooltipId);
+                              tooltip.style.visibility = 'hidden';
+                              tooltip.style.height = '0px';
+                              this.setAttribute('aria-expanded', 'false');
+                            });
+                          }
+                      
+                          button.addEventListener('focus', function() {
+                            const tooltipId = this.getAttribute('aria-controls');
+                            const tooltip = document.getElementById(tooltipId);
+                            tooltip.style.visibility = 'visible';
+                            tooltip.style.height = 'auto';
+                            this.setAttribute('aria-expanded', 'true');
+                          });
+                      
+                          button.addEventListener('blur', function() {
+                            const tooltipId = this.getAttribute('aria-controls');
+                            const tooltip = document.getElementById(tooltipId);
+                            tooltip.style.visibility = 'hidden';
+                            tooltip.style.height = '0px';
+                            this.setAttribute('aria-expanded', 'false');
+                          });
+                      
+                          button.addEventListener('keydown', function(event) {
+                            if (event.key === 'Escape') {
+                              const tooltipId = this.getAttribute('aria-controls');
+                              const tooltip = document.getElementById(tooltipId);
+                              tooltip.style.visibility = 'hidden';
+                              tooltip.style.height = '0px';
+                              this.setAttribute('aria-expanded', 'false');
+                            }
+                          });
+                        });
+                      });
+
+                       // Add event listeners for close buttons inside tooltips
+                        const closeButtons = document.querySelectorAll('.close-tooltip');
+                        closeButtons.forEach(closeButton => {
+                          closeButton.addEventListener('click', function(event) {
+                            const tooltip = closeButton.closest('.tooltip');
+                            const buttonId = tooltip ? tooltip.getAttribute('id').replace('tooltip-', 'button-') : null;
+                            const button = buttonId ? document.getElementById(buttonId) : null;
+
+                            if (tooltip && button) {
+                              hideTooltip(button, tooltip);
+                            }
+
+                            // Prevent the click event from bubbling up and triggering the button's click event.
+                            event.stopPropagation();
+                          });
+                        });
+
+                        function showTooltip(button, tooltip) {
+                          tooltip.style.visibility = 'visible';
+                          tooltip.style.height = 'auto';
+                          button.setAttribute('aria-expanded', 'true');
+                        }
+
+                        function hideTooltip(button, tooltip) {
+                          tooltip.style.visibility = 'hidden';
+                          tooltip.style.height = '0px';
+                          button.setAttribute('aria-expanded', 'false');
+                        }
+                     
+                    </script>
+
+                    <style>
+                      .tooltip {
+                        position: absolute; 
+                        visibility: hidden; 
+                        height: 0px; 
+                        top: 0px; 
+                        background: white; 
+                        width: fit-content; 
+                        padding: 10px 5px 10px 10px;
+                        box-shadow: 0 0 20px 10px #00000017;
+                        -webkit-transform: translateY(-100%);
+                        margin-top: -30px;
+                      }
+                      
+                      .close-tooltip {
+                        position: absolute;
+                        right: -5px;
+                        top: 10px;
+                      }
+
+                      .close-tooltip svg {
+                        width: 20px;
+                        height: auto;
+                      }
+
+                      @media (max-width: 767px) {
+                        .tooltip {
+                          top: 0px;
+                          width: 100%;
+                          -webkit-transform: translateY(-100%);
+                          margin-top: 0px;
+                        }
+                      }
+
+                      @media (min-width: 768px) {
+                        .close-tooltip {
+                          display: none;
+                        }
+                      }
+                    </style>
+                  </div>
+                {% endif %}
+
+                {% assign product_best_for = product.metafields.custom.best_for.value %}
+                {% if product_best_for %}
+                  <div class="section-best-for">
+                    <strong>Best for</strong>
+                    <div class="details-best-for-wrapper">
+                      {% for best_for in product_best_for %}
+                        <div class="best-for-item-wrapper">
+                          {% if best_for == 'All Day Wear' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <g clip-path="url(#clip0_1_2)">
+                                <path d="M18.18 3.52C18.22 3.25 18.24 2.98 18.26 2.71C18.26 2.6 18.26 2.45 18.29 2.35C18.29 2.33 18.31 2.31 18.32 2.3C18.35 2.27 18.41 2.28 18.47 2.28C18.59 2.28 18.72 2.3 18.84 2.31C18.97 2.31 19.1 2.33 19.22 2.33C19.31 2.33 19.4 2.34 19.5 2.35C19.5 2.7 19.46 3.05 19.43 3.39C19.42 3.57 19.4 3.75 19.39 3.92C19.37 4.13 19.36 4.34 19.34 4.55C19.34 4.63 19.33 4.71 19.32 4.78C19.3 4.99 19.29 5.2 19.27 5.41C19.27 5.47 19.25 5.53 19.23 5.61C19.2 5.61 19.16 5.61 19.13 5.61C18.94 5.6 18.74 5.59 18.55 5.57C18.33 5.56 18.11 5.54 17.88 5.52C17.37 5.49 16.86 5.45 16.36 5.41C16.16 5.4 15.96 5.38 15.75 5.36C15.72 5.36 15.78 4.71 15.79 4.66C15.79 4.54 15.79 4.42 15.82 4.3C15.82 4.27 15.85 4.23 15.88 4.22C15.9 4.22 15.93 4.22 15.95 4.22C16.28 4.25 16.6 4.29 16.92 4.3C16.99 4.3 17.07 4.3 17.14 4.3C17.16 4.3 17.26 4.3 17.27 4.3C17.18 4.22 17.11 4.14 17.04 4.08C16.9 3.95 16.76 3.81 16.61 3.68C16.5 3.59 16.39 3.51 16.27 3.42C16.17 3.34 16.07 3.27 15.96 3.2C15.8 3.1 15.64 3 15.49 2.9C15.16 2.69 14.8 2.53 14.44 2.36C14.22 2.26 13.99 2.19 13.75 2.11C13.54 2.04 13.33 1.97 13.11 1.91C12.94 1.86 12.77 1.83 12.59 1.8C12.4 1.76 12.21 1.73 12.02 1.7C11.94 1.69 11.86 1.69 11.78 1.68C11.57 1.66 11.35 1.64 11.14 1.62C11.05 1.62 10.95 1.62 10.85 1.62C10.71 1.62 10.58 1.62 10.44 1.62C10.2 1.62 9.97001 1.63 9.73001 1.66C9.50001 1.68 9.28001 1.73 9.05001 1.77C8.87001 1.8 8.70001 1.83 8.52001 1.87C8.37001 1.9 8.22001 1.94 8.08001 1.99C7.79001 2.08 7.51001 2.18 7.23001 2.28C6.99001 2.37 6.75001 2.47 6.52001 2.59C6.20001 2.76 5.90001 2.94 5.59001 3.13C5.37001 3.27 5.16001 3.41 4.96001 3.57C4.71001 3.77 4.47001 3.99 4.23001 4.21C4.10001 4.33 3.97001 4.45 3.86001 4.58C3.69001 4.77 3.54001 4.96 3.38001 5.16C3.28001 5.28 3.19001 5.41 3.09001 5.54C3.04001 5.62 2.99001 5.7 2.94001 5.78C2.84001 5.96 2.73001 6.13 2.64001 6.31C2.54001 6.51 2.45001 6.71 2.36001 6.92C2.28001 7.1 2.21001 7.28 2.15001 7.47C2.08001 7.67 2.03001 7.87 1.98001 8.07C1.93001 8.26 1.88001 8.46 1.84001 8.65C1.81001 8.79 1.80001 8.93 1.79001 9.06C1.77001 9.27 1.76001 9.48 1.75001 9.69C1.75001 9.81 1.73001 9.94 1.73001 10.06C1.73001 10.3 1.75001 10.54 1.77001 10.78C1.79001 10.98 1.82001 11.18 1.86001 11.37C1.91001 11.6 1.95001 11.83 2.02001 12.05C2.13001 12.39 2.24001 12.72 2.37001 13.04C2.48001 13.32 2.62001 13.59 2.77001 13.85C2.94001 14.15 3.14001 14.43 3.33001 14.71C3.44001 14.87 3.57001 15.01 3.69001 15.16C3.84001 15.34 4.00001 15.52 4.17001 15.69C4.35001 15.87 4.54001 16.06 4.74001 16.22C5.01001 16.43 5.29001 16.63 5.57001 16.83C5.74001 16.95 5.91001 17.06 6.08001 17.15C6.29001 17.26 6.50001 17.37 6.71001 17.46C6.98001 17.58 7.25001 17.69 7.53001 17.79C7.75001 17.87 7.98001 17.93 8.21001 17.99C8.40001 18.04 8.59001 18.09 8.78001 18.14C8.91001 18.17 9.05001 18.18 9.18001 18.2C9.29001 18.22 9.39001 18.24 9.50001 18.25C9.57001 18.26 9.65001 18.27 9.72001 18.28C9.83001 18.29 9.94001 18.3 10.06 18.3C10.4 18.3 10.75 18.31 11.09 18.32C11.23 18.32 11.38 18.32 11.52 18.3C11.74 18.28 11.97 18.25 12.19 18.21C12.42 18.17 12.66 18.12 12.88 18.07C13.17 18 13.45 17.91 13.73 17.82C13.93 17.76 14.12 17.68 14.31 17.6C14.55 17.5 14.78 17.4 15.01 17.29C15.16 17.22 15.3 17.13 15.45 17.04C15.62 16.94 15.79 16.84 15.95 16.73C16.04 16.67 16.12 16.6 16.21 16.53C16.31 16.46 16.42 16.39 16.51 16.31C16.66 16.18 16.81 16.05 16.96 15.92C17.08 15.81 17.2 15.7 17.31 15.59C17.43 15.47 17.54 15.34 17.65 15.22C17.74 15.12 17.83 15.02 17.91 14.91C17.99 14.81 18.07 14.71 18.16 14.6C18.25 14.65 18.34 14.71 18.43 14.77C18.65 14.91 18.87 15.04 19.09 15.18C19.14 15.21 19.16 15.24 19.11 15.29C18.95 15.48 18.81 15.68 18.65 15.87C18.52 16.03 18.39 16.19 18.24 16.34C18.12 16.47 17.98 16.59 17.84 16.71C17.73 16.81 17.62 16.92 17.5 17.02C17.32 17.17 17.14 17.31 16.95 17.45C16.73 17.6 16.51 17.76 16.28 17.89C15.96 18.08 15.64 18.25 15.31 18.42C15.11 18.52 14.9 18.6 14.69 18.68C14.46 18.77 14.23 18.86 14 18.93C13.69 19.03 13.38 19.11 13.07 19.19C12.83 19.25 12.58 19.28 12.33 19.32C12.1 19.35 11.87 19.37 11.64 19.41C11.17 19.48 10.7 19.44 10.23 19.45C10.07 19.45 9.92001 19.45 9.76001 19.43C9.57001 19.41 9.38001 19.39 9.19001 19.37C9.00001 19.34 8.82001 19.3 8.63001 19.26C8.43001 19.22 8.22001 19.18 8.02001 19.13C7.88001 19.1 7.74001 19.06 7.61001 19.02C7.30001 18.92 7.00001 18.82 6.69001 18.71C6.47001 18.63 6.25001 18.53 6.03001 18.43C5.75001 18.29 5.48001 18.14 5.21001 17.98C4.99001 17.85 4.76001 17.71 4.55001 17.57C4.37001 17.45 4.21001 17.31 4.04001 17.18C3.70001 16.93 3.42001 16.64 3.12001 16.36C2.99001 16.24 2.88001 16.1 2.77001 15.97C2.68001 15.87 2.60001 15.77 2.52001 15.67C2.40001 15.51 2.27001 15.36 2.16001 15.2C2.04001 15.04 1.93001 14.87 1.82001 14.7C1.76001 14.61 1.72001 14.52 1.67001 14.44C1.56001 14.24 1.45001 14.05 1.35001 13.84C1.25001 13.62 1.16001 13.4 1.07001 13.17C0.970007 12.91 0.880007 12.65 0.800007 12.39C0.750007 12.24 0.720007 12.08 0.690007 11.93C0.650007 11.76 0.620007 11.6 0.600007 11.43C0.570007 11.27 0.550007 11.12 0.530007 10.96C0.510007 10.76 0.490007 10.56 0.480007 10.35C0.470007 10.12 0.460007 9.9 0.460007 9.67C0.460007 9.45 0.480007 9.22 0.500007 9C0.510007 8.84 0.540007 8.68 0.570007 8.52C0.600007 8.36 0.620007 8.21 0.660007 8.05C0.730007 7.78 0.800007 7.51 0.880007 7.25C0.930007 7.08 0.980007 6.92 1.04001 6.76C1.12001 6.55 1.21001 6.35 1.31001 6.15C1.43001 5.91 1.55001 5.66 1.69001 5.43C1.81001 5.23 1.94001 5.04 2.07001 4.84C2.16001 4.7 2.25001 4.57 2.35001 4.44C2.43001 4.33 2.52001 4.24 2.60001 4.13C2.72001 3.99 2.83001 3.85 2.95001 3.72C3.10001 3.56 3.26001 3.41 3.42001 3.26C3.53001 3.16 3.63001 3.05 3.75001 2.96C3.93001 2.82 4.11001 2.68 4.29001 2.54C4.47001 2.41 4.65001 2.28 4.84001 2.15C5.02001 2.03 5.20001 1.93 5.39001 1.82C5.58001 1.71 5.77001 1.6 5.97001 1.51C6.17001 1.42 6.37001 1.33 6.57001 1.25C6.71001 1.19 6.86001 1.13 7.00001 1.08C7.23001 0.999997 7.46001 0.919997 7.70001 0.849997C7.87001 0.799997 8.04001 0.759997 8.21001 0.719997C8.40001 0.679997 8.59001 0.639997 8.79001 0.599997C8.91001 0.579997 9.03001 0.569997 9.15001 0.549997C9.30001 0.529997 9.45001 0.509997 9.61001 0.489997C9.70001 0.479997 9.79001 0.469997 9.88001 0.469997C10.3 0.469997 10.71 0.449997 11.13 0.449997C11.33 0.449997 11.53 0.469997 11.73 0.489997C11.97 0.519997 12.2 0.559997 12.43 0.589997C12.62 0.619997 12.82 0.649997 13 0.689997C13.39 0.789997 13.78 0.899997 14.17 1.02C14.42 1.1 14.67 1.2 14.91 1.3C15.09 1.37 15.27 1.45 15.44 1.53C15.68 1.66 15.92 1.79 16.15 1.93C16.33 2.03 16.5 2.14 16.68 2.25C16.8 2.33 16.91 2.41 17.02 2.5C17.2 2.64 17.38 2.77 17.55 2.91C17.69 3.03 17.82 3.16 17.95 3.28C18.01 3.33 18.06 3.39 18.13 3.45L18.18 3.52Z" fill="black"/>
+                                <path d="M5.69001 11.02H7.70001V11.95C7.70001 11.95 7.65001 11.95 7.62001 11.95C6.49001 11.95 5.36001 11.95 4.23001 11.95C4.17001 11.95 4.14001 11.93 4.13001 11.87C4.12001 11.75 4.10001 11.62 4.10001 11.5C4.12001 11.28 4.15001 11.06 4.24001 10.85C4.37001 10.56 4.56001 10.31 4.81001 10.12C4.94001 10.02 5.08001 9.95 5.23001 9.87C5.46001 9.76 5.70001 9.66 5.93001 9.54C6.14001 9.43 6.34001 9.3 6.42001 9.08C6.50001 8.86 6.50001 8.64 6.31001 8.46C6.17001 8.33 5.96001 8.34 5.78001 8.37C5.58001 8.41 5.38001 8.46 5.20001 8.55C5.10001 8.6 5.01001 8.66 4.93001 8.74C4.90001 8.77 4.87001 8.8 4.83001 8.81C4.80001 8.81 4.76001 8.79 4.73001 8.76C4.57001 8.61 4.42001 8.45 4.27001 8.3C4.23001 8.26 4.18001 8.23 4.17001 8.17C4.16001 8.11 4.23001 8.06 4.28001 8.02C4.39001 7.92 4.52001 7.83 4.66001 7.76C4.79001 7.69 4.92001 7.62 5.06001 7.57C5.22001 7.52 5.38001 7.47 5.55001 7.45C5.97001 7.38 6.45001 7.41 6.86001 7.54C7.20001 7.66 7.48001 7.9 7.62001 8.21C7.71001 8.41 7.73001 8.64 7.73001 8.85C7.73001 9.05 7.71001 9.24 7.61001 9.42C7.51001 9.6 7.36001 9.75 7.20001 9.87C7.02001 10 6.83001 10.11 6.63001 10.21C6.45001 10.3 6.27001 10.42 6.10001 10.53C5.91001 10.66 5.81001 10.81 5.70001 11L5.69001 11.02Z" fill="black"/>
+                                <path d="M11.18 10.09C11.35 10.09 11.51 10.09 11.67 10.09C11.75 10.09 11.78 10.11 11.77 10.19C11.77 10.44 11.77 10.69 11.77 10.95C11.77 11.01 11.75 11.03 11.68 11.03C11.52 11.03 11.35 11.03 11.18 11.03V11.96H10.08C10.08 11.96 10.08 11.91 10.08 11.88C10.08 11.64 10.08 11.4 10.08 11.16C10.08 11.13 10.08 11.08 10.07 11.05C10.05 11.03 10.02 11.03 9.99 11.03C9.42 11.03 8.86 11.03 8.29 11.03C8.26 11.03 8.23 11.03 8.19 11.03C8.19 10.84 8.19 10.66 8.19 10.47C8.19 10.31 8.16 10.14 8.27 10.01C8.4 9.86 8.54 9.71 8.67 9.55C9 9.17 9.32 8.77001 9.64 8.39001C9.74 8.28001 9.84 8.17 9.94 8.05C10.01 7.97 10.06 7.89 10.13 7.81C10.21 7.72 10.29 7.62 10.38 7.54C10.47 7.46 10.58 7.47 10.69 7.47C10.73 7.47 11.18 7.47 11.18 7.47V10.1V10.09ZM10.18 9.08C10.18 9.08 10.17 9.08 10.16 9.08C9.88 9.41 9.61 9.75 9.32 10.09H10.18V9.08Z" fill="black"/>
+                                <path d="M15.82 9.79C15.82 9.55 15.82 9.3 15.7 9.08C15.51 8.71 15.04 8.52 14.6 8.56C14.16 8.6 13.77 8.84 13.47 9.13C13.47 8.54 13.47 7.94 13.47 7.34H12.38V11.98H13.47V10.28C13.47 10.14 13.53 9.98 13.6 9.85C13.67 9.72 13.78 9.61 13.92 9.54C14.16 9.42 14.51 9.48 14.64 9.7C14.71 9.82 14.71 9.97 14.71 10.1C14.71 10.68 14.71 11.27 14.71 11.85C14.71 11.87 14.71 11.9 14.73 11.91C14.75 11.92 14.77 11.92 14.79 11.92C15.13 11.92 15.48 11.92 15.82 11.92C15.82 11.2 15.81 10.48 15.8 9.76L15.82 9.79Z" fill="black"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_1_2">
+                                <rect width="20" height="20" fill="white"/>
+                                </clipPath>
+                                </defs>
+                              </svg>
+                            </div>
+                          {% elsif best_for == 'Dress & Casual Wear' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <g clip-path="url(#clip0_1_42)">
+                                <path d="M10.32 4.70999V4.81999C10.32 9.58999 10.32 14.37 10.32 19.14C10.32 19.25 10.31 19.36 10.2 19.43C10.13 19.47 10.05 19.5 9.97 19.5C8.18 19.5 6.4 19.5 4.61 19.5C4.45 19.5 4.34 19.42 4.3 19.27C4.3 19.24 4.28 19.2 4.26 19.17C4.12 19.26 3.99 19.36 3.85 19.44C3.78 19.48 3.72 19.52 3.63 19.51C3.54 19.51 3.47 19.47 3.43 19.4C3.3 19.18 3.18 18.96 3.06 18.74C2.91 18.45 2.77 18.16 2.62 17.87C2.41 17.44 2.2 17.02 1.99 16.59C1.81 16.23 1.63 15.88 1.45 15.52C1.24 15.09 1.02 14.66 0.810001 14.23C0.730001 14.07 0.650001 13.91 0.570001 13.75C0.510001 13.63 0.470001 13.5 0.470001 13.36C0.470001 11.66 0.470001 9.95999 0.470001 8.25999C0.470001 8.05999 0.550001 7.87999 0.640001 7.70999C0.760001 7.45999 0.880001 7.20999 1 6.96999C1.19 6.58999 1.38 6.21999 1.57 5.83999C1.69 5.59999 1.8 5.36999 1.92 5.12999C2.07 4.83999 2.21 4.54999 2.37 4.26999C2.47 4.09999 2.63 3.98999 2.8 3.89999C3.15 3.71999 3.5 3.53999 3.86 3.36999C4.12 3.24999 4.39 3.12999 4.65 3.01999C4.95 2.88999 5.26 2.76999 5.56 2.65999C5.7 2.60999 5.85 2.55999 5.99 2.50999C6.02 2.50999 6.05 2.49999 6.07 2.48999C6.14 2.68999 6.21 2.87999 6.28 3.07999C6.16 3.12999 6.05 3.17999 5.94 3.21999C5.74 3.29999 5.54 3.36999 5.34 3.44999C5.26 3.47999 5.19 3.50999 5.11 3.52999C4.92 3.56999 4.91 3.71999 4.91 3.85999C4.91 3.89999 4.92 3.94999 4.92 3.98999C4.92 7.16999 4.92 10.35 4.92 13.54C4.92 13.73 4.96 13.9 5.02 14.07C5.1 14.32 5.19 14.57 5.27 14.82C5.41 15.24 5.55 15.65 5.69 16.07C5.79 16.37 5.88 16.67 5.98 16.97C6.03 17.12 6.09 17.26 6.13 17.41C6.21 17.66 6.19 17.76 5.98 17.91C5.68 18.12 5.37 18.34 5.08 18.56C4.99 18.63 4.93 18.74 4.84 18.85C4.89 18.85 4.91 18.85 4.94 18.85C6.47 18.85 8 18.85 9.53 18.85C9.6 18.85 9.62 18.83 9.62 18.76C9.62 14.1 9.62 9.44999 9.62 4.78999V4.69999C9.56 4.74999 9.5 4.77999 9.45 4.81999C9.33 4.91999 9.22 5.01999 9.1 5.10999C8.96 5.21999 8.81 5.33999 8.66 5.44999C8.61 5.48999 8.55 5.52999 8.49 5.55999C8.32 5.63999 8.15 5.55999 8.06 5.36999C7.95 5.12999 7.85 4.89999 7.74 4.65999C7.62 4.39999 7.51 4.13999 7.4 3.87999C7.3 3.65999 7.2 3.44999 7.1 3.22999C7.01 3.01999 6.91 2.80999 6.83 2.59999C6.77 2.44999 6.8 2.29999 6.86 2.15999C6.98 1.85999 7.1 1.55999 7.22 1.25999C7.28 1.09999 7.35 0.939989 7.41 0.779989C7.48 0.599989 7.62 0.519989 7.8 0.519989C9.23 0.519989 10.67 0.519989 12.1 0.519989C12.35 0.519989 12.41 0.589989 12.5 0.799989C12.61 1.06999 12.72 1.33999 12.82 1.59999C12.86 1.69999 12.91 1.78999 12.94 1.88999C13 2.09999 13.15 2.20999 13.34 2.28999C13.62 2.38999 13.89 2.50999 14.17 2.61999C14.43 2.71999 14.68 2.81999 14.94 2.91999C15.19 3.01999 15.43 3.11999 15.67 3.21999C15.97 3.33999 16.28 3.44999 16.58 3.56999C16.8 3.65999 17.03 3.73999 17.25 3.83999C17.54 3.95999 17.76 4.15999 17.87 4.46999C17.9 4.54999 17.92 4.63999 17.93 4.71999C17.95 4.91999 17.96 5.12999 17.99 5.32999C18.01 5.52999 18.04 5.72999 18.07 5.93999C18.09 6.08999 18.1 6.22999 18.11 6.37999C18.12 6.51999 18.14 6.65999 18.16 6.79999C18.16 6.86999 18.18 6.94999 18.19 7.01999C18.21 7.21999 18.23 7.42999 18.25 7.62999C18.27 7.80999 18.29 7.97999 18.31 8.15999C18.34 8.38999 18.36 8.61999 18.39 8.84999C18.42 9.07999 18.44 9.30999 18.47 9.53999C18.49 9.70999 18.51 9.87999 18.53 10.05C18.55 10.23 18.57 10.4 18.59 10.58C18.62 10.81 18.64 11.04 18.67 11.28C18.69 11.45 18.7 11.62 18.73 11.79C18.75 11.99 18.79 12.19 18.81 12.4C18.83 12.54 18.84 12.69 18.85 12.83C18.86 12.96 18.88 13.08 18.9 13.21C18.9 13.28 18.92 13.36 18.93 13.43C18.96 13.69 18.98 13.95 19 14.22C19.02 14.4 19.04 14.58 19.06 14.76C19.08 14.92 19.1 15.09 19.12 15.25C19.15 15.49 19.17 15.72 19.2 15.96C19.22 16.13 19.23 16.29 19.25 16.46C19.27 16.6 19.29 16.74 19.31 16.88C19.31 16.94 19.33 17.01 19.33 17.08C19.35 17.28 19.37 17.47 19.39 17.67C19.41 17.88 19.44 18.09 19.47 18.3C19.47 18.39 19.49 18.47 19.49 18.56C19.49 18.73 19.41 18.84 19.26 18.88C19.03 18.95 18.79 19 18.56 19.06C18.22 19.15 17.88 19.23 17.54 19.31C17.28 19.37 17.01 19.42 16.75 19.51C16.5 19.59 16.33 19.42 16.29 19.18C16.26 18.97 16.23 18.76 16.2 18.55C16.14 18.17 16.07 17.8 16.01 17.42C15.96 17.14 15.92 16.87 15.87 16.59C15.83 16.36 15.8 16.13 15.76 15.9C15.76 15.84 15.73 15.79 15.7 15.73V15.84C15.7 16.94 15.7 18.05 15.7 19.15C15.7 19.41 15.57 19.53 15.32 19.53C13.9 19.53 12.48 19.53 11.06 19.53C10.9867 19.53 10.95 19.4933 10.95 19.42C10.95 19.25 10.95 19.08 10.95 18.9C10.99 18.9 11.03 18.9 11.07 18.9C12.36 18.9 13.65 18.9 14.94 18.9C15.0133 18.9 15.05 18.8633 15.05 18.79C15.05 13.79 15.05 8.78999 15.05 3.78999C15.05 3.66999 15.02 3.61999 14.91 3.57999C14.6 3.45999 14.28 3.34999 13.97 3.23999C13.77 3.15999 13.57 3.07999 13.37 3.00999C13.27 2.96999 13.18 2.92999 13.08 2.88999C13.06 2.88999 13.02 2.89999 13.01 2.91999C12.93 3.08999 12.85 3.26999 12.77 3.43999C12.71 3.57999 12.64 3.71999 12.58 3.85999C12.52 3.99999 12.46 4.12999 12.4 4.26999C12.27 4.55999 12.15 4.84999 12.02 5.12999C11.97 5.23999 11.92 5.34999 11.86 5.44999C11.77 5.62999 11.61 5.67999 11.44 5.56999C11.29 5.47999 11.15 5.36999 11.01 5.25999C10.86 5.13999 10.71 5.01999 10.56 4.89999C10.49 4.83999 10.41 4.77999 10.34 4.71999C10.34 4.71999 10.33 4.72999 10.32 4.73999V4.70999ZM4.29 3.90999C4.15 3.96999 4.02 4.02999 3.89 4.08999C3.69 4.18999 3.49 4.29999 3.29 4.39999C3.12 4.48999 2.97 4.58999 2.88 4.75999C2.69 5.12999 2.51 5.48999 2.32 5.85999C2.11 6.27999 1.9 6.69999 1.69 7.12999C1.55 7.41999 1.4 7.69999 1.26 7.98999C1.21 8.08999 1.17 8.19999 1.17 8.30999C1.17 9.95999 1.17 11.62 1.17 13.27C1.17 13.35 1.2 13.43 1.22 13.5C1.26 13.59 1.31 13.68 1.36 13.78C1.5 14.07 1.64 14.36 1.79 14.65C1.95 14.98 2.12 15.31 2.29 15.64C2.43 15.93 2.57 16.21 2.71 16.5C2.89 16.86 3.07 17.21 3.25 17.57C3.43 17.92 3.6 18.27 3.78 18.62C3.8 18.67 3.82 18.67 3.86 18.64C4.07 18.49 4.28 18.34 4.49 18.19C4.79 17.98 5.08 17.77 5.38 17.55C5.44 17.51 5.48 17.41 5.47 17.36C5.44 17.27 5.41 17.18 5.38 17.09C5.33 16.94 5.28 16.8 5.23 16.65C5.21 16.65 5.19 16.66 5.18 16.67C5.05 16.75 4.92 16.84 4.79 16.92C4.5 17.11 4.2 17.31 3.91 17.51C3.85 17.55 3.83 17.53 3.8 17.49C3.7 17.35 3.61 17.2 3.51 17.06C3.47 17.01 3.49 16.99 3.53 16.96C3.62 16.9 3.71 16.84 3.8 16.78C4.17 16.53 4.55 16.29 4.92 16.04C4.94 16.02 4.96 15.97 4.95 15.95C4.93 15.85 4.89 15.75 4.86 15.65C4.76 15.35 4.66 15.05 4.57 14.75C4.49 14.49 4.42 14.23 4.34 13.97C4.26 13.73 4.18 13.49 4.11 13.24C4.01 12.92 3.91 12.59 3.81 12.27C3.76 12.1 3.7 11.93 3.65 11.76C3.59 11.56 3.53 11.37 3.46 11.17C3.41 11.01 3.36 10.84 3.31 10.68C3.26 10.52 3.21 10.35 3.15 10.19C3.11 10.07 3.07 9.93999 3.04 9.81999C3.04 9.79999 3.06 9.75999 3.08 9.75999C3.27 9.69999 3.46 9.63999 3.66 9.57999C3.86 10.22 4.06 10.87 4.26 11.52H4.28V3.90999H4.29ZM17.21 17.27C17.38 17.24 17.53 17.21 17.69 17.19C17.86 17.16 18.04 17.13 18.21 17.1C18.34 17.08 18.46 17.04 18.59 17.04C18.67 17.04 18.68 17 18.67 16.93C18.65 16.78 18.63 16.64 18.61 16.49C18.59 16.31 18.57 16.14 18.55 15.96C18.53 15.78 18.51 15.61 18.49 15.43C18.46 15.17 18.44 14.9 18.41 14.64C18.41 14.57 18.4 14.5 18.39 14.44C18.37 14.3 18.35 14.16 18.33 14.02C18.31 13.88 18.31 13.73 18.29 13.59C18.27 13.39 18.24 13.18 18.21 12.98C18.19 12.78 18.17 12.58 18.15 12.38C18.15 12.31 18.13 12.23 18.12 12.16C18.1 12.01 18.08 11.86 18.07 11.72C18.06 11.59 18.05 11.45 18.03 11.32C18.01 11.16 17.99 11.01 17.97 10.85C17.95 10.72 17.94 10.59 17.93 10.46C17.91 10.32 17.89 10.19 17.88 10.05C17.86 9.83999 17.84 9.63999 17.82 9.42999C17.82 9.35999 17.81 9.29999 17.8 9.22999C17.78 9.07999 17.76 8.91999 17.75 8.76999C17.74 8.63999 17.73 8.50999 17.72 8.37999C17.69 8.12999 17.65 7.87999 17.62 7.62999C17.6 7.45999 17.58 7.28999 17.56 7.11999C17.54 6.93999 17.52 6.75999 17.5 6.58999C17.48 6.35999 17.45 6.12999 17.43 5.89999C17.41 5.71999 17.39 5.54999 17.37 5.36999C17.35 5.16999 17.33 4.96999 17.31 4.76999C17.29 4.64999 17.24 4.53999 17.12 4.47999C16.92 4.38999 16.73 4.30999 16.53 4.21999C16.32 4.12999 16.11 4.03999 15.9 3.94999C15.84 3.92999 15.78 3.90999 15.72 3.87999V3.93999C15.72 6.46999 15.72 8.99999 15.72 11.53C15.72 11.59 15.73 11.66 15.74 11.72C15.77 11.9 15.8 12.08 15.83 12.25C15.86 12.42 15.89 12.6 15.92 12.77C15.94 12.91 15.97 13.05 15.99 13.19C16.02 13.37 16.05 13.55 16.08 13.73C16.11 13.9 16.14 14.06 16.17 14.23C16.2 14.44 16.23 14.65 16.27 14.87C16.31 15.08 16.34 15.3 16.38 15.51C16.41 15.69 16.44 15.86 16.46 16.04C16.49 16.22 16.52 16.4 16.55 16.57C16.57 16.7 16.58 16.83 16.61 16.96C16.63 17.1 16.66 17.24 16.69 17.38C16.71 17.47 16.71 17.57 16.73 17.66C16.76 17.83 16.79 17.99 16.82 18.15C16.85 18.35 16.88 18.56 16.92 18.78C17.56 18.62 18.2 18.46 18.83 18.31C18.8 18.1 18.78 17.91 18.75 17.7C18.63 17.72 18.53 17.73 18.42 17.75C18.25 17.78 18.07 17.81 17.9 17.83C17.73 17.86 17.55 17.89 17.38 17.92C17.34 17.92 17.32 17.92 17.31 17.87C17.3 17.76 17.28 17.65 17.26 17.54C17.25 17.46 17.23 17.38 17.22 17.29L17.21 17.27ZM8.56 4.71999C8.9 4.44999 9.22 4.18999 9.55 3.92999C8.99 3.12999 8.43 2.33999 7.87 1.53999C7.85 1.56999 7.84 1.57999 7.84 1.58999C7.76 1.76999 7.69 1.95999 7.61 2.13999C7.57 2.24999 7.52 2.35999 7.56 2.47999C7.62 2.63999 7.69 2.79999 7.76 2.95999C7.85 3.15999 7.95 3.36999 8.04 3.56999C8.11 3.71999 8.17 3.86999 8.23 4.01999C8.3 4.18999 8.38 4.35999 8.45 4.52999C8.48 4.59999 8.52 4.65999 8.56 4.72999V4.71999ZM12.14 1.52999C12.14 1.52999 12.09 1.57999 12.07 1.60999C11.88 1.87999 11.69 2.15999 11.5 2.42999C11.37 2.61999 11.24 2.79999 11.11 2.98999C10.98 3.17999 10.85 3.35999 10.72 3.54999C10.64 3.65999 10.57 3.76999 10.49 3.87999C10.48 3.89999 10.48 3.93999 10.49 3.94999C10.58 4.02999 10.68 4.09999 10.77 4.17999C10.93 4.30999 11.09 4.43999 11.25 4.55999C11.31 4.60999 11.38 4.65999 11.45 4.70999C11.48 4.65999 11.5 4.62999 11.52 4.58999C11.56 4.50999 11.59 4.42999 11.62 4.34999C11.72 4.13999 11.81 3.92999 11.91 3.71999C12.01 3.49999 12.1 3.27999 12.2 3.05999C12.28 2.87999 12.36 2.70999 12.44 2.52999C12.47 2.44999 12.49 2.36999 12.45 2.28999C12.39 2.15999 12.35 2.01999 12.3 1.88999C12.25 1.76999 12.2 1.65999 12.15 1.52999H12.14ZM8.45 1.16999C8.45 1.16999 8.45 1.20999 8.47 1.21999C8.52 1.29999 8.58 1.36999 8.64 1.44999C8.76 1.61999 8.89 1.79999 9.01 1.96999C9.06 2.03999 9.13 2.06999 9.21 2.06999C9.75 2.06999 10.29 2.06999 10.83 2.06999C10.89 2.06999 10.96 2.03999 10.99 1.98999C11.15 1.77999 11.29 1.56999 11.44 1.35999C11.48 1.29999 11.52 1.23999 11.57 1.15999H8.46L8.45 1.16999ZM10 3.40999C10.16 3.17999 10.31 2.96999 10.46 2.74999H9.53C9.69 2.97999 9.84 3.18999 10 3.40999Z" fill="black"/>
+                                <path d="M12.85 7.47C13.27 7.47 13.7 7.47 14.12 7.47C14.28 7.47 14.42 7.59 14.42 7.74C14.42 7.87 14.44 8 14.44 8.13C14.44 8.72 14.44 9.32 14.44 9.91C14.44 10.12 14.36 10.26 14.16 10.35C13.87 10.48 13.59 10.64 13.3 10.78C13.2 10.83 13.09 10.89 12.98 10.92C12.83 10.97 12.68 10.93 12.54 10.86C12.23 10.71 11.93 10.56 11.62 10.4C11.54 10.36 11.45 10.32 11.38 10.27C11.28 10.2 11.24 10.1 11.24 9.98C11.24 9.26 11.24 8.54 11.24 7.82C11.24 7.58 11.39 7.46 11.6 7.47C12.01 7.47 12.42 7.47 12.83 7.47H12.85ZM11.91 8.13V8.23C11.91 8.6 11.91 8.97 11.91 9.34C11.91 9.37 11.91 9.39 11.91 9.42C11.9 9.55 11.91 9.68 12.01 9.78C12.16 9.95 12.35 10.04 12.55 10.12C12.72 10.19 12.9 10.2 13.07 10.15C13.31 10.08 13.53 9.97 13.69 9.77C13.74 9.71 13.78 9.62 13.78 9.54C13.78 9.35 13.76 9.16 13.76 8.97C13.76 8.87 13.78 8.77 13.78 8.67C13.78 8.53 13.78 8.4 13.78 8.26C13.78 8.21 13.78 8.17 13.78 8.12H11.9L11.91 8.13Z" fill="black"/>
+                                <path d="M9.04 6.52998C9.04 6.60998 9.04 6.69998 9.04 6.77998C9.04 6.82998 9.02 6.84998 8.97 6.84998C8.81 6.84998 8.65 6.84998 8.48 6.84998C8.43 6.84998 8.41 6.82998 8.41 6.77998C8.41 6.60998 8.41 6.43998 8.41 6.25998C8.41 6.20998 8.43 6.19998 8.47 6.19998C8.63 6.19998 8.8 6.19998 8.96 6.19998C9.02 6.19998 9.03 6.21998 9.03 6.26998C9.03 6.34998 9.03 6.42998 9.03 6.51998L9.04 6.52998Z" fill="black"/>
+                                <path d="M8.41999 9.37H9.02999C9.02999 9.37 9.02999 9.41 9.02999 9.43C9.02999 9.6 9.02999 9.76 9.02999 9.93C9.02999 9.98 9.01999 10.01 8.95999 10.01C8.79999 10.01 8.63999 10.01 8.46999 10.01C8.42999 10.01 8.39999 10.01 8.39999 9.95C8.39999 9.76 8.39999 9.57 8.39999 9.37H8.41999Z" fill="black"/>
+                                <path d="M8.43001 12.52H9.04001V13.15H8.43001V12.52Z" fill="black"/>
+                                <path d="M8.43001 16.31V15.7C8.51001 15.7 8.58001 15.7 8.66001 15.7C8.77001 15.7 8.89001 15.7 9.00001 15.7C9.05001 15.7 9.07001 15.72 9.07001 15.77C9.07001 15.93 9.07001 16.09 9.07001 16.26C9.07001 16.28 9.04001 16.32 9.02001 16.32C8.83001 16.32 8.63001 16.32 8.43001 16.32V16.31Z" fill="black"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_1_42">
+                                <rect width="20" height="20" fill="white"/>
+                                </clipPath>
+                                </defs>
+                              </svg>
+                            </div>
+                          {% elsif best_for == 'Golf' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="19"
+                                height="20"
+                                viewBox="0 0 19 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M15.6 0.529993C15.65 0.539993 15.71 0.549993 15.76 0.569993C15.89 0.609993 16.01 0.659993 16.13 0.699993C16.21 0.719993 16.21 0.739993 16.19 0.819993C16.15 0.949993 16.12 1.07999 16.07 1.20999C16.03 1.31999 15.98 1.42999 15.94 1.53999C15.92 1.59999 15.9 1.66999 15.88 1.72999C15.85 1.81999 15.82 1.90999 15.79 2.00999C15.76 2.10999 15.72 2.20999 15.69 2.29999C15.65 2.41999 15.61 2.53999 15.56 2.66999C15.54 2.72999 15.52 2.78999 15.5 2.84999C15.61 2.88999 15.72 2.91999 15.83 2.95999C15.96 2.99999 16.08 3.04999 16.21 3.08999C16.29 3.10999 16.36 3.12999 16.44 3.14999C16.56 3.18999 16.69 3.23999 16.81 3.27999C16.93 3.31999 17.06 3.35999 17.18 3.39999C17.19 3.39999 17.21 3.41999 17.22 3.41999C17.3 3.43999 17.37 3.46999 17.45 3.48999C17.46 3.48999 17.49 3.45999 17.49 3.43999C17.54 3.27999 17.6 3.11999 17.65 2.94999C17.67 2.87999 17.69 2.79999 17.71 2.72999C17.75 2.59999 17.79 2.46999 17.83 2.33999C17.87 2.20999 17.91 2.07999 17.96 1.94999C17.99 1.84999 18.03 1.74999 18.07 1.63999C18.09 1.56999 18.11 1.49999 18.13 1.43999C18.16 1.34999 18.19 1.25999 18.22 1.16999C18.43 1.23999 18.63 1.29999 18.84 1.35999C18.83 1.40999 18.81 1.45999 18.8 1.50999C18.75 1.65999 18.71 1.79999 18.66 1.94999C18.62 2.07999 18.59 2.20999 18.55 2.33999C18.51 2.46999 18.46 2.59999 18.42 2.73999C18.37 2.89999 18.33 3.05999 18.28 3.21999C18.25 3.31999 18.22 3.41999 18.18 3.51999C18.15 3.60999 18.12 3.70999 18.08 3.79999C18.04 3.91999 18 4.04999 17.96 4.16999C17.95 4.20999 17.93 4.25999 17.92 4.30999C17.9 4.38999 17.87 4.46999 17.85 4.54999C17.82 4.64999 17.79 4.74999 17.76 4.84999C17.72 4.97999 17.67 5.10999 17.63 5.22999C17.59 5.35999 17.55 5.49999 17.51 5.62999C17.49 5.68999 17.46 5.75999 17.44 5.81999C17.4 5.94999 17.36 6.07999 17.32 6.20999C17.28 6.32999 17.23 6.45999 17.19 6.57999C17.17 6.64999 17.15 6.71999 17.13 6.78999C17.09 6.92999 17.04 7.05999 17 7.19999C16.96 7.32999 16.93 7.45999 16.88 7.57999C16.84 7.69999 16.79 7.82999 16.75 7.94999C16.73 7.99999 16.72 8.05999 16.7 8.10999C16.68 8.19999 16.65 8.28999 16.63 8.37999C16.61 8.45999 16.67 8.50999 16.72 8.54999C16.79 8.59999 16.87 8.63999 16.94 8.68999C17.04 8.75999 17.13 8.81999 17.22 8.88999C17.33 8.97999 17.44 9.05999 17.54 9.15999C17.61 9.22999 17.67 9.30999 17.73 9.37999C17.8 9.45999 17.87 9.53999 17.94 9.61999C18.03 9.73999 18.13 9.85999 18.2 9.98999C18.3 10.16 18.39 10.34 18.47 10.52C18.52 10.63 18.56 10.75 18.6 10.87C18.65 11.04 18.69 11.22 18.74 11.39C18.77 11.51 18.78 11.64 18.8 11.76C18.84 12.07 18.81 12.37 18.82 12.68C18.82 12.79 18.79 12.89 18.77 13C18.77 13.05 18.75 13.1 18.74 13.15C18.72 13.33 18.67 13.5 18.6 13.67C18.54 13.82 18.49 13.97 18.43 14.11C18.35 14.31 18.24 14.5 18.11 14.68C18.03 14.78 17.96 14.89 17.88 14.99C17.81 15.09 17.73 15.19 17.66 15.28C17.6 15.35 17.58 15.44 17.58 15.53C17.58 15.84 17.58 16.16 17.58 16.47C17.58 16.5 17.6 16.53 17.6 16.56C17.6 16.65 17.6 16.74 17.58 16.82C17.56 16.91 17.48 16.95 17.39 16.97C17.29 17 17.2 17.04 17.11 17.08C16.99 17.13 16.87 17.18 16.75 17.23C16.61 17.29 16.46 17.34 16.32 17.4C16.27 17.42 16.22 17.47 16.16 17.49C16.09 17.52 16.02 17.55 15.95 17.57C15.89 17.59 15.88 17.63 15.88 17.69C15.88 18.18 15.88 18.67 15.88 19.17C15.88 19.23 15.85 19.26 15.79 19.26C15.64 19.26 15.48 19.26 15.33 19.26C15.23 19.26 15.22 19.25 15.22 19.15C15.22 18.52 15.22 17.9 15.22 17.27C15.22 17.19 15.26 17.14 15.32 17.11C15.4 17.06 15.49 17.03 15.57 17C15.65 16.97 15.73 16.94 15.81 16.91C15.93 16.86 16.05 16.8 16.17 16.75C16.25 16.72 16.33 16.69 16.4 16.66C16.44 16.64 16.47 16.61 16.51 16.59C16.62 16.54 16.73 16.5 16.84 16.46C16.93 16.42 16.96 16.34 16.93 16.25C16.93 16.23 16.93 16.21 16.93 16.19C16.93 16.07 16.93 15.94 16.93 15.82C16.93 15.77 16.91 15.75 16.87 15.76C16.86 15.76 16.85 15.76 16.84 15.76C15.32 15.76 13.8 15.76 12.28 15.76C12.2133 15.76 12.18 15.7933 12.18 15.86C12.18 15.98 12.18 16.09 12.18 16.21C12.18 16.27 12.19 16.34 12.22 16.39C12.24 16.43 12.3 16.46 12.35 16.48C12.37 16.49 12.4 16.5 12.43 16.51C12.5 16.54 12.58 16.57 12.65 16.6C12.72 16.63 12.79 16.68 12.86 16.71C12.96 16.76 13.07 16.8 13.17 16.84C13.3 16.9 13.43 16.96 13.57 17.01C13.68 17.05 13.78 17.08 13.86 17.17C13.89 17.21 13.92 17.26 13.92 17.3C13.92 17.93 13.92 18.55 13.92 19.18C13.92 19.24 13.9 19.26 13.85 19.25C13.68 19.25 13.51 19.25 13.34 19.25C13.28 19.25 13.26 19.23 13.26 19.17C13.26 18.69 13.26 18.22 13.26 17.74C13.26 17.65 13.23 17.59 13.14 17.55C13.01 17.49 12.88 17.43 12.75 17.37C12.58 17.29 12.4 17.22 12.22 17.15C12.06 17.08 11.91 17.01 11.75 16.95C11.69 16.93 11.63 16.92 11.58 16.86C11.53 16.8 11.51 16.74 11.51 16.67C11.51 16.24 11.51 15.8 11.51 15.37C11.51 15.33 11.5 15.3 11.47 15.26C11.36 15.14 11.26 15.02 11.17 14.89C11.07 14.76 10.97 14.63 10.89 14.5C10.79 14.33 10.71 14.16 10.63 13.98C10.58 13.86 10.53 13.73 10.48 13.61C10.48 13.6 10.45 13.58 10.44 13.58C10.32 13.58 10.21 13.6 10.09 13.62C10.01 13.63 9.94001 13.65 9.87001 13.67C9.87001 13.67 9.86001 13.67 9.85001 13.67C9.74001 13.67 9.64001 13.68 9.53001 13.7C9.44001 13.71 9.35001 13.73 9.27001 13.75C9.27001 13.75 9.26001 13.75 9.25001 13.75C9.14001 13.75 9.03001 13.77 8.92001 13.78C8.83001 13.78 8.73001 13.78 8.64001 13.81C8.48001 13.85 8.32001 13.86 8.16001 13.87C8.06001 13.87 7.94001 13.87 7.85001 13.9C7.73001 13.94 7.62001 13.92 7.51001 13.93C7.36001 13.94 7.21001 13.93 7.06001 13.96C6.69001 14.01 6.32001 13.97 5.94001 13.98C5.76001 13.98 5.58001 13.98 5.40001 13.98C5.22001 13.98 5.05001 13.97 4.87001 13.96C4.79001 13.96 4.71001 13.95 4.63001 13.93C4.49001 13.91 4.35001 13.88 4.20001 13.85C4.07001 13.83 3.94001 13.81 3.82001 13.79C3.72001 13.77 3.62001 13.74 3.52001 13.71C3.41001 13.68 3.29001 13.65 3.19001 13.6C3.02001 13.52 2.84001 13.44 2.69001 13.32C2.47001 13.15 2.26001 12.94 2.06001 12.74C1.96001 12.64 1.89001 12.52 1.81001 12.41C1.77001 12.36 1.72001 12.31 1.68001 12.25C1.63001 12.18 1.58001 12.11 1.54001 12.04C1.48001 11.95 1.42001 11.85 1.36001 11.75C1.30001 11.64 1.24001 11.53 1.18001 11.41C1.09001 11.23 0.990013 11.06 0.910013 10.87C0.850013 10.74 0.810013 10.6 0.760013 10.47C0.710013 10.34 0.670013 10.22 0.630013 10.09C0.610013 10.04 0.610013 9.99999 0.600013 9.94999C0.570013 9.83999 0.540013 9.73999 0.520013 9.62999C0.510013 9.55999 0.500013 9.48999 0.490013 9.41999C0.470013 9.31999 0.460013 9.21999 0.440013 9.12999C0.440013 9.12999 0.440013 9.10999 0.440013 9.09999C0.440013 8.93999 0.420013 8.78999 0.420013 8.62999C0.420013 8.43999 0.420013 8.24999 0.420013 8.06999C0.420013 7.94999 0.420013 7.82999 0.450013 7.70999C0.470013 7.57999 0.510013 7.43999 0.550013 7.30999C0.600013 7.15999 0.650013 6.99999 0.720013 6.84999C0.780013 6.72999 0.850013 6.61999 0.930013 6.50999C1.03001 6.37999 1.13001 6.25999 1.24001 6.13999C1.30001 6.07999 1.39001 6.03999 1.45001 5.97999C1.52001 5.90999 1.63001 5.89999 1.70001 5.81999C1.74001 5.76999 1.84001 5.75999 1.91001 5.72999C1.97001 5.69999 2.04001 5.67999 2.11001 5.65999C2.19001 5.63999 2.27001 5.61999 2.34001 5.59999C2.41001 5.57999 2.48001 5.56999 2.55001 5.54999C2.60001 5.53999 2.65001 5.52999 2.70001 5.51999C2.78001 5.50999 2.87001 5.49999 2.95001 5.47999C3.05001 5.45999 3.15001 5.44999 3.25001 5.42999C3.25001 5.42999 3.25001 5.42999 3.26001 5.42999C3.41001 5.41999 3.56001 5.39999 3.70001 5.39999C4.11001 5.39999 4.53001 5.39999 4.94001 5.39999C5.10001 5.39999 5.26001 5.41999 5.41001 5.42999C5.51001 5.42999 5.61001 5.44999 5.71001 5.44999C5.82001 5.44999 5.93001 5.44999 6.04001 5.47999C6.20001 5.50999 6.37001 5.52999 6.53001 5.53999C6.61001 5.53999 6.69001 5.54999 6.77001 5.55999C6.91001 5.57999 7.05001 5.59999 7.19001 5.61999C7.31001 5.63999 7.42001 5.65999 7.54001 5.67999C7.66001 5.69999 7.78001 5.70999 7.90001 5.72999C8.03001 5.74999 8.16001 5.77999 8.29001 5.80999C8.42001 5.83999 8.54001 5.85999 8.67001 5.87999C8.78001 5.89999 8.89001 5.93999 9.00001 5.95999C9.10001 5.97999 9.21001 5.98999 9.32001 6.00999C9.38001 6.01999 9.43001 6.02999 9.49001 6.04999C9.55001 6.05999 9.62001 6.07999 9.68001 6.08999C9.77001 6.10999 9.86001 6.12999 9.96001 6.14999C10.03 6.16999 10.1 6.17999 10.17 6.19999C10.26 6.21999 10.35 6.24999 10.45 6.26999C10.57 6.29999 10.69 6.32999 10.82 6.35999C10.9 6.37999 10.97 6.39999 11.05 6.42999C11.16 6.45999 11.28 6.49999 11.39 6.52999C11.47 6.54999 11.55 6.57999 11.62 6.59999C11.67 6.60999 11.71 6.61999 11.76 6.63999C11.83 6.66999 11.9 6.68999 11.98 6.71999C12.09 6.75999 12.2 6.78999 12.3 6.81999C12.38 6.83999 12.46 6.87999 12.54 6.88999C12.62 6.89999 12.71 6.90999 12.79 6.88999C12.89 6.88999 12.99 6.86999 13.08 6.83999C13.16 6.80999 13.24 6.76999 13.31 6.70999C13.38 6.63999 13.45 6.55999 13.5 6.46999C13.63 6.28999 13.67 6.06999 13.75 5.86999C13.8 5.73999 13.84 5.60999 13.89 5.47999C13.93 5.35999 13.96 5.22999 14 5.10999C14.04 4.98999 14.09 4.86999 14.13 4.74999C14.16 4.65999 14.19 4.56999 14.22 4.48999C14.25 4.39999 14.28 4.30999 14.31 4.21999C14.33 4.13999 14.36 4.06999 14.38 3.98999C14.42 3.86999 14.46 3.75999 14.5 3.64999C14.54 3.51999 14.58 3.38999 14.63 3.26999C14.66 3.17999 14.69 3.09999 14.72 3.00999C14.75 2.90999 14.78 2.81999 14.82 2.71999C14.85 2.61999 14.89 2.52999 14.93 2.42999C14.96 2.33999 14.99 2.23999 15.02 2.14999C15.07 2.00999 15.12 1.86999 15.16 1.72999C15.19 1.62999 15.22 1.53999 15.26 1.43999C15.3 1.32999 15.34 1.20999 15.38 1.09999C15.42 0.969993 15.47 0.829993 15.51 0.699993C15.54 0.609993 15.57 0.529993 15.61 0.429993L15.6 0.529993ZM15.3 3.50999C15.3 3.50999 15.27 3.55999 15.26 3.58999C15.21 3.73999 15.16 3.87999 15.11 4.02999C15.07 4.15999 15.03 4.28999 14.99 4.41999C14.97 4.47999 14.95 4.54999 14.93 4.60999C14.9 4.69999 14.86 4.78999 14.83 4.87999C14.79 4.97999 14.76 5.08999 14.73 5.18999C14.7 5.26999 14.67 5.35999 14.64 5.43999C14.6 5.55999 14.56 5.68999 14.52 5.80999C14.48 5.93999 14.43 6.05999 14.39 6.18999C14.31 6.39999 14.24 6.60999 14.16 6.80999C14.08 7.00999 13.93 7.16999 13.77 7.30999C13.71 7.35999 13.65 7.39999 13.59 7.43999C13.45 7.51999 13.31 7.59999 13.15 7.63999C13.1 7.64999 13.05 7.67999 13 7.67999C12.77 7.67999 12.54 7.70999 12.31 7.61999C12.27 7.59999 12.23 7.58999 12.19 7.57999C12.08 7.54999 11.96 7.51999 11.85 7.48999C11.7 7.44999 11.56 7.39999 11.41 7.35999C11.3 7.32999 11.19 7.29999 11.09 7.26999C10.98 7.23999 10.88 7.19999 10.77 7.16999C10.61 7.12999 10.45 7.09999 10.3 7.05999C10.14 7.01999 9.98001 6.96999 9.81001 6.91999C9.70001 6.88999 9.59001 6.86999 9.48001 6.83999C9.36001 6.80999 9.23001 6.79999 9.11001 6.74999C8.99001 6.69999 8.85001 6.68999 8.72001 6.65999C8.67001 6.64999 8.62001 6.63999 8.57001 6.62999C8.46001 6.60999 8.34001 6.59999 8.23001 6.56999C8.11001 6.54999 7.98001 6.50999 7.86001 6.48999C7.78001 6.46999 7.69001 6.46999 7.60001 6.45999C7.46001 6.43999 7.32001 6.39999 7.18001 6.37999C7.05001 6.35999 6.92001 6.34999 6.79001 6.32999C6.63001 6.30999 6.48001 6.28999 6.32001 6.26999C6.13001 6.24999 5.95001 6.24999 5.76001 6.21999C5.63001 6.19999 5.51001 6.21999 5.38001 6.19999C5.16001 6.16999 4.93001 6.16999 4.71001 6.16999C4.50001 6.16999 4.28001 6.16999 4.07001 6.16999C3.92001 6.16999 3.78001 6.18999 3.63001 6.18999C3.48001 6.18999 3.34001 6.20999 3.19001 6.21999C3.11001 6.21999 3.02001 6.23999 2.94001 6.24999C2.88001 6.24999 2.82001 6.26999 2.77001 6.27999C2.67001 6.29999 2.57001 6.32999 2.48001 6.35999C2.36001 6.39999 2.23001 6.43999 2.11001 6.47999C2.03001 6.50999 1.95001 6.55999 1.87001 6.60999C1.81001 6.64999 1.76001 6.69999 1.70001 6.73999C1.65001 6.78999 1.60001 6.84999 1.55001 6.89999C1.50001 6.94999 1.45001 6.99999 1.42001 7.06999C1.30001 7.28999 1.21001 7.51999 1.16001 7.75999C1.16001 7.80999 1.14001 7.85999 1.13001 7.90999C1.11001 8.00999 1.08001 8.11999 1.08001 8.21999C1.08001 8.47999 1.06001 8.74999 1.11001 9.00999C1.13001 9.10999 1.13001 9.21999 1.14001 9.31999C1.14001 9.31999 1.14001 9.31999 1.14001 9.32999C1.17001 9.43999 1.19001 9.53999 1.22001 9.64999C1.26001 9.80999 1.29001 9.97999 1.33001 10.14C1.37001 10.26 1.42001 10.38 1.47001 10.5C1.51001 10.61 1.55001 10.72 1.60001 10.83C1.66001 10.95 1.72001 11.06 1.78001 11.18C1.84001 11.29 1.89001 11.41 1.96001 11.52C2.02001 11.63 2.10001 11.73 2.17001 11.83C2.28001 11.99 2.39001 12.16 2.52001 12.3C2.66001 12.45 2.79001 12.62 2.96001 12.74C3.08001 12.83 3.21001 12.92 3.35001 12.99C3.57001 13.1 3.79001 13.2 4.04001 13.23C4.10001 13.23 4.17001 13.24 4.23001 13.26C4.34001 13.28 4.44001 13.3 4.55001 13.32C4.63001 13.33 4.71001 13.34 4.79001 13.35C4.92001 13.36 5.05001 13.37 5.17001 13.38C5.24001 13.38 5.32001 13.35 5.38001 13.42C5.38001 13.42 5.40001 13.42 5.41001 13.42C5.67001 13.42 5.94001 13.43 6.20001 13.42C6.46001 13.41 6.72001 13.46 6.98001 13.38C7.16001 13.33 7.35001 13.36 7.54001 13.35C7.69001 13.35 7.84001 13.33 7.99001 13.32C7.99001 13.32 8.00001 13.32 8.01001 13.32C8.11001 13.3 8.22001 13.28 8.32001 13.27C8.48001 13.25 8.64001 13.24 8.80001 13.22C8.95001 13.2 9.09001 13.18 9.24001 13.17C9.37001 13.16 9.50001 13.14 9.62001 13.11C9.75001 13.08 9.89001 13.07 10.02 13.06C10.11 13.05 10.2 13.04 10.28 13.02C10.28 13.02 10.28 13.02 10.3 13.01C10.3 12.99 10.28 12.96 10.28 12.94C10.27 12.79 10.26 12.63 10.26 12.48C10.26 12.38 10.28 12.28 10.28 12.18C10.28 12.05 10.3 11.92 10.31 11.78C10.31 11.71 10.33 11.64 10.34 11.57C10.37 11.41 10.4 11.24 10.45 11.08C10.49 10.92 10.54 10.77 10.61 10.62C10.71 10.4 10.82 10.19 10.95 9.98999C11.04 9.83999 11.15 9.70999 11.26 9.56999C11.34 9.46999 11.42 9.38999 11.51 9.29999C11.56 9.24999 11.61 9.20999 11.66 9.15999C11.76 9.06999 11.85 8.96999 11.96 8.88999C12.08 8.79999 12.2 8.70999 12.33 8.63999C12.5 8.53999 12.68 8.43999 12.86 8.34999C12.98 8.28999 13.1 8.24999 13.23 8.20999C13.34 8.16999 13.45 8.12999 13.56 8.09999C13.71 8.06999 13.85 8.03999 14 8.01999C14.13 7.99999 14.27 7.98999 14.4 7.98999C14.52 7.98999 14.64 7.97999 14.77 8.00999C14.89 8.03999 15.02 8.02999 15.15 8.03999C15.24 8.03999 15.32 8.06999 15.4 8.08999C15.46 8.09999 15.52 8.10999 15.57 8.12999C15.67 8.14999 15.76 8.16999 15.86 8.19999C15.92 8.21999 15.98 8.19999 16 8.13999C16.03 8.04999 16.07 7.95999 16.1 7.86999C16.13 7.77999 16.16 7.68999 16.19 7.58999C16.23 7.47999 16.26 7.35999 16.29 7.24999C16.31 7.17999 16.33 7.10999 16.36 7.03999C16.4 6.91999 16.44 6.78999 16.48 6.66999C16.52 6.53999 16.57 6.40999 16.61 6.28999C16.63 6.21999 16.64 6.14999 16.66 6.08999C16.7 5.95999 16.75 5.82999 16.79 5.69999C16.83 5.57999 16.87 5.44999 16.91 5.31999C16.95 5.17999 17 5.03999 17.04 4.89999C17.08 4.76999 17.12 4.64999 17.16 4.51999C17.2 4.39999 17.24 4.27999 17.27 4.15999C16.6 3.94999 15.95 3.72999 15.29 3.51999L15.3 3.50999ZM14.57 15.13C15.32 15.13 16.06 15.13 16.81 15.13C16.87 15.13 16.95 15.1 16.99 15.06C17.11 14.94 17.22 14.82 17.33 14.69C17.42 14.59 17.51 14.49 17.59 14.38C17.68 14.25 17.75 14.12 17.82 13.99C17.88 13.88 17.91 13.75 17.97 13.64C18.04 13.5 18.06 13.35 18.1 13.21C18.11 13.16 18.12 13.11 18.13 13.06C18.15 12.96 18.18 12.86 18.18 12.76C18.18 12.41 18.21 12.06 18.13 11.72C18.1 11.61 18.1 11.5 18.07 11.39C18.02 11.23 17.97 11.07 17.91 10.92C17.87 10.8 17.82 10.69 17.76 10.58C17.66 10.42 17.56 10.26 17.45 10.1C17.35 9.96999 17.25 9.83999 17.13 9.71999C17.02 9.60999 16.89 9.50999 16.77 9.40999C16.7 9.34999 16.63 9.27999 16.55 9.23999C16.42 9.15999 16.28 9.08999 16.14 9.01999C16.02 8.95999 15.9 8.91999 15.78 8.86999C15.7 8.83999 15.63 8.81999 15.55 8.79999C15.52 8.78999 15.48 8.77999 15.45 8.76999C15.38 8.75999 15.32 8.74999 15.25 8.73999C15.13 8.71999 15.01 8.68999 14.89 8.68999C14.59 8.68999 14.28 8.65999 13.98 8.73999C13.85 8.77999 13.71 8.79999 13.58 8.82999C13.5 8.84999 13.43 8.86999 13.35 8.89999C13.25 8.93999 13.15 8.97999 13.06 9.01999C12.92 9.08999 12.78 9.14999 12.64 9.22999C12.57 9.26999 12.51 9.32999 12.44 9.37999C12.32 9.47999 12.18 9.55999 12.07 9.66999C11.96 9.76999 11.87 9.88999 11.78 10.01C11.68 10.15 11.58 10.28 11.49 10.43C11.41 10.57 11.35 10.72 11.29 10.87C11.23 11.01 11.18 11.15 11.13 11.29C11.09 11.41 11.07 11.54 11.04 11.67C11.03 11.73 11.02 11.78 11.01 11.84C10.99 11.94 10.96 12.04 10.96 12.15C10.96 12.37 10.94 12.58 10.98 12.8C11.01 12.97 11.03 13.14 11.07 13.31C11.07 13.35 11.09 13.39 11.11 13.43C11.15 13.53 11.19 13.63 11.23 13.72C11.31 13.89 11.39 14.05 11.48 14.21C11.55 14.32 11.63 14.43 11.71 14.54C11.78 14.63 11.84 14.72 11.92 14.8C11.99 14.87 12.07 14.94 12.13 15.01C12.21 15.11 12.31 15.13 12.43 15.13C13.15 15.13 13.86 15.13 14.58 15.13H14.57Z" fill="black"/>
+                                <path d="M8.27003 9.2V9.84C8.27003 9.84 8.22003 9.84 8.19003 9.84C6.12003 9.84 4.05003 9.84 1.98003 9.84C1.91003 9.84 1.89003 9.82 1.90003 9.75C1.90003 9.59 1.90003 9.43 1.90003 9.27C1.90003 9.2 1.92003 9.19 1.98003 9.19C3.07003 9.19 4.16003 9.19 5.25003 9.19C6.23003 9.19 7.20003 9.19 8.18003 9.19C8.21003 9.19 8.23003 9.19 8.26003 9.19L8.27003 9.2Z" fill="black"/>
+                                <path d="M4.56002 11.33C3.94002 11.33 3.32002 11.33 2.70002 11.33C2.64002 11.33 2.61002 11.3 2.61002 11.24C2.61002 11.08 2.61002 10.92 2.61002 10.76C2.61002 10.7 2.63002 10.68 2.69002 10.68C3.28002 10.68 3.87002 10.68 4.46002 10.68C5.11002 10.68 5.76002 10.68 6.42002 10.68C6.48668 10.68 6.52002 10.7133 6.52002 10.78C6.52002 10.94 6.52002 11.1 6.52002 11.25C6.52002 11.31 6.50002 11.33 6.44002 11.33C5.82002 11.33 5.19002 11.33 4.57002 11.33H4.56002Z" fill="black"/>
+                                <path d="M3.45001 7.69998C3.94001 7.69998 4.42001 7.69998 4.91001 7.69998C4.97001 7.69998 5.00001 7.72998 5.00001 7.78998C5.00001 7.94998 5.00001 8.09998 5.00001 8.25998C5.00001 8.30998 5.00001 8.32998 4.93001 8.32998C3.94001 8.32998 2.95001 8.32998 1.96001 8.32998C1.91001 8.32998 1.89001 8.30998 1.89001 8.25998C1.89001 8.09998 1.89001 7.92998 1.89001 7.76998C1.89001 7.70998 1.91001 7.69998 1.96001 7.69998C2.45001 7.69998 2.95001 7.69998 3.44001 7.69998H3.45001Z" fill="black"/>
+                                <path d="M8.13002 8.36998C7.98002 8.36998 7.83002 8.36998 7.68002 8.36998C7.63002 8.36998 7.61002 8.34998 7.61002 8.29998C7.61002 8.11998 7.61002 7.93998 7.61002 7.75998C7.61002 7.70998 7.63002 7.69998 7.68002 7.69998C7.98002 7.69998 8.29002 7.69998 8.59002 7.69998C8.64002 7.69998 8.66002 7.70998 8.66002 7.75998C8.66002 7.93998 8.66002 8.11998 8.66002 8.29998C8.66002 8.34998 8.64002 8.36998 8.59002 8.36998C8.44002 8.36998 8.28002 8.36998 8.13002 8.36998Z" fill="black"/>
+                                <path d="M8.65001 11.02C8.65001 11.11 8.65001 11.21 8.65001 11.3C8.65001 11.34 8.64001 11.36 8.59001 11.36C8.42001 11.36 8.24001 11.36 8.07001 11.36C8.03001 11.36 8.01001 11.35 8.01001 11.31C8.01001 11.12 8.01001 10.93 8.01001 10.74C8.01001 10.7 8.03001 10.68 8.07001 10.69C8.24001 10.69 8.41001 10.69 8.59001 10.69C8.64001 10.69 8.65001 10.71 8.65001 10.75C8.65001 10.84 8.65001 10.94 8.65001 11.03V11.02Z" fill="black"/>
+                                <path d="M5.44 7.70999H6.07C6.07 7.78999 6.07 7.86999 6.07 7.94999C6.07 8.06999 6.07 8.18999 6.07 8.30999C6.07 8.35999 6.06 8.37999 6.01 8.37999C5.84 8.37999 5.67 8.37999 5.5 8.37999C5.48 8.37999 5.44 8.35999 5.44 8.33999C5.44 8.13999 5.44 7.92999 5.44 7.71999V7.70999Z" fill="black"/>
+                                <path d="M6.84 7.69998C6.93 7.69998 7.02 7.69998 7.11 7.69998C7.16 7.69998 7.17 7.71998 7.17 7.75998C7.17 7.92998 7.17 8.09998 7.17 8.26998C7.17 8.30998 7.15 8.32998 7.11 8.32998C6.93 8.32998 6.74 8.32998 6.56 8.32998C6.51 8.32998 6.5 8.30998 6.5 8.26998C6.5 8.09998 6.5 7.92998 6.5 7.75998C6.5 7.71998 6.51 7.69998 6.56 7.69998C6.65 7.69998 6.75 7.69998 6.84 7.69998Z" fill="black"/>
+                                <path d="M6.95001 11.01C6.95001 10.92 6.95001 10.84 6.95001 10.75C6.95001 10.7 6.96001 10.68 7.01001 10.68C7.18001 10.68 7.35001 10.68 7.52001 10.68C7.56001 10.68 7.58001 10.69 7.58001 10.74C7.58001 10.92 7.58001 11.09 7.58001 11.27C7.58001 11.32 7.56001 11.33 7.51001 11.33C7.34001 11.33 7.18001 11.33 7.01001 11.33C6.96001 11.33 6.94001 11.31 6.95001 11.27C6.95001 11.18 6.95001 11.09 6.95001 11.01Z" fill="black"/>
+                                <path d="M9.34 9.20999C9.34 9.40999 9.34 9.60999 9.34 9.80999C9.34 9.81999 9.31 9.84999 9.3 9.84999C9.11 9.84999 8.92 9.84999 8.72 9.84999V9.20999H9.34Z" fill="black"/>
+                                <path d="M15.86 9.77C15.86 9.86 15.86 9.96 15.86 10.05C15.86 10.09 15.85 10.11 15.8 10.11C15.63 10.11 15.46 10.11 15.28 10.11C15.24 10.11 15.22 10.11 15.22 10.06C15.22 9.87 15.22 9.68 15.22 9.49C15.22 9.45 15.23 9.44 15.27 9.44C15.44 9.44 15.62 9.44 15.79 9.44C15.83 9.44 15.85 9.46 15.85 9.5C15.85 9.6 15.85 9.69 15.85 9.79L15.86 9.77Z" fill="black"/>
+                                <path d="M15.56 12.96C15.47 12.96 15.38 12.96 15.29 12.96C15.25 12.96 15.23 12.95 15.23 12.9C15.23 12.72 15.23 12.55 15.23 12.37C15.23 12.33 15.24 12.31 15.29 12.31C15.47 12.31 15.65 12.31 15.83 12.31C15.87 12.31 15.89 12.32 15.89 12.37C15.89 12.55 15.89 12.73 15.89 12.91C15.89 12.95 15.87 12.97 15.83 12.97C15.74 12.97 15.65 12.97 15.56 12.97V12.96Z" fill="black"/>
+                                <path d="M12.48 14.08C12.48 13.99 12.48 13.91 12.48 13.82C12.48 13.78 12.49 13.76 12.54 13.76C12.71 13.76 12.88 13.76 13.05 13.76C13.1 13.76 13.11 13.77 13.11 13.82C13.11 13.99 13.11 14.17 13.11 14.34C13.11 14.39 13.1 14.41 13.05 14.41C12.88 14.41 12.71 14.41 12.54 14.41C12.49 14.41 12.48 14.39 12.48 14.35C12.48 14.26 12.48 14.17 12.48 14.09V14.08Z" fill="black"/>
+                                <path d="M14.05 9.78999C14.05 9.87999 14.05 9.95999 14.05 10.05C14.05 10.09 14.04 10.11 13.99 10.11C13.82 10.11 13.64 10.11 13.47 10.11C13.43 10.11 13.41 10.1 13.41 10.05C13.41 9.86999 13.41 9.68999 13.41 9.50999C13.41 9.46999 13.42 9.45999 13.46 9.45999C13.64 9.45999 13.81 9.45999 13.99 9.45999C14.03 9.45999 14.05 9.47999 14.04 9.51999C14.04 9.60999 14.04 9.69999 14.04 9.78999H14.05Z" fill="black"/>
+                                <path d="M13.11 11.2C13.11 11.29 13.11 11.38 13.11 11.46C13.11 11.5 13.1 11.52 13.05 11.52C12.88 11.52 12.71 11.52 12.54 11.52C12.49 11.52 12.48 11.5 12.48 11.46C12.48 11.28 12.48 11.11 12.48 10.93C12.48 10.89 12.49 10.87 12.53 10.87C12.7 10.87 12.88 10.87 13.05 10.87C13.09 10.87 13.11 10.88 13.11 10.93C13.11 11.02 13.11 11.11 13.11 11.19V11.2Z" fill="black"/>
+                                <path d="M14.05 12.64C14.05 12.72 14.05 12.81 14.05 12.89C14.05 12.94 14.04 12.96 13.99 12.96C13.82 12.96 13.65 12.96 13.48 12.96C13.43 12.96 13.42 12.94 13.42 12.9C13.42 12.72 13.42 12.55 13.42 12.37C13.42 12.32 13.44 12.31 13.48 12.31C13.65 12.31 13.82 12.31 13.99 12.31C14.04 12.31 14.05 12.33 14.05 12.37C14.05 12.46 14.05 12.55 14.05 12.64Z" fill="black"/>
+                                <path d="M12.21 12.63C12.21 12.72 12.21 12.8 12.21 12.89C12.21 12.94 12.2 12.96 12.15 12.96C11.98 12.96 11.81 12.96 11.64 12.96C11.6 12.96 11.58 12.94 11.58 12.9C11.58 12.72 11.58 12.54 11.58 12.36C11.58 12.32 11.6 12.3 11.64 12.3C11.81 12.3 11.98 12.3 12.15 12.3C12.19 12.3 12.21 12.32 12.21 12.36C12.21 12.45 12.21 12.54 12.21 12.62V12.63Z" fill="black"/>
+                                <path d="M14.93 14.09C14.93 14.18 14.93 14.26 14.93 14.35C14.93 14.39 14.92 14.41 14.87 14.41C14.7 14.41 14.52 14.41 14.35 14.41C14.31 14.41 14.29 14.39 14.29 14.35C14.29 14.17 14.29 14 14.29 13.82C14.29 13.77 14.31 13.76 14.35 13.76C14.52 13.76 14.69 13.76 14.86 13.76C14.91 13.76 14.92 13.78 14.92 13.82C14.92 13.91 14.92 14 14.92 14.08L14.93 14.09Z" fill="black"/>
+                                <path d="M16.77 14.09C16.77 14.17 16.77 14.26 16.77 14.34C16.77 14.39 16.76 14.41 16.7 14.41C16.53 14.41 16.37 14.41 16.2 14.41C16.15 14.41 16.13 14.4 16.13 14.35C16.13 14.18 16.13 14 16.13 13.83C16.13 13.78 16.15 13.77 16.2 13.77C16.37 13.77 16.54 13.77 16.71 13.77C16.76 13.77 16.77 13.79 16.77 13.84C16.77 13.93 16.77 14.01 16.77 14.1V14.09Z" fill="black"/>
+                                <path d="M14.29 11.2C14.29 11.11 14.29 11.03 14.29 10.94C14.29 10.89 14.3 10.87 14.35 10.87C14.52 10.87 14.69 10.87 14.86 10.87C14.91 10.87 14.93 10.88 14.93 10.93C14.93 11.1 14.93 11.28 14.93 11.45C14.93 11.5 14.91 11.51 14.86 11.51C14.69 11.51 14.53 11.51 14.36 11.51C14.3 11.51 14.29 11.49 14.29 11.44C14.29 11.36 14.29 11.27 14.29 11.19V11.2Z" fill="black"/>
+                                <path d="M17.7 12.64C17.7 12.73 17.7 12.81 17.7 12.9C17.7 12.94 17.69 12.96 17.65 12.96C17.48 12.96 17.3 12.96 17.13 12.96C17.09 12.96 17.07 12.94 17.07 12.9C17.07 12.72 17.07 12.54 17.07 12.36C17.07 12.32 17.09 12.3 17.13 12.3C17.3 12.3 17.47 12.3 17.64 12.3C17.69 12.3 17.7 12.32 17.7 12.36C17.7 12.45 17.7 12.54 17.7 12.63V12.64Z" fill="black"/>
+                                <path d="M16.77 11.21C16.77 11.29 16.77 11.38 16.77 11.46C16.77 11.51 16.76 11.53 16.7 11.53C16.53 11.53 16.36 11.53 16.19 11.53C16.15 11.53 16.13 11.52 16.13 11.47C16.13 11.29 16.13 11.12 16.13 10.94C16.13 10.89 16.15 10.88 16.19 10.88C16.36 10.88 16.53 10.88 16.7 10.88C16.75 10.88 16.76 10.9 16.76 10.94C16.76 11.03 16.76 11.12 16.76 11.2L16.77 11.21Z" fill="black"/>
+                              </svg>
+                            </div>
+                          {% elsif best_for == 'Recovery' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M0.500014 9.99999C0.520014 7.64999 1.27001 5.56999 2.81001 3.79999C4.78001 1.54999 7.29001 0.439989 10.29 0.499989C12.48 0.549989 14.44 1.29999 16.11 2.71999C18.46 4.72999 19.6 7.29999 19.5 10.38C19.43 12.56 18.66 14.51 17.22 16.16C15.21 18.47 12.65 19.56 9.59001 19.48C9.21001 19.47 8.83001 19.43 8.46001 19.36C6.76001 19.07 5.24001 18.38 3.91001 17.27C2.86001 16.39 2.03001 15.34 1.44001 14.11C0.810014 12.81 0.490014 11.43 0.500014 9.97999V9.99999ZM10.14 18.49C12.56 18.44 14.71 17.47 16.4 15.55C17.74 14.02 18.45 12.22 18.48 10.19C18.52 7.45999 17.46 5.18999 15.36 3.43999C13.82 2.15999 12.03 1.50999 10.03 1.51999C7.49001 1.51999 5.34001 2.49999 3.65001 4.39999C2.29001 5.92999 1.56001 7.74999 1.53001 9.79999C1.49001 12.56 2.56001 14.83 4.68001 16.59C6.21001 17.86 8.01001 18.47 10.14 18.5V18.49Z" fill="black"/>
+                                <path d="M12.09 7.89999H12.2C12.74 7.89999 13.27 7.89999 13.81 7.89999C14.08 7.89999 14.19 8.04999 14.19 8.27999C14.19 8.74999 14.19 9.20999 14.19 9.67999C14.19 10.35 14.19 11.02 14.19 11.7C14.19 11.83 14.15 11.94 14.05 12.02C14.01 12.05 13.97 12.07 13.92 12.08C13.85 12.09 13.79 12.1 13.72 12.1C13.21 12.1 12.7 12.1 12.2 12.1H12.09V12.21C12.09 12.75 12.09 13.28 12.09 13.82C12.09 14.1 11.94 14.18 11.73 14.18C11.46 14.18 11.19 14.18 10.92 14.18C10.05 14.18 9.18001 14.18 8.31001 14.18C8.25001 14.18 8.18001 14.18 8.12001 14.15C8.00001 14.11 7.92001 13.98 7.92001 13.86C7.92001 13.31 7.92001 12.76 7.91001 12.21C7.91001 12.1 7.91001 12.1 7.80001 12.1C7.30001 12.1 6.79001 12.1 6.29001 12.1C6.22001 12.1 6.14001 12.1 6.07001 12.07C5.90001 12.03 5.82001 11.87 5.82001 11.71C5.82001 10.71 5.82001 9.71999 5.82001 8.71999C5.82001 8.55999 5.82001 8.40999 5.82001 8.24999C5.82001 8.14999 5.83001 8.02999 5.94001 7.96999C6.01001 7.92999 6.09001 7.88999 6.17001 7.88999C6.72001 7.88999 7.26001 7.88999 7.81001 7.88999H7.91001C7.91001 7.88999 7.91001 7.82999 7.91001 7.79999C7.91001 7.41999 7.91001 7.02999 7.91001 6.64999C7.91001 6.46999 7.91001 6.28999 7.92001 6.10999C7.92001 5.96999 8.02001 5.82999 8.19001 5.81999C8.30001 5.80999 8.41001 5.79999 8.53001 5.79999C9.59001 5.79999 10.65 5.79999 11.7 5.79999C11.83 5.79999 11.97 5.82999 12.05 5.95999C12.08 6.00999 12.09 6.07999 12.1 6.13999C12.1 6.18999 12.1 6.24999 12.1 6.30999C12.1 6.51999 12.12 6.73999 12.12 6.94999C12.12 7.22999 12.11 7.51999 12.1 7.79999C12.1 7.82999 12.1 7.85999 12.1 7.89999H12.09ZM13.46 11.37V8.60999C13.46 8.60999 13.4 8.60999 13.37 8.60999C13 8.60999 12.63 8.60999 12.26 8.60999C12.06 8.60999 11.87 8.60999 11.67 8.58999C11.56 8.58999 11.43 8.48999 11.41 8.37999C11.39 8.28999 11.37 8.19999 11.37 8.11999C11.37 7.61999 11.37 7.11999 11.37 6.61999V6.52999H8.61001C8.61001 6.52999 8.61001 6.59999 8.61001 6.62999C8.61001 7.18999 8.61001 7.74999 8.59001 8.30999C8.59001 8.42999 8.52001 8.51999 8.41001 8.55999C8.34001 8.58999 8.26001 8.59999 8.18001 8.59999C7.66001 8.59999 7.14001 8.59999 6.62001 8.59999C6.59001 8.59999 6.56001 8.59999 6.53001 8.59999V11.36C6.53001 11.36 6.60001 11.36 6.63001 11.36C7.12001 11.36 7.62001 11.36 8.11001 11.36C8.19001 11.36 8.28001 11.37 8.35001 11.39C8.43001 11.41 8.51001 11.44 8.53001 11.53C8.56001 11.62 8.59001 11.71 8.59001 11.8C8.59001 12.31 8.59001 12.83 8.59001 13.34C8.59001 13.4133 8.62667 13.45 8.70001 13.45C9.55001 13.45 10.4 13.45 11.25 13.45H11.35C11.35 13.45 11.35 13.38 11.35 13.35C11.35 12.79 11.37 12.23 11.37 11.67C11.37 11.55 11.46 11.44 11.58 11.41C11.67 11.39 11.77 11.37 11.87 11.37C12.36 11.37 12.84 11.37 13.33 11.37C13.36 11.37 13.39 11.37 13.43 11.37H13.46Z" fill="black"/>
+                              </svg>
+                            </div>
+                          {% elsif best_for == 'Special Foot Care Needs' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M4.79 7.81001C4.66 7.76001 4.51 7.72001 4.37 7.67001C4.08 7.57001 3.79 7.45001 3.54 7.27001C3.39 7.16001 3.24 7.04001 3.11 6.91001C2.95 6.74001 2.82 6.55001 2.75 6.33001C2.68 6.13001 2.61 5.94001 2.52 5.75001C2.39 5.49001 2.23 5.24001 2.02 5.02001C1.87 4.87001 1.78 4.68001 1.71 4.47001C1.63 4.22001 1.6 3.97001 1.61 3.71001C1.61 3.59001 1.55 3.52001 1.46 3.46001C1.29 3.35001 1.12 3.23001 0.980004 3.08001C0.830004 2.91001 0.710004 2.73001 0.630004 2.52001C0.550004 2.32001 0.500004 2.11001 0.500004 1.89001C0.500004 1.74001 0.490004 1.58001 0.500004 1.43001C0.520004 1.21001 0.660004 1.05001 0.920004 1.04001C1.13 1.04001 1.31 1.13001 1.5 1.19001C1.67 1.24001 1.84 1.29001 2.01 1.34001C2.19 1.39001 2.37 1.43001 2.55 1.47001C2.64 1.49001 2.74 1.50001 2.83 1.52001C2.95 1.54001 3.06 1.55001 3.18 1.57001C3.24 1.57001 3.31 1.59001 3.37 1.60001C3.54 1.62001 3.72 1.63001 3.89 1.65001C4.07 1.67001 4.25 1.69001 4.43 1.71001C4.58 1.73001 4.73 1.74001 4.87 1.75001C4.99 1.76001 5.1 1.79001 5.22 1.81001C5.33 1.83001 5.44 1.83001 5.55 1.86001C5.77 1.91001 5.98 1.98001 6.19 2.08001C6.4 2.18001 6.59 2.30001 6.77 2.45001C6.9 2.56001 7.03 2.68001 7.14 2.81001C7.25 2.93001 7.33 3.07001 7.44 3.19001C7.57 3.33001 7.71 3.47001 7.85 3.60001C7.96 3.70001 8.08 3.79001 8.21 3.87001C8.43 4.01001 8.66 4.11001 8.91 4.17001C8.96 4.18001 9.02 4.20001 9.08 4.22001V4.14001C9.08 3.99001 9.08 3.84001 9.08 3.69001C9.08 3.55001 9.02 3.46001 8.92 3.37001C8.83 3.29001 8.74 3.21001 8.67 3.11001C8.57 2.97001 8.49 2.82001 8.42 2.67001C8.38 2.58001 8.36 2.48001 8.34 2.38001C8.32 2.30001 8.32 2.21001 8.32 2.13001C8.32 1.87001 8.39 1.62001 8.52 1.38001C8.61 1.21001 8.72 1.06001 8.86 0.930011C9.08 0.740011 9.33 0.600011 9.62 0.540011C9.8 0.500011 9.99 0.500011 10.17 0.510011C10.37 0.520011 10.56 0.580011 10.75 0.670011C10.91 0.750011 11.06 0.850011 11.18 0.970011C11.3 1.09001 11.4 1.23001 11.48 1.38001C11.56 1.54001 11.62 1.70001 11.65 1.87001C11.67 2.00001 11.65 2.14001 11.66 2.27001C11.66 2.44001 11.61 2.59001 11.55 2.74001C11.48 2.91001 11.39 3.08001 11.25 3.21001C11.16 3.29001 11.08 3.38001 10.99 3.46001C10.94 3.52001 10.92 3.58001 10.92 3.66001C10.92 3.84001 10.92 4.03001 10.92 4.21001C11.23 4.16001 11.52 4.07001 11.77 3.89001C11.89 3.81001 12 3.71001 12.12 3.61001C12.23 3.52001 12.34 3.43001 12.43 3.32001C12.55 3.19001 12.64 3.05001 12.76 2.92001C12.86 2.81001 12.96 2.70001 13.07 2.60001C13.3 2.38001 13.56 2.21001 13.85 2.07001C14.1 1.95001 14.36 1.85001 14.63 1.80001C14.84 1.76001 15.04 1.74001 15.25 1.71001C15.38 1.69001 15.51 1.66001 15.64 1.67001C15.86 1.67001 15.97 1.81001 15.94 2.02001C15.93 2.12001 15.78 2.23001 15.66 2.25001C15.39 2.28001 15.12 2.31001 14.85 2.35001C14.51 2.40001 14.18 2.51001 13.89 2.70001C13.69 2.83001 13.52 2.99001 13.35 3.15001C13.23 3.26001 13.15 3.42001 13.05 3.54001C12.91 3.69001 12.77 3.84001 12.62 3.98001C12.54 4.06001 12.45 4.14001 12.36 4.20001C12.22 4.30001 12.07 4.39001 11.92 4.47001C11.75 4.55001 11.57 4.62001 11.39 4.69001C11.28 4.73001 11.16 4.75001 11.04 4.78001C10.98 4.79001 10.95 4.82001 10.95 4.88001C10.95 5.54001 10.95 6.20001 10.95 6.86001C10.95 6.93001 10.98 6.96001 11.05 6.97001C11.22 6.99001 11.4 7.03001 11.59 7.06001C11.59 6.99001 11.57 6.93001 11.57 6.87001C11.57 6.66001 11.57 6.44001 11.61 6.24001C11.64 6.03001 11.77 5.85001 11.94 5.73001C12.05 5.65001 12.19 5.60001 12.34 5.60001C12.7 5.58001 13.04 5.67001 13.37 5.80001C13.59 5.89001 13.79 6.00001 13.97 6.14001C14.1 6.24001 14.23 6.34001 14.35 6.46001C14.46 6.57001 14.56 6.69001 14.66 6.81001C14.75 6.92001 14.83 7.04001 14.93 7.15001C14.98 7.21001 15.06 7.23001 15.14 7.21001C15.42 7.14001 15.69 7.05001 15.93 6.91001C16.04 6.85001 16.14 6.77001 16.24 6.69001C16.41 6.57001 16.54 6.41001 16.64 6.24001C16.73 6.10001 16.77 5.94001 16.78 5.76001C16.71 5.76001 16.65 5.77001 16.59 5.78001C16.4 5.81001 16.22 5.84001 16.03 5.87001C15.96 5.88001 15.9 5.89001 15.83 5.89001C15.64 5.89001 15.44 5.91001 15.25 5.91001C15.15 5.91001 15.06 5.86001 15.01 5.77001C14.95 5.67001 14.96 5.56001 15.02 5.48001C15.09 5.38001 15.2 5.35001 15.32 5.34001C15.48 5.32001 15.63 5.30001 15.79 5.28001C15.86 5.28001 15.92 5.27001 15.99 5.26001C16.22 5.23001 16.45 5.21001 16.67 5.15001C16.89 5.09001 17.1 4.98001 17.29 4.86001C17.56 4.68001 17.72 4.44001 17.79 4.14001C17.81 4.04001 17.81 3.94001 17.82 3.82001C17.75 3.82001 17.7 3.83001 17.65 3.84001C17.5 3.86001 17.35 3.88001 17.19 3.90001C17.12 3.90001 17.05 3.91001 16.98 3.92001C16.83 3.93001 16.67 3.95001 16.52 3.96001C16.39 3.97001 16.26 3.99001 16.14 3.99001C16.06 3.99001 15.98 3.97001 15.92 3.91001C15.78 3.77001 15.8 3.50001 16.02 3.44001C16.09 3.42001 16.17 3.41001 16.24 3.40001C16.36 3.39001 16.48 3.40001 16.6 3.38001C16.77 3.36001 16.93 3.34001 17.1 3.32001C17.23 3.30001 17.36 3.29001 17.49 3.26001C17.82 3.18001 18.13 3.06001 18.4 2.86001C18.59 2.72001 18.74 2.54001 18.82 2.32001C18.88 2.17001 18.92 2.01001 18.92 1.85001C18.92 1.82001 18.93 1.79001 18.94 1.73001C18.87 1.73001 18.81 1.73001 18.75 1.75001C18.44 1.83001 18.13 1.91001 17.81 1.98001C17.58 2.03001 17.34 2.07001 17.11 2.12001C17.02 2.14001 16.95 2.15001 16.86 2.12001C16.71 2.06001 16.65 1.98001 16.66 1.81001C16.66 1.70001 16.76 1.60001 16.88 1.58001C17.09 1.55001 17.3 1.51001 17.51 1.47001C17.64 1.44001 17.78 1.40001 17.91 1.36001C18.09 1.31001 18.27 1.26001 18.45 1.21001C18.58 1.17001 18.71 1.11001 18.85 1.07001C18.96 1.04001 19.06 1.01001 19.18 1.05001C19.34 1.10001 19.43 1.20001 19.47 1.36001C19.5 1.47001 19.52 1.60001 19.51 1.71001C19.49 1.93001 19.49 2.15001 19.42 2.36001C19.36 2.54001 19.29 2.71001 19.19 2.86001C19.11 2.98001 19.01 3.10001 18.9 3.20001C18.78 3.31001 18.64 3.39001 18.51 3.49001C18.44 3.54001 18.4 3.62001 18.4 3.71001C18.41 3.95001 18.38 4.18001 18.32 4.41001C18.27 4.62001 18.18 4.81001 18.03 4.97001C17.95 5.06001 17.87 5.15001 17.78 5.24001C17.7 5.32001 17.6 5.38001 17.51 5.45001C17.48 5.48001 17.44 5.51001 17.43 5.55001C17.41 5.60001 17.41 5.65001 17.41 5.70001C17.41 5.97001 17.33 6.23001 17.21 6.48001C17.11 6.70001 16.96 6.89001 16.78 7.05001C16.53 7.28001 16.25 7.45001 15.93 7.57001C15.72 7.65001 15.5 7.72001 15.29 7.79001C15.27 7.79001 15.25 7.82001 15.25 7.84001C15.27 8.01001 15.3 8.17001 15.3 8.34001C15.3 8.53001 15.3 8.72001 15.28 8.90001C15.27 9.04001 15.23 9.18001 15.18 9.31001C15.12 9.51001 15 9.69001 14.86 9.86001C14.68 10.08 14.46 10.25 14.21 10.38C14 10.49 13.79 10.59 13.58 10.69C13.39 10.78 13.2 10.85 13.02 10.94C12.82 11.03 12.62 11.11 12.42 11.2C12.42 11.2 12.4 11.21 12.38 11.22C12.52 11.33 12.66 11.44 12.8 11.55C12.9 11.63 13 11.71 13.1 11.79C13.24 11.91 13.38 12.04 13.53 12.16C13.82 12.42 14.02 12.73 14.13 13.1C14.18 13.28 14.21 13.48 14.18 13.67C14.15 13.95 14.07 14.21 13.91 14.45C13.81 14.59 13.69 14.71 13.57 14.83C13.43 14.96 13.27 15.06 13.11 15.18C13.05 15.23 12.98 15.27 12.93 15.31C13.09 15.42 13.26 15.53 13.43 15.65C13.53 15.72 13.62 15.79 13.71 15.88C13.9 16.08 14.06 16.3 14.15 16.57C14.21 16.75 14.24 16.94 14.26 17.13C14.28 17.36 14.25 17.59 14.19 17.81C14.15 17.96 14.05 18.1 13.98 18.24C13.89 18.42 13.74 18.54 13.6 18.67C13.46 18.8 13.27 18.89 13.09 18.97C12.9 19.05 12.69 19.12 12.48 19.13C12.3 19.14 12.12 19.13 11.95 19.11C11.78 19.09 11.61 18.88 11.58 18.71C11.55 18.55 11.59 18.41 11.65 18.26C11.75 18.01 11.91 17.79 12.04 17.56C12.1 17.47 12.13 17.36 12.15 17.26C12.19 17.04 12.06 16.9 11.87 16.82C11.67 16.73 11.46 16.67 11.25 16.6C11.15 16.57 11.05 16.54 10.93 16.51V16.61C10.93 17.29 10.93 17.97 10.93 18.65C10.93 18.97 10.76 19.22 10.46 19.38C10.32 19.46 10.16 19.51 10.01 19.5C9.76 19.5 9.54 19.41 9.36 19.23C9.18 19.05 9.1 18.84 9.1 18.58C9.1 17.92 9.1 17.25 9.1 16.59C9.1 16.56 9.1 16.53 9.1 16.49C9.02 16.51 8.95 16.53 8.89 16.55C8.64 16.64 8.38 16.73 8.13 16.83C7.99 16.89 7.86 16.99 7.86 17.16C7.86 17.26 7.89 17.38 7.94 17.47C8.04 17.67 8.17 17.85 8.28 18.04C8.35 18.18 8.43 18.31 8.45 18.47C8.48 18.67 8.43 18.83 8.3 18.97C8.22 19.05 8.1 19.11 7.98 19.11C7.76 19.11 7.53 19.11 7.31 19.07C7.04 19.02 6.79 18.92 6.57 18.76C6.34 18.6 6.17 18.4 6.03 18.17C5.93 18.01 5.86 17.84 5.81 17.66C5.75 17.43 5.75 17.2 5.78 16.96C5.81 16.67 5.93 16.41 6.09 16.17C6.22 15.96 6.39 15.77 6.6 15.63C6.76 15.52 6.93 15.41 7.11 15.3C7.02 15.24 6.92 15.18 6.83 15.11C6.67 14.99 6.5 14.87 6.36 14.74C6.12 14.51 5.95 14.24 5.88 13.92C5.85 13.8 5.84 13.68 5.83 13.56C5.83 13.48 5.84 13.39 5.86 13.31C5.92 13.08 6.1 13.05 6.29 13.11C6.38 13.14 6.46 13.32 6.44 13.44C6.4 13.63 6.45 13.8 6.53 13.97C6.62 14.18 6.77 14.34 6.94 14.48C7.1 14.61 7.28 14.72 7.47 14.82C7.75 14.98 8.06 15.07 8.37 15.16C8.62 15.24 8.87 15.3 9.12 15.37C9.28 15.41 9.43 15.47 9.58 15.51C9.84 15.58 10.1 15.65 10.35 15.73C10.6 15.8 10.85 15.88 11.11 15.96C11.34 16.03 11.58 16.1 11.81 16.17C12.05 16.25 12.29 16.35 12.48 16.52C12.64 16.67 12.75 16.84 12.77 17.06C12.77 17.11 12.8 17.16 12.79 17.2C12.77 17.33 12.75 17.47 12.69 17.59C12.54 17.89 12.37 18.18 12.21 18.47C12.2 18.49 12.19 18.51 12.16 18.56C12.26 18.56 12.35 18.56 12.44 18.56C12.65 18.53 12.84 18.47 13.03 18.37C13.2 18.27 13.35 18.15 13.46 17.99C13.57 17.83 13.64 17.66 13.68 17.47C13.74 17.21 13.7 16.95 13.58 16.71C13.47 16.49 13.32 16.31 13.14 16.15C13.03 16.06 12.91 15.99 12.79 15.92C12.55 15.78 12.28 15.7 12.01 15.62C11.75 15.54 11.49 15.47 11.23 15.4C11.05 15.35 10.87 15.3 10.69 15.25C10.47 15.19 10.26 15.13 10.04 15.07C9.81 15 9.59 14.93 9.36 14.86C9.12 14.79 8.89 14.72 8.65 14.65C8.37 14.57 8.1 14.45 7.84 14.3C7.72 14.23 7.61 14.15 7.51 14.06C7.27 13.82 7.15 13.5 7.34 13.14C7.42 12.99 7.53 12.88 7.67 12.77C7.94 12.56 8.23 12.41 8.53 12.25C8.69 12.17 8.86 12.09 9.03 12.01C9.1 11.98 9.18 11.95 9.27 11.91C9.13 11.85 9 11.79 8.87 11.73C8.77 11.69 8.67 11.65 8.57 11.6C8.5 11.57 8.44 11.58 8.39 11.6C8.22 11.7 8.05 11.81 7.89 11.91C7.61 12.09 7.33 12.27 7.05 12.44C6.9 12.54 6.77 12.53 6.65 12.42C6.56 12.33 6.54 12.14 6.63 12.05C6.71 11.97 6.81 11.9 6.9 11.83C7.05 11.72 7.2 11.61 7.36 11.51C7.48 11.43 7.6 11.36 7.72 11.28C7.73 11.28 7.74 11.27 7.76 11.25C7.68 11.21 7.62 11.18 7.55 11.15C7.43 11.1 7.31 11.06 7.19 11.01C7.01 10.93 6.83 10.86 6.65 10.77C6.4 10.65 6.15 10.54 5.91 10.41C5.65 10.27 5.42 10.09 5.23 9.87001C5.01 9.62001 4.85 9.33001 4.79 9.00001C4.75 8.81001 4.74 8.60001 4.75 8.40001C4.76 8.20001 4.81 8.01001 4.85 7.80001L4.79 7.81001ZM3.19 5.75001C3.23 5.89001 3.26 6.02001 3.31 6.14001C3.39 6.31001 3.5 6.46001 3.64 6.59001C3.85 6.80001 4.11 6.94001 4.38 7.05001C4.53 7.11001 4.68 7.16001 4.84 7.20001C4.98 7.24001 5.06 7.23001 5.16 7.08001C5.25 6.94001 5.34 6.80001 5.45 6.68001C5.72 6.40001 6 6.13001 6.36 5.93001C6.58 5.81001 6.81 5.73001 7.05 5.65001C7.24 5.59001 7.44 5.59001 7.63 5.59001C8.01 5.59001 8.36 5.90001 8.4 6.26001C8.4 6.33001 8.42 6.40001 8.43 6.47001C8.43 6.59001 8.45 6.70001 8.44 6.82001C8.44 6.90001 8.42 6.98001 8.41 7.07001C8.47 7.07001 8.51 7.07001 8.54 7.07001C8.69 7.05001 8.84 7.02001 8.99 6.99001C9.05 6.99001 9.08 6.96001 9.08 6.89001C9.08 6.26001 9.08 5.63001 9.08 5.00001C9.08 4.89001 9.03 4.82001 8.92 4.80001C8.72 4.76001 8.53 4.71001 8.35 4.62001C8.2 4.55001 8.03 4.49001 7.89 4.39001C7.61 4.22001 7.35 4.02001 7.15 3.77001C6.99 3.58001 6.83 3.40001 6.68 3.21001C6.52 3.01001 6.33 2.85001 6.11 2.72001C5.95 2.63001 5.77 2.55001 5.59 2.49001C5.45 2.44001 5.3 2.41001 5.16 2.38001C5 2.35001 4.83 2.34001 4.66 2.32001C4.47 2.30001 4.29 2.28001 4.1 2.26001C3.98 2.25001 3.86 2.24001 3.75 2.23001C3.59 2.21001 3.42 2.19001 3.26 2.17001C3.13 2.15001 2.99 2.14001 2.86 2.12001C2.71 2.10001 2.56 2.07001 2.42 2.04001C2.32 2.02001 2.21 2.01001 2.11 1.98001C1.86 1.91001 1.61 1.83001 1.36 1.75001C1.28 1.73001 1.21 1.70001 1.13 1.68001C1.11 1.89001 1.13 2.08001 1.2 2.27001C1.27 2.46001 1.37 2.64001 1.55 2.77001C1.66 2.85001 1.77 2.93001 1.89 3.00001C2.03 3.07001 2.17 3.14001 2.31 3.19001C2.49 3.24001 2.69 3.26001 2.88 3.29001C3.06 3.32001 3.24 3.35001 3.42 3.37001C3.56 3.39001 3.69 3.39001 3.83 3.41001C3.91 3.42001 3.99 3.44001 4.06 3.47001C4.24 3.55001 4.25 3.79001 4.15 3.90001C4.05 4.01001 3.93 4.00001 3.8 4.00001C3.7 4.00001 3.59 4.00001 3.49 3.98001C3.35 3.97001 3.21 3.96001 3.08 3.94001C2.92 3.92001 2.75 3.89001 2.59 3.86001C2.49 3.84001 2.4 3.83001 2.3 3.81001C2.25 3.80001 2.23 3.81001 2.24 3.86001C2.24 3.93001 2.25 4.01001 2.26 4.08001C2.28 4.24001 2.33 4.39001 2.42 4.52001C2.54 4.71001 2.7 4.84001 2.9 4.94001C3.07 5.03001 3.24 5.12001 3.44 5.15001C3.56 5.17001 3.67 5.19001 3.79 5.21001C3.98 5.24001 4.16 5.26001 4.35 5.29001C4.51 5.31001 4.68 5.32001 4.84 5.36001C5.04 5.40001 5.15 5.63001 5 5.82001C4.94 5.89001 4.86 5.92001 4.77 5.92001C4.55 5.92001 4.33 5.90001 4.11 5.88001C3.9 5.86001 3.68 5.82001 3.47 5.79001C3.39 5.78001 3.32 5.77001 3.22 5.76001L3.19 5.75001ZM11.09 14.73C11.17 14.76 11.22 14.78 11.28 14.8C11.47 14.85 11.66 14.91 11.85 14.96C11.93 14.98 12.02 15.03 12.11 15C12.42 14.89 12.71 14.75 12.97 14.56C13.17 14.41 13.33 14.24 13.45 14.02C13.62 13.71 13.61 13.4 13.45 13.09C13.39 12.97 13.32 12.85 13.23 12.74C13.14 12.62 13.04 12.5 12.93 12.4C12.82 12.29 12.7 12.2 12.57 12.11C12.38 11.98 12.18 11.85 11.98 11.74C11.71 11.6 11.44 11.48 11.16 11.36C10.92 11.25 10.69 11.15 10.45 11.05C10.21 10.95 9.97 10.85 9.74 10.75C9.45 10.63 9.17 10.5 8.88 10.37C8.58 10.24 8.28 10.11 7.98 9.98001C7.8 9.90001 7.63 9.83001 7.45 9.74001C7.27 9.65001 7.09 9.57001 6.92 9.46001C6.74 9.34001 6.57 9.19001 6.41 9.04001C6.29 8.93001 6.22 8.78001 6.21 8.61001C6.19 8.35001 6.32 8.15001 6.53 8.00001C6.71 7.86001 6.91 7.78001 7.13 7.71001C7.37 7.63001 7.58 7.49001 7.7 7.25001C7.82 7.00001 7.89 6.73001 7.87 6.46001C7.87 6.29001 7.77 6.19001 7.58 6.18001C7.5 6.18001 7.43 6.18001 7.35 6.21001C7.2 6.25001 7.05 6.28001 6.9 6.34001C6.67 6.44001 6.45 6.56001 6.27 6.74001C6.13 6.87001 5.99 6.99001 5.87 7.13001C5.75 7.27001 5.66 7.43001 5.57 7.58001C5.4 7.86001 5.32 8.16001 5.3 8.48001C5.3 8.63001 5.31 8.79001 5.35 8.94001C5.45 9.31001 5.67 9.58001 5.99 9.79001C6.22 9.94001 6.46 10.06 6.71 10.16C6.96 10.26 7.2 10.38 7.45 10.48C7.73 10.6 8.02 10.72 8.31 10.84C8.56 10.94 8.8 11.05 9.05 11.16C9.25 11.24 9.44 11.32 9.64 11.41C9.81 11.48 9.98 11.56 10.15 11.63C10.27 11.68 10.4 11.73 10.53 11.79C10.72 11.87 10.91 11.95 11.1 12.04C11.37 12.16 11.63 12.27 11.9 12.4C12.15 12.52 12.37 12.69 12.55 12.9C12.72 13.11 12.83 13.33 12.77 13.61C12.72 13.83 12.6 13.99 12.42 14.12C12.32 14.19 12.21 14.26 12.1 14.32C11.96 14.4 11.82 14.47 11.68 14.53C11.5 14.6 11.32 14.66 11.12 14.72L11.09 14.73ZM10.77 10.52C10.77 10.52 10.77 10.54 10.77 10.55C10.98 10.64 11.19 10.73 11.4 10.81C11.49 10.85 11.59 10.88 11.69 10.84C11.93 10.75 12.16 10.65 12.39 10.55C12.62 10.45 12.85 10.36 13.07 10.26C13.3 10.16 13.52 10.04 13.75 9.94001C14.05 9.80001 14.31 9.61001 14.49 9.33001C14.6 9.16001 14.67 8.97001 14.68 8.76001C14.68 8.59001 14.68 8.42001 14.66 8.25001C14.63 8.07001 14.58 7.89001 14.51 7.73001C14.39 7.45001 14.21 7.21001 14 6.98001C13.83 6.80001 13.64 6.64001 13.43 6.51001C13.33 6.45001 13.22 6.38001 13.11 6.34001C12.94 6.28001 12.77 6.22001 12.6 6.19001C12.51 6.17001 12.41 6.17001 12.32 6.19001C12.18 6.22001 12.14 6.34001 12.13 6.46001C12.13 6.54001 12.15 6.63001 12.15 6.72001C12.15 6.88001 12.19 7.02001 12.26 7.16001C12.38 7.43001 12.59 7.61001 12.86 7.70001C13.09 7.78001 13.32 7.89001 13.51 8.03001C13.67 8.15001 13.77 8.31001 13.78 8.52001C13.79 8.74001 13.68 8.91001 13.54 9.07001C13.37 9.26001 13.18 9.41001 12.95 9.52001C12.77 9.61001 12.59 9.71001 12.4 9.80001C12.21 9.89001 12.01 9.97001 11.82 10.06C11.61 10.15 11.4 10.24 11.19 10.33C11.05 10.39 10.9 10.46 10.76 10.52H10.77ZM10.32 6.88001C10.32 5.88001 10.32 4.88001 10.32 3.88001C10.32 3.86001 10.32 3.83001 10.32 3.81001C10.32 3.79001 10.29 3.76001 10.27 3.76001C10.09 3.76001 9.91 3.76001 9.72 3.76001C9.7 3.76001 9.68 3.79001 9.67 3.81001C9.67 3.83001 9.67 3.86001 9.67 3.89001C9.65 5.71001 9.7 7.54001 9.65 9.36001C9.65 9.51001 9.65 9.66001 9.65 9.81001C9.65 9.93001 9.68 10.06 9.81 10.13C9.92 10.19 10.03 10.21 10.14 10.15C10.25 10.09 10.32 10.01 10.32 9.87001C10.32 8.87001 10.32 7.88001 10.32 6.88001ZM8.91 2.13001C8.93 2.74001 9.4 3.18001 9.97 3.18001C10.6 3.18001 11.06 2.73001 11.06 2.13001C11.06 1.57001 10.59 1.11001 10.05 1.08001C9.38 1.04001 8.91 1.60001 8.9 2.12001L8.91 2.13001ZM10.94 9.82001C11 9.79001 11.07 9.77001 11.13 9.74001C11.36 9.63001 11.6 9.52001 11.83 9.41001C12.15 9.26001 12.47 9.11001 12.79 8.95001C12.93 8.88001 13.03 8.76001 13.14 8.65001C13.21 8.58001 13.18 8.49001 13.1 8.45001C12.93 8.37001 12.77 8.30001 12.6 8.22001C12.4 8.13001 12.21 8.04001 12.06 7.88001C11.97 7.78001 11.88 7.68001 11.73 7.68001C11.69 7.68001 11.65 7.68001 11.62 7.67001C11.51 7.65001 11.39 7.63001 11.28 7.62001C11.17 7.60001 11.06 7.59001 10.95 7.57001V9.83001L10.94 9.82001ZM9.05 7.57001C8.96 7.58001 8.87 7.59001 8.79 7.60001C8.62 7.62001 8.46 7.65001 8.29 7.68001C8.18 7.70001 8.08 7.73001 8 7.82001C7.79 8.05001 7.51 8.19001 7.22 8.29001C7.1 8.34001 6.98 8.40001 6.86 8.47001C6.8 8.50001 6.79 8.59001 6.83 8.64001C6.92 8.73001 7 8.82001 7.11 8.89001C7.23 8.97001 7.36 9.02001 7.49 9.08001C7.65 9.16001 7.82 9.24001 7.98 9.31001C8.13 9.38001 8.28 9.44001 8.43 9.51001C8.63 9.60001 8.83 9.70001 9.04 9.79001V7.56001L9.05 7.57001ZM8.85 15.96C8.85 15.96 8.85 15.94 8.85 15.93C8.6 15.85 8.34 15.76 8.09 15.68C8.03 15.66 7.96 15.63 7.9 15.64C7.75 15.68 7.6 15.72 7.46 15.79C7.28 15.87 7.1 15.96 6.95 16.09C6.8 16.22 6.65 16.35 6.54 16.52C6.39 16.74 6.32 16.99 6.32 17.26C6.32 17.3 6.34 17.34 6.34 17.38C6.34 17.61 6.44 17.81 6.58 17.98C6.67 18.08 6.77 18.18 6.87 18.26C6.95 18.32 7.03 18.38 7.12 18.42C7.25 18.47 7.38 18.51 7.51 18.54C7.61 18.56 7.72 18.54 7.84 18.54C7.76 18.4 7.69 18.27 7.62 18.15C7.5 17.95 7.37 17.77 7.29 17.54C7.23 17.36 7.21 17.17 7.25 16.98C7.3 16.74 7.44 16.55 7.65 16.41C7.91 16.23 8.21 16.14 8.52 16.05C8.63 16.02 8.73 15.98 8.84 15.95L8.85 15.96ZM10.32 17.51C10.32 17.15 10.32 16.8 10.32 16.44C10.32 16.39 10.29 16.32 10.26 16.31C10.16 16.27 10.06 16.24 9.96 16.24C9.79 16.24 9.68 16.37 9.68 16.54C9.68 17.2 9.68 17.85 9.68 18.51C9.68 18.58 9.68 18.64 9.7 18.7C9.73 18.83 9.93 18.96 10.05 18.92C10.23 18.87 10.33 18.73 10.33 18.56C10.33 18.21 10.33 17.86 10.33 17.51H10.32ZM9.67 13.33C9.67 13.61 9.67 13.88 9.67 14.16C9.67 14.21 9.69 14.28 9.72 14.32C9.82 14.45 9.97 14.44 10.11 14.41C10.26 14.38 10.32 14.29 10.32 14.14C10.32 13.6 10.32 13.06 10.32 12.52C10.32 12.49 10.32 12.46 10.32 12.43C10.28 12.3 10.16 12.23 10 12.22C9.84 12.22 9.68 12.37 9.68 12.52C9.68 12.79 9.68 13.06 9.68 13.33H9.67ZM9.07 12.58C9.07 12.58 9.01 12.61 8.99 12.62C8.83 12.7 8.66 12.78 8.51 12.87C8.3 12.99 8.07 13.09 7.91 13.29C7.83 13.4 7.8 13.51 7.88 13.6C7.94 13.66 8 13.71 8.07 13.76C8.25 13.88 8.44 13.97 8.65 14.03C8.79 14.07 8.93 14.11 9.07 14.15V12.57V12.58ZM10.94 12.61V14.13C10.99 14.12 11.04 14.11 11.09 14.1C11.37 14.03 11.63 13.93 11.88 13.78C11.96 13.73 12.03 13.67 12.09 13.61C12.17 13.54 12.19 13.42 12.14 13.36C12.09 13.29 12.03 13.21 11.96 13.15C11.66 12.9 11.31 12.74 10.94 12.6V12.61Z" fill="black"/>
+                              </svg>
+                            </div>
+
+                          {% elsif best_for == 'Sports' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M19.54 10.88V12.27C19.47 12.61 19.43 12.96 19.33 13.29C18.99 14.37 18.4 15.29 17.58 16.07C17.2 16.43 16.77 16.73 16.3 16.96C15.8 17.21 15.27 17.39 14.71 17.49C14.49 17.53 14.3 17.61 14.12 17.75C13.89 17.94 13.66 18.13 13.4 18.28C13.01 18.51 12.62 18.72 12.21 18.9C11.19 19.33 10.13 19.52 9.03 19.51C8.95 19.51 8.87 19.53 8.79 19.53H7.59C7.52 19.53 7.44 19.51 7.37 19.51C7.19 19.49 7.01 19.49 6.83 19.46C6.22 19.37 5.63 19.21 5.05 18.99C4.54 18.8 4.04 18.57 3.58 18.26C3.18 17.98 2.78 17.69 2.39 17.39C2.16 17.22 1.94 17.04 1.75 16.83C1.48 16.52 1.48 16.05 1.71 15.72C1.81 15.58 1.93 15.45 2.06 15.33C2.33 15.07 2.61 14.8 2.9 14.56C3.24 14.28 3.6 14.02 3.96 13.77C4.09 13.68 4.23 13.6 4.38 13.51C4.33 13.47 4.29 13.43 4.25 13.41C3.84 13.17 3.44 12.94 3.08 12.61C2.75 12.31 2.41 12.01 2.12 11.67C1.49 10.95 1.09 10.11 0.830004 9.19C0.700004 8.73 0.640004 8.27 0.590004 7.8C0.540004 7.35 0.570004 6.92 0.610004 6.48C0.670004 5.89 0.840004 5.32 1.06 4.77C1.38 3.98 1.82 3.27 2.42 2.67C2.66 2.43 2.92 2.2 3.17 1.96C3.43 1.71 3.73 1.53 4.04 1.36C5.06 0.799998 6.16 0.599998 7.31 0.559998C7.44 0.559998 7.57 0.579998 7.7 0.599998C8.03 0.639998 8.37 0.649998 8.7 0.729998C9.68 0.949998 10.59 1.34 11.34 2.04C11.6 2.28 11.86 2.5 12.11 2.75C12.67 3.3 13.08 3.96 13.35 4.7C13.42 4.87 13.49 5.05 13.55 5.22C13.6 5.35 13.69 5.39 13.82 5.4C14.15 5.43 14.49 5.45 14.82 5.52C15.93 5.75 16.88 6.27 17.69 7.06C17.86 7.23 18.01 7.42 18.17 7.61C18.75 8.28 19.15 9.05 19.35 9.91C19.43 10.23 19.47 10.56 19.53 10.88H19.54ZM14.71 16.39C14.75 16.2 14.68 16.09 14.57 16C14.41 15.87 14.25 15.73 14.09 15.58C13.84 15.35 13.61 15.11 13.36 14.9C12.84 14.48 12.28 14.12 11.68 13.84C10.72 13.38 9.7 13.19 8.65 13.15C8.47 13.15 8.29 13.18 8.11 13.18C7.64 13.18 7.18 13.26 6.73 13.37C5.92 13.56 5.16 13.89 4.44 14.32C3.65 14.79 3 15.43 2.37 16.08C2.31 16.14 2.29 16.22 2.24 16.3C2.31 16.38 2.36 16.46 2.42 16.51C2.64 16.69 2.87 16.86 3.1 17.04C3.72 17.54 4.41 17.93 5.12 18.26C5.96 18.65 6.88 18.81 7.8 18.85C8.49 18.88 9.18 18.88 9.87 18.79C10.33 18.73 10.78 18.63 11.22 18.51C11.64 18.39 12.03 18.2 12.41 17.99C12.63 17.86 12.87 17.76 13.08 17.61C13.54 17.3 13.98 16.97 14.43 16.64C14.54 16.56 14.63 16.47 14.72 16.4L14.71 16.39ZM5.73 8.26C6.06 7.94 6.35 7.65 6.65 7.35C6.49 7.1 2.9 3.46 2.73 3.38C1.82 4.33 1.3 6.08 1.37 6.55C3.04 6.57 4.5 7.17 5.72 8.25L5.73 8.26ZM6.44 1.34C5.23 1.48 4.23 2.02 3.33 2.79C4.63 4.11 5.93 5.42 7.19 6.7C7.51 6.39 7.82 6.1 8.13 5.81C8.05 5.7 7.96 5.59 7.88 5.49C7.53 5.06 7.27 4.57 7.05 4.06C6.72 3.29 6.53 2.5 6.49 1.66C6.49 1.56 6.46 1.47 6.44 1.35V1.34ZM1.27 7.29C1.27 8.28 1.5 9.21 1.92 10.09C2.13 10.53 2.4 10.96 2.76 11.31C2.82 11.25 2.87 11.21 2.91 11.17C3.65 10.41 4.4 9.66 5.14 8.9C5.17 8.87 5.2 8.83 5.23 8.79C4.18 7.77 2.12 7.17 1.26 7.3L1.27 7.29ZM7.16 1.28C7.18 2.18 7.34 3.04 7.71 3.84C7.96 4.37 8.23 4.88 8.65 5.31C8.71 5.25 8.75 5.21 8.8 5.17C9.19 4.77 9.57 4.37 9.96 3.98C10.3 3.63 10.65 3.29 10.99 2.95C11.04 2.9 11.08 2.85 11.13 2.79C10.49 2.29 9.85 1.84 9.08 1.59C8.46 1.39 7.82 1.3 7.15 1.29L7.16 1.28ZM11.28 6.61C10.49 6.96 9.91 7.53 9.37 8.17C9.4 8.19 9.42 8.21 9.44 8.22C9.63 8.29 9.74 8.43 9.81 8.62C9.94 8.96 10.08 9.3 10.22 9.64C10.27 9.78 10.34 9.91 10.48 9.97C10.84 10.14 11.21 10.31 11.57 10.47C11.67 10.42 11.74 10.38 11.81 10.34C12.11 10.13 12.41 9.92 12.71 9.71C12.83 9.62 12.96 9.55 13.08 9.46C13.14 9.41 13.2 9.33 13.2 9.26C13.21 8.91 13.2 8.56 13.2 8.2C13.15 8.15 13.1 8.1 13.04 8.06C12.62 7.75 12.19 7.43 11.77 7.12C11.58 6.98 11.34 6.88 11.29 6.6L11.28 6.61ZM18.85 11.79C18.55 11.86 18.47 11.85 18.24 11.69C17.77 11.38 17.3 11.06 16.83 10.74C16.71 10.66 16.61 10.65 16.48 10.72C16.34 10.79 16.19 10.87 16.04 10.92C15.83 11 15.72 11.14 15.66 11.35C15.54 11.79 15.41 12.22 15.29 12.66C15.26 12.78 15.25 12.91 15.23 13.02C15.37 13.17 15.48 13.31 15.6 13.43C15.79 13.62 16 13.73 16.3 13.72C16.83 13.7 17.36 13.72 17.89 13.72C18.02 13.72 18.14 13.75 18.23 13.85C18.25 13.87 18.28 13.88 18.31 13.9C18.64 13.23 18.8 12.54 18.85 11.8V11.79ZM7.21 12.49C7.04 11.29 6.55 10.26 5.8 9.33C4.96 10.18 4.14 11.02 3.29 11.88C3.53 12.05 3.75 12.23 3.98 12.38C4.16 12.5 4.37 12.58 4.54 12.71C4.73 12.86 4.94 12.93 5.15 13C5.3 13.05 5.44 13.02 5.59 12.97C5.97 12.84 6.35 12.71 6.74 12.59C6.88 12.55 7.03 12.52 7.2 12.48L7.21 12.49ZM15.42 10.43C15.67 10.32 15.91 10.23 16.12 10.11C16.27 10.03 16.41 9.92 16.46 9.74C16.55 9.39 16.64 9.04 16.76 8.7C16.89 8.33 16.87 7.91 17.2 7.62C16.77 7.15 16.13 6.7 15.8 6.63C15.74 6.73 15.7 6.84 15.62 6.91C15.37 7.11 15.11 7.3 14.85 7.49C14.59 7.68 14.33 7.87 14.06 8.05C13.93 8.14 13.88 8.25 13.89 8.4C13.89 8.63 13.89 8.86 13.89 9.09C13.89 9.27 13.95 9.39 14.1 9.49C14.38 9.68 14.65 9.89 14.93 10.09C15.09 10.2 15.25 10.3 15.42 10.42V10.43ZM14.44 12.78C14.48 12.73 14.55 12.68 14.56 12.62C14.72 12.1 14.87 11.57 15.03 11.03C14.52 10.69 14.04 10.36 13.54 10.03C13.05 10.36 12.57 10.68 12.09 11.01C12.1 11.09 12.11 11.14 12.12 11.2C12.24 11.65 12.37 12.1 12.5 12.55C12.53 12.64 12.59 12.71 12.64 12.78H14.44ZM10.04 6.51C10.89 5.93 11.82 5.55 12.87 5.43C12.59 4.66 12.26 3.96 11.69 3.35C11.62 3.41 11.56 3.46 11.51 3.51C10.81 4.22 10.12 4.92 9.42 5.63C9.38 5.67 9.33 5.72 9.29 5.76C9.26 5.79 9.23 5.83 9.19 5.88C9.48 6.09 9.75 6.29 10.03 6.5L10.04 6.51ZM10.19 10.67C10.12 10.73 10.04 10.77 9.97 10.84C9.6 11.21 9.24 11.59 8.87 11.96C8.78 12.06 8.67 12.15 8.52 12.16C8.44 12.16 8.36 12.16 8.25 12.14C8.27 12.24 8.29 12.32 8.31 12.4C8.95 12.43 9.56 12.47 10.16 12.58C10.76 12.7 11.31 12.96 11.93 13.15C11.74 12.5 11.57 11.89 11.4 11.28C11.37 11.17 11.3 11.11 11.21 11.07C10.88 10.94 10.56 10.8 10.19 10.65V10.67ZM15.35 15.69C15.39 16.04 15.42 16.29 15.45 16.55C16.46 16.21 17.22 15.52 17.86 14.65C17.79 14.57 17.74 14.49 17.69 14.42C17.16 14.42 16.65 14.42 16.14 14.42C16.03 14.42 15.97 14.47 15.92 14.57C15.72 14.97 15.52 15.37 15.35 15.68V15.69ZM18.81 11C18.81 10.91 18.82 10.82 18.81 10.74C18.69 9.96 18.44 9.22 17.99 8.56C17.94 8.48 17.86 8.41 17.81 8.36C17.64 8.34 17.57 8.42 17.54 8.54C17.48 8.76 17.41 8.97 17.35 9.18C17.27 9.48 17.19 9.78 17.1 10.09C17.61 10.42 18.1 10.75 18.59 11.07C18.67 11.04 18.72 11.02 18.81 10.99V11ZM7.54 10.87C7.63 10.12 7.95 9.47 8.1 8.84C7.79 8.51 7.51 8.22 7.22 7.92C6.92 8.23 6.61 8.53 6.29 8.85C6.87 9.43 7.19 10.13 7.54 10.87ZM13.55 7.56C14 7.15 14.54 6.86 14.98 6.48C14.93 6.29 14.93 6.3 14.79 6.26C14.23 6.1 13.65 6.09 13.07 6.12C12.81 6.13 12.55 6.21 12.28 6.26C12.19 6.28 12.1 6.32 12.08 6.47C12.44 6.83 12.94 7.04 13.32 7.4C13.38 7.46 13.45 7.49 13.55 7.55V7.56ZM12.6 13.49C13.4 13.97 14.1 14.56 14.79 15.21C14.97 14.84 15.15 14.49 15.32 14.14C15.14 13.96 14.98 13.79 14.82 13.64C14.7 13.53 14.56 13.47 14.39 13.49C14.27 13.5 14.15 13.49 14.03 13.49C13.55 13.49 13.07 13.49 12.6 13.49ZM8.94 8.8C8.48 9.55 8.28 10.37 8.22 11.24C8.28 11.29 8.32 11.33 8.38 11.38C8.44 11.34 8.5 11.32 8.54 11.28C8.87 10.95 9.2 10.62 9.53 10.29C9.6 10.22 9.64 10.12 9.6 10.02C9.47 9.69 9.34 9.36 9.2 9.03C9.16 8.92 9.08 8.84 8.93 8.81L8.94 8.8ZM9.43 6.97C9.17 6.77 8.94 6.59 8.74 6.44C8.42 6.76 8.11 7.06 7.8 7.37C8.03 7.58 8.28 7.82 8.54 8.06C8.82 7.72 9.12 7.35 9.44 6.97H9.43Z" fill="black"/>
+                              </svg>
+                            </div>
+
+                          {% elsif best_for == 'Travel' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="15"
+                                height="17"
+                                viewBox="0 0 15 17"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M12.6 7.84002C12.69 7.80002 12.78 7.75002 12.88 7.72002C12.99 7.68002 13.08 7.72002 13.17 7.77002C13.33 7.87002 13.44 8.02002 13.56 8.16002C13.61 8.22002 13.66 8.28002 13.7 8.34002C13.8 8.48002 13.82 8.64002 13.76 8.81002C13.72 8.92002 13.66 9.01002 13.57 9.10002C13.46 9.21002 13.36 9.33002 13.26 9.45002C13.21 9.51002 13.23 9.58002 13.26 9.64002C13.3 9.74002 13.34 9.85002 13.38 9.95002C13.41 10.02 13.44 10.1 13.47 10.18C13.54 10.12 13.6 10.06 13.66 10C13.81 9.84002 14.03 9.82002 14.2 9.91002C14.27 9.95002 14.33 10.01 14.39 10.07C14.47 10.15 14.54 10.23 14.61 10.32C14.71 10.42 14.79 10.53 14.82 10.67C14.86 10.86 14.8 11.02 14.68 11.17C14.6 11.27 14.51 11.36 14.42 11.45C14.32 11.56 14.22 11.68 14.12 11.79C14.08 11.83 14.1 11.88 14.12 11.92C14.17 12.06 14.23 12.2 14.28 12.34C14.33 12.48 14.39 12.61 14.43 12.75C14.47 12.86 14.49 12.98 14.5 13.1C14.51 13.21 14.51 13.33 14.5 13.44C14.49 13.55 14.46 13.67 14.41 13.78C14.37 13.89 14.3 14 14.24 14.1C14.19 14.18 14.12 14.25 14.06 14.32C13.96 14.43 13.86 14.54 13.76 14.65C13.67 14.75 13.58 14.85 13.48 14.94C13.34 15.06 13.19 15.14 13 15.12C12.83 15.1 12.68 15.03 12.57 14.88C12.47 14.75 12.37 14.61 12.27 14.47C12.15 14.3 12.03 14.12 11.91 13.94C11.83 13.82 11.74 13.7 11.66 13.58C11.59 13.47 11.52 13.36 11.45 13.26C11.36 13.13 11.27 13 11.18 12.87C11.08 12.72 10.98 12.57 10.87 12.41C10.79 12.29 10.71 12.17 10.63 12.05C10.57 11.96 10.51 11.87 10.45 11.79C10.38 11.69 10.3 11.59 10.23 11.48C10.12 11.31 10.01 11.15 9.9 10.98C9.79 10.82 9.68 10.66 9.57 10.5C9.49 10.39 9.43 10.27 9.35 10.16C9.24 10 9.13 9.84002 9.02 9.69002C8.99 9.65002 8.96 9.61002 8.93 9.56002C8.89 9.50002 8.87 9.50002 8.82 9.55002C8.78 9.59002 8.73 9.64002 8.69 9.68002C8.57 9.79002 8.44 9.90002 8.32 10.02C8.24 10.09 8.17 10.17 8.09 10.24C7.97 10.35 7.84 10.47 7.72 10.58C7.63 10.66 7.55 10.75 7.46 10.83C7.35 10.93 7.24 11.03 7.13 11.14C7.07 11.2 7.02 11.26 6.96 11.32C6.89 11.38 6.82 11.45 6.76 11.51C6.67 11.59 6.59 11.67 6.5 11.75C6.37 11.87 6.25 11.98 6.12 12.1C6.04 12.18 5.96 12.26 5.88 12.34C5.76 12.45 5.65 12.56 5.53 12.66C5.5 12.69 5.5 12.71 5.52 12.74C5.64 13.04 5.77 13.33 5.89 13.63C5.98 13.86 6.08 14.08 6.17 14.31C6.26 14.54 6.37 14.75 6.42 14.99C6.45 15.14 6.45 15.29 6.42 15.45C6.38 15.64 6.29 15.81 6.17 15.96C6.09 16.06 6 16.16 5.9 16.25C5.83 16.32 5.76 16.38 5.68 16.43C5.62 16.48 5.46 16.47 5.38 16.43C5.26 16.36 5.19 16.25 5.12 16.15C5.03 16.02 4.94 15.9 4.85 15.77C4.77 15.65 4.7 15.53 4.62 15.42C4.48 15.21 4.33 15.01 4.19 14.8C4.12 14.71 4.06 14.61 4 14.52C3.93 14.42 3.87 14.31 3.8 14.21C3.76 14.15 3.71 14.09 3.67 14.03C3.61 13.97 3.55 13.96 3.47 14C3.37 14.05 3.27 14.11 3.15 14.13C3 14.16 2.85 14.16 2.71 14.1C2.47 13.98 2.31 13.79 2.24 13.53C2.17 13.26 2.22 13.01 2.35 12.77C2.37 12.72 2.39 12.68 2.41 12.62C2.34 12.56 2.27 12.51 2.2 12.45C2.1 12.36 1.99 12.28 1.89 12.19C1.83 12.14 1.76 12.09 1.7 12.03C1.62 11.97 1.55 11.9 1.47 11.84C1.39 11.77 1.3 11.71 1.22 11.64C1.09 11.53 0.960003 11.42 0.830003 11.31C0.740003 11.23 0.640003 11.16 0.550003 11.08C0.440003 10.99 0.330003 10.9 0.230003 10.8C0.100003 10.67 0.0800032 10.43 0.180003 10.27C0.250003 10.17 0.330003 10.07 0.410003 9.97002C0.500003 9.87002 0.590003 9.78002 0.680003 9.70002C0.790003 9.60002 0.920003 9.55002 1.06 9.52002C1.13 9.50002 1.2 9.48002 1.26 9.49002C1.43 9.52002 1.61 9.55002 1.76 9.65002C1.84 9.70002 1.93 9.73002 2.02 9.77002C2.25 9.89002 2.48 10 2.71 10.12C2.85 10.19 3 10.25 3.14 10.33C3.25 10.38 3.35 10.45 3.45 10.5C3.49 10.52 3.54 10.54 3.58 10.49C3.64 10.4 3.71 10.32 3.78 10.24C3.84 10.16 3.9 10.08 3.95 10C4 9.92002 4.05 9.85002 4.11 9.77002C4.16 9.71002 4.21 9.65002 4.27 9.61002C4.4 9.54002 4.49 9.60002 4.55 9.71002C4.6 9.80002 4.55 9.96002 4.49 10.02C4.43 10.09 4.38 10.17 4.33 10.24C4.25 10.35 4.18 10.45 4.1 10.56C4.04 10.65 3.98 10.74 3.92 10.83C3.84 10.96 3.76 11.08 3.68 11.21C3.59 11.35 3.51 11.49 3.43 11.64C3.32 11.84 3.2 12.04 3.1 12.25C3 12.45 2.9 12.66 2.81 12.87C2.76 12.97 2.72 13.08 2.68 13.19C2.62 13.4 2.71 13.64 2.98 13.66C3.04 13.66 3.11 13.65 3.17 13.62C3.29 13.56 3.41 13.49 3.53 13.43C3.61 13.39 3.69 13.34 3.77 13.29C3.92 13.2 4.07 13.1 4.22 13C4.39 12.89 4.55 12.76 4.72 12.65C4.82 12.58 4.92 12.51 5.02 12.43C5.13 12.34 5.25 12.25 5.36 12.16C5.47 12.07 5.57 11.98 5.68 11.89C5.78 11.8 5.89 11.71 5.98 11.62C6.11 11.49 6.24 11.36 6.38 11.23C6.49 11.12 6.61 11.02 6.73 10.91C6.9 10.75 7.06 10.58 7.23 10.42C7.35 10.3 7.49 10.19 7.61 10.07C7.67 10.01 7.72 9.95002 7.78 9.89002C7.86 9.81002 7.95 9.74002 8.04 9.66002C8.1 9.60002 8.15 9.54002 8.21 9.48002C8.28 9.41002 8.36 9.34002 8.44 9.27002C8.51 9.21002 8.57 9.14002 8.64 9.08002C8.72 9.00002 8.8 8.93002 8.88 8.86002C8.94 8.80002 9 8.74002 9.06 8.68002C9.14 8.61002 9.21 8.54002 9.29 8.46002C9.36 8.39002 9.42 8.33002 9.49 8.26002C9.56 8.19002 9.64 8.12002 9.72 8.05002C9.79 7.98002 9.85 7.92002 9.92 7.85002C9.95 7.82002 9.99 7.80002 10.02 7.77002C10.17 7.63002 10.31 7.49002 10.46 7.35002C10.57 7.24002 10.69 7.14002 10.8 7.04002C10.9 6.94002 11 6.83002 11.1 6.73002C11.18 6.65002 11.27 6.59002 11.35 6.51002C11.43 6.44002 11.5 6.36002 11.57 6.29002C11.64 6.22002 11.72 6.16002 11.79 6.09002C11.88 6.00002 11.96 5.92002 12.05 5.83002C12.17 5.72002 12.29 5.62002 12.4 5.50002C12.48 5.42002 12.55 5.39002 12.66 5.41002C12.75 5.43002 12.84 5.58002 12.81 5.67002C12.79 5.72002 12.77 5.78002 12.74 5.82002C12.68 5.89002 12.6 5.95002 12.53 6.02002C12.47 6.08002 12.41 6.14002 12.35 6.20002C12.3 6.25002 12.24 6.30002 12.18 6.36002C12.04 6.49002 12.05 6.50002 12.11 6.65002C12.18 6.83002 12.24 7.01002 12.31 7.19002C12.38 7.39002 12.46 7.59002 12.54 7.79002C12.54 7.80002 12.55 7.82002 12.56 7.83002L12.6 7.84002ZM14.11 13.28C14.11 13.28 14.11 13.28 14.1 13.28C14.1 13.27 14.1 13.25 14.1 13.24C14.06 13.07 14.03 12.9 13.96 12.74C13.85 12.47 13.75 12.19 13.65 11.91C13.58 11.71 13.51 11.51 13.44 11.31C13.39 11.18 13.33 11.05 13.28 10.92C13.21 10.73 13.14 10.53 13.07 10.33C13.02 10.19 12.96 10.05 12.91 9.91002C12.82 9.68002 12.74 9.44002 12.65 9.21002C12.58 9.01002 12.5 8.82002 12.42 8.62002C12.34 8.40002 12.26 8.18002 12.17 7.97002C12.09 7.76002 12.01 7.55002 11.93 7.34002C11.88 7.20002 11.83 7.05002 11.77 6.91002C11.77 6.89002 11.75 6.87002 11.74 6.87002C11.72 6.87002 11.7 6.88002 11.69 6.90002C11.63 6.96002 11.57 7.02002 11.5 7.08002C11.42 7.16002 11.33 7.24002 11.25 7.32002C11.2 7.37002 11.15 7.43002 11.09 7.48002C10.96 7.60002 10.83 7.72002 10.7 7.85002C10.59 7.96002 10.48 8.07002 10.36 8.18002C10.23 8.30002 10.1 8.42002 9.97 8.54002C9.85 8.65002 9.74 8.77002 9.62 8.89002C9.52 8.99002 9.42 9.09002 9.31 9.18002C9.28 9.21002 9.28 9.23002 9.31 9.26002C9.36 9.34002 9.41 9.41002 9.46 9.49002C9.55 9.62002 9.64 9.76002 9.73 9.89002C9.87 10.09 10 10.29 10.14 10.48C10.23 10.6 10.31 10.73 10.39 10.86C10.45 10.94 10.5 11.03 10.56 11.11C10.64 11.22 10.72 11.34 10.8 11.45C10.87 11.55 10.94 11.65 11 11.75C11.07 11.85 11.13 11.96 11.2 12.06C11.25 12.13 11.3 12.2 11.35 12.28C11.42 12.39 11.49 12.5 11.56 12.6C11.66 12.75 11.76 12.89 11.86 13.04C11.99 13.23 12.12 13.42 12.25 13.61C12.33 13.73 12.42 13.85 12.5 13.97C12.58 14.08 12.65 14.2 12.73 14.32C12.78 14.39 12.82 14.45 12.87 14.52C12.97 14.68 13.13 14.67 13.25 14.55C13.4 14.4 13.53 14.24 13.67 14.08C13.79 13.94 13.94 13.81 14.01 13.64C14.05 13.53 14.08 13.41 14.11 13.3V13.28ZM5.17 12.99C5.17 12.99 5.15 12.99 5.14 12.99C4.97 13.11 4.79 13.23 4.62 13.34C4.48 13.43 4.35 13.53 4.21 13.62C4.17 13.65 4.13 13.68 4.09 13.7C4.05 13.72 4.06 13.74 4.09 13.77C4.19 13.91 4.29 14.06 4.39 14.2C4.5 14.36 4.6 14.52 4.71 14.68C4.79 14.79 4.87 14.91 4.94 15.02C5.06 15.19 5.18 15.37 5.3 15.54C5.35 15.62 5.4 15.7 5.45 15.77C5.5 15.84 5.55 15.9 5.61 15.97C5.65 15.92 5.68 15.87 5.72 15.83C5.83 15.7 5.95 15.59 6 15.42C6.02 15.34 6.05 15.26 6.04 15.18C6.04 15.02 5.95 14.87 5.89 14.72C5.85 14.6 5.79 14.5 5.74 14.38C5.69 14.26 5.64 14.13 5.59 14.01C5.53 13.87 5.47 13.73 5.41 13.59C5.32 13.38 5.24 13.18 5.16 12.97L5.17 12.99ZM1.29 10.01C1.21 10.01 1.13 10.01 1.07 10.07C0.930003 10.2 0.790003 10.34 0.650003 10.47C0.630003 10.49 0.620003 10.5 0.650003 10.53C0.740003 10.6 0.820003 10.67 0.900003 10.74C1.04 10.86 1.18 10.98 1.32 11.09C1.45 11.2 1.58 11.3 1.7 11.41C1.81 11.5 1.91 11.58 2.02 11.67C2.1 11.74 2.19 11.8 2.27 11.87C2.34 11.93 2.41 11.99 2.49 12.06C2.54 12.1 2.58 12.14 2.63 12.18C2.64 12.18 2.68 12.18 2.68 12.18C2.73 12.1 2.77 12.03 2.81 11.95C2.92 11.74 3.04 11.53 3.15 11.33C3.2 11.23 3.26 11.13 3.31 11.04C3.31 11.02 3.31 10.99 3.31 10.98C3.28 10.95 3.24 10.94 3.2 10.92C3.01 10.83 2.83 10.73 2.64 10.64C2.58 10.61 2.52 10.59 2.46 10.55C2.34 10.49 2.22 10.42 2.1 10.36C1.95 10.29 1.79 10.22 1.64 10.14C1.53 10.08 1.42 10.01 1.29 10.02V10.01ZM13.91 11.32C13.91 11.32 13.94 11.29 13.95 11.29C14.07 11.16 14.19 11.03 14.31 10.9C14.41 10.8 14.41 10.79 14.31 10.7C14.31 10.7 14.3 10.69 14.29 10.68C14.2 10.58 14.11 10.47 14.01 10.37C13.93 10.44 13.87 10.52 13.79 10.58C13.7 10.65 13.67 10.74 13.72 10.84C13.76 10.92 13.78 11 13.81 11.08C13.84 11.16 13.87 11.24 13.91 11.33V11.32ZM13.04 9.02002C13.13 8.92002 13.21 8.83002 13.28 8.74002C13.33 8.69002 13.34 8.61002 13.29 8.56002C13.21 8.46002 13.12 8.36002 13.03 8.27002C12.93 8.16002 12.93 8.16002 12.86 8.29002C12.82 8.36002 12.81 8.43002 12.84 8.51002C12.89 8.65002 12.95 8.79002 13 8.94002C13.01 8.97002 13.02 8.99002 13.03 9.03002L13.04 9.02002Z" fill="black"/>
+                                <path d="M6.47 6.83001C6.4 6.77001 6.32 6.71001 6.25 6.65001C6.18 6.59001 6.11 6.53001 6.04 6.47001C5.95 6.40001 5.86 6.33001 5.78 6.26001C5.71 6.20001 5.64 6.13001 5.56 6.07001C5.47 6.00001 5.39 5.93001 5.3 5.86001C5.2 5.77001 5.09 5.69001 4.99 5.60001C4.84 5.48001 4.69 5.36001 4.54 5.24001C4.43 5.15001 4.32 5.06001 4.2 4.96001C4.02 4.81001 3.84 4.65001 3.66 4.50001C3.56 4.42001 3.46 4.35001 3.37 4.27001C3.3 4.21001 3.23 4.15001 3.16 4.09001C3.08 4.02001 3 3.96001 2.92 3.90001C2.81 3.81001 2.71 3.72001 2.6 3.64001C2.47 3.54001 2.35 3.44001 2.22 3.33001C2.12 3.25001 2.03 3.17001 1.93 3.09001C1.86 3.03001 1.78 2.98001 1.71 2.91001C1.52 2.73001 1.38 2.51001 1.41 2.23001C1.43 2.07001 1.48 1.91001 1.6 1.79001C1.75 1.62001 1.89 1.45001 2.04 1.29001C2.16 1.16001 2.27 1.03001 2.41 0.92001C2.53 0.82001 2.68 0.73001 2.85 0.71001C2.95 0.70001 3.05 0.67001 3.15 0.68001C3.32 0.69001 3.49 0.72001 3.65 0.81001C3.7 0.84001 3.76 0.86001 3.82 0.88001C3.94 0.93001 4.06 0.98001 4.18 1.04001C4.25 1.07001 4.32 1.11001 4.4 1.14001C4.53 1.20001 4.58 1.19001 4.68 1.08001C4.79 0.95001 4.91 0.82001 5.03 0.69001C5.09 0.62001 5.17 0.56001 5.24 0.50001C5.26 0.48001 5.29 0.47001 5.32 0.46001C5.5 0.41001 5.73 0.49001 5.85 0.64001C5.91 0.72001 5.98 0.78001 6.04 0.86001C6.11 0.95001 6.2 1.04001 6.25 1.14001C6.32 1.29001 6.32 1.45001 6.25 1.61001C6.2 1.70001 6.14 1.79001 6.07 1.86001C6.04 1.89001 6.06 1.91001 6.09 1.92001C6.17 1.95001 6.24 1.98001 6.32 2.01001C6.38 2.04001 6.44 2.06001 6.5 2.09001C6.57 2.12001 6.62 2.10001 6.68 2.05001C6.78 1.93001 6.89 1.81001 7 1.70001C7.08 1.62001 7.16 1.55001 7.25 1.49001C7.32 1.44001 7.42 1.44001 7.5 1.46001C7.63 1.50001 7.74 1.57001 7.83 1.68001C7.92 1.79001 8.03 1.89001 8.12 2.01001C8.23 2.15001 8.3 2.31001 8.25 2.49001C8.21 2.61001 8.15 2.71001 8.1 2.83001C8.22 2.89001 8.36 2.96001 8.49 3.02001C8.58 3.06001 8.67 3.09001 8.76 3.13001C8.88 3.19001 9 3.25001 9.12 3.30001C9.17 3.32001 9.22 3.33001 9.26 3.29001C9.34 3.20001 9.42 3.11001 9.49 3.01001C9.55 2.94001 9.61 2.86001 9.68 2.79001C9.74 2.72001 9.79 2.65001 9.85 2.58001C9.91 2.51001 9.97 2.45001 10.03 2.39001C10.11 2.30001 10.18 2.21001 10.27 2.13001C10.43 1.98001 10.6 1.84001 10.77 1.70001C10.85 1.64001 10.94 1.59001 11.02 1.53001C11.13 1.46001 11.24 1.39001 11.35 1.33001C11.42 1.29001 11.5 1.26001 11.58 1.23001C11.74 1.17001 11.9 1.10001 12.06 1.04001C12.19 1.00001 12.32 0.96001 12.45 0.94001C12.67 0.90001 12.88 0.86001 13.1 0.83001C13.23 0.81001 13.37 0.80001 13.51 0.81001C13.66 0.83001 13.81 0.84001 13.93 0.95001C13.98 0.99001 14.04 1.03001 14.09 1.08001C14.2 1.19001 14.28 1.32001 14.33 1.47001C14.39 1.63001 14.41 1.80001 14.39 1.98001C14.39 2.05001 14.39 2.13001 14.38 2.20001C14.37 2.35001 14.35 2.50001 14.33 2.65001C14.3 2.82001 14.28 2.99001 14.24 3.16001C14.18 3.42001 14.11 3.68001 14.01 3.94001C13.95 4.10001 13.89 4.26001 13.81 4.41001C13.75 4.53001 13.68 4.65001 13.61 4.77001C13.58 4.83001 13.54 4.88001 13.5 4.94001C13.43 5.04001 13.35 5.03001 13.28 5.02001C13.2 5.00001 13.12 4.91001 13.13 4.83001C13.13 4.75001 13.15 4.67001 13.19 4.60001C13.31 4.34001 13.46 4.09001 13.57 3.83001C13.66 3.61001 13.74 3.37001 13.79 3.13001C13.84 2.91001 13.87 2.69001 13.91 2.46001C13.94 2.28001 13.96 2.09001 13.96 1.90001C13.96 1.68001 13.89 1.51001 13.69 1.38001C13.54 1.29001 13.38 1.32001 13.22 1.32001C13.17 1.32001 13.11 1.33001 13.06 1.34001C12.97 1.35001 12.88 1.37001 12.79 1.39001C12.65 1.42001 12.5 1.45001 12.36 1.48001C12.21 1.52001 12.07 1.57001 11.93 1.62001C11.82 1.66001 11.71 1.73001 11.61 1.78001C11.55 1.81001 11.5 1.83001 11.44 1.86001C11.34 1.92001 11.24 1.99001 11.14 2.06001C11.04 2.13001 10.95 2.19001 10.85 2.27001C10.77 2.33001 10.69 2.40001 10.62 2.47001C10.56 2.53001 10.49 2.59001 10.43 2.65001C10.35 2.74001 10.26 2.82001 10.18 2.92001C10.09 3.03001 10 3.14001 9.92 3.25001C9.87 3.32001 9.81 3.39001 9.76 3.46001C9.69 3.55001 9.61 3.65001 9.54 3.74001C9.43 3.88001 9.32 4.02001 9.21 4.16001C9.16 4.22001 9.1 4.29001 9.05 4.35001C8.95 4.48001 8.85 4.61001 8.75 4.73001C8.7 4.79001 8.65 4.85001 8.6 4.90001C8.57 4.93001 8.55 4.97001 8.52 5.00001C8.41 5.14001 8.31 5.27001 8.2 5.41001C8.15 5.47001 8.1 5.53001 8.05 5.59001C8 5.65001 7.96 5.72001 7.91 5.78001C7.85 5.85001 7.79 5.92001 7.73 6.00001C7.62 6.13001 7.52 6.27001 7.41 6.40001C7.32 6.51001 7.24 6.63001 7.15 6.74001C7.09 6.82001 7.02 6.90001 6.95 6.98001C6.9 7.04001 6.85 7.11001 6.8 7.18001C6.75 7.24001 6.7 7.30001 6.65 7.36001C6.55 7.48001 6.45 7.61001 6.36 7.73001C6.31 7.80001 6.25 7.86001 6.2 7.93001C6.15 7.99001 6.11 8.06001 6.06 8.13001C6.01 8.19001 5.96 8.25001 5.91 8.31001C5.84 8.39001 5.78 8.48001 5.71 8.56001C5.66 8.63001 5.61 8.69001 5.56 8.76001C5.51 8.83001 5.46 8.91001 5.4 8.97001C5.31 9.06001 5.27 9.19001 5.13 9.22001C5.11 9.22001 5.08 9.26001 5.07 9.25001C5.02 9.22001 4.96 9.20001 4.92 9.16001C4.84 9.07001 4.83 8.97001 4.91 8.87001C5.02 8.72001 5.13 8.58001 5.24 8.43001C5.37 8.26001 5.49 8.10001 5.62 7.93001C5.7 7.83001 5.79 7.72001 5.87 7.62001C5.95 7.51001 6.04 7.40001 6.12 7.29001C6.19 7.20001 6.26 7.12001 6.33 7.03001C6.39 6.96001 6.44 6.88001 6.5 6.80001L6.47 6.83001ZM8.89 3.76001C8.89 3.76001 8.87 3.73001 8.86 3.73001C8.74 3.67001 8.63 3.61001 8.51 3.56001C8.35 3.49001 8.19 3.42001 8.04 3.35001C7.88 3.28001 7.73 3.21001 7.57 3.13001C7.43 3.06001 7.28 3.00001 7.14 2.93001C6.98 2.85001 6.82 2.78001 6.66 2.70001C6.56 2.65001 6.46 2.61001 6.36 2.56001C6.26 2.52001 6.17 2.47001 6.07 2.43001C5.96 2.38001 5.86 2.33001 5.75 2.29001C5.62 2.23001 5.5 2.18001 5.37 2.12001C5.32 2.10001 5.26 2.08001 5.21 2.05001C5.08 1.99001 4.95 1.93001 4.82 1.86001C4.74 1.83001 4.67 1.80001 4.59 1.76001C4.48 1.71001 4.37 1.65001 4.26 1.60001C4.16 1.55001 4.06 1.51001 3.96 1.46001C3.8 1.39001 3.64 1.32001 3.49 1.25001C3.41 1.22001 3.33 1.19001 3.24 1.16001C3.09 1.12001 2.96 1.16001 2.83 1.23001C2.78 1.26001 2.72 1.28001 2.67 1.32001C2.55 1.44001 2.43 1.56001 2.32 1.69001C2.2 1.82001 2.08 1.96001 1.97 2.09001C1.89 2.19001 1.87 2.30001 1.91 2.38001C1.96 2.48001 2.06 2.54001 2.14 2.61001C2.22 2.68001 2.31 2.75001 2.4 2.82001C2.54 2.94001 2.68 3.05001 2.81 3.17001C2.92 3.26001 3.02 3.35001 3.13 3.43001C3.28 3.55001 3.42 3.67001 3.57 3.78001C3.66 3.85001 3.74 3.93001 3.83 4.00001C3.92 4.08001 4.02 4.15001 4.11 4.22001C4.24 4.32001 4.36 4.43001 4.48 4.54001C4.55 4.60001 4.62 4.65001 4.69 4.71001C4.78 4.79001 4.87 4.86001 4.96 4.94001C5.05 5.01001 5.15 5.08001 5.24 5.16001C5.37 5.27001 5.49 5.38001 5.62 5.48001C5.74 5.58001 5.86 5.68001 5.99 5.78001C6.13 5.90001 6.27 6.01001 6.42 6.12001C6.44 6.13001 6.45 6.14001 6.47 6.16001C6.57 6.24001 6.67 6.33001 6.77 6.41001C7.48 5.51001 8.18 4.61001 8.89 3.71001V3.76001ZM5 1.43001C5.1 1.47001 5.19 1.51001 5.29 1.56001C5.36 1.59001 5.42 1.63001 5.49 1.66001C5.52 1.67001 5.58 1.68001 5.6 1.66001C5.67 1.60001 5.74 1.54001 5.8 1.46001C5.87 1.38001 5.86 1.34001 5.79 1.27001C5.72 1.20001 5.66 1.13001 5.6 1.06001C5.51 0.94001 5.42 0.94001 5.32 1.06001C5.25 1.14001 5.18 1.22001 5.11 1.30001C5.07 1.34001 5.04 1.38001 5 1.43001ZM7 2.35001C7.11 2.40001 7.21 2.45001 7.32 2.50001C7.41 2.54001 7.49 2.58001 7.58 2.61001C7.59 2.61001 7.62 2.61001 7.63 2.61001C7.67 2.58001 7.7 2.54001 7.74 2.51001C7.79 2.46001 7.79 2.35001 7.74 2.30001C7.66 2.21001 7.58 2.12001 7.5 2.04001C7.46 2.00001 7.41 1.97001 7.36 2.01001C7.32 2.04001 7.28 2.08001 7.25 2.12001C7.17 2.20001 7.09 2.28001 7.01 2.36001L7 2.35001Z" fill="black"/>
+                                <path d="M13 3.92C13 4.09 12.93 4.2 12.79 4.22C12.73 4.23 12.62 4.18 12.6 4.12C12.57 4.02 12.54 3.91 12.51 3.81C12.47 3.68 12.45 3.54 12.39 3.42C12.32 3.27 12.22 3.14 12.08 3.04C11.9 2.92 11.7 2.86 11.48 2.82C11.38 2.8 11.31 2.73 11.29 2.63C11.27 2.56 11.29 2.41 11.39 2.37C11.44 2.35 11.51 2.34 11.56 2.34C11.69 2.36 11.81 2.38 11.93 2.42C12.06 2.47 12.19 2.51 12.29 2.6C12.37 2.67 12.46 2.73 12.54 2.81C12.64 2.91 12.72 3.02 12.77 3.15C12.83 3.28 12.89 3.42 12.93 3.56C12.97 3.69 12.98 3.83 13 3.91V3.92Z" fill="black"/>
+                              </svg>
+                            </div>
+
+                          {% elsif best_for == 'Walking' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="14"
+                                height="20"
+                                viewBox="0 0 14 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M13.22 8.17001C13.08 8.04001 12.92 7.94001 12.73 7.89001C12.31 7.77001 11.9 7.65001 11.48 7.54001C11.17 7.45001 10.87 7.36001 10.56 7.28001C10.37 7.23001 10.21 7.15001 10.08 7.00001C9.99 6.90001 9.9 6.81001 9.81 6.71001C9.51 6.40001 9.19999 6.09001 8.89999 5.78001C8.83999 5.72001 8.78 5.65001 8.72 5.59001C8.5 5.37001 8.29 5.13001 8.04 4.95001C7.72 4.72001 7.37 4.59001 6.97 4.64001C6.75 4.67001 6.53 4.73001 6.34 4.83001C6.02 5.00001 5.7 5.18001 5.38 5.37001C5 5.59001 4.63 5.81001 4.26 6.02001C4.01 6.16001 3.76 6.30001 3.52 6.45001C3.26 6.60001 3.01 6.75001 2.76 6.89001C2.5 7.04001 2.23 7.19001 1.97 7.34001C1.66 7.52001 1.36 7.70001 1.06 7.88001C0.899995 7.97001 0.759995 8.08001 0.639995 8.22001C0.499995 8.40001 0.409995 8.61001 0.389995 8.84001C0.369995 9.07001 0.389995 9.29001 0.459995 9.50001C0.529995 9.71001 0.659995 9.88001 0.829995 10.02C1.05 10.19 1.3 10.29 1.57 10.31C1.89 10.33 2.17 10.23 2.44 10.06C2.65 9.93001 2.87 9.81001 3.08 9.69001C3.3 9.56001 3.53 9.43001 3.75 9.30001C4.03 9.14001 4.3 8.98001 4.58 8.82001C4.81 8.69001 5.03 8.56001 5.26 8.43001C5.34 8.38001 5.42 8.34001 5.49 8.30001C5.49 8.47001 5.49 8.63001 5.49 8.79001C5.49 9.16001 5.51 9.53001 5.52 9.91001C5.52 10.11 5.52 10.32 5.52 10.52C5.51 10.76 5.49 11 5.46 11.24C5.43 11.49 5.39 11.74 5.33 11.99C5.25 12.34 5.15999 12.69 5.06999 13.04C4.98999 13.37 4.85 13.69 4.68 13.98C4.4 14.44 4.12 14.89 3.84 15.34C3.65 15.65 3.45 15.97 3.26 16.29C3.06 16.62 2.86 16.96 2.65 17.29C2.44 17.63 2.35 17.99 2.43 18.39C2.5 18.75 2.68999 19.04 2.99 19.25C3.30999 19.47 3.66 19.56 4.05 19.49C4.41 19.42 4.7 19.24 4.92 18.95C5.07 18.74 5.2 18.51 5.34 18.29C5.54 17.98 5.73 17.66 5.92 17.34C6.1 17.05 6.27 16.76 6.45 16.47C6.62 16.2 6.77 15.92 6.95 15.66C7.15 15.36 7.35 15.07 7.49 14.74C7.6 14.48 7.69 14.21 7.74 13.94C7.76 13.86 7.77 13.78 7.79 13.69C7.82 13.71 7.83 13.73 7.85 13.75C7.96 13.87 8.07 13.99 8.18 14.11C8.33 14.27 8.49 14.43 8.64 14.6C8.71 14.68 8.79 14.76 8.83 14.85C8.94 15.1 9.03 15.36 9.13 15.62C9.28 16.03 9.44 16.44 9.59 16.86C9.8 17.43 10.02 18 10.24 18.56C10.38 18.92 10.61 19.2 10.96 19.38C11.18 19.49 11.41 19.53 11.65 19.51C11.83 19.5 12 19.46 12.16 19.39C12.48 19.24 12.71 19.01 12.86 18.69C13.01 18.37 13.04 18.03 12.93 17.69C12.84 17.42 12.73 17.15 12.63 16.87C12.48 16.48 12.33 16.08 12.18 15.69C12.06 15.37 11.94 15.05 11.82 14.74C11.69 14.4 11.56 14.06 11.43 13.72C11.37 13.56 11.31 13.39 11.21 13.26C11.02 13.01 10.81 12.78 10.6 12.55C10.49 12.43 10.38 12.31 10.28 12.2C10.09 11.98 9.89 11.77 9.7 11.55C9.6 11.44 9.49999 11.33 9.39999 11.22C9.22999 11.03 9.06 10.83 8.88 10.64C8.79 10.55 8.75 10.44 8.75 10.31C8.75 10.11 8.75 9.90001 8.75 9.70001V9.40001C8.75 9.40001 8.78 9.41001 8.79 9.42001C8.91 9.52001 9.04 9.59001 9.18 9.63001C9.58 9.74001 9.98999 9.85001 10.4 9.96001C10.78 10.06 11.15 10.17 11.53 10.27C11.77 10.33 12 10.41 12.24 10.44C12.42 10.46 12.6 10.44 12.77 10.39C13.21 10.26 13.49 9.96001 13.62 9.51001C13.64 9.43001 13.65 9.36001 13.67 9.28001V9.03001C13.67 9.03001 13.67 8.97001 13.65 8.94001C13.59 8.65001 13.46 8.41001 13.24 8.21001L13.22 8.17001ZM7.14 13.08C7.09 13.32 7.03999 13.55 6.97999 13.79C6.87999 14.16 6.75 14.51 6.56 14.84C6.44 15.05 6.3 15.24 6.18 15.44C6.09 15.58 6 15.73 5.92 15.87C5.74 16.16 5.57 16.45 5.39 16.73C5.2 17.05 5 17.36 4.81 17.68C4.65 17.94 4.5 18.21 4.32 18.46C4.19 18.65 3.99 18.77 3.75 18.75C3.42 18.72 3.14 18.47 3.14 18.11C3.14 17.94 3.2 17.8 3.28 17.67C3.48 17.33 3.69 17 3.9 16.66C4.07 16.38 4.25 16.09 4.42 15.81C4.63 15.46 4.85 15.11 5.06 14.77C5.16 14.61 5.25999 14.45 5.35999 14.29C5.53999 13.99 5.67 13.67 5.75 13.34C5.86 12.86 5.98 12.38 6.1 11.9C6.1 11.9 6.1 11.9 6.12 11.88C6.18 11.94 6.23 11.99 6.29 12.05C6.38 12.14 6.46 12.24 6.54 12.33C6.73 12.54 6.93 12.74 7.12 12.96C7.15 12.99 7.16 13.05 7.16 13.08H7.14ZM12.88 9.29001C12.82 9.49001 12.69 9.61001 12.48 9.65001C12.32 9.68001 12.18 9.65001 12.03 9.60001C11.4 9.43001 10.76 9.26001 10.13 9.09001C9.91 9.03001 9.68999 8.97001 9.47999 8.91001C9.45999 8.91001 9.44 8.89001 9.42 8.88001C9.25 8.72001 9.06999 8.57001 8.89999 8.40001C8.73999 8.24001 8.54 8.14001 8.33 8.06001C8.21 8.01001 8.1 7.96001 7.97 7.90001V7.98001C7.97 8.83001 7.97 9.68001 7.97 10.53C7.97 10.69 8.03 10.83 8.13 10.95C8.33 11.17 8.52999 11.39 8.72999 11.61C8.89999 11.8 9.08 11.99 9.25 12.19C9.46 12.43 9.68 12.67 9.89 12.9C10.05 13.07 10.2 13.25 10.36 13.42C10.54 13.61 10.65 13.84 10.74 14.08C10.88 14.46 11.03 14.84 11.17 15.22C11.28 15.51 11.39 15.81 11.5 16.11C11.64 16.48 11.78 16.85 11.91 17.22C11.98 17.42 12.06 17.62 12.13 17.82C12.22 18.09 12.21 18.35 12 18.57C11.82 18.76 11.53 18.83 11.26 18.71C11.05 18.62 10.94 18.44 10.87 18.23C10.74 17.88 10.61 17.54 10.47 17.19C10.36 16.9 10.25 16.61 10.14 16.31C9.97 15.85 9.81 15.39 9.63 14.93C9.49 14.57 9.29999 14.23 9.02999 13.94C8.92999 13.83 8.82 13.73 8.72 13.62C8.6 13.49 8.47999 13.35 8.35999 13.22C8.28999 13.15 8.23 13.07 8.16 13C8.01 12.84 7.86 12.68 7.71 12.52C7.49 12.28 7.27 12.04 7.05 11.8C6.91 11.65 6.78 11.5 6.64 11.35C6.53 11.23 6.43 11.12 6.33 11C6.26 10.91 6.23 10.81 6.22 10.7C6.22 10.34 6.21 9.98001 6.21 9.62001C6.21 9.50001 6.22 9.37001 6.22 9.25001C6.22 9.13001 6.21 9.02001 6.21 8.90001C6.21 8.67001 6.22 8.45001 6.22 8.22001C6.22 8.03001 6.22 7.84001 6.21 7.65001C6.2 7.46001 6.1 7.31001 5.89 7.29001C5.81 7.29001 5.72 7.31001 5.64 7.35001C5.39 7.48001 5.15 7.62001 4.91 7.77001C4.69 7.90001 4.46 8.03001 4.24 8.16001C4.00999 8.29001 3.79 8.42001 3.56 8.55001C3.34 8.68001 3.12 8.81001 2.89 8.93001C2.63 9.08001 2.38 9.23001 2.12 9.37001C2.01 9.43001 1.89 9.50001 1.77 9.55001C1.46 9.67001 1.08 9.39001 1.08 9.06001C1.08 8.80001 1.2 8.64001 1.41 8.53001C1.76 8.32001 2.12 8.12001 2.48 7.91001C2.83 7.71001 3.17 7.51001 3.52 7.31001C3.92 7.08001 4.33 6.84001 4.73 6.61001C5.09 6.40001 5.45999 6.19001 5.81999 5.99001C6.11999 5.82001 6.41999 5.64001 6.72999 5.48001C6.91999 5.38001 7.13 5.37001 7.34 5.44001C7.42 5.47001 7.49999 5.53001 7.56999 5.59001C7.65999 5.66001 7.75 5.74001 7.83 5.82001C7.95 5.94001 8.06 6.07001 8.16 6.19001C8.26 6.31001 8.35 6.43001 8.46 6.54001C8.57 6.66001 8.69 6.76001 8.81 6.87001C8.89 6.94001 8.97 7.02001 9.05 7.09001C9.29 7.31001 9.52 7.53001 9.76 7.75001C9.91 7.88001 10.09 7.95001 10.28 8.00001C10.56 8.08001 10.84 8.16001 11.12 8.24001C11.51 8.35001 11.9 8.46001 12.29 8.57001C12.45 8.62001 12.61 8.65001 12.73 8.78001C12.88 8.93001 12.92 9.11001 12.86 9.31001L12.88 9.29001Z" fill="black"/>
+                                <path d="M7.67999 0.49999C6.51999 0.44999 5.73999 1.36999 5.68999 2.26999C5.62999 3.43999 6.55999 4.30999 7.58999 4.27999C8.62999 4.29999 9.41999 3.42999 9.45999 2.49999C9.50999 1.30999 8.59999 0.53999 7.67999 0.48999V0.49999ZM7.56999 3.53999C6.92999 3.50999 6.42999 3.02999 6.42999 2.38999C6.42999 1.73999 6.94999 1.23999 7.57999 1.23999C8.24999 1.23999 8.71999 1.74999 8.71999 2.38999C8.71999 3.03999 8.22999 3.51999 7.56999 3.53999Z" fill="black"/>
+                              </svg>
+                            </div>
+                          {% elsif best_for == 'Trail' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="14"
+                                height="20"
+                                viewBox="0 0 14 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="m16.64,8.97c-.06.24-.19.48-.38.64-.1.08-.23.12-.31.22-.08.09-.09.21-.09.33,0,.13.02.25.02.38,0,2.8,0,5.6,0,8.39,0,.13-.04.27-.08.4-.06.17-.21.18-.36.17-.13,0-.23-.08-.26-.2-.03-.12-.06-.24-.06-.36,0-2.96,0-5.92,0-8.88v-.15c-.08,0-.16-.02-.24-.02-.81,0-1.62,0-2.42,0-.45,0-.85-.17-1.18-.48-.13-.13-.25-.27-.38-.41-.03.08-.07.17-.09.25-.12.36-.24.72-.35,1.09-.08.3-.02.6.14.86.11.17.24.31.38.46.31.35.63.69.94,1.04.14.16.3.31.44.46.3.31.51.66.56,1.09.03.28.04.56.04.84,0,.35-.02.7-.02,1.05,0,.61,0,1.21,0,1.82,0,.34-.1.66-.29.95-.18.27-.44.42-.76.48-.67.12-1.72-.37-1.72-1.14,0-.7-.01-1.41,0-2.11,0-.21.02-.41-.06-.6-.06-.15-.16-.3-.26-.43-.19-.24-.4-.47-.6-.7-.01-.01-.03-.02-.05-.04-.02.1-.04.2-.06.29-.08.33-.26.62-.46.89-.4.53-.81,1.06-1.21,1.59-.4.53-.8,1.06-1.2,1.58-.16.2-.3.41-.53.55-.18.11-.37.17-.59.19-.31.03-.61-.03-.88-.17-.33-.18-.54-.46-.64-.81-.15-.5-.06-.95.25-1.37.3-.4.6-.8.9-1.2.34-.45.69-.91,1.04-1.36.14-.19.28-.38.41-.57.13-.18.17-.38.18-.59,0-.6,0-1.21,0-1.81,0-.08-.02-.11-.1-.13-.41-.12-.82-.26-1.23-.39-.34-.11-.67-.21-1.01-.32-.22-.07-.42-.16-.56-.35-.16-.22-.15-.46-.07-.71.13-.39.26-.77.39-1.16.19-.55.37-1.1.56-1.66.19-.56.37-1.11.55-1.67.15-.47.3-.95.46-1.42.11-.32.32-.55.67-.62.18-.04.36-.02.53.03.61.16,1.23.32,1.84.48.24.06.46.16.63.34.12.13.2.3.3.45.02.04.04.08.05.11.18-.05.35-.11.52-.14.31-.05.61-.04.92.07.49.17.84.49,1.12.91.29.44.59.87.88,1.3.19.28.37.56.56.85.12.17.27.27.49.26.34,0,.68,0,1.02,0,.17,0,.21-.03.21-.2,0-.43,0-.87,0-1.3,0-.09.02-.17.04-.26.05-.2.22-.25.36-.24.23.02.33.12.35.32.02.26.02.51.02.77,0,.29,0,.57,0,.86,0,.06.01.09.07.12.15.08.3.16.42.29.14.14.21.3.27.49.04.12.03.23,0,.34Zm-9.06,1.31c.15-.02.29-.02.42-.05.39-.08.76-.18,1.1-.39.27-.16.5-.36.69-.6.2-.26.34-.54.47-.84.07-.18.08-.35-.02-.51-.06-.09-.11-.17-.16-.26-.09-.16-.19-.31-.27-.48-.06-.13-.01-.27.09-.36.11-.1.24-.14.4-.08.17.07.24.23.32.36.31.5.61,1,.92,1.49.22.35.53.56.95.57.98,0,1.96,0,2.94,0,.14,0,.27-.04.37-.15.1-.11.1-.22,0-.32-.1-.1-.23-.13-.37-.13-.54,0-1.09,0-1.63,0-.1,0-.19,0-.29-.02-.27-.05-.5-.18-.66-.4-.15-.21-.3-.43-.45-.65-.36-.53-.71-1.06-1.06-1.58-.19-.28-.41-.53-.74-.67-.48-.2-.93-.03-1.24.35-.15.19-.22.42-.3.65-.26.7-.51,1.4-.77,2.11-.11.3-.22.61-.33.91-.13.35-.25.7-.38,1.06Zm-.17.82s.02.04.04.06c.16.19.33.38.5.57.21.25.42.5.63.75.18.21.36.41.53.61.25.3.5.59.75.89.21.24.43.48.63.73.28.34.42.75.43,1.19,0,.21-.02.42-.02.63,0,.48,0,.95,0,1.43,0,.12.03.24.07.35.08.16.24.22.4.28.29.1.45.09.64-.13.11-.13.16-.3.16-.47,0-1.14,0-2.28,0-3.42,0-.33-.13-.6-.34-.83-.24-.26-.47-.51-.71-.76-.32-.34-.63-.68-.95-1.02-.21-.24-.38-.5-.45-.82-.05-.22-.08-.45-.12-.68-.33.19-.68.35-1.06.44-.38.09-.76.15-1.15.23Zm-3.28-1.14s.05.03.07.03c.32.1.64.2.95.3.39.13.79.25,1.18.39.17.06.29-.03.34-.16.19-.48.36-.97.54-1.46.3-.81.59-1.61.89-2.44-.87-.25-1.75-.5-2.62-.74-.46,1.37-.9,2.72-1.36,4.08Zm3.04,2.07s-.02.02-.03.02c0,.04,0,.08,0,.12,0,.51,0,1.02-.03,1.53-.02.32-.17.6-.36.86-.33.43-.66.86-.99,1.3-.43.56-.86,1.13-1.28,1.7-.14.19-.23.4-.17.65.07.29.26.45.55.51.25.05.46-.06.62-.25.15-.19.29-.38.44-.57.32-.42.65-.85.97-1.27.39-.51.78-1.02,1.16-1.54.1-.13.21-.27.26-.42.09-.3.14-.62.22-.92.02-.1,0-.16-.07-.22-.06-.05-.11-.12-.16-.18-.17-.21-.35-.41-.52-.62-.14-.16-.27-.32-.41-.48-.06-.07-.13-.14-.19-.21Zm1.18-6.13c.14-.27.27-.53.3-.84.05-.42-.13-.59-.41-.66-.62-.17-1.25-.33-1.88-.5-.13-.03-.24.03-.28.15-.06.19-.12.37-.18.56-.06.18-.11.37-.17.55.87.25,1.74.49,2.61.74Z" fill="black"/>
+                                <path d="m11.9,4.32c-1.06,0-1.94-.83-1.92-1.96.02-1.02.84-1.86,1.94-1.86,1.06,0,1.95.84,1.92,1.95-.02,1.03-.83,1.87-1.94,1.87Zm.02-3.06c-.67,0-1.18.53-1.18,1.16,0,.63.51,1.15,1.17,1.15.65,0,1.17-.52,1.18-1.15,0-.63-.54-1.18-1.17-1.16Z" fill="black"/>
+                              </svg>
+                            </div>
+                          {% elsif best_for == 'Running' %}
+                            <div class="best-for-item-icon">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <g clip-path="url(#clip0_3_12)">
+                                <path d="M11.34 19.39C11.21 19.36 11.08 19.32 10.95 19.27C10.65 19.15 10.41 18.94 10.24 18.66C10.05 18.35 9.98 18.02 9.98 17.66C9.98 16.64 9.98 15.63 9.98 14.61C9.98 14.48 9.94 14.38 9.85 14.28C9.41 13.84 8.98 13.4 8.55 12.96C8.28 12.68 8 12.41 7.74 12.11C7.45 11.77 7.26 11.38 7.23 10.92C7.18 10.31 7.39 9.78999 7.8 9.35999C8.41 8.71999 9.02 8.07999 9.64 7.44999C9.8 7.28999 9.96 7.13999 10.12 6.97999C10.28 6.81999 10.43 6.65999 10.58 6.50999C10.58 6.49999 10.57 6.48999 10.56 6.48999C10.26 6.48999 9.96 6.48999 9.66 6.48999C9.54 6.48999 9.42 6.48999 9.3 6.50999C9.24 6.50999 9.17 6.53999 9.12 6.57999C8.82 6.86999 8.54 7.16999 8.24 7.45999C8.08 7.60999 7.91 7.75999 7.73 7.88999C7.55 8.02999 7.34 8.06999 7.11 8.08999C6.78 8.10999 6.48 8.02999 6.21 7.82999C5.89 7.58999 5.7 7.27999 5.64 6.87999C5.59 6.49999 5.68 6.16999 5.89 5.86999C5.96 5.75999 6.05 5.65999 6.14 5.56999C6.63 5.06999 7.12 4.56999 7.62 4.06999C7.89 3.78999 8.22 3.64999 8.61 3.64999C10.11 3.64999 11.61 3.64999 13.11 3.64999C13.48 3.64999 13.81 3.76999 14.08 4.02999C14.56 4.48999 15.03 4.95999 15.48 5.43999C15.78 5.74999 15.92 6.13999 15.92 6.58999C15.92 7.44999 15.92 8.31999 15.92 9.17999V9.30999H16.04C16.53 9.30999 17.03 9.30999 17.52 9.30999C17.71 9.30999 17.9 9.32999 18.08 9.36999C18.46 9.45999 18.73 9.69999 18.92 10.05C19.14 10.48 19.15 10.92 18.95 11.34C18.74 11.78 18.4 12.07 17.9 12.11C17.71 12.13 17.52 12.13 17.33 12.13C16.82 12.13 16.32 12.15 15.81 12.15C15.42 12.15 15.03 12.15 14.65 12.13C14.29 12.11 13.96 12 13.69 11.75C13.39 11.48 13.21 11.15 13.17 10.75C13.14 10.4 13.15 10.04 13.15 9.67999C13.15 9.63999 13.15 9.58999 13.15 9.52999C12.56 10.12 11.99 10.69 11.42 11.26C11.44 11.28 11.45 11.3 11.47 11.31C11.73 11.58 11.98 11.85 12.24 12.11C12.38 12.25 12.53 12.38 12.67 12.53C12.94 12.83 13.11 13.18 13.16 13.59C13.18 13.72 13.18 13.85 13.18 13.99C13.18 15.26 13.19 16.52 13.18 17.79C13.18 18.27 13 18.7 12.63 19.03C12.51 19.14 12.37 19.23 12.22 19.29C12.08 19.35 11.92 19.38 11.77 19.41C11.64 19.43 11.48 19.43 11.36 19.41L11.34 19.39ZM12.58 5.68999C12.49 5.76999 12.41 5.82999 12.34 5.89999C11.07 7.18999 9.8 8.48999 8.54 9.77999C8.41 9.91999 8.28 10.07 8.18 10.23C8.04 10.46 7.99 10.71 8.05 10.98C8.11 11.24 8.24 11.45 8.42 11.64C9.17 12.41 9.91 13.17 10.66 13.93C10.75 14.02 10.8 14.13 10.8 14.27C10.8 15.44 10.8 16.6 10.8 17.77C10.8 17.83 10.8 17.9 10.82 17.96C10.89 18.3 11.17 18.53 11.44 18.57C11.94 18.63 12.35 18.29 12.35 17.75C12.35 16.44 12.35 15.12 12.35 13.81C12.35 13.64 12.31 13.46 12.2 13.33C12.03 13.12 11.85 12.92 11.67 12.73C11.4 12.45 11.13 12.17 10.85 11.9C10.65 11.7 10.48 11.46 10.25 11.33C10.3 11.3 10.37 11.27 10.41 11.22C11.07 10.55 11.72 9.87999 12.38 9.19999C12.88 8.68999 13.39 8.17999 13.89 7.65999C13.9 7.63999 13.92 7.62999 13.95 7.60999V7.73999C13.95 8.62999 13.95 9.51999 13.95 10.42C13.95 10.54 13.97 10.66 14 10.77C14.09 11.11 14.41 11.3 14.71 11.3C15.68 11.3 16.66 11.3 17.63 11.3C17.7 11.3 17.76 11.3 17.83 11.28C18.21 11.17 18.34 10.85 18.24 10.52C18.16 10.27 17.91 10.14 17.64 10.13C16.84 10.13 16.04 10.13 15.25 10.13H15.12V9.99999C15.12 8.89999 15.12 7.79999 15.12 6.68999C15.12 6.45999 15.06 6.22999 14.91 6.04999C14.79 5.90999 14.67 5.77999 14.54 5.65999C14.23 5.33999 13.92 5.01999 13.6 4.70999C13.45 4.55999 13.26 4.46999 13.05 4.46999C11.62 4.46999 10.19 4.46999 8.76 4.46999C8.6 4.46999 8.44 4.46999 8.3 4.57999C8.22 4.63999 8.13 4.69999 8.06 4.77999C7.57 5.27999 7.09 5.76999 6.61 6.26999C6.48 6.40999 6.41 6.56999 6.44 6.76999C6.49 7.04999 6.71 7.25999 6.98 7.26999C7.18 7.26999 7.34 7.17999 7.48 7.04999C7.89 6.63999 8.3 6.21999 8.71 5.80999C8.78 5.73999 8.84 5.66999 8.95 5.66999C9.53 5.66999 10.1 5.64999 10.68 5.64999C11.27 5.64999 11.85 5.65999 12.44 5.66999C12.47 5.66999 12.51 5.67999 12.56 5.69999L12.58 5.68999Z" fill="black"/>
+                                <path d="M0.5 6.48999H4.06V7.28999H0.5V6.48999Z" fill="black"/>
+                                <path d="M8.51001 13.9C7.99001 14.45 7.47001 15 6.94001 15.54C6.78001 15.71 6.58001 15.84 6.39001 15.98C6.22001 16.1 6.01001 16.15 5.80001 16.18C5.40001 16.23 5.05001 16.12 4.73001 15.89C4.58001 15.78 4.44001 15.65 4.31001 15.52C3.65001 14.85 2.98001 14.18 2.33001 13.5C2.17001 13.33 2.02001 13.15 1.89001 12.95C1.77001 12.76 1.71001 12.55 1.69001 12.32C1.67001 11.99 1.69001 11.67 1.86001 11.37C2.11001 10.92 2.48001 10.67 2.96001 10.56C3.32001 10.47 3.67001 10.53 4.00001 10.71C4.15001 10.79 4.29001 10.9 4.41001 11.02C4.82001 11.42 5.22001 11.84 5.63001 12.25C5.78001 12.1 5.93001 11.95 6.08001 11.8C6.16001 11.72 6.23001 11.63 6.32001 11.55C6.34001 11.53 6.39001 11.54 6.41001 11.55C6.57001 11.7 6.72001 11.86 6.87001 12.02C6.89001 12.04 6.87001 12.09 6.87001 12.12C6.87001 12.12 6.87001 12.12 6.86001 12.13C6.47001 12.54 6.07001 12.94 5.68001 13.35C5.66001 13.37 5.64001 13.4 5.66001 13.35C5.07001 12.78 4.48001 12.21 3.89001 11.64C3.80001 11.56 3.70001 11.48 3.59001 11.42C3.06001 11.14 2.49001 11.58 2.49001 12.11C2.49001 12.34 2.57001 12.53 2.73001 12.69C2.81001 12.77 2.87001 12.87 2.96001 12.96C3.67001 13.68 4.37001 14.4 5.09001 15.1C5.44001 15.44 5.84001 15.44 6.19001 15.1C6.75001 14.55 7.30001 13.98 7.85001 13.41C7.91001 13.34 7.95001 13.34 8.02001 13.41C8.19001 13.59 8.36001 13.76 8.50001 13.9H8.51001Z" fill="black"/>
+                                <path d="M19.5 2.86001C19.5 4.19001 18.43 5.32001 17.03 5.27001C15.81 5.23001 14.7 4.21001 14.74 2.76001C14.77 1.51001 15.77 0.350006 17.24 0.410006C18.43 0.460006 19.51 1.46001 19.5 2.85001V2.86001ZM17.13 1.24001C16.22 1.26001 15.57 1.96001 15.55 2.84001C15.53 3.73001 16.26 4.44001 17.11 4.44001C17.97 4.44001 18.68 3.72001 18.69 2.88001C18.7 1.96001 17.97 1.25001 17.14 1.24001H17.13Z" fill="black"/>
+                                <path d="M5.65 3.64999V4.43999H1.7V3.64999H5.64H5.65Z" fill="black"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_3_12">
+                                <rect width="20" height="20" fill="white"/>
+                                </clipPath>
+                                </defs>
+                              </svg>
+                            </div>
+                          {% else %}
+
+                          {% endif %}
+                          <div class="best-for-item-text">{{ best_for }}</div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <style>
+                    .section-best-for {
+                      margin-top: 15px;
+                      padding-bottom: 12px;
+                    }
+
+                    .details-best-for-wrapper {
+                      display: grid;
+                      grid-template-columns: repeat(2, 1fr);
+                      grid-gap: 5px;
+                    }
+
+                    .best-for-item-wrapper {
+                      display: flex;
+                      flex-direction: row;
+                    }
+
+                    .best-for-item-icon {
+                      width: 20px;
+                      margin-right: 7px;
+                      margin-top: 5px;
+                    }
+                  </style>
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- SPECS -->
+            {% unless product.title contains 'Tee' %}
+            <div class="product-single__accordion">
+              <div class="product-single__accordion-title">
+                <strong>Specs</strong>
+                <span class="accordion-plus">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17.996" height="17.996" viewBox="0 0 17.996 17.996">
+                    <g transform="translate(-1751.504 -1172.5)"><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(1760.502 1173.5)"/><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(1768.5 1181.498) rotate(90)"/></g>
+                  </svg>
+                </span>
+              </div>
+              <div class="single__accordion-content">
+                {% liquid
+                  assign sock_cushion = product.metafields.custom.cushion
+                %}
+                {% if sock_cushion %}
+                  <p>
+                    <strong>{{ sock_cushion }}</strong>
+                  </p>
+
+                  {% case sock_cushion %}
+                    {% when 'Ultra Light' %}
+                      <p>
+                        Takes up minimal space in the shoe, with high breathability to keep your feet dry in various
+                        conditions.
+                      </p>
+                      <div class="cushion-bars">
+                        <div class="cushion-bar active"></div>
+                        <div class="cushion-bar"></div>
+                        <div class="cushion-bar"></div>
+                      </div>
+
+                    {% when 'Light' %}
+                      <p>High-density cushioning provides comfort and impact protection without the bulk.</p>
+                      <div class="cushion-bars">
+                        <div class="cushion-bar"></div>
+                        <div class="cushion-bar active"></div>
+                        <div class="cushion-bar"></div>
+                      </div>
+
+                    {% when 'Max Cushion' %}
+                      <p>Maximum cushioning that protects the foot, with added impact protection and comfort.</p>
+                      <div class="cushion-bars">
+                        <div class="cushion-bar"></div>
+                        <div class="cushion-bar"></div>
+                        <div class="cushion-bar active"></div>
+                      </div>
+                  {% endcase %}
+                {% endif %}
+
+                <style>
+                  .cushion-bars {
+                    display: flex;
+                    margin: 20px 0;
+                  }
+                  .cushion-bar {
+                    width: 100%;
+                    height: 5px;
+                    background-color: #bbcfd1;
+                  }
+                  .cushion-bar.active {
+                    background-color: #15565b;
+                  }
+
+                  .cushion-bar:nth-child(2n) {
+                    margin: 0 5px;
+                  }
+                </style>
+
+                {% liquid
+                  assign sock_height = product.metafields.custom.sock_height
+                %}
+
+                {% if sock_height %}
+                  <p>
+                    <strong>{{ sock_height }}</strong>
+                  </p>
+
+                  {% case sock_height %}
+                    {% when 'Invisible' %}
+                      <p>
+                        Rests low on the ankle to stay hidden in performance or casual shoes. Heel Hugger 2.0 Technology
+                        adds improved silicone tape placement to prevent slippage while staying hidden.
+                      </p>
+                    {% when 'Tab' %}
+                      <p>
+                        Our most popular silhouette. Rests below the ankle with a tab for comfort and blister protection
+                        from friction caused at the back of the shoe.
+                      </p>
+                    {% when 'Low Cut' %}
+                      <p>Sits at ankle height with a roughly 1” cuff, for ankle protection from rocks, dirt and mud while cycling or golfing.</p>
+                    {% when 'Quarter' %}
+                      <p>
+                        2" quarter length offers the perfect amount of ankle protection from rocks, dirt and mud while
+                        running, cycling, or everyday use.
+                      </p>
+                    {% when 'Mini Crew' %}
+                      <p>
+                        A 5" cuff designed to show off style while protecting feet from blisters and debris.
+                      </p>
+                    {% when 'Crew' %}
+                      <p>
+                        6” Cuff that rests just below mid-calf, perfect for casual or dress attire, or any outdoor
+                        activity.
+                      </p>
+                    {% when 'Knee High' %}
+                      <p>Sits just below the knee for snug, smooth compression all the way up the calf muscle.</p>
+                  {% endcase %}
+                {% endif %}
+              </div>
+            </div>
+            {% endunless %}
+
+            <!-- MATERIALS & CARE -->
+
+            <div class="product-single__accordion">
+              <div class="product-single__accordion-title">
+                <strong>Materials & Care</strong>
+                <span class="accordion-plus">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17.996" height="17.996" viewBox="0 0 17.996 17.996">
+                    <g transform="translate(-1751.504 -1172.5)"><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(1760.502 1173.5)"/><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(1768.5 1181.498) rotate(90)"/></g>
+                  </svg>
+                </span>
+              </div>
+              <div class="single__accordion-content">
+                {% liquid
+                  assign sock_material = product.metafields.custom.material_content
+                  assign fabric = product.metafields.custom.fabric.value | first
+                %}
+                  {% case fabric %}
+                    {% when 'iWick Fibers' %}
+                      <p><strong>iWick Fibers</strong></p>
+                      <p>Wicks moisture to keep you cool and dry, while providing superior durability.</p>
+                    {% when 'Merino Wool & TENCEL' %}
+                      <p><strong>Merino Wool & TENCEL</strong></p>
+                      <p>
+                        A unique blend of rarefied 200-needle thread count merino wool spun with TENCEL fibers, for a
+                        game-changing sock that's comfier, stretchier, drier, and more durable than ever before.
+                      </p>
+                  {% endcase %}
+
+
+                {% if sock_material %}
+                  <p>{{ sock_material }}</p>
+                {% endif %}
+
+                <div class="section-sock-care" style="margin-top: 15px;">
+                  <p><strong>Care</strong></p>
+                  {% if product.title contains 'Tee' %}
+                    <p>Machine wash cold, do not bleach, tumble dry low heat. Do not iron, do not dry clean.</p>
+                  {% else %}
+                  <p>
+                    Machine wash cold or warm, on the gentle cycle with a mild soap, avoiding bleach and fabric softeners. Tumble dry low. For best results, hang or lay flat to dry. Turn inside out before washing.
+                  </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% if product_description[1] != blank %}
+              <div class="product-single__accordion">
+                <div class="product-single__accordion-title">
+                  <strong>Product Details</strong>
+                  <span class="accordion-plus">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17.996" height="17.996" viewBox="0 0 17.996 17.996">
+                      <g transform="translate(-1751.504 -1172.5)"><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(1760.502 1173.5)"/><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(1768.5 1181.498) rotate(90)"/></g>
+                    </svg>
+                  </span>
+                </div>
+                <div class="single__accordion-content">
+                  <ul>
+                    {{ product_description[1] | remove: '</div>' }}
+                  </ul>
+
+                  {% comment %}
+                    {% if product.metafields.accentuate.fabric_and_care_info %}
+                      <p>{{ product.metafields.accentuate.fabric_and_care_info | strip_html }}</p>
+                    {% endif %}
+                  {% endcomment %}
+                </div>
+              </div>
+            {% endif %}
+            {% unless product.title contains 'Pack' or product.title contains 'Tee' or product.title contains 'Gift Card' %}
+            <div class="product-single__accordion">
+              <div class="product-single__accordion-title active">
+                <strong>Save with Bundles</strong>
+                <span class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17.996" height="2" viewBox="0 0 17.996 2">
+                    <g transform="translate(1 1)"><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(15.996) rotate(90)"></path></g>
+                  </svg>
+                </span>
+              </div>
+              <div class="single__accordion-content active">
+                <!-- REBUY SECTION - SAVE WITH BUNDLES - -->
+                <div data-rebuy-id="71971" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+                <!-- END REBUY BUNDLES -->
+              </div>
+            </div>
+          
+
+            <style>
+              .primary-title {
+                display: none;
+              }
+              .rebuy-widget,
+              .rebuy-recommended-products {
+                padding: 10px 0 0 0;
+              }
+            </style>
+
+            {% endunless %}
+
+         {% unless product.title contains 'Gift Card' %}
+            <div class="product-single__accordion">
+              <div class="product-single__accordion-title active">
+                <strong>Pair it With</strong>
+                <span class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17.996" height="2" viewBox="0 0 17.996 2">
+                    <g transform="translate(1 1)"><path d="M0,17a1,1,0,0,1-1-1V0A1,1,0,0,1,0-1,1,1,0,0,1,1,0V16A1,1,0,0,1,0,17Z" transform="translate(15.996) rotate(90)"></path></g>
+                  </svg>
+                </span>
+              </div>
+              <div class="single__accordion-content active">
+                <!-- REBUY SECTION - PAIR IT WITH - -->
+                <div data-rebuy-id="180479" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+                <!-- END REBUY PAIR IT WITH -->
+              </div>
+            </div>          
+          </div>
+
+          <style>
+              .primary-title {
+                display: none;
+              }
+              .rebuy-widget,
+              .rebuy-recommended-products {
+                padding: 10px 0 0 0;
+              }
+            </style>
+       {% endunless %}
+                        
+          </div>
+
+          {% if section.settings.social_sharing_products %}
+            {% include 'social-sharing',
+              share_title: product.title,
+              share_permalink: product.url,
+              share_image: product.featured_media
+            %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% assign lifestyle_images = product.metafields.accentuate.lifestyle_images.images %}
+  {% if lifestyle_images != blank %}
+    <div class="product-single-lifestyle-images">
+      {% for lifestyle_image in lifestyle_images %}
+        <img src="{{lifestyle_image.image}}" alt="{{lifestyle_image.alt}}">
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% unless product == empty %}
+  <script type="application/json" id="ProductJson-{{ section.id }}">
+    {{ product | json }}
+  </script>
+  <script type="application/json" id="ModelJson-{{ section.id }}">
+    {{ product.media | where: 'media_type', 'model' | json }}
+  </script>
+{% endunless %}
+
+{% if product.tags contains 'sock-bundle-eligible' %}
+  <style>
+    .product-single__quantity {
+      display: none;
+    }
+    .product-single__add-to-cart {
+      margin-left: 0px;
+    }
+    .pack-pricing-flag {
+      width: 100%;
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 25px;
+    }
+    .pack-pricing-flag:has(#PackSavings:not(:empty)) {
+      display: flex;
+    }
+    .pack-pricing-flag #ComparePrice {
+      margin-left: 10px;
+    }
+    .pack-pricing-flag #PackSavings {
+      margin-left: 10px;
+    }
+    .packsize-single {
+      margin-top: 15px;
+    }
+    .packsize-price--sale {
+      margin-top: 5px;
+    }
+
+    .single-option-radio label {
+      padding: 10px 11px;
+      width: 31%;
+    }
+
+    #PackSavingsLower {
+      display: none;
+    }
+
+    .single-option-selector--flag {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: #f8f8f8;
+      font-size: 8px;
+    }
+
+    .single-pair {
+      margin-top: 19px;
+    }
+
+    .single-option-selector-label-eyebrow {
+      background: #bb3820;
+      color: #fff;
+      width: calc(100% + 22px);
+      font-size: 12px;
+      margin-top: -10px;
+      padding: 5px 5px 3px 5px;
+      margin-left: -11px;
+      margin-bottom: 7px;
+    }
+
+    .single-option-selector-value-helper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #PackSavingsLower {
+      color: #bb3820;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .pack-pricing-flag #ProductPrice {
+      color: #bb3820;
+    }
+    #PackSavings {
+      color: #bb3820;
+      font-weight: 700;
+    }
+    .price-container:has(#PackSavings:not(:empty)) #ProductPrice {
+      color: #bb3820;
+    }
+
+    @media (max-width: 768px) {
+      .packsize-single,
+      .packsize-price--sale {
+        font-size: 14px;
+      }
+
+      .single-option-selector-label-eyebrow {
+        font-size: 11px;
+      }
+    }
+  </style>
+{% endif %}
+
+<script type="text/javascript">
+  var _learnq = _learnq || [];
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "product_vendor_enable",
+      "label": "Show Vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "quantity_enabled",
+      "label": "Show quantity picker"
+    },
+    {
+      "type": "select",
+      "id": "product_selector",
+      "label": "Picker type",
+      "options": [
+        {
+          "value": "radio",
+          "label": "button"
+        },
+        {
+          "value": "select",
+          "label": "dropdown"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Add to cart button"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_payment_button",
+      "label": "Show dynamic checkout button",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "add_to_cart_button_size",
+      "label": "Button Size",
+      "default": "small",
+      "options": [
+        {
+          "value": "small",
+          "label": "small"
+        },
+        {
+          "value": "large",
+          "label": "large"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "atc_feature_title_1",
+      "label": "ATC Feature - Title 1",
+      "default": "Free Shipping $55+"
+    },
+    {
+      "type": "richtext",
+      "id": "atc_feature_content_1",
+      "label": "ATC Feature - Content 1"
+    },
+    {
+      "type": "text",
+      "id": "atc_feature_title_2",
+      "label": "ATC Feature - Title 2"
+    },
+    {
+      "type": "richtext",
+      "id": "atc_feature_content_2",
+      "label": "ATC Feature - Content 2"
+    },
+    {
+      "type": "text",
+      "id": "atc_feature_title_3",
+      "label": "ATC Feature - Title 3"
+    },
+    {
+      "type": "richtext",
+      "id": "atc_feature_content_3",
+      "label": "ATC Feature - Content 3"
+    },
+  ]
+}
+{% endschema %}

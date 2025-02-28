@@ -1,0 +1,90 @@
+{% if width %}
+  {%- assign theWidth = width | append: 'x' -%}
+{% else %}
+  {%- assign theWidth = 310 | append: 'x' -%}
+{% endif %}
+
+{% if height %}
+  {%- assign theHeight = height | prepend: 'x' -%}
+{% else %}
+  {%- assign theHeight = 415 | prepend: 'x' -%}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {%- unless product.tags contains 'exclude-sale' -%}
+    {% assign on_sale = true %}
+  {%- endunless -%}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{% capture img_id_class %}ProductImage-{{ product.featured_media.id }}{% endcapture %}
+{% capture img_wrapper_id %}ProductImageWrapper-{{ product.featured_media.id }}{% endcapture %}
+{%- assign featured_image = product.featured_media.preview_image %}
+{%- assign img_url = featured_image | img_url: theWidth -%}
+{%- capture sale_msg -%}
+  {%- if product.title contains "Pack" -%}
+    Bundle Savings
+  {%- elsif on_sale -%}
+    Select Colors {{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}% off
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="grid-product__wrapper">
+  <div class="grid-product__image-wrapper">
+    <a
+      class="grid-product__image-link"
+      href="{{ product.url | within: collection }}"
+      data-image-link
+    >
+      <img
+        class="product--image {{ img_id_class }}"
+        src="{{ img_url }}"
+        loading="lazy"
+        src="{{ featured_image | img_url: "20x" }}"
+        alt="{{ featured_image.alt | escape }}"
+        data-image
+      >
+    </a>
+
+    {% if sold_out %}
+      <div class="grid-product__sold-out">
+        <p>{{ 'products.product.sold_out_html' | t }}</p>
+      </div>
+    {% elsif on_sale %}
+      <div class="grid-product__on-sale">
+        <p>Sale</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <a href="{{ product.url | within: collection }}" class="grid-product__meta">
+    <span class="grid-product__title">{{ product.title }}</span>
+    <div class="grid__price">
+      <span class="grid__price-actual"></span>
+      <strike class="grid__price-compare"></strike>
+    </div>
+    <div class="grid-product__sale-msg">{{ sale_msg }}</div>
+
+    {% if section.settings.product_vendor_enable %}
+      <p class="grid-product__vendor">{{ product.vendor }}</p>
+    {% endif %}
+  </a>
+  <div class="grid-product__variants"></div>
+
+  <div class="grid-product__controls">
+    <div class="grid-product__add-to-cart btn">Add To Cart</div>
+    <div class="grid-product__sizes">
+      <div class="grid-product-size" data-size="small">S</div>
+      <div class="grid-product-size" data-size="medium">M</div>
+      <div class="grid-product-size" data-size="large">L</div>
+      <div class="grid-product-size" data-size="xlarge">XL</div>
+    </div>
+  </div>
+</div>

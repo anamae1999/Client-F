@@ -1,0 +1,411 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "e765a22c-d95f-4442-af4d-68bb52300b2b": {
+      "type": "feetures-hero",
+      "blocks": {
+        "desktop_image_PfpR7n": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image_url": ""
+          }
+        },
+        "template--14630613221448__e765a22c-d95f-4442-af4d-68bb52300b2b-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Web-TrashSocks-LP-DT-1_883352db-5191-4274-9378-e2b023d6c6a9.jpg",
+            "desktop_image_url": "shopify://collections/socks-the-pros-love"
+          }
+        },
+        "bab6ea97-4b45-4a09-8440-e6cac1317de5": {
+          "type": "eyebrow_text",
+          "disabled": true,
+          "settings": {
+            "eyebrow_text": "Feetures Stride Flex",
+            "eyebrow_color": "#ffffff",
+            "eyebrow_mobile_size": 16,
+            "eyebrow_size": 50
+          }
+        },
+        "b9eb5272-ad1c-41b5-b57b-d99c81f6c0a3": {
+          "type": "headline",
+          "disabled": true,
+          "settings": {
+            "headline": "Your New Go To Tee",
+            "headline_color": "#ffffff",
+            "headline_mobile_size": 40,
+            "headline_size": 60
+          }
+        },
+        "ab8baa05-9ef1-404a-90c2-3d83debd830a": {
+          "type": "cta_btn",
+          "disabled": true,
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "shopify://products/feetures-womens-athletic-shirt",
+            "new_tab": false,
+            "cta_btn_text_color": "#000000",
+            "cta_btn_bg_color": "#ffffff"
+          }
+        },
+        "3c0256cd-3b2c-4043-b505-67bbbfa43693": {
+          "type": "cta_btn",
+          "disabled": true,
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "shopify://products/feetures-mens-athletic-shirt",
+            "new_tab": false,
+            "cta_btn_text_color": "#000000",
+            "cta_btn_bg_color": "#ffffff"
+          }
+        },
+        "2697f41a-d08e-4fd0-a4f8-75fef9f04a36": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify://shop_images/Web-TrashSocks-LP-MB-1_d3797fa2-e72b-4bac-ace1-cd513d518128.jpg",
+            "mobile_image_url": ""
+          }
+        },
+        "mobile_image_waUKxj": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "desktop_image_PfpR7n",
+        "template--14630613221448__e765a22c-d95f-4442-af4d-68bb52300b2b-desktop_image-1",
+        "bab6ea97-4b45-4a09-8440-e6cac1317de5",
+        "b9eb5272-ad1c-41b5-b57b-d99c81f6c0a3",
+        "ab8baa05-9ef1-404a-90c2-3d83debd830a",
+        "3c0256cd-3b2c-4043-b505-67bbbfa43693",
+        "2697f41a-d08e-4fd0-a4f8-75fef9f04a36",
+        "mobile_image_waUKxj"
+      ],
+      "custom_css": [
+        "@media (min-width: 767px) {.feeturesHero .feeturesHero__inner {padding: 80px 0; } .feeturesHero.feeturesHero--tall {margin-left: -30px; margin-right: -30px; }}"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x800",
+        "vertical_alignment_desktop": "bottom",
+        "horizontal_alignment_desktop": "center",
+        "vertical_alignment_mobile": "center",
+        "horizontal_alignment_mobile": "center",
+        "cta_top_margin": "130px"
+      }
+    },
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h1>Golf in style. Win with Comfort.</h1></div>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1"
+      ],
+      "custom_css": [
+        ".custom__item {padding-bottom: 0px;}",
+        "@media (min-width: 767px) {div {padding-top: 5px; padding-bottom: 0px; }}"
+      ],
+      "settings": {}
+    },
+    "feetures_image_text_TG7Fff": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "desktop_image_JUMfdV": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Web-TrashSocks-LP-2.jpg"
+          }
+        },
+        "headline_wRF4j7": {
+          "type": "headline",
+          "settings": {
+            "headline": "Ryan Moore x Feetures",
+            "headline_color": "",
+            "headline_mobile_size": 27,
+            "headline_size": 45
+          }
+        },
+        "body_copy_NGYQF6": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Feetures is proud to partner with Ryan Moore, a years long Feetures fan, who believes that great apparel changes the golf game. Ryan is a professional golfer with 18+ years of experience, known for his consistent play and strong performances in major tournaments. He has won multiple PGA Tour titles and represented the U.S. in international team events, including the Ryder Cup.</p>",
+            "body_copy_color": "",
+            "body_mobile_size": 16,
+            "body_size": 30
+          }
+        }
+      },
+      "block_order": [
+        "desktop_image_JUMfdV",
+        "headline_wRF4j7",
+        "body_copy_NGYQF6"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262": {
+      "type": "feetures-product-carousel",
+      "custom_css": [
+        ".feeturesProductCarousel {margin-bottom: 0px;}"
+      ],
+      "settings": {
+        "headline": "Shop Golf",
+        "collection": "golf-socks",
+        "cta_btn_text": "",
+        "cta_btn_url": "",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Golf_Tech_Illustration.png"
+          }
+        },
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200": {
+          "type": "headline",
+          "settings": {
+            "headline": "Golf Tech",
+            "headline_color": "",
+            "headline_mobile_size": 32,
+            "headline_size": 32
+          }
+        },
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Anatomical Design: Right and left foot design enhances fit, delivering maximum comfort and protection by helping to eliminate blisters.</p><p>Targeted Compression: Our patented compressed arch support allows for more comfort and less irritation.</p><p>iWick Fibers: Wicks moisture to keep you cool and dry, while providing superior durability.</p>",
+            "body_copy_color": "",
+            "body_mobile_size": 16,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1",
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200",
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Web-TrashSocks-LP-3.jpg"
+          }
+        },
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5": {
+          "type": "headline",
+          "settings": {
+            "headline": "Get the Socks Pro Caddies Love",
+            "headline_color": "",
+            "headline_mobile_size": 28,
+            "headline_size": 45
+          }
+        },
+        "body_copy_w4mp6h": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 20
+          }
+        },
+        "cta_btn_VnTXEW": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Mission Gray",
+            "cta_btn_url": "https://feetures.com/collections/womens-mini-crew-styles/products/elite-ultra-light-mini-crew?variant=40514552102984",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1",
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5",
+        "body_copy_w4mp6h",
+        "cta_btn_VnTXEW"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 0,
+        "padding_bottom": 28
+      }
+    },
+    "feetures_quote_carousel_686ABh": {
+      "type": "feetures-quote-carousel",
+      "blocks": {
+        "quote_AGCHQm": {
+          "type": "quote",
+          "settings": {
+            "link": "",
+            "text": "<p>\"LOVE all Features socks but golfing I need these MAX comfort. So happy I tried them. Now I’m hooked! Do not hesitate to give them a try.\" - Vicki S.</p>",
+            "author": ""
+          }
+        },
+        "quote_V6MgVL": {
+          "type": "quote",
+          "settings": {
+            "link": "",
+            "text": "<p>\"I had a couple of pairs of Feetures that I used to play golf and walk in. They have been great, long lasting and supportive to my feet, so when the time came to replace all my other athletic socks, the decision was easy. 12 pairs of Feetures!\" - Mark B.</p>",
+            "author": ""
+          }
+        },
+        "quote_AVB4zy": {
+          "type": "quote",
+          "settings": {
+            "link": "",
+            "text": "<p>\"The shirt feels comfortable and form fitting (it resides in that perfect middle ground where it isn’t baggy but also doesn’t feel conflicting or tight). I think the overall length (and sleeve length) is perfect. I could see myself wearing this item not only for exercise but also to run errands. The biggest compliment I can give is that my wife said “that looks good on you, when did you buy that” so I have the ultimate approval.\" - Raman</p>",
+            "author": ""
+          }
+        },
+        "quote_DUYFQ9": {
+          "type": "quote",
+          "settings": {
+            "link": "",
+            "text": "<p>\"The fit feels a little bit more dialed in than some of the other performance tees. I’ve worn in the past in terms of being tightened in the arms, but no awkward, seems or cuts across the chest abdomen.\" - Jonathan</p>",
+            "author": ""
+          }
+        },
+        "quote_prjfKW": {
+          "type": "quote",
+          "settings": {
+            "link": "",
+            "text": "<p>\"I think the design elements such as the sleeve length and the side panels are extremely flattering and comfortable. I’ve had workout tees that are too bulky or the sleeves are too long, and I don’t like them. I like that this fits my body and gives some shape without making me feel like it’s too tight.\" - Michelle</p>",
+            "author": ""
+          }
+        }
+      },
+      "block_order": [
+        "quote_AGCHQm",
+        "quote_V6MgVL",
+        "quote_AVB4zy",
+        "quote_DUYFQ9",
+        "quote_prjfKW"
+      ],
+      "settings": {
+        "headline": "Testimonials",
+        "cta_btn_text": "",
+        "cta_btn_url": "",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "f68c6052-ad63-4822-88a6-4d5515796d61": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h2>Testimonials</h2></div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        },
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca": {
+          "type": "html",
+          "settings": {
+            "code": "<p>\"Perfect sleeve length and body length and not too oversized but not too slim fitting either. Really the best fitting workout shirt I’ve ever encountered. Great with a variety of bottoms. \" - Amy J.\n</p>\n\n<p>\"This is definitely one of my favorite fits on any of my shirts. In fact, I don’t think I have a performance shirt I like better than this.\" - Rose</p>\n\n<p>\"The shirt feels comfortable and form fitting (it resides in that perfect middle ground where it isn’t baggy but also doesn’t feel conflicting or tight). I think the overall length (and sleeve length) is perfect. I could see myself wearing this item not only for exercise but also to run errands. The biggest compliment I can give is that my wife said “that looks good on you, when did you buy that” so I have the ultimate approval.\" - Raman</p>\n\n<p>\"The fit feels a little bit more dialed in than some of the other performance tees. I’ve worn in the past in terms of being tightened in the arms, but no awkward, seems or cuts across the chest abdomen.\" - Jonathan\n</p>\n\n<p>\"I think the design elements such as the sleeve length and the side panels are extremely flattering and comfortable. I’ve had workout tees that are too bulky or the sleeves are too long, and I don’t like them. I like that this fits my body and gives some shape without making me feel like it’s too tight.\" - Michelle </p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1",
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "feetures_product_carousel_BC9TBp": {
+      "type": "feetures-product-carousel",
+      "custom_css": [
+        ".feeturesProductCarousel {margin-bottom: 0px;}"
+      ],
+      "settings": {
+        "headline": "Socks the Pros Love",
+        "collection": "socks-the-pros-love",
+        "cta_btn_text": "",
+        "cta_btn_url": "",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "03642916-6dd5-4af1-94f4-7e5323edf355": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "",
+        "image1": "shopify://shop_images/Web-TrashSocks-LP-4.jpg",
+        "image2": "shopify://shop_images/Web-TrashSocks-LP-6.jpg",
+        "image3": "shopify://shop_images/Web-TrashSocks-LP-7.jpg",
+        "image4": "shopify://shop_images/Web-TrashSocks-LP-5.jpg",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "e765a22c-d95f-4442-af4d-68bb52300b2b",
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca",
+    "feetures_image_text_TG7Fff",
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262",
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090",
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd",
+    "feetures_quote_carousel_686ABh",
+    "f68c6052-ad63-4822-88a6-4d5515796d61",
+    "feetures_product_carousel_BC9TBp",
+    "03642916-6dd5-4af1-94f4-7e5323edf355"
+  ]
+}

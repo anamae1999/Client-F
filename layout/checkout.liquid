@@ -1,0 +1,146 @@
+{% include 'shogun-content-handler' %}
+<!DOCTYPE html><html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+    <style>
+    .field__input, .btn {
+      border-radius: 2px !important;
+    }
+      
+    </style>
+
+    {% if settings.use_purpledot and settings.purpledot_api_key != blank %}
+      {% render 'purple-dot' %}
+    {% endif %}
+    </head><body>{{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    
+    <!-- ADDRESS VALIDATOR -->
+    <!-- EcoCart Carbon Offset -->
+    <script async="" src="https://d2v82nkpsxzrcr.cloudfront.net/ecocart.js?shop_name=feetures-online.myshopify.com"></script>
+    <!-- End EcoCart -->
+    <script async="" src="https://d3ox8tdk614ykk.cloudfront.net/pobox_checker.js"></script>
+    {% render 'bing-script' %}
+
+    {% render 'shogun-head' %}
+
+    {{ skip_to_content_link }}
+
+    <header class="banner" data-header="" role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+    
+    {{ order_summary_toggle }}
+    <div class="content" data-content="">
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </header>
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+            
+            
+            <div class="fieldset" id="checkout-note-wrapper">
+              <br>
+              <div class="field" style="background: #f3f3f3; padding: 15px; border-radius: 2px; text-align: center;">Free Shipping threshold is before taxes and after discounts.<br/> Please allow 1-2 Days to process your order.</div>
+              <br><br>
+              {% comment %}
+               <div class="cart-note text-left field">
+                <div class="field__input-wrapper">
+                  <label class="field__label field__label--visible" for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+                  <textarea name="checkout[note]" id="CartSpecialInstructions" class="field__input" placeholder="Add Gift Message">{{ checkout.note }}</textarea>
+                </div>
+               </div>
+              {% endcomment %}
+            </div>
+          </main>
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+  
+
+<script type="text/javascript">
+    function setFeeturesCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+    function getFeeturesCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    function deleteFeeturesCookie(name) {
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    
+    var checkoutNotes = document.getElementById("checkout-note-wrapper"),
+        checkoutFormFooter = document.querySelector('form.edit_checkout .step__footer');
+    
+    checkoutFormFooter.parentNode.insertBefore(checkoutNotes, checkoutFormFooter);
+
+  (function($) {
+      $(document).on("page:load", function() {
+          if (Shopify.Checkout.step === 'contact_information') {
+              $(".order-summary-toggle").click();
+              document.body.scrollTop = document.documentElement.scrollTop = 0;
+              $('.order-summary__section--total-lines').append($('#checkout-note-wrapper'));
+              var checkoutAddressType = $('<div class="section section--half-spacing-top checkout-address-type" id="checkout-address-type"><div class="section__header"><h2 class="section__title">Address Type</h2></div><div class="section__content"><div class="field field--required"><div class="radio-wrapper"><div class="radio__input"><input class="input-radio checkout-address-type-radio" type="radio" name="checkout[attributes][shipping_address_type]" id="checkout_shipping_address_type_residential" value="Residential"></div><label class="radio__label" for="checkout_shipping_address_type_residential">Residential</label></div><div class="radio-wrapper"><div class="radio__input"><input class="input-radio checkout-address-type-radio" type="radio" name="checkout[attributes][shipping_address_type]" id="checkout_shipping_address_type_commercial" value="Commercial"></div><label class="radio__label" for="checkout_shipping_address_type_commercial">Commercial</label></div></div></div></div>'),
+                  checkoutForm = $('form.edit_checkout .step__footer').parent().find('.step__sections');
+              if(checkoutForm.find('.checkout-address-type').length === 0) {
+                  checkoutAddressType.appendTo(checkoutForm);
+                  var shippingAddressTypeCookie = getFeeturesCookie('shipping_address_type');
+                  if(shippingAddressTypeCookie === 'Residential') {
+                      $('#checkout_shipping_address_type_residential').prop('checked',true);
+                  } else if(shippingAddressTypeCookie === 'Commercial') {
+                      $('#checkout_shipping_address_type_commercial').prop('checked',true);
+                  }
+              }
+              $('.step__sections').on('change','.checkout-address-type-radio',function (e) {
+                  var shippingAddressTypeCookieValue = $(this).val();
+                  setFeeturesCookie('shipping_address_type',shippingAddressTypeCookieValue);
+                  $.post('/cart/update.js', "attributes[shipping_address_type]="+shippingAddressTypeCookieValue);
+              });
+          }
+      });
+  })(Checkout.$);
+</script>
+
+
+      
+<script async src="https://cdn.rebuyengine.com/onsite/js/rebuy.js?shop={{ shop.permanent_domain }}"></script>
+<div data-rebuy-id="62535"></div>
+</body></html>

@@ -1,0 +1,105 @@
+<div class="template-press">
+    {% if section.settings.image != blank %}
+        <div class="page-hero">
+            <img src="{{ section.settings.image | img_url: '1920x' }}" alt="{{ block.settings.image.alt }}"/>
+            {% if section.settings.headline != blank %}
+                <h1 class="page-hero__headline">
+                    {{section.settings.headline}}
+                </h1>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% comment %}
+    Loop through a defined number of articles with the 'paginate' tag.
+    Don't forget to close the tag after your loop.
+    {% endcomment %}
+    {% paginate blog.articles by 9 %}
+        {% comment %}
+        This template is also used for listing out articles of a specific tag.
+        You can change layouts or styles by checking if current_tags is true.
+        {% endcomment %}
+        
+        <div class="grid--rev">
+
+            <div class="grid__item one-whole">
+                <div class="section-header">
+                {% if current_tags %}
+                    {% if section.settings.headline != blank %}
+                        <div class="h1">{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}</div>
+                    {% else %}
+                        <h1>{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}</h1>
+                    {% endif %}
+                {% else %}
+                    {% if section.settings.headline != blank %}
+                        <div class="h1">{{ blog.title }}</div>
+                    {% else %}
+                        <h1>{{ blog.title }}</h1>
+                    {% endif %}
+                {% endif %}
+                </div>
+
+            {% comment %}
+                Loop through each article in your blog. This is limited to what you set for pagination above.
+
+                For more info on article liquid tags:
+                - http://docs.shopify.com/themes/liquid-variables/article
+            {% endcomment %}
+
+            <div class="grid grid--table press-article-listings">
+                {% for article in blog.articles %}
+                <div class="grid__item xlarge--one-third large--one-half medium--one-whole small--one-whole press-grid-item">
+                    <div class="article">
+                        {% if article.image %}
+                        <a class="article__featured-image" href="{{ article.url }}" style="background-image: url({{ article.image | img_url: '1024x1024' }});">
+                            <div class="overlay rte">
+                                <div class="overlay__inner">
+                                    <h3>
+                                    {{ article.excerpt | strip_html | strip | escape }}
+                                    </h3>
+                                    <p>
+                                    {{ article.content | strip_html | strip | escape | truncate: 100 | remove: '"' }}read more
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endif %}
+                        {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.metafields.accentuate.original_publish_date }}</time>{% endcapture %}
+
+                        {{ date }}
+                        <h2 class="h3">
+                        <a href="{{ article.url }}">
+                            {{ article.title }}
+                        </a>
+                        </h2>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if paginate.pages > 1 %}
+                <hr>
+                <div class="pagination">
+                {{ paginate | default_pagination }}
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    {% endpaginate %}
+</div>
+{% schema %}
+  {
+    "name": "Press Blog Hero",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Press Blog Header Image"
+      },
+      { 
+        "type": "text",
+        "id": "headline",
+        "label": "Headline (optional)"
+      }
+    ]
+  }
+{% endschema %}

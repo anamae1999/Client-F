@@ -1,0 +1,185 @@
+{% style %}
+  .section-id-{{section.id}}-padding  {
+        padding-top: {{section.settings.padding_top}}px;
+        padding-bottom: {{section.settings.padding_bottom}}px;
+    }
+
+    .feeturesQuoteCarousel__btnWrapper a {
+        margin-bottom: 15px;
+    }
+
+    .feeturesQuoteCarousel {
+      text-align: center;
+    }
+    .quote-image {
+      border-radius: 100%;
+      padding: 0 20px;
+    }
+
+    .feeturesQuoteCarouselSlider__item {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .quote__author {
+      font-size: 0.8rem;
+    }
+
+    .feeturesQuoteCarouselSlider__item img {
+      width: 100%;
+      height: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .feeturesQuoteCarousel__btnWrapper .btn:last-of-type {
+      margin-left: 10px;
+    }
+
+    .slick-slider .slick-dots li button:before, .slick-slider .slick-dots li a:before {
+      background: lightgrey;
+    }
+
+    .slick-slider .slick-dots li.slick-active button:before {
+      background: black !important;
+    }
+{% endstyle %}
+
+<section class="feeturesQuoteCarousel section-id-{{section.id}}-padding">
+  <div class="wrapper">
+    {% if section.settings.headline %}
+      <h3 class="feeturesQuoteCarousel__headline">{{ section.settings.headline }}</h3>
+    {% endif %}
+
+    <div class="feeturesProductCarouselSlider" data-section-type="quote-carousel">
+      {% for block in section.blocks %}
+        <div class="feeturesQuoteCarouselSlider__item">
+          {% if block.settings.image %}
+            {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% else %}<div>{% endif %}
+            <img
+              src="
+                {{
+                  block.settings.image
+                  | image_url: width: 300, height: 300, crop: 'center'
+                }}
+              "
+              alt="{{ block.settings.image.alt }}"
+              class="quote-image"
+            >
+            {% if block.settings.link != blank %}</a>{% else %}</div>{% endif %}
+          {% endif %}
+          {% if block.settings.text %}
+            <p class="quote__text">{{ block.settings.text }}</p>
+          {% endif %}
+          {% if block.settings.author %}
+            <p class="quote__author">{{ block.settings.author }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <div class="feeturesQuoteCarouselSlider__controls"></div>
+      <div class="feeturesQuote__dots"></div>
+    </div>
+
+    {% if section.settings.cta_btn_url != blank and section.settings.cta_btn_text != blank %}
+      <div class="feeturesQuoteCarousel__btnWrapper">
+        <a class="btn" href="{{section.settings.cta_btn_url}}">{{ section.settings.cta_btn_text }}</a>
+        {% if section.settings.cta_btn_url_2 != blank and section.settings.cta_btn_text_2 != blank %}
+          <a class="btn" href="{{section.settings.cta_btn_url_2 }}">{{ section.settings.cta_btn_text_2 }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quote Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "type": "text",
+      "id": "cta_btn_text",
+      "label": "CTA Button Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_btn_url",
+      "label": "CTA Button URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_btn_text_2",
+      "label": "CTA 2 Button Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_btn_url_2",
+      "label": "CTA 2 Button URL"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "presets": [],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Quote Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Quote Text"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures - Quote Carousel",
+      "category": "Feetures",
+      "blocks": [
+        {
+          "type": "quote"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

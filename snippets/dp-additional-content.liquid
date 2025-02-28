@@ -1,0 +1,82 @@
+<!-- DIGITAL POSITION NEEDS THIS, DO NOT REMOVE WITHOUT REACHING OUT TO SUPPORT@DIGITALPOSITION.COM -->
+<script>
+  window.addEventListener('load', function() {
+    $("#accordion h2, #accordion h3").each(function(i, o) {
+      if (i == 0) {
+        $(o).nextUntil("h2, h3").wrapAll("<div class='active' />")
+        $(o).prepend("<i class='fa fa-angle-up'></i>")
+      } else {
+        $(o).nextUntil("h2, h3").wrapAll("<div />")
+        $(o).prepend("<i class='fa fa-angle-down'></i>")
+      }
+    })
+    $('#accordion h2').on('click', function() {
+      $('#accordion div').removeClass('active');
+      $('#accordion h2 i').removeClass('fa-angle-up').addClass('fa-angle-down');
+      $(this).next('div').addClass('active');
+      $(this).find('i').removeClass('fa-angle-down').addClass('fa-angle-up');
+    });
+    $('#accordion h3').on('click', function() {
+      $('#accordion div').removeClass('active');
+      $('#accordion h3 i').removeClass('fa-angle-up').addClass('fa-angle-down');
+      $(this).next('div').addClass('active');
+      $(this).find('i').removeClass('fa-angle-down').addClass('fa-angle-up');
+    });
+  })
+</script>
+
+<style>
+ .collections-bottom-content-section{
+     margin: 0px 100px;
+ }
+
+ @media screen and (max-width: 1670px) {
+  .collections-bottom-content-section{
+     margin: 0px 30px;
+ } 
+ }
+  @media screen and (max-width: 1075px) {
+  .collections-bottom-content-section{
+     margin: 0px 15px;
+ }
+   #accordion { margin: 20px 16px; } 
+  }
+  #accordion h3 {
+    font-weight: 600!important;
+    font-size: 18px!important;
+    color: #1b4b26!important;
+  }
+  #accordion h2 {
+    background-color: #F5F2EE;
+    color: #000000;
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+  #accordion h2, #accordion h3 { cursor: pointer; }
+  #accordion h2 i, #accordion h3 i { margin-right: 8px; }
+  #accordion h4 { font-size: 18px; }
+  #accordion div { /*display: none; max-height: 0px; transition: 0.4s; will-change: max-height; */
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 200ms linear, max-height 200ms linear;
+    will-change: opacity, max-height;
+  }
+  #accordion div.active { /*display: block; max-height: 100em;*/
+    opacity: 1;
+    max-height: 100em;
+    transition: all 200ms linear;
+    will-change: opacity, max-height;
+  }
+</style>
+
+{% if collection.metafields.global.additional_text != blank %}
+<div style="margin-top: 40px;" class="additional_text">
+  <div class="container">
+    <!-- Test -->
+    <div class="collections-bottom-content-section" id="accordion">
+      {{ collection.metafields.global.additional_text }}
+    </div>
+  </div>
+</div>
+{% endif %}

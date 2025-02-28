@@ -1,0 +1,93 @@
+{% if section.blocks.size > 0 %}
+  <section class="feeturesBrandStatementWrapper">
+    <div class="wrapper">
+      <div class="feeturesBrandStatement">
+        <div class="feeturesBrandStatement__left">
+          <h2 class="feeturesBrandStatement__headline">{{ section.settings.headline }}</h2>
+          {% for block in section.blocks %}
+            {% if block.type == 'statement' %}
+              <div class="feeturesBrandStatementItem">
+                {% if block.settings.image %}
+                <div class="feeturesBrandStatementItem__img">
+                  {{
+                    block.settings.image
+                    | image_url: width: 170
+                    | image_tag: height: 'auto', loading: 'lazy', alt: block.settings.headline
+                  }}
+                </div>
+                {% endif %}
+                <div>
+                  <p class="feeturesBrandStatementItem__headline">{{ block.settings.headline }}</p>
+                  <p class="feeturesBrandStatementItem__description">{{ block.settings.text }}</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if section.settings.image %}
+        <div class="feeturesBrandStatement__right">
+          {{
+            section.settings.image
+            | image_url: width: 1000
+            | image_tag: height: 'auto', loading: 'lazy', alt: section.settings.image.alt
+          }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Feetures Brand Statement",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Large Image (880 x 860 ideally)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "statement",
+      "name": "statement",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Statement Image (85x85 ideally)"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Statement Headline"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Statement Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures Brand Statement",
+      "category": "Feetures"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

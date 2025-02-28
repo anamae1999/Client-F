@@ -1,0 +1,78 @@
+<section class="feeturesHero feeturesHero--find-your">
+    {% for block in section.blocks %}
+      {% if block.type == "desktop_image" %}
+        <img class="feeturesHero__img feeturesHero__img--desktop"  src="{{block.settings.desktop_image | img_url: '1920x600' }}" alt="{{ block.settings.image.alt }}">
+      {% endif %}
+      {% if block.type == "mobile_image" %}
+        <img class="feeturesHero__img feeturesHero__img--mobile"  src="{{block.settings.mobile_image | img_url: '768x880' }}" alt="{{ block.settings.image.alt }}">
+      {% endif %}
+    {% endfor %}
+    <div class="wrapper">
+        <div class=" feeturesHero__inner items-center justify-center">
+            <h1 class="feeturesHero__heading md-text-left text-center" 
+              {%if section.settings.headline_color != blank%} style="color:{{section.settings.headline_color}}"{%endif%}
+            >
+              Find Your Feetures
+            </h1>
+            <div class="feeturesHero__cta">
+              <a class="btn" href="https://{{shop.domain}}/collections/all-womens-socks">Women</a>
+              <a class="btn" href="https://{{shop.domain}}/collections/all-mens-socks">Men</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+{
+"name": "Feetures - Find Your",
+"settings": [
+  {
+    "type": "color",
+    "id": "headline_color",
+    "label": "headline color"
+  }
+],
+"blocks": [
+    {
+        "type": "desktop_image",
+        "name": "Desktop Image",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "desktop_image",
+                "label": "desktop image"
+            }
+        ]
+    },
+    {
+        "type": "mobile_image",
+        "name": "Mobile Image",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "mobile_image",
+                "label": "mobile image"
+            }
+        ]
+    }
+],
+"presets": [
+    {
+        "name": "Feetures - Find Your",
+        "category": "Feetures",
+        "blocks": [
+            {
+                "type": "desktop_image"
+            }
+        ]
+    }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,544 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ea385b0b-94e5-4489-b4d0-7997b108208f": {
+      "type": "feetures-hero",
+      "blocks": {
+        "mobile_image_HjJW46": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/Mobile_552c86ab-4da0-476c-a593-ebf3b1bd321f.jpg"
+          }
+        },
+        "template--14603988828232__ea385b0b-94e5-4489-b4d0-7997b108208f-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/LandingPage-3.jpg"
+          }
+        },
+        "b33b385a-97ae-4d6b-a6fa-a89347b23ac2": {
+          "type": "video",
+          "disabled": true,
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/Mt_Baker.mp4"
+          }
+        },
+        "3c5a9b71-ffac-402a-9f83-aa65eb643760": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Applications for 2024 Closed",
+            "cta_btn_url": "https:\/\/feetures.aspireiq.com\/join\/sole-circle?clientId=hf4vPNBeouqThGXAbDeMN9MaDm5JrDxw",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "mobile_image_HjJW46",
+        "template--14603988828232__ea385b0b-94e5-4489-b4d0-7997b108208f-desktop_image-1",
+        "b33b385a-97ae-4d6b-a6fa-a89347b23ac2",
+        "3c5a9b71-ffac-402a-9f83-aa65eb643760"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x800",
+        "vertical_alignment_desktop": "bottom",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "bottom",
+        "horizontal_alignment_mobile": "center",
+        "cta_top_margin": "0"
+      }
+    },
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe": {
+      "type": "feetures-hero-half-half",
+      "blocks": {
+        "template--14603988828232__fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Brand-2.jpg"
+          }
+        },
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1": {
+          "type": "mobile_image",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "e91ccce7-9616-4fef-8256-ea92f532d541": {
+          "type": "headline",
+          "settings": {
+            "headline": "Join Feetures Sole Circle",
+            "headline_color": "",
+            "headline_mobile_size": 30,
+            "headline_size": 32
+          }
+        },
+        "32e4bf52-d9a0-4634-85e4-40d46cbd8ba1": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>We believe people were not meant to sit still, they were meant to move. That there’s a drive, energy, and restlessness pushing all of us to be better. It is our mission to support that desire by cultivating a community of Feetures Fanatics who are passionate, boundary-pushers that inspire everyone around them. Step into our sole circle by joining our team of brand ambassadors who understand the call to move and the drive to be better, just like our performance socks.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 16,
+            "body_size": 18
+          }
+        },
+        "6a0c64d4-4302-44b1-9d63-6febfc385b87": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Applications for 2024 Now Closed",
+            "cta_btn_url": "https:\/\/feetures.aspireiq.com\/join\/sole-circle?clientId=hf4vPNBeouqThGXAbDeMN9MaDm5JrDxw",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe-desktop_image-1",
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1",
+        "e91ccce7-9616-4fef-8256-ea92f532d541",
+        "32e4bf52-d9a0-4634-85e4-40d46cbd8ba1",
+        "6a0c64d4-4302-44b1-9d63-6febfc385b87"
+      ],
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 80,
+        "image_side": "left",
+        "background_color": "#ffffff",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "center",
+        "horizontal_alignment_mobile": "left",
+        "cta_top_margin": ""
+      }
+    },
+    "f7c075f4-e326-4f2d-8fe6-c294dea78bd7": {
+      "type": "feetures-featured-collections",
+      "blocks": {
+        "c37cda3d-eb67-4f9b-8e4b-37be74d93f39": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mini_Crew.jpg",
+            "headline": "Elite No Show Tab Mini Crew",
+            "description": "",
+            "btn_1_text": "Shop Men",
+            "btn_1_aria": "Shop Men",
+            "btn_1_url": "shopify:\/\/products\/elite-light-cushion-mini-crew",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        },
+        "32d62206-674c-4ce3-9804-a80d9a06ec6f": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/BluePinkMix_caacfaaa-7d3d-44c8-aece-32257d43dd19.jpg",
+            "headline": "Shop Bundles",
+            "description": "",
+            "btn_1_text": "Men",
+            "btn_1_aria": "Men",
+            "btn_1_url": "shopify:\/\/pages\/all-colors",
+            "btn_2_text": "Women",
+            "btn_2_aria": "Women",
+            "btn_2_url": "shopify:\/\/collections\/all-1"
+          }
+        },
+        "30d5ae55-3d98-48de-8706-87d92e9c13e8": {
+          "type": "collection",
+          "settings": {
+            "headline": "Another One",
+            "description": "",
+            "btn_1_text": "Men",
+            "btn_1_aria": "Men",
+            "btn_1_url": "shopify:\/\/collections\/active-socks",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        },
+        "c0f59b11-43c3-47c6-a456-93a940b9c42b": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/MintPlumMix.jpg",
+            "headline": "Headline",
+            "description": "This is a short collection description lorem ipsum dolor sit amet adipiscing elit nullam est.",
+            "btn_1_text": "Shop Now",
+            "btn_1_aria": "",
+            "btn_1_url": "#",
+            "btn_2_text": "Shop Now",
+            "btn_2_aria": "",
+            "btn_2_url": "#"
+          }
+        },
+        "35495c33-04d1-41c0-b6ab-70a21cca000a": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mint-Charcoal-Mix.jpg",
+            "headline": "",
+            "description": "",
+            "btn_1_text": "",
+            "btn_1_aria": "",
+            "btn_1_url": "",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        },
+        "4d4df0d1-90d8-4a43-b4d3-f3b20de4fba3": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Moss-Charcoal-Mix.jpg",
+            "headline": "",
+            "description": "",
+            "btn_1_text": "",
+            "btn_1_aria": "",
+            "btn_1_url": "",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "c37cda3d-eb67-4f9b-8e4b-37be74d93f39",
+        "32d62206-674c-4ce3-9804-a80d9a06ec6f",
+        "30d5ae55-3d98-48de-8706-87d92e9c13e8",
+        "c0f59b11-43c3-47c6-a456-93a940b9c42b",
+        "35495c33-04d1-41c0-b6ab-70a21cca000a",
+        "4d4df0d1-90d8-4a43-b4d3-f3b20de4fba3"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "headline": "Some of Our Favorites",
+        "background_color": "",
+        "mobile_alignment": "stack",
+        "button_placement": "over"
+      }
+    },
+    "feetures_mini_callouts_4WJxVJ": {
+      "type": "feetures-mini-callouts",
+      "blocks": {
+        "callout_hnan8e": {
+          "type": "callout",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/0fa7f2bf7518a030c54be7411b69971b.jpg",
+            "headline": "Free Socks!",
+            "text": "Welcome Kit + quarterly seedings full of Feetures gear"
+          }
+        },
+        "callout_rqfzww": {
+          "type": "callout",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/a5499521deea38916693fa5d338d0100.jpg",
+            "headline": "Discount Codes",
+            "text": "30% discount code to use on personal purchases + a promo code for 15% off to share with friends and followers"
+          }
+        },
+        "callout_mr9nGE": {
+          "type": "callout",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/85e729a95ec2c968157fbc4a585e1c62.jpg",
+            "headline": "More perks",
+            "text": "Exclusive access to our sole circle Slack community, plus additional rewards & incentives"
+          }
+        }
+      },
+      "block_order": [
+        "callout_hnan8e",
+        "callout_rqfzww",
+        "callout_mr9nGE"
+      ],
+      "custom_css": [
+        ".feeturesMiniCalloutsItem__headline {font-size: 120%;}"
+      ],
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "acdb8400-cbe2-43b8-94d8-84f0ddad539f": {
+      "type": "feetures-brand-benefits",
+      "blocks": {
+        "237660e1-a554-44fe-b9b0-3513961ee7fc": {
+          "type": "benefit",
+          "settings": {
+            "headline": "Free Socks!",
+            "text": "Welcome Kit + quarterly seedings full of Feetures gear"
+          }
+        },
+        "9630af94-bea4-46d3-bc38-fa38c6119e13": {
+          "type": "benefit",
+          "settings": {
+            "headline": "Discount codes",
+            "text": "30% discount code to use on personal purchases + a promo code for 15% off to share with friends and followers"
+          }
+        },
+        "c3124857-e28b-4b0b-a5b2-a84a4c93762b": {
+          "type": "benefit",
+          "settings": {
+            "headline": "More perks",
+            "text": "Exclusive access to our Sole Circle Slack community, plus additional rewards & incentives"
+          }
+        }
+      },
+      "block_order": [
+        "237660e1-a554-44fe-b9b0-3513961ee7fc",
+        "9630af94-bea4-46d3-bc38-fa38c6119e13",
+        "c3124857-e28b-4b0b-a5b2-a84a4c93762b"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "heading": "Sole Circle Benefits",
+        "subheading": ""
+      }
+    },
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5": {
+      "type": "feetures-brand-statement",
+      "blocks": {
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6": {
+          "type": "statement",
+          "settings": {
+            "headline": "Statement one",
+            "text": "I like to row, row, row..."
+          }
+        },
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17": {
+          "type": "statement",
+          "settings": {
+            "headline": "Cool Statement",
+            "text": "More of these sections can be added!"
+          }
+        },
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002": {
+          "type": "statement",
+          "settings": {
+            "headline": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6",
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17",
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002"
+      ],
+      "disabled": true,
+      "settings": {
+        "headline": "Great for all action sports"
+      }
+    },
+    "eb304014-09ed-4f8f-9a21-4cd48c899a84": {
+      "type": "feetures-video",
+      "disabled": true,
+      "settings": {
+        "video_id": "",
+        "headline": "Video Title",
+        "description": "And some cool text to go below the video section here."
+      }
+    },
+    "288fbe07-33cc-484b-a930-78e31e3fc82c": {
+      "type": "feetures-logos",
+      "blocks": {
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_1_250x94_a5c8df9d-c28f-4737-ab6c-1b3357a89fef.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "842a552d-d026-4cfa-a7b1-53da96bf5989": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_3_250x94_4ce9e062-650b-4c7a-b50b-6686e3b6cee7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "ea7a5c74-dffc-4447-9271-e139a249c093": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_4_250x94_b66a6798-4efc-4bac-aca3-7f48d338e198.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "99ea2433-9438-41fe-966d-395059abf1a4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_2_250x94_ec014e0b-e3a1-45d3-8265-7d2bdb310d43.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "db55c43e-61ef-4026-8d84-1baafc55ce37": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_6_250x94_e025bb97-d471-4bc0-b967-61f6b44bdcac.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "673d26c5-59e2-4079-8455-8c4c53072b43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_5_250x94_78417c4e-5e5c-4a7f-85be-de8b93f566b7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105",
+        "842a552d-d026-4cfa-a7b1-53da96bf5989",
+        "ea7a5c74-dffc-4447-9271-e139a249c093",
+        "99ea2433-9438-41fe-966d-395059abf1a4",
+        "db55c43e-61ef-4026-8d84-1baafc55ce37",
+        "673d26c5-59e2-4079-8455-8c4c53072b43"
+      ],
+      "settings": {
+        "padding_top": 12,
+        "padding_bottom": 16,
+        "heading": "Recommended By"
+      }
+    },
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1": {
+          "type": "desktop_image",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "20fa25b4-0561-4d7e-a965-ec554a6b1e33": {
+          "type": "video",
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/PF_Relief_Updated.mp4"
+          }
+        },
+        "44452239-a81d-4791-8e83-60f45e312177": {
+          "type": "headline",
+          "settings": {
+            "headline": "Listicle style image + text section",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin. Meatloaf salami shoulder eu, doner exercitation drumstick eiusmod ut reprehenderit quis cow.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 18
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1",
+        "20fa25b4-0561-4d7e-a965-ec554a6b1e33",
+        "44452239-a81d-4791-8e83-60f45e312177",
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Brand-4.jpg"
+          }
+        },
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5": {
+          "type": "headline",
+          "settings": {
+            "headline": "Movement Maker",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "5f722017-8140-441e-80e1-b28491dfa2b2": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>You prioritize movement in your daily life and it shows throughout your content & on your social platforms. You enjoy the 'little luxuries' in life—like socks with a custom-like fit & lifetime guarantee. You believe we are all Meant to Move and want to share this desire with your audience.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 18
+          }
+        },
+        "cta_btn_GzRpVX": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Applications for 2024 Now Closed",
+            "cta_btn_url": "https:\/\/feetures.aspireiq.com\/join\/sole-circle?clientId=hf4vPNBeouqThGXAbDeMN9MaDm5JrDxw",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1",
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5",
+        "5f722017-8140-441e-80e1-b28491dfa2b2",
+        "cta_btn_GzRpVX"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "03642916-6dd5-4af1-94f4-7e5323edf355": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "Feetures Sole Circle",
+        "image1": "shopify:\/\/shop_images\/UGC_3.jpg",
+        "image2": "shopify:\/\/shop_images\/UGC_4.jpg",
+        "image3": "shopify:\/\/shop_images\/UGC_2.jpg",
+        "image4": "shopify:\/\/shop_images\/UGC_1.jpg",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ea385b0b-94e5-4489-b4d0-7997b108208f",
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe",
+    "f7c075f4-e326-4f2d-8fe6-c294dea78bd7",
+    "feetures_mini_callouts_4WJxVJ",
+    "acdb8400-cbe2-43b8-94d8-84f0ddad539f",
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5",
+    "eb304014-09ed-4f8f-9a21-4cd48c899a84",
+    "288fbe07-33cc-484b-a930-78e31e3fc82c",
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a",
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd",
+    "03642916-6dd5-4af1-94f4-7e5323edf355"
+  ]
+}

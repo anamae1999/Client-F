@@ -1,0 +1,324 @@
+<style>
+  .comparison-image-swarm-wrapper[data-comparison-image-swarm] {
+    /* vw percentages  based on provided image at 1920px width */
+    width: 100vw;
+    aspect-ratio: 1.4;
+    position: relative;
+    left: calc(50% - 50vw);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .comparison-image-swarm-text {
+      max-width: 49%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .comparison-image-swarm-text h1 {
+      font-size: 2.5vw;
+    }
+
+    .comparison-image-swarm-text span {
+      font-size: 1.25vw;
+      max-width: 80%;
+    }
+
+    .comparison-image-swarm-images {
+      width: 2px;
+      height: 2px;
+      position: absolute;
+      left: calc(50% - 1px);
+      top: calc(50% - 1px);
+      overflow: visible;
+    }
+
+    .comparison-image-swarm-images * {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: stretch;
+      background: lightgrey;
+    }
+
+    .comparison-image-swarm-images * img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .image-1 {
+      width: 9vw;
+      aspect-ratio: 1;
+      position: absolute;
+      top: -21vw;
+      left: -6.25vw;
+    }
+
+    .image-2 {
+      width: 17.5vw;
+      aspect-ratio: 0.9;
+      position: absolute;
+      top: -29vw;
+      right: -23vw;
+    }
+
+    .image-3 {
+      width: 25vw;
+      aspect-ratio: 1;
+      position: absolute;
+      top: -26vw;
+      right: -49.5vw;
+    }
+
+    .image-4 {
+      width: 20.2vw;
+      aspect-ratio: 1;
+      position: absolute;
+      top: 1vw;
+      right: -49.5vw;
+    }
+
+    .image-5 {
+      width: 9vw;
+      aspect-ratio: 1;
+      position: absolute;
+      bottom: -32vw;
+      right: -38.5vw;
+    }
+
+    .image-6 {
+      width: 21.5vw;
+      aspect-ratio: 1;
+      position: absolute;
+      bottom: -31vw;
+      right: -28.5vw;
+    }
+
+    .image-7 {
+      width: 16vw;
+      aspect-ratio: 1;
+      position: absolute;
+      left: -11.5vw;
+      bottom: -24vw;
+    }
+
+    .image-8 {
+      width: 19vw;
+      aspect-ratio: 0.75;
+      position: absolute;
+      left: -33vw;
+      bottom: -35vw;
+    }
+
+    .image-9 {
+      width: 9vw;
+      aspect-ratio: 1;
+      position: absolute;
+      left: -45vw;
+      bottom: -22vw;
+    }
+
+    .image-10 {
+      width: 12vw;
+      aspect-ratio: 1;
+      position: absolute;
+      left: -48vw;
+      bottom: -11vw;
+    }
+
+    .image-11 {
+      width: 21vw;
+      aspect-ratio: 1;
+      position: absolute;
+      top: -24vw;
+      left: -50vw;
+    }
+
+    .image-12 {
+      width: 17.5vw;
+      aspect-ratio: 0.9;
+      position: absolute;
+      top: -29vw;
+      left: -27vw;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .comparison-image-swarm-wrapper[data-comparison-image-swarm] {
+      aspect-ratio: 0.45;
+
+      .comparison-image-swarm-text {
+        max-width: 76%;
+      }
+
+      .comparison-image-swarm-text h1 {
+        font-size: 6.5vw;
+      }
+
+      .comparison-image-swarm-text span {
+        font-size: 4vw;
+      }
+
+      .image-1 {
+        width: 19vw;
+        top: -89vw;
+        left: -49vw;
+      }
+
+      .image-2 {
+        width: 32vw;
+        top: -105vw;
+        left: -27vw;
+      }
+
+      .image-3 {
+        width: 43vw;
+        top: -95vw;
+        left: 7vw;
+      }
+
+      .image-4 {
+        width: 27vw;
+        top: unset;
+        bottom: -62vw;
+        right: -49vw;
+      }
+
+      .image-5 {
+        width: 27vw;
+        bottom: -68vw;
+        right: -11vw;
+      }
+
+      .image-6 {
+        width: 40vw;
+        bottom: -111vw;
+        left: -28vw;
+        right: unset;
+      }
+
+      .image-7 {
+        width: 31vw;
+        bottom: -68vw;
+        left: -49vw;
+      }
+
+      .image-8 {
+        width: 35vw;
+        bottom: -111vw;
+        left: unset;
+        right: -49vw;
+      }
+
+      .image-9 {
+        width: 19vw;
+        bottom: -90vw;
+        left: -49vw;
+      }
+
+      .image-10 {
+        width: 19vw;
+        top: -67vw;
+        bottom: unset;
+        left: -14vw;
+      }
+
+      .image-11 {
+        width: 32.5vw;
+        top: -67vw;
+        left: -49vw;
+      }
+
+      .image-12 {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .comparison-image-swarm-wrapper[data-comparison-image-swarm] {
+      aspect-ratio: 0.45;
+
+      .comparison-image-swarm-text {
+        max-width: 76%;
+      }
+
+      .comparison-image-swarm-text h1 {
+        font-size: 7.5vw;
+      }
+
+      .comparison-image-swarm-text span {
+        font-size: 5vw;
+      }
+    }
+  }
+</style>
+
+<div class="comparison-image-swarm-wrapper" data-comparison-image-swarm>
+  <div class="comparison-image-swarm-text">
+    <h1>We create socks designed to enhance the action of life</h1>
+    <span> Movement is our business</span>
+    <div class="comparison-image-swarm-images">
+      {% for block in section.blocks %}
+        <div class="image-{{ forloop.index }}">
+          {% if block.settings.image %}
+            <img
+              width="600"
+              height="600"
+              src="{{ block.settings.image | image_url }}"
+            >
+          {% else %}
+            {{ forloop.index }}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script data-comparison-image-swarm></script>
+
+{% schema %}
+{
+  "name": "Sock Image Grid Wall",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Header",
+      "default": "Header Goes Here"
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body",
+      "default": "Body Goes Here"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (index bassed ordering clockwise from center top)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Sock Image Grid Wall"
+    }
+  ]
+}
+{% endschema %}

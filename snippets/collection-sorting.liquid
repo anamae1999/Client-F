@@ -1,0 +1,13 @@
+<div class="sortby-dropdown">
+  <label class="sortby-dropdown__label" for="sortBy">
+    <span class="sortby-dropdown__label--title">Sort by </span>
+    <span class="sortby-dropdown__label--active"></span>
+  </label>
+  {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+  <select id="sortBy" name="sort_by" aria-describedby="a11y-refresh-page-message a11y-selection-message" class="sortby-dropdown__select">
+    {% for option in collection.sort_options %}
+      <option value="{{ option.value }}"{% if sort_by == option.value %} selected="selected"{% endif %}>{{ option.name }}</option>
+    {% endfor %}
+  </select>
+  {% include 'chevron-right.svg' %}
+</div>

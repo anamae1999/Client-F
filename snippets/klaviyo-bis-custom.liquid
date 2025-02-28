@@ -1,0 +1,110 @@
+<style>
+  .email-notification-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+  }
+  .email-notification-container .call-to-action {
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  #emailNotificationForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+</style>
+
+<div class="email-notification-container" data-email-notification>
+  <span class="call-to-action">Notify Me When Back In Stock</span>
+  <form id="emailNotificationForm">
+    <input type="email" id="email" placeholder="Enter your email address" required>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+  <div id="successMessage" style="display: none;">
+    <p>We'll let you know when we have more back in stock!</p>
+  </div>
+  <div id="errorMessage" style="display: none;">
+    <p>Back in stock notification submission failed.</p>
+  </div>
+</div>
+
+<script>
+  'use strict';
+  let emailForm = document.getElementById('emailNotificationForm');
+  let successMessage = document.getElementById('successMessage');
+  let errorMessage = document.getElementById('errorMessage');
+
+  emailForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the form from submitting as a traditional POST request
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    // Get the email address input value
+    let emailInput = emailForm.querySelector('input[id="email"]');
+    let emailAddress = emailInput.value;
+
+    // Get product and variant ids
+    let urlParams = new URLSearchParams(window.location.search);
+    let variantId = urlParams.get('variant');
+    let productId = document.querySelector('input[name="product-id"]').value;
+
+    // Prepare the data to send in the request
+    let payload = {
+      data: {
+        type: 'back-in-stock-subscription',
+        attributes: {
+          company_id: 'HnW8Sn',
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                email: emailAddress,
+              },
+            },
+          },
+          channels: ['EMAIL'],
+        },
+        relationships: {
+          variant: {
+            data: {
+              type: 'catalog-variant',
+              id: `$shopify:::$default:::${variantId}`,
+            },
+          },
+        },
+      },
+    };
+
+    // Send the POST request using the fetch API
+    fetch('https://a.klaviyo.com/client/back-in-stock-subscriptions', {
+      method: 'POST',
+      headers: {
+        accept: 'application/vnd.api+json',
+        revision: '2024-10-15',
+        'content-type': 'application/vnd.api+json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Successful response
+          emailForm.style.display = 'none'; // Hide the form
+          successMessage.style.display = 'block'; // Show the success message
+        } else {
+          // Error response
+          emailInput.value = ''; // Clear the input field
+          errorMessage.style.display = 'block'; // Show the error message
+        }
+      })
+      .catch((error) => {
+        console.error('An error occurred:', error);
+        emailInput.value = ''; // Clear the input field
+        errorMessage.style.display = 'block'; // Show the error message
+      });
+  });
+</script>

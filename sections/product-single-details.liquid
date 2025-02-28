@@ -1,0 +1,27 @@
+
+  {% if product.metafields.accentuate.product_details != blank %}
+    <div class="wrapper">
+      <div class="product-single-details">
+        {% assign selectedDetails = product.metafields.accentuate.product_details | split: '|' %}
+        {% for detail in shop.metafields.accentuate.product_details.details %}
+          {% for selectedDetail in selectedDetails %}
+            {% if selectedDetail == detail.headline %}
+              <div class="product-single-detail">
+                <div class="product-single-detail__img">
+                  <img class="lazyload" data-src="{{ detail.image }}" alt="{{detail.headline}}">
+                </div>
+                <div class="product-single-detail__headline">
+                  <h3>{{ detail.headline }}</h3>
+                  <img class="lazyload" data-src="{{ detail.icon }}" alt="icon representing {{detail.headline}}">
+                </div>
+
+                <p class="product-single-detail__description">
+                  {{ detail.description }}
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}

@@ -1,0 +1,208 @@
+<style>
+  .sock-cushion-illustration {
+    padding: 50px 15px;
+    background-image: url({{section.settings.background_image|img_url:'master'}});
+    background-size: cover;
+    text-align: center;
+  }
+
+  .sock-cushion-header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .sock-cushion-header p {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cushion-columns {
+    display: flex;
+  }
+
+  .left-side,
+  .right-side {
+    width: 50%;
+  }
+
+  .left-side {
+    position: relative;
+  }
+
+  .left-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .cushion-description-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    margin: 20px 0;
+  }
+
+  .cushion-description-wrapper img {
+    margin-right: 25px;
+  }
+
+  .icon-cushion {
+    max-width: 125px;
+    height: 100%;
+    border-radius: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .cushion-columns {
+      flex-direction: column;
+    }
+
+    .left-side,
+    .right-side {
+      width: 100%;
+    }
+  }
+</style>
+
+<section class="sock-cushion-illustration">
+  <div class="wrapper">
+    <div class="sock-cushion-header">
+      <h2>Our Cushion Weights</h2>
+      <p>
+        Cushion weight can impact how your feet feel in and out of your shoes, which is why we crafted three unique
+        levels.
+      </p>
+    </div>
+    <div class="cushion-columns">
+      <div class="left-side">
+        {{ section.settings.left_image | image_url: width: 500 | image_tag }}
+      </div>
+
+      <div class="right-side">
+        <div class="cushion-description-wrapper">
+          {{ section.settings.ultralight_image | image_url: width: 250 | image_tag: class: 'icon-cushion' }}
+          <div class="cushion-description-text">
+            <h4>Ultra Light</h4>
+            <p>
+              Takes up minimal space in the shoe, with more more breathability to keep your feet dry in various
+              conditions.
+            </p>
+          </div>
+        </div>
+
+        <div class="cushion-description-wrapper">
+          {{ section.settings.light_image | image_url: width: 250 | image_tag: class: 'icon-cushion' }}
+          <div class="cushion-description-text">
+            <h4>Light Cushion</h4>
+            <p>High density cushioning provides cushioned comfort and impact protection without the bulk.</p>
+          </div>
+        </div>
+
+        <div class="cushion-description-wrapper">
+          {{ section.settings.max_image | image_url: width: 250 | image_tag: class: 'icon-cushion' }}
+          <div class="cushion-description-text">
+            <h4>Max Cushion</h4>
+            <p>Maximum cushioning that protects the foot, with added impact protection and comfort.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sock Cushion Illustration",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left image"
+    },
+    {
+      "type": "image_picker",
+      "id": "ultralight_image",
+      "label": "Ultra Light image"
+    },
+    {
+      "type": "text",
+      "id": "ultralight_heading",
+      "label": "Ultra Light heading",
+      "default": "Ultra Light"
+    },
+    {
+      "type": "textarea",
+      "id": "ultralight_text",
+      "label": "Ultra Light text",
+      "default": "Ultra Light text here"
+    },
+    {
+      "type": "image_picker",
+      "id": "light_image",
+      "label": "Light image"
+    },
+    {
+      "type": "text",
+      "id": "light_heading",
+      "label": "Light heading",
+      "default": "Light Cushion"
+    },
+    {
+      "type": "textarea",
+      "id": "light_text",
+      "label": "Light text",
+      "default": "Light text here"
+    },
+    {
+      "type": "image_picker",
+      "id": "max_image",
+      "label": "Max image"
+    },
+    {
+      "type": "text",
+      "id": "max_heading",
+      "label": "Max heading",
+      "default": "Max Cushion"
+    },
+    {
+      "type": "textarea",
+      "id": "max_text",
+      "label": "Max text",
+      "default": "Max text here"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sock Cushion Illustration",
+      "category": "Feetures"
+    }
+  ]
+}
+{% endschema %}

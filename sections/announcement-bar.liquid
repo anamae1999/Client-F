@@ -1,0 +1,364 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<style>
+  .announcement-bar-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+    padding: 13px 30px;
+  }
+
+  .announcement-bar-wrapper .announcement-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .announcement-bar-wrapper .swiper {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+
+  .announcement-bar-wrapper .swiper-wrapper {
+    align-items: center;
+  }
+
+  .announcement-bar-wrapper .swiper-slide {
+    width: 100%;
+    padding: 0px 16px;
+  }
+
+  .announcement-bar-wrapper .swiper-slide div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .announcement-bar-wrapper .swiper-slide div * {
+    color: var(--text-color);
+    margin: 0;
+    text-align: center;
+  }
+
+  .announcement-bar-wrapper .swiper-slide div p {
+   font-size: 14px;
+  }
+
+  .announcement-bar-wrapper .swiper-navigation {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .announcement-bar-wrapper .navigation-button {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: 0;
+  }
+
+  .announcement-bar-wrapper .navigation-button.swiper-button-lock {
+    display: none;
+  }
+
+  .announcement-bar-wrapper .navigation-button svg {
+    width: auto;
+    height: 14px;
+  }
+
+  .announcement-bar-wrapper .navigation-button svg path {
+    stroke: var(--text-color);
+  }
+
+  .announcement-bar-wrapper .navigation-button.prev {
+    left: 0;
+    transform: rotate(180deg);
+  }
+
+  .announcement-bar-wrapper .navigation-button.next {
+   right: 0;
+  }
+
+  .announcement-bar-wrapper .additional-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    padding-right: 20px;
+  }
+
+  .announcement-bar-wrapper .additional-content a {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .additional-content a:hover, .additional-content a:active, .additional-content a:focus {
+    text-decoration: underline;
+  }
+
+
+  .announcement-bar-wrapper .pre-header-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav .pre-header-nav__link {
+    margin-right: 25px;
+    margin-bottom: 0;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__link:last-child {
+    margin-right: 0;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__link .pre-header-nav__link--has-dropdown {
+    position: relative;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__link--has-dropdown span {
+    color:  var(--text-color);
+    cursor: pointer;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__link--has-dropdown svg {
+    width: 5px;
+    transform: rotate(90deg);
+    top: -1px;
+    position: relative;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__link--has-dropdown svg path {
+    stroke: var(--text-color);
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__link--has-dropdown:hover .pre-header-nav__dropdown{
+    display: block;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    margin: 0;
+    z-index: 99;
+    background: var(--background-color);
+    padding: 15px 20px 5px;
+    list-style: none;
+  }
+
+  .announcement-bar-wrapper .pre-header-nav__dropdown li {
+    line-height: 1.2;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+
+  .announcement-bar-wrapper .pre-header .pre-header-nav .pre-header-nav__link.pre-header-nav__link--has-dropdown svg path {
+    stroke: var(--text-color);
+  }
+
+  .announcement-bar-wrapper .pre-header .pre-header-nav__dropdown {
+    background-color:var(--background-color)
+    stroke: var(--text-color);
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .announcement-bar-wrapper {
+      grid-template-columns: 100%;
+      padding: 10px;
+    }
+
+    .announcement-bar-wrapper:not(:has(.swiper-slide)) {
+      display: none;
+    }
+
+    .announcement-bar-wrapper .swiper-slide {
+      padding: 0 15px;
+    }
+
+    .announcement-bar-wrapper .swiper-slide div p {
+      font-size: 12px;
+    }
+
+    .announcement-bar-wrapper .additional-content {
+      display: none;
+    }
+
+    .announcement-bar-wrapper .navigation-button svg {
+      height: 18px;
+    }
+  }
+</style>
+<div
+  class="announcement-bar-wrapper"
+  data-announcement-bar
+  data-autoplay-delay="{{ section.settings.autoplay_delay }}"
+  style="--background-color:{{ section.settings.background_color }};--text-color:{{ section.settings.text_color }}"
+>
+  <div class="announcement-content">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div>{{ block.settings.text }}</div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-navigation">
+        <button class="navigation-button prev">{% render 'chevron-right.svg' %}</button>
+        <button class="navigation-button next">{% render 'chevron-right.svg' %}</button>
+      </div>
+    </div>
+  </div>
+  <div class="additional-content pre-header-nav">
+    {% for link in linklists['pre-header-nav'].links %}
+      <li class="pre-header-nav__link {% if link.links != blank %}pre-header-nav__link--has-dropdown{% endif %}">
+        {% if link.links != blank %}
+          <span>
+            {{ link.title }}
+            {% include 'chevron-right.svg' %}
+          </span>
+          <ul class="pre-header-nav__dropdown">
+            {% for child_link in link.links %}
+              <li>
+                <a
+                  href="{{ child_link.url }}"
+                  {% if child_link.url contains 'http' %}
+                    target="_blank"
+                  {% endif %}
+                >
+                  {{- child_link.title -}}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  'use strict';
+  if (true) {
+    let announcementBar = document.querySelector('[data-announcement-bar]');
+
+    let initSwiper = function () {
+      let swiperQuerySelector = `[data-announcement-bar] .announcement-content > .swiper`;
+      let autoplayDelay = parseInt(
+        document
+          .querySelector(swiperQuerySelector)
+          .closest('[data-announcement-bar]')
+          .getAttribute('data-autoplay-delay')
+      );
+      let swiper = new Swiper(swiperQuerySelector, {
+        slidesPerView: 1,
+        spaceBetween: autoplayDelay,
+        loop: true,
+        autoplay: {
+          delay: autoplayDelay,
+          disableOnInteraction: true,
+          pauseOnMouseEnter: true,
+        },
+        navigation: {
+          nextEl: `${swiperQuerySelector} > .swiper-navigation .navigation-button.next`,
+          prevEl: `${swiperQuerySelector} > .swiper-navigation .navigation-button.prev`,
+        },
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      let headerAttachmentDiv = document.querySelector('[data-announcement-bar-attach]');
+      if (headerAttachmentDiv) {
+        headerAttachmentDiv.append(announcementBar);
+        let header = document.querySelector('header');
+        let navDropDowns = header.querySelectorAll('.site-nav__dropdown');
+        for (let i = 0; i < navDropDowns.length; i++) {
+          let navDropDown = navDropDowns[i];
+          navDropDown.style.top = headerAttachmentDiv.offsetHeight + header.offsetHeight + 'px';
+        }
+        initSwiper();
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#15565b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "number",
+      "id": "autoplay_delay",
+      "label": "Autoplay Delay",
+      "info": "Time in ms between announcement slides",
+      "default": 5000
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Announcement",
+      "type": "announcement_text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Announcment text</p>",
+          "label": "Announcment text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

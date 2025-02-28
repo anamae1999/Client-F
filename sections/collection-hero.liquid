@@ -1,0 +1,92 @@
+<div
+  class="collectionHeroWrapper"
+  {% if collection.metafields.accentuate.hero_image_bg_color != blank %}
+    style="background-color:{{collection.metafields.accentuate.hero_image_bg_color}}"
+  {% endif %}
+>
+  <div class="wrapper">
+    <div class="collectionHero">
+      <div class="collectionHero__left">
+        <div class="collectionHero__content" style="margin-bottom: 48px;">
+          {% if collection.metafields.accentuate.the_parent_collection != blank %}
+            <a
+              class="colletionHero__breadcrumb"
+              href="{{ collections[collection.metafields.accentuate.the_parent_collection].url }}"
+            >
+              {{ collections[collection.metafields.accentuate.the_parent_collection].title }}
+            </a>
+          {% endif %}
+          <h1 class="collectionHero__title">
+            {{ collection.title }}
+          </h1>
+          {% if collection.metafields.global.top_description != blank %}
+            <div class="desc_tag" style="color: white!important; margin-top:4px!important;">
+              <p>{{ collection.metafields.global.top_description }}</p>
+            </div>
+          {% endif %}
+          {% if collection.metafields.global.top_description == blank
+            and collection.metafields.global.description_tag != blank
+          %}
+            <div class="desc_tag" style="color: white!important; margin-top:4px!important;">
+              <p>{{ collection.metafields.global.description_tag }}</p>
+            </div>
+          {% endif %}
+          {% if collection.metafields.accentuate.subcollections != blank %}
+            {% assign selected_handles = collection.metafields.accentuate.subcollections | split: '|' %}
+            {% for selected_handle in selected_handles %}
+              <a class="btn btn--white" href="{{ collections[selected_handle].url }}">
+                {{
+                  collections[selected_handle].title
+                  | remove: "Women's"
+                  | remove: "Men's"
+                  | remove: 'Socks'
+                  | remove: 'Sock'
+                }}
+              </a>
+            {% endfor %}
+          {% endif %}
+
+          {% comment %}
+            {% if product.metafields.accentuate.bundle_reviews != blank %}
+              {% assign selected_handles = product.metafields.accentuate.bundle_reviews | split: '|' %}
+              {% for selected_handle in selected_handles %}
+                <ul class="spr-bundle-nav">
+                  {% for selected_handle in selected_handles %}
+                    <li class="spr-bundle-nav__item" data-product="{{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}">
+                      {{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}
+                    </li>
+                  {% endfor %}
+                </ul>
+                <div id="shopify-product-reviews" class="shopify-product-reviews" data-id="{{ all_products[selected_handle].id }}" data-product="{{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}">
+                  {{ all_products[selected_handle].metafields.spr.reviews }}
+                </div>
+              {% endfor %}
+            {% else %}
+              <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+            {% endif %}
+          {% endcomment %}
+        </div>
+      </div>
+      <div class="collectionHero__right">
+        <div class="collectionHero__imgWrapper">
+          <img
+            srcset="
+              {{ collection.image | img_url: '350x' }} 350w,
+              {{ collection.image | img_url: '480x' }} 480w,
+              {{ collection.image | img_url: '768x' }} 768w,
+              {{ collection.image | img_url: '960x390' }} 960w
+            "
+            sizes="
+              (min-width: 2040px) 960px,
+              (min-width: 920px) calc(45.45vw + 42px),
+              calc(95vw + 45px)
+            "
+            src="{{ collection.image | img_url: '960x390' }}"
+            alt="{{collection.image.alt}}"
+            importance="high"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<section class="feeturesProductLines">
+    <div class="wrapper">
+      {% if section.settings.headline != blank %}
+          <h2 class="feeturesProductLines__headline">{{section.settings.headline}}</h2>
+      {% endif %}
+      {% comment %} {% assign productLines = "shop.metafields.accentuate.product_line_elite,shop.metafields.accentuate.product_line_high_performance,shop.metafields.accentuate.product_line_merino_10,shop.metafields.accentuate.product_line_graduated_compres,shop.metafields.accentuate.product_line_therapeutic"| replace:"shop.metafields.accentuate.", "" | split: ',' %} {% endcomment %}
+      {% assign productLines = section.settings.product_line_metafields | replace:"shop.metafields.accentuate.", "" | split: ',' %}
+      <nav class="feeturesProductLines__nav">
+        {% for productLine in productLines %}
+          {% assign productLineJSON = shop.metafields.accentuate[productLine] %}
+          {% assign i = forloop.index0 %}
+          <span class="btn btn--white {% if i == 0 %}active{% endif %}">{{productLineJSON.name}}</span>
+        {% endfor %}
+      </nav>
+    </div>
+    
+
+    <div class="productLineDetailsWrapper">
+      <div class="wrapper">
+        {% for productLine in productLines %}
+        {% assign productLineJSON = shop.metafields.accentuate[productLine] %}
+        {% assign i = forloop.index0 %}
+        <div class="productLineDetails {% if i == 0 %}productLineDetails--active{% endif %}" data-name="{{productLineJSON.name}}">
+          <div class="productLineDetails__left">
+            <img class="productLineDetails__logo" src="{{ productLineJSON.logo}}" alt="{{product.metafields.accentuate.product_line}}">
+            <p class="productLineDetails__description">{{ productLineJSON.description }}</p>
+            
+            {% for item in productLineJSON.items %}
+              <div class="productLineDetailsItem">
+                <div class="productLineDetailsItem__img">
+                    <img class="lazyload" data-src="{{item.img}}" alt="{{item.headline}}">
+                </div>
+                <div>
+                    <p class="productLineDetailsItem__headline">{{item.headline}}</p>
+                    <p class="productLineDetailsItem__description">{{item.text}}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="productLineDetails__right">
+            <img class="lazyload" data-src="{{productLineJSON.large_image}}" alt="{{productLineJSON.name}} - {% for item in productLineJSON.items %}{{item.headline}}{%unless forloop.last%},{%endunless%} {% endfor %}">
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</section>
+
+{% schema %}
+{
+"name": "Feetures Product Lines",
+"settings": [
+    {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline"
+    },
+    {
+        "type": "text",
+        "id": "product_line_metafields",
+        "label": "Product Lines",
+        "info": "(comma seperated list of product lines from accentuate > shop fields > Product Line X > liquid code)"
+    }
+],
+"presets": [
+    {
+        "name": "Feetures Product Lines",
+        "category": "Feetures"
+    }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,52 @@
+<section>
+    <div class="wrapper">
+        <div class="feeturesVideo">
+            <div class="feeturesVideo__videoWrapper">
+                <div class="video-wrapper">
+                    <iframe class="lazyload" id="player" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="1142" height="642" data-src="https://www.youtube.com/embed/{{section.settings.video_id}}?autoplay=0&amp;controls=0&amp;wmode=transparent&amp;rel=0">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="feeturesVideo__content">
+                <h3 class="feeturesVideo__headline">{{section.settings.headline}}</h3>
+                <p class="feeturesVideo__description">{{section.settings.description}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+"name": "Feetures Video",
+"settings": [
+    {
+        "type": "text",
+        "id": "video_id",
+        "label": "Youtube Video ID"
+    },
+    {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline"
+    },
+    {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+    }
+],
+"presets": [
+    {
+        "name": "Feetures Video",
+        "category": "Feetures"
+    }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

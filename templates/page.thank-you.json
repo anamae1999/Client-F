@@ -1,0 +1,564 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe": {
+      "type": "feetures-hero-half-half",
+      "blocks": {
+        "template--14603988828232__fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Lightning4_fcdbc788-62d6-49a6-b078-3b25676031e2.jpg"
+          }
+        },
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1": {
+          "type": "mobile_image",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "1e78b988-d887-4d75-a164-a37ee0cfc219": {
+          "type": "eyebrow_text",
+          "settings": {
+            "eyebrow_text": "Feetures Elite Invisible",
+            "eyebrow_color": "",
+            "eyebrow_mobile_size": 16,
+            "eyebrow_size": 16
+          }
+        },
+        "e91ccce7-9616-4fef-8256-ea92f532d541": {
+          "type": "headline",
+          "settings": {
+            "headline": "You go, the sock stays",
+            "headline_color": "",
+            "headline_mobile_size": 30,
+            "headline_size": 48
+          }
+        },
+        "6a0c64d4-4302-44b1-9d63-6febfc385b87": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "shopify:\/\/collections\/womens-pf-relief-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "e82198a8-c9ab-492f-8978-d8565692dd45": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "shopify:\/\/collections\/mens-pf-relief-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "fbcf7ce7-bdd9-4280-a357-0858b06b17fd": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Meet our high-tech, truly invisible running socks that won't slip down<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 16,
+            "body_size": 20
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe-desktop_image-1",
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1",
+        "1e78b988-d887-4d75-a164-a37ee0cfc219",
+        "e91ccce7-9616-4fef-8256-ea92f532d541",
+        "6a0c64d4-4302-44b1-9d63-6febfc385b87",
+        "e82198a8-c9ab-492f-8978-d8565692dd45",
+        "fbcf7ce7-bdd9-4280-a357-0858b06b17fd"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "image_side": "left",
+        "background_color": "#e7f771",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "center",
+        "horizontal_alignment_mobile": "left",
+        "cta_top_margin": ""
+      }
+    },
+    "288fbe07-33cc-484b-a930-78e31e3fc82c": {
+      "type": "feetures-logos",
+      "blocks": {
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_1_250x94_a5c8df9d-c28f-4737-ab6c-1b3357a89fef.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "842a552d-d026-4cfa-a7b1-53da96bf5989": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_3_250x94_4ce9e062-650b-4c7a-b50b-6686e3b6cee7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "ea7a5c74-dffc-4447-9271-e139a249c093": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_4_250x94_b66a6798-4efc-4bac-aca3-7f48d338e198.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "99ea2433-9438-41fe-966d-395059abf1a4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_2_250x94_ec014e0b-e3a1-45d3-8265-7d2bdb310d43.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "db55c43e-61ef-4026-8d84-1baafc55ce37": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_6_250x94_e025bb97-d471-4bc0-b967-61f6b44bdcac.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "673d26c5-59e2-4079-8455-8c4c53072b43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_5_250x94_78417c4e-5e5c-4a7f-85be-de8b93f566b7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105",
+        "842a552d-d026-4cfa-a7b1-53da96bf5989",
+        "ea7a5c74-dffc-4447-9271-e139a249c093",
+        "99ea2433-9438-41fe-966d-395059abf1a4",
+        "db55c43e-61ef-4026-8d84-1baafc55ce37",
+        "673d26c5-59e2-4079-8455-8c4c53072b43"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 72,
+        "padding_bottom": 36,
+        "heading": ""
+      }
+    },
+    "9b4683d9-5fba-42dd-ba32-53b809f0f1dd": {
+      "type": "feetures-media-collage",
+      "settings": {
+        "headline": "2023 Activewear Award Winner: Best No Show Sock",
+        "description": "\"Feetures' Elite Invisible Socks might just be the glass slipper solution: they're thin and breathable for anyone who likes a sock that feels like a second skin - and they stay put.\"",
+        "tagline": "- SELF Magazine",
+        "image": "shopify:\/\/shop_images\/BlueLightningMix_aaad4409-9d26-4e9c-bc5b-eab1e586d92c.jpg"
+      }
+    },
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h1>Here's How it Works<\/h1><\/div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Black4_5944f1db-3e2c-43b5-93ea-ba3c3874cf7f.jpg"
+          }
+        },
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5": {
+          "type": "headline",
+          "settings": {
+            "headline": "Ultra Low Height with Heel Protection",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "5f722017-8140-441e-80e1-b28491dfa2b2": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Our invisible socks are a true no-show height. A higher tab protects the ankle while staying hidden, and Heel Hugger 2.0 silicone tape helps the sock stay up in the most strenuous of running conditions.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1",
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5",
+        "5f722017-8140-441e-80e1-b28491dfa2b2"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Pink3_86de1e74-453e-4f83-8104-d4e192655e1c.jpg"
+          }
+        },
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427": {
+          "type": "headline",
+          "settings": {
+            "headline": "Anatomical Fit",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "cd535363-ed57-4739-a3ee-f0c995666962": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>How it works meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361",
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427",
+        "cd535363-ed57-4739-a3ee-f0c995666962"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Blue4_50b65bce-1afd-453b-a028-a706f07252b4.jpg"
+          }
+        },
+        "44452239-a81d-4791-8e83-60f45e312177": {
+          "type": "headline",
+          "settings": {
+            "headline": "Ultra Lightweight Breathability",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Technical mesh ventilation keeps your foot cool and comfortable, even on long runs. Plus, iWick Fibers wick moisture to keep feet cool and dry, while providing superior durability for intense runs and workouts<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1",
+        "44452239-a81d-4791-8e83-60f45e312177",
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/E702158-3_22bb9d36-63f9-4edb-9e8d-7ec0d84dce23.jpg"
+          }
+        },
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200": {
+          "type": "headline",
+          "settings": {
+            "headline": "High Density Cushioning",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>How it works meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1",
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200",
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5": {
+      "type": "feetures-brand-statement",
+      "blocks": {
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Seamless_Toe_copy.png",
+            "headline": "The Perfect Toe",
+            "text": "I like to row, row, row..."
+          }
+        },
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/new_iWick_Tech_Icons.png",
+            "headline": "Targeted Compression",
+            "text": "More of these sections can be added!"
+          }
+        },
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/lifetime-guarantee.png",
+            "headline": "Lifetime Guarantee",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6",
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17",
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002"
+      ],
+      "disabled": true,
+      "settings": {
+        "headline": "Plus, all the other tech that makes Feetures socks the best available",
+        "image": "shopify:\/\/shop_images\/Gray3_e43ebc5b-4d6c-497b-b718-7626900efd77.jpg"
+      }
+    },
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Try Elite Invisible Socks for Your Next Workout",
+        "collection": "invisible-socks",
+        "cta_btn_text": "",
+        "cta_btn_url": "",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "f68c6052-ad63-4822-88a6-4d5515796d61": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h2>Testimonials will go here<\/h2><\/div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        },
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca": {
+          "type": "html",
+          "settings": {
+            "code": "<p>\"Best no show socks ever. Perfect fit on my feet, great material that keeps my feet dry and happy. They truly don’t slip or move at all!!\" - Shannon H.\n<\/p>\n\n<p>\"I'm not one to write reviews....but these are the best socks I've ever owned. I will never go back to any other brand- and it seems like I've tried them all!\" - Janice R.<\/p>\n\n<p>\"Whether I am wearing running shoes, loafers or Toms, these socks have such a low profile that I have the comfort of a sock without the thickness or visibility. A great product!\" - Elizabeth S.<\/p>\n\n<p>\"Great no-show socks. Fantastic grip around heel, no sliding down in your shoe. And you still get that little \"hug\" around your foot which feels great.\" - Vicky R.\n<\/p>\n\n<p>\"This is my second purchase of these socks. I love the thinness of them; they fit perfectly and never move on my foot, and best of all you can’t see them! They also keep my feet dry. Love, love, love!!!\" - Larry H.<\/p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1",
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca"
+      ],
+      "settings": {
+      }
+    },
+    "7084eae3-1067-4927-93ba-f7dca655ffec": {
+      "type": "feetures-hero",
+      "blocks": {
+        "template--14627720495176__7084eae3-1067-4927-93ba-f7dca655ffec-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Trail_header_for_Alexis_2.png"
+          }
+        },
+        "25130732-2e49-4715-a30e-c63b16143a35": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/Gray3_e43ebc5b-4d6c-497b-b718-7626900efd77.jpg"
+          }
+        },
+        "39e0c449-2240-4f67-bfa9-4e98d7cc64f3": {
+          "type": "headline",
+          "settings": {
+            "headline": "Shopping CTA Lorem Ipsum",
+            "headline_color": "#ffffff",
+            "headline_mobile_size": 36,
+            "headline_size": 56
+          }
+        },
+        "476adb9b-0957-4fdb-9ac3-38458ddca04e": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "#",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "2c23940b-9b6d-40c1-b4b6-2c0baae7353a": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "#",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14627720495176__7084eae3-1067-4927-93ba-f7dca655ffec-desktop_image-1",
+        "25130732-2e49-4715-a30e-c63b16143a35",
+        "39e0c449-2240-4f67-bfa9-4e98d7cc64f3",
+        "476adb9b-0957-4fdb-9ac3-38458ddca04e",
+        "2c23940b-9b6d-40c1-b4b6-2c0baae7353a"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x600",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "center",
+        "vertical_alignment_mobile": "top",
+        "horizontal_alignment_mobile": "left",
+        "cta_top_margin": ""
+      }
+    },
+    "feetures_comparison_CVXiFx": {
+      "type": "feetures-comparison",
+      "blocks": {
+        "row_gF6aPH": {
+          "type": "row",
+          "settings": {
+            "headline": "",
+            "item_1": "",
+            "item_2": "",
+            "item_3": ""
+          }
+        },
+        "row_EYfqpq": {
+          "type": "row",
+          "settings": {
+            "headline": "",
+            "item_1": "",
+            "item_2": "",
+            "item_3": ""
+          }
+        },
+        "row_xUG4dE": {
+          "type": "row",
+          "settings": {
+            "headline": "",
+            "item_1": "",
+            "item_2": "",
+            "item_3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_gF6aPH",
+        "row_EYfqpq",
+        "row_xUG4dE"
+      ],
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "text_alignment": "center",
+        "heading": "",
+        "column_1_title": "",
+        "column_1_cta_text": "",
+        "column_1_link": "",
+        "column_2_title": "",
+        "column_2_cta_text": "",
+        "column_2_link": "",
+        "column_3_title": "",
+        "column_3_cta_text": "",
+        "column_3_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe",
+    "288fbe07-33cc-484b-a930-78e31e3fc82c",
+    "9b4683d9-5fba-42dd-ba32-53b809f0f1dd",
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca",
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd",
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596",
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a",
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090",
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5",
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262",
+    "f68c6052-ad63-4822-88a6-4d5515796d61",
+    "7084eae3-1067-4927-93ba-f7dca655ffec",
+    "feetures_comparison_CVXiFx"
+  ]
+}

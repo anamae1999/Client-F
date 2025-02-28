@@ -1,0 +1,72 @@
+{% assign handle = section.settings.collection %}
+<section class="feeturesProductCarousel">
+  <div class="wrapper">
+    <h3 class="feeturesProductCarousel__headline">{{ section.settings.headline }}</h3>
+    <div id="{{handle}}-carousel" class="feeturesProductCarouselSlider" data-section-type="product-carousel">
+      {% for product in collections[handle].products limit: 8 %}
+        <div id="{{handle}}-carousel-item" data-product-id="{{product.id}}" class="feeturesProductCarouselSlider__item">
+          {% render 'product-grid-item', product: product, collection: collections[handle] %}
+        </div>
+      {% endfor %}
+      <div id="{{handle}}-carousel-controls" class="feeturesProductCarouselSlider__controls"></div>
+    </div>
+    {% if section.settings.cta_btn_url != blank and section.settings.cta_btn_text != blank %}
+      <div class="feeturesProductCarousel__btnWrapper">
+        <a class="btn" href="{{section.settings.cta_btn_url}}">{{ section.settings.cta_btn_text }}</a>
+        {% if section.settings.cta_btn_url_2 != blank and section.settings.cta_btn_text_2 != blank %}
+          <a class="btn" href="{{section.settings.cta_btn_url_2 }}">{{ section.settings.cta_btn_text_2 }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feetures Product Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "cta_btn_text",
+      "label": "CTA Button Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_btn_url",
+      "label": "CTA Button URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_btn_text_2",
+      "label": "CTA 2 Button Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_btn_url_2",
+      "label": "CTA 2 Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures Product Carousel",
+      "category": "Feetures"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

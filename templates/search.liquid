@@ -1,0 +1,115 @@
+<!-- /templates/search.liquid -->
+{% comment %}
+  To return only products or pages in results:
+    - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+    - Or manually add type=product or type=page to the search URL as a parameter
+{% endcomment %}
+
+{% comment %}
+  Avoid accessing search.results before the opening paginate tag.
+  If you do, the pagination of results will be broken.
+{% endcomment %}
+
+<style>
+  .search-input--wrapper {
+    width: 100% !important;
+  }
+  .input-group-field {
+    width: 100% !important;
+  }
+  .icon.icon-search {
+    right: 0 !important;
+  }
+</style>
+
+{% paginate search.results by 500 %}
+  {% section 'main-search' %}
+
+  <div class="collections-loaded" data-section-type="search">
+    <div class="">
+      <header class="section-header text-center">
+        <h2 class="section-header text-center">Search Results</h2>
+        <predictive-search
+          class="predictive-search"
+        >
+          <form
+            action="{{ routes.search_url }}"
+            class="search-box input-group search-bar search-bar--page"
+            method="get"
+            role="search"
+            autocomplete="off"
+          >
+            <div class="search-input--wrapper">
+              <input
+                id="Search"
+                class="input-group-field"
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"
+                role="combobox"
+                aria-expanded="false"
+                aria-owns="predictive-search-results"
+                aria-controls="predictive-search-results"
+                aria-haspopup="listbox"
+                aria-autocomplete="list"
+              >
+              <input name="options[prefix]" type="hidden" value="last">
+              <span class="icon icon-search" aria-hidden="true"></span>
+            </div>
+            <div id="predictive-search" tabindex="-1"></div>
+          </form>
+        </predictive-search>
+        {% if search.performed %}
+          {% if search.results_count == 0 %}
+            <h1 class="search-results-header">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
+          {% endif %}
+        {% else %}
+          <h1 class="search-results-header">{{ 'general.search.title' | t }}</h1>
+        {% endif %}
+      </header>
+
+      {% if search.performed %}
+        {% assign searchResultsReturnedProductCount = search.results | where: 'object_type', 'product' | size %}
+        {% assign searchResultsReturnedArticlesCount = search.results | where: 'object_type', 'article' | size %}
+        {% if searchResultsReturnedProductCount > 0 %}
+          <h2 class="search-results-header">"{{ search.terms }}" Products</h2>
+          {% section 'search-products' %}
+          {% comment %}
+            <div class="collectionGrid">
+              {% for item in search.results %}
+                {% if item.object_type == 'product' %}
+                  {% assign product = item %}
+                  {% include 'product-grid-item-isolated-not-category' %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endcomment %}
+        {% endif %}
+
+        {% if searchResultsReturnedArticlesCount > 0 %}
+          <h2 class="search-results-header">"{{ search.terms }}" Articles</h2>
+          <div class="collectionGrid collectionGrid--articles">
+            {% for item in search.results %}
+              {% if item.object_type == 'article' %}
+                {% assign article_content = item.content %}
+                {% include 'article-grid-item', article: item %}
+                <!--
+                  <div class="grid-search">
+                    <a href="{{ item.url }}" class="grid-search__link">
+                      <span class="grid-search__content">
+                        <div class="grid-search__heading">{{ item.title }}</div>
+                        {{ item.content | strip_html | truncatewords: 60 }}
+                      </span>
+                    </a>
+                  </div>
+                -->
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% include 'pagination' %}
+      {% endif %}
+    </div>
+  </div>
+{% endpaginate %}

@@ -1,0 +1,35 @@
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/"> Home </a>
+  <span aria-hidden="true">-</span>
+  <a href="{{blog.url}}">
+    {{ blog.title }}
+  </a>
+  <span aria-hidden="true">-</span>
+  <span>{{ article.title }}</span>
+</nav>
+<header class="section-header">
+  <h1>{{ article.title }}</h1>
+  <!-- <hr class="hr--small"> -->
+  <div>
+    <span
+      ><time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}">
+        {{- article.published_at | date: format: 'date' -}}
+      </time></span
+    >
+  </div>
+</header>
+
+{% unless article.image == blank %}
+  <div class="article-page__featured-image-wrapper">
+    {% assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="article-page__featured-image lazyload"
+      src="{{ article.image | img_url: 'master' }}"
+      data-src="{{ img_url }}"
+      data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+      data-aspectratio="{{ article.image.aspect_ratio }}"
+      data-sizes="auto"
+      alt="{{ article.title | escape }}"
+    >
+  </div>
+{% endunless %}

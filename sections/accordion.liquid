@@ -1,0 +1,65 @@
+<div class="container">
+	<div class="collections-bottom-content-section" id="accordion">
+      {% assign firstloop = false %}
+      {% for block in section.blocks %}
+        {% if firstloop != true %}
+      	{% assign firstloop = true %}
+      	  <h2><i class="fas fa-angle-up"></i> {{ block.settings.accordiontitle }}</h2>
+          <div class="active">
+            {{ block.settings.accordiontext }}
+          </div>
+     	 {% else %}
+        	<h2><i class="fas fa-angle-down"></i> {{ block.settings.accordiontitle }}</h2>
+          <div>
+            {{ block.settings.accordiontext }}
+          </div>
+      	{% endif %}
+      {% endfor %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Accordion",
+	"max_blocks": 16,
+    "settings": [
+	],
+	"blocks": [
+	  {
+		"type": "text",
+        "name": "Accordion",
+        "settings": [
+            {
+              "type": "text",
+              "id": "accordiontitle",
+              "label": "Accordion Title",
+			  "default": "test"
+            },
+            {
+              "type": "richtext",
+              "id": "accordiontext",
+              "label": "Accordion Text",
+			  "default": "<p>Test</p>"
+            }
+		]
+	  }
+	],
+	"presets": [
+	  {
+		"name": "Accordion",
+        "category": "Text",
+        "settings": {
+        },
+		"blocks": [
+		  {
+			"type": "text"
+		  },
+	 	  {
+			"type": "text"
+		  }
+		]
+	  }
+	]
+  }
+{% endschema %}

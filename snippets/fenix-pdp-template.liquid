@@ -1,0 +1,355 @@
+<!--
+<style>
+  
+    .fenix-fixd-delivery {
+       margin-left: -4px !important;
+       margin-top: 10px;
+       margin-bottom: 10px;
+       font-size: 16px;
+    line-height: 1.6;
+    font-family: Gotham,Arial,sans-serif;
+    color: #000;
+    font-weight: 400;
+    font-style: normal;
+   }
+     
+     .fenix-provided-options .fenix-logo{
+         margin-bottom:5px;
+
+     }
+
+   @media screen and (min-width: 1200px) {
+     .fenix-fixd-delivery {
+       font-size: 16px;
+     }
+   }
+   
+   .fenix-resp-span-date,.fenix-resp-span-shippingname{
+         color:#016aed !important;
+   
+   }
+     .fenix-fixd-delivery strong {
+       color:#016aed !important;
+     }
+     .fenix-fixd-delivery #view-all-shipping{
+       color: #016aed;
+     }
+   
+     
+     #fenix-change-zip #fenix-zip{
+       margin-top:10px;
+       margin-bottom:15px;
+       margin-left:20%;
+   
+     }
+     #fenix-change-zip #fenix-zip input {
+       padding-top:4px;
+       padding-bottom: 4px;
+       text-align:center;
+       width: 150px;
+       display: inline;
+       max-height: 40px;
+       border: solid 1px;
+       font-size: 16px;
+    line-height: 1.6;
+    font-family: Gotham,Arial,sans-serif;
+    color: #000;
+    font-weight: 400;
+    font-style: normal;
+   
+       
+   }
+     #fenix-change-zip #fenix-zip button {
+       padding-top: 8px;
+       max-height:40px;
+       text-transform: uppercase;
+       background-color:#016aed;
+       border:none;
+       font-weight:500;
+       margin-top:-1px!important;
+       font-size: 14px;
+       font-family: Gotham,Arial,sans-serif;
+       color: #fff;
+       font-style: normal;
+   
+      }
+     #fenix-change-zip #fenix-zip button:hover{
+       background-color:#c81b9e;
+      }
+     
+     .fenix-provided-options table {
+       font-size: 16px;
+       line-height: 1.6;
+       font-family: Gotham,Arial,sans-serif;
+       color: #000;
+       font-weight: 400;
+       font-style: normal;
+       width: 98% !important;
+       border: 1px solid #ccc;
+       color: rgba(0,0,0,0.8);
+       margin-top: 5px;
+       margin-bottom: 15px;
+       border-radius: 20px;
+       display:inline-table!important;
+ 
+   }
+       .fenix-provided-options table td {
+       padding-top: 7px;
+       padding-bottom: 7px;
+       border: solid 2px black;
+       font-weight: bolder;
+       text-align: center;
+       font-size: 16px;
+       line-height: 1.6;
+       font-family: Gotham,Arial,sans-serif;
+       color: #000;
+       font-weight: 400;
+       font-style: normal;
+       padding: 5px;
+   }
+       .fenix-provided-options table thead th {
+       color: white;
+       background-color: #000;
+       font-weight: bold;
+       padding: 4px;
+       border: solid 2px #212b36;
+       text-align: center;
+       font-size:16px;
+       padding:5px;
+   }
+   
+     
+   @media screen and (max-width: 480px) {
+     .fenix-fixd-delivery {
+       font-size: 16px;
+     }
+   }
+     
+     
+     
+   </style>
+    <script>
+      var __FenixProductData_ProductPage = [];
+      var __FenixProductVariants_ProductPage = [];
+      var productJSONFenix = {{ product | json }};
+   
+      var __fenixcallbackBulb = true;
+      var __fenixFirstON = false;
+      
+      function isValidUSZip(sZip) {
+          return /^\d{5}(-\d{4})?$/.test(sZip);
+      }
+      
+      
+      function getCookie(cname) {
+          var name = cname + "=";
+          var decodedCookie = decodeURIComponent(document.cookie);
+          var ca = decodedCookie.split(';');
+          for (var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+              }
+          }
+          return "";
+      }
+      
+      function createCookie(name, value, days) {
+          if (days) {
+              var date = new Date();
+              date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+              var expires = "; expires=" + date.toGMTString();
+          } else {
+              var expires = "";
+          }
+          document.cookie = name + "=" + value + expires + "; path=/";
+      }
+   
+      
+      jQuery(document).ready(function() {
+        
+        setTimeout(function() {
+          document.querySelectorAll('.js-qty__adjust').forEach(item => {
+            item.addEventListener('click', event => {
+            if (__fenixcallbackBulb === true && __fenixFirstON === true) {
+                        __fenixcallbackBulb = false;
+                        __findFormidProductPage();
+                      }
+            })
+          })
+	    }, 1000);
+      
+        $( document ).ajaxComplete(function( event, xhr, settings ) {
+            if( settings.url == 'https://delest-api.fenixcommerce.com/fenixdelest/api/v2/deliveryestimates' &&
+               JSON.parse(settings.data).pageType === 'PDP' &&
+                xhr.responseJSON[0].response  == null){
+                 $(".fenix-fixd-delivery").hide();
+             } 
+       });
+        
+   
+           $(document).on('click', '#fenix-change-zip #fenix-zip', function(e){
+               console.log('e :>> ', e);
+               if(e.target == this){
+                   $(this).hide();
+                   $('.fenix-fixd-delivery #fenix-change-zip #fenix-toggle-zip').show();
+               }
+           });
+          $.event.special.inputchange = {
+              setup: function() {
+                  var self = this,
+                      val;
+                  $.data(this, 'timer', window.setInterval(function() {
+                      val = self.value;
+                      if ($.data(self, 'cache') != val) {
+                          $.data(self, 'cache', val);
+                          $(self).trigger('inputchange');
+                      }
+                  }, 20));
+              },
+              teardown: function() {
+                  window.clearInterval($.data(this, 'timer'));
+              },
+              add: function() {
+                  $.data(this, 'cache', this.value);
+              }
+          };
+      
+      
+          // foreach loop for products in page.
+          $(productJSONFenix).each(function(index2, value2) {
+              __FenixProductData_ProductPage[value2.id] = value2;
+              if (value2.variants !== undefined &&
+                  value2.variants !== null &&
+                  value2.variants !== ''
+              ) {
+                  $(value2.variants).each(function(index3, value3) {
+                      __FenixProductVariants_ProductPage[value3.id] = value3; // set global product variants
+                  });
+              }
+          });
+          setTimeout(function() {
+              ___updateFenixDelhiveryDates(productJSONFenix, $("select[name='id']").val() || $("input[name='Size']:checked").val() || $("input[name='Color']:checked").val());
+          }, 300);
+      
+      
+          $("form").each(function(index, form) {
+              $(productJSONFenix).each(function(index2, value2) {
+                  const formaction = $(form).attr("action");
+                  if (formaction == "/cart/add" && productJSONFenix.variants.length > 0) {
+      
+                      $(form).find('input').on('inputchange', function(event) {
+                          if (__fenixcallbackBulb === true && __fenixFirstON === true) {
+                              __fenixcallbackBulb = false;
+                              __findFormidProductPage();
+                          }
+                      });
+      
+                      $(form).find('input').on('change', function(event) {
+                          if (__fenixcallbackBulb === true && __fenixFirstON === true) {
+                              __fenixcallbackBulb = false;
+                              __findFormidProductPage();
+                          }
+                      });
+      
+                      $(form).find('select').on('change', function(event) {
+                          if (__fenixcallbackBulb === true && __fenixFirstON === true) {
+                              __fenixcallbackBulb = false;
+                              __findFormidProductPage();
+                          }
+                      });
+      
+                      $(form).on('change', function(event) {
+                          if (__fenixcallbackBulb === true && __fenixFirstON === true) {
+                              __fenixcallbackBulb = false;
+                              __findFormidProductPage();
+                          }
+                      });			
+             
+                  }
+              });
+          });
+      
+          setTimeout(function() {
+              __fenixcallbackBulb = true;
+              __fenixFirstON = true;
+          }, 1000);
+      });
+      
+      // pass product id //
+      function ___updateFenixDelhiveryDates(productid, variant, testzip) {
+          $('.fenix-fixd-delivery').css('display', 'block');
+          FenixDeliveryEstimates({
+              zipcode: $("#zip-inpt").val() || 0,
+              page: "product",
+              product: productJSONFenix,
+              productVariant: __FenixProductVariants_ProductPage[variant] || productJSONFenix.variants[0],
+              locationid: 'manual',
+              shop: "{{shop.permanent_domain}}",
+              template: "{{template}}",
+              shippingOptions: {
+                  showAll: true,
+                  defaultRule: 'fastest'
+              },
+              fenixMessageStyles: {
+                  fontSize: '16px',
+                  messageHighlightColor: '#333',
+                  changeZipTextColor: '#333'
+              }
+          });
+      
+          $('#fenix-toggle-zip').on('click', function() {
+              $(this).hide();
+              $("#fenix-zip").show();
+          });
+          // Stop propogation in CDN file. 
+          $('#zip-inpt').on('keyup', function(event) {
+              var testzip = $('#zip-inpt').val();
+              if (event.which === 13 || event.keyCode === 13) {
+                  if (isValidUSZip(testzip)) {
+                      __findFormidProductPage(testzip);
+                  }
+              }
+      
+          });
+          $('#check-zip').on('click', function() {
+              var testzip = $('#zip-inpt').val();
+              if (isValidUSZip(testzip)) {
+                  __findFormidProductPage(testzip);
+              }
+          });
+      }
+      
+      function __findFormidProductPage(testzip) {
+          console.log(testzip);
+          var fromserialize = decodeURI($("form[action='/cart/add']").serialize());
+          console.log(fromserialize);
+          var variantid = "";
+          var ispresent = false;
+          $.each(productJSONFenix.variants, function(index, value) {
+              ispresent = false;
+      
+              $.each(value.options, function(indexoptions, valueoptions) {
+                  if (fromserialize.indexOf(valueoptions) !== -1) {
+                      ispresent = true;
+                  } else {
+                      ispresent = false;
+                  }
+              });
+              if (ispresent) {
+                  variantid = value.id;
+              }
+          });
+      
+          setTimeout(function() {
+          ___updateFenixDelhiveryDates(productJSONFenix, $("select[name='id']").val() || $("input[name='Size']:checked").val() || $("input[name='Color']:checked").val() || variantid, testzip);
+            __fenixcallbackBulb = true;
+          }, 20);
+          return false;
+      }    
+      </script>
+      <div class="fenix-fixd-delivery"></div>
+      -->

@@ -1,0 +1,45 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "article-banner": {
+      "type": "article-banner",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "settings": {
+      }
+    },
+    "feetures_product_carousel_qWRdNq": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Shop Feetures Merino Wool Socks",
+        "collection": "merino-wool-socks",
+        "cta_btn_text": "",
+        "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": "shopify:\/\/collections\/womens-merino-socks-collection"
+      }
+    },
+    "blog-author": {
+      "type": "article-author",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "article-banner",
+    "main",
+    "feetures_product_carousel_qWRdNq",
+    "blog-author"
+  ]
+}

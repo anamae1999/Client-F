@@ -1,0 +1,311 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ea385b0b-94e5-4489-b4d0-7997b108208f": {
+      "type": "feetures-hero",
+      "blocks": {
+        "template--14603988828232__ea385b0b-94e5-4489-b4d0-7997b108208f-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Header-1.jpg"
+          }
+        },
+        "mobile_image_Fy8m7y": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/Mobile_8a658df6-473d-407d-aae7-d651de74e3fd.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__ea385b0b-94e5-4489-b4d0-7997b108208f-desktop_image-1",
+        "mobile_image_Fy8m7y"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x800",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "top",
+        "horizontal_alignment_mobile": "left",
+        "cta_top_margin": "0"
+      }
+    },
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe": {
+      "type": "feetures-hero-half-half",
+      "blocks": {
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1": {
+          "type": "mobile_image",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "e91ccce7-9616-4fef-8256-ea92f532d541": {
+          "type": "headline",
+          "settings": {
+            "headline": "Movement is our Business",
+            "headline_color": "",
+            "headline_mobile_size": 30,
+            "headline_size": 32
+          }
+        },
+        "32e4bf52-d9a0-4634-85e4-40d46cbd8ba1": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>People are not meant to sit still. We are all Meant to Move and that’s why Feetures, a family-owned business in North Carolina, was founded with the purpose of creating products to enhance your active lifestyle. After becoming the leading brand in the US run specialty market, we set our sights on becoming the most recognized performance sock brand in the world. We invite you to join us on our mission to inspire people to get moving. Together, we can go farther!<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 16,
+            "body_size": 18
+          }
+        }
+      },
+      "block_order": [
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1",
+        "e91ccce7-9616-4fef-8256-ea92f532d541",
+        "32e4bf52-d9a0-4634-85e4-40d46cbd8ba1"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "image_side": "left",
+        "background_color": "#ffffff",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "center",
+        "horizontal_alignment_mobile": "left",
+        "cta_top_margin": ""
+      }
+    },
+    "feetures_video_with_quote_LqEkxA": {
+      "type": "feetures-video-with-quote",
+      "settings": {
+        "video_id": "jjVSK-B3XPY",
+        "image": "shopify:\/\/shop_images\/About_Page_Video_Still_1.jpg",
+        "quote": "\"We wake up every day with the sole purpose of making the best performance socks in the world.\"",
+        "iframe_title": ""
+      }
+    },
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/20201021-01_feetures1144_v4_720_8a1b56f9-9278-4ab4-a8b1-40db7838a0a2.png"
+          }
+        },
+        "44452239-a81d-4791-8e83-60f45e312177": {
+          "type": "headline",
+          "settings": {
+            "headline": "We have entered a new era in our company’s history…",
+            "headline_color": "",
+            "headline_mobile_size": 19,
+            "headline_size": 19
+          }
+        },
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>In the beginning of 2023, after 20+ years of leading the company, Hugh Gaither stepped back into a Chairman role and passed the operation of the company on to his sons. After acting as COO and leading the Product and Supply Chain part of the business for decades, elder brother John Gaither, became CEO. Joe Gaither is the Chief Marketing Officer. <\/p><p><\/p><p><em>“We obsess over the details and performance of our socks and bring unmatched competitive passion to the category. That’s why we are relevant, and people are so loyal to our brand.” - John Gaither, CEO<\/em><\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 18
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1",
+        "44452239-a81d-4791-8e83-60f45e312177",
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/FA503616-1_61914da4-0e7b-47a1-b3e3-a72bcbbfb59b.jpg"
+          }
+        },
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5": {
+          "type": "headline",
+          "settings": {
+            "headline": "Image or video can flip flop on each side",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "5f722017-8140-441e-80e1-b28491dfa2b2": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin. Meatloaf salami shoulder eu, doner exercitation drumstick eiusmod ut reprehenderit quis cow.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 18
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1",
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5",
+        "5f722017-8140-441e-80e1-b28491dfa2b2"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "f050e553-1fe5-4099-81a1-edadfcc5ad01": {
+      "type": "feetures-comparison",
+      "blocks": {
+        "c1d30a21-2216-4c0a-b397-83afa9a9de9d": {
+          "type": "row",
+          "settings": {
+            "headline": "Feature",
+            "item_1": "You can place text or SVG images in this box.",
+            "item_2": "YES",
+            "item_3": "NO"
+          }
+        },
+        "d681a038-23d3-4c77-81ca-ec87a957d633": {
+          "type": "row",
+          "settings": {
+            "headline": "Another row",
+            "item_1": "Add as many rows as needed",
+            "item_2": "Supports 1-2-3 columns",
+            "item_3": "HTML enabled here"
+          }
+        }
+      },
+      "block_order": [
+        "c1d30a21-2216-4c0a-b397-83afa9a9de9d",
+        "d681a038-23d3-4c77-81ca-ec87a957d633"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 36,
+        "text_alignment": "center",
+        "heading": "Comparison Chart",
+        "column_1_title": "Sock 1",
+        "column_1_cta_text": "",
+        "column_1_link": "",
+        "column_2_title": "Bundle",
+        "column_2_cta_text": "",
+        "column_2_link": "",
+        "column_3_image": "shopify:\/\/shop_images\/FA503617-1_9e8b5190-7aa4-40aa-a7bf-0fc06602baf9.jpg",
+        "column_3_title": "Third Product",
+        "column_3_cta_text": "",
+        "column_3_link": ""
+      }
+    },
+    "288fbe07-33cc-484b-a930-78e31e3fc82c": {
+      "type": "feetures-logos",
+      "blocks": {
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_1_250x94_a5c8df9d-c28f-4737-ab6c-1b3357a89fef.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "842a552d-d026-4cfa-a7b1-53da96bf5989": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_3_250x94_4ce9e062-650b-4c7a-b50b-6686e3b6cee7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "ea7a5c74-dffc-4447-9271-e139a249c093": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_4_250x94_b66a6798-4efc-4bac-aca3-7f48d338e198.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "99ea2433-9438-41fe-966d-395059abf1a4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_2_250x94_ec014e0b-e3a1-45d3-8265-7d2bdb310d43.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "db55c43e-61ef-4026-8d84-1baafc55ce37": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_6_250x94_e025bb97-d471-4bc0-b967-61f6b44bdcac.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "673d26c5-59e2-4079-8455-8c4c53072b43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_5_250x94_78417c4e-5e5c-4a7f-85be-de8b93f566b7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105",
+        "842a552d-d026-4cfa-a7b1-53da96bf5989",
+        "ea7a5c74-dffc-4447-9271-e139a249c093",
+        "99ea2433-9438-41fe-966d-395059abf1a4",
+        "db55c43e-61ef-4026-8d84-1baafc55ce37",
+        "673d26c5-59e2-4079-8455-8c4c53072b43"
+      ],
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 36,
+        "heading": "Recommended By"
+      }
+    },
+    "03642916-6dd5-4af1-94f4-7e5323edf355": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "",
+        "image1": "shopify:\/\/shop_images\/UGC_3.jpg",
+        "image2": "shopify:\/\/shop_images\/Curated_UGC_4_fe203f5c-2cc1-468b-ae55-003c74b2cbb8.jpg",
+        "image3": "shopify:\/\/shop_images\/UGC_2.jpg",
+        "image4": "shopify:\/\/shop_images\/UGC_1.jpg",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ea385b0b-94e5-4489-b4d0-7997b108208f",
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe",
+    "feetures_video_with_quote_LqEkxA",
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a",
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd",
+    "f050e553-1fe5-4099-81a1-edadfcc5ad01",
+    "288fbe07-33cc-484b-a930-78e31e3fc82c",
+    "03642916-6dd5-4af1-94f4-7e5323edf355"
+  ]
+}

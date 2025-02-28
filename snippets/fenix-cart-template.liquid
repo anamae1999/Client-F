@@ -1,0 +1,64 @@
+ <!-- START FENIX CONFIGURATION CODE
+ <style>
+.fenix-fixd-delivery-cart {
+     text-align: right;
+     margin-bottom: 10px;
+     margin-left:-5% !important;
+     font-family:Verdana Pro !important;
+ }
+    
+   @media screen and (min-width: 1200px) {
+   .fenix-fixd-delivery-cart {
+     font-size: 14px;
+   }
+ }
+   
+@media screen and (max-width: 480px) {
+.fenix-fixd-delivery-cart {
+     font-size: 13px;
+   }
+ }
+@media screen and (max-width: 360px) {
+.fenix-fixd-delivery-cart {
+     font-size: 10px;
+   }
+ }
+.fenix-resp-span-date,.fenix-resp-span-shippingname,.fenix-resp-span-time{
+       color:#ed7bd1 !important;
+ 
+ }
+.fenix-fixd-delivery-cart strong{
+     font-weight:bold;
+      color:#ed7bd1;
+ }
+ </style>
+ 
+ <script>
+ if (window.location.pathname == "/cart" || window.location.pathname == "/cart/") {
+     FenixDeliveryEstimates({
+         page: 'cart',
+         cartItems: {{ cart.items | json }},
+         shop: "{{shop.permanent_domain}}",
+         template: "{{template}}",
+         fenixMessageStyles: {
+             fontSize: '14px',
+             messageHighlightColor: '#333',
+             changeZipTextColor: '#333'
+         }
+     });
+ }
+   
+         $( document ).ajaxComplete(function( event, xhr, settings ) {
+     if ( settings.url === "https://delest-api.fenixcommerce.com/fenixdelest/api/v2/deliveryestimates" ) {
+       if( $(".fenix-fixd-delivery-cart").text() == "" ||  $("#fenix-message-left").text().length == 0 ){
+               $(".fenix-fixd-delivery-cart").hide();
+       }else{
+            $(".fenix-fixd-delivery-cart").show();
+       }
+     }  
+   });
+ 
+</script>
+-->
+<!--END FENIX CONFIGURATION CODE-->
+ 

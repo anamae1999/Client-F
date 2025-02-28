@@ -1,0 +1,62 @@
+{%- unless width -%}
+  {%- assign width = 310 -%}
+{%- endunless -%}
+{%- unless height -%}
+  {%- assign height = 415 -%}
+{%- endunless -%}
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+  {%- unless product.tags contains 'exclude-sale' -%}
+    {%- assign on_sale = true -%}
+  {%- endunless -%}
+{%- endif -%}
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+  {%- assign sold_out = false -%}
+{%- endif -%}
+{%- capture img_id_class -%}ProductImage-{{ product.featured_media.id }}{%- endcapture -%}
+{%- capture img_wrapper_id -%}ProductImageWrapper-{{ product.featured_media.id }}{%- endcapture -%}
+{%- assign featured_image = product.featured_media.preview_image -%}
+{%- assign img_url = featured_image | img_url: '600x' -%}
+{%- capture sale_msg -%}
+  {%- if product.title contains "Pack" -%}
+    Bundle Savings
+  {%- elsif on_sale -%}
+    Select Colors {{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}% off
+  {%- endif -%}
+{%- endcapture -%}
+<script>
+{% if collection_handle != blank %}
+if(window.collectionSectionProducts.hasOwnProperty('{{ product.id }}')) {
+    window.collectionSectionProducts['{{ product.id }}']['collection_handle'].push('{{ collection_handle }}');
+} else {
+    window.collectionSectionProducts['{{ product.id }}'] = {
+        position: {{ position }},
+        img_id_class: '{{ img_id_class }}',
+        on_sale: {{ on_sale }},
+        sold_out: {{ sold_out }},
+        img_url: '{{ img_url }}',
+        img_alt: '{{ featured_image.alt | escape }}',
+        url: '{{ product.url | within: collection }}',
+        title: "{{ product.title }}",
+        sale_msg: '{{ sale_msg }}',
+        collection_handle: ['{{ collection_handle | default: '' }}'],
+        new_styles: [{% for variant in product.variants %}{% if variant.metafields.tags.new_style == true %}{{variant.id}},{% endif %}{% endfor %}]
+    };
+}
+{% else %}
+window.collectionSectionProducts['{{ product.id }}'] = {
+    position: {{ position }},
+    img_id_class: '{{ img_id_class }}',
+    on_sale: {{ on_sale }},
+    sold_out: {{ sold_out }},
+    img_url: '{{ img_url }}',
+    img_alt: '{{ featured_image.alt | escape }}',
+    url: '{{ product.url | within: collection }}',
+    title: "{{ product.title }}",
+    sale_msg: '{{ sale_msg }}',
+    collection_handle: '{{ collection_handle | default: '' }}',
+    new_styles: [{% for variant in product.variants %}{% if variant.metafields.tags.new_style == true %}{{variant.id}},{% endif %}{% endfor %}]
+};
+{% endif %}
+</script>

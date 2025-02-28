@@ -1,0 +1,369 @@
+<style>
+  .carousel-sock-height-wrapper {
+    width: 1005;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-icon-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-icon {
+    flex: 1;
+    aspect-ratio: 1;
+    max-width: 75px;
+    position: relative;
+    border: 1px solid black;
+    border-radius: 100%;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-icon:hover {
+    cursor: pointer;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-icon img {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .carousel-sock-height-wrapper .swiper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .carousel-sock-height-wrapper .swiper:before {
+    content: '';
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 2;
+  }
+
+  .carousel-sock-height-wrapper .swiper:after {
+    content: '';
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    z-index: 2;
+  }
+
+  .carousel-sock-height-wrapper button.arrow-prev,
+  .carousel-sock-height-wrapper button.arrow-next {
+    position: absolute;
+    width: 50px;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #31555b;
+    border-radius: 100%;
+    z-index: 3;
+  }
+
+  .carousel-sock-height-wrapper button.arrow-prev svg,
+  .carousel-sock-height-wrapper button.arrow-next svg {
+    width: auto;
+    height: 65%;
+  }
+
+  .carousel-sock-height-wrapper button.arrow-prev {
+    left: 10%;
+  }
+
+  .carousel-sock-height-wrapper button.arrow-prev svg {
+    transform: rotate(180deg);
+  }
+
+  .carousel-sock-height-wrapper button.arrow-next {
+    right: 10%;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .carousel-sock-height-wrapper .sock-height-button {
+    color: #fff;
+    background: #000;
+    padding: 10px 30px;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 580px) {
+    .carousel-sock-height-wrapper .sock-height-icon-container {
+      gap: 5px;
+    }
+
+    .carousel-sock-height-wrapper .swiper:before,
+    .carousel-sock-height-wrapper .swiper:after {
+      background: none;
+    }
+
+    .carousel-sock-height-wrapper button.arrow-prev {
+      left: 0;
+    }
+
+    .carousel-sock-height-wrapper button.arrow-next {
+      right: 0;
+    }
+
+    .carousel-sock-height-wrapper .sock-height-icon img {
+      padding: 5px;
+    }
+
+    .carousel-sock-height-wrapper .sock-height-card {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="carousel-sock-height-wrapper">
+  <h2>Explore Our Heights</h2>
+  <div class="sock-height-icon-container">
+    {% for block in section.blocks %}
+      <div
+        class="sock-height-icon"
+      >
+        {% if block.settings.icon %}
+          {{ block.settings.icon | image_url: width: '150' | image_tag }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div class="sock-height-card">
+            <div class="sock-height-img-wrapper">
+              {% if block.settings.image %}
+                {{ block.settings.image | image_url: width: '500' | image_tag }}
+              {% endif %}
+            </div>
+            <h4>{{ block.settings.title }}</h4>
+            <span>{{ block.settings.body }}</span>
+            <div class="sock-height-button-container">
+              <a class="sock-height-button" href="{{ block.settings.cta_btn_url_1 }}">
+                {{- block.settings.cta_btn_text_1 -}}
+              </a>
+              <a class="sock-height-button" href="{{ block.settings.cta_btn_url_2 }}">
+                {{- block.settings.cta_btn_text_2 -}}
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button class="arrow-prev">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.748 34.89">
+        <path d="M-7,33.89a1,1,0,0,1-.686-.273A1,1,0,0,1-7.727,32.2L7.143,16.445-7.727.686A1,1,0,0,1-7.686-.727a1,1,0,0,1,1.414.041L9.893,16.445-6.273,33.576A1,1,0,0,1-7,33.89Z" transform="translate(9.855)" fill="#fff"></path>
+      </svg>
+    </button>
+    <button class="arrow-next">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.748 34.89">
+        <path d="M-7,33.89a1,1,0,0,1-.686-.273A1,1,0,0,1-7.727,32.2L7.143,16.445-7.727.686A1,1,0,0,1-7.686-.727a1,1,0,0,1,1.414.041L9.893,16.445-6.273,33.576A1,1,0,0,1-7,33.89Z" transform="translate(9.855)" fill="#fff"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script
+  data-slides-visible="{{ section.settings.slides_visible_desktop }}"
+  data-slides-visible-mobile="{{ section.settings.slides_visible_mobile }}"
+  data-slide-space="{{ section.settings.slide_space_desktop }}"
+  data-slide-space-mobile="{{ section.settings.slide_space_mobile }}"
+>
+  // If wrapper to scope variables for load in from section rendering API
+  if (true) {
+    let script = document.currentScript;
+    let parentSection = script.parentElement;
+    let sectionId = parentSection.id;
+
+    // Slider specific variables
+    let slidesVisible = parseFloat(script.getAttribute('data-slides-visible'));
+    let slidesVisibleMobile = parseFloat(script.getAttribute('data-slides-visible-mobile'));
+    let slideSpace = parseFloat(script.getAttribute('data-slide-space'));
+    let slideSpaceMobile = parseFloat(script.getAttribute('data-slide-space-mobile'));
+
+    let initSwiper = function () {
+      let swiper = new Swiper(`[id="${sectionId}"] .swiper`, {
+        centeredSlides: true,
+        loop: true,
+        spaceBetween: slideSpaceMobile,
+        slidesPerView: slidesVisibleMobile,
+        watchSlidesProgress: true,
+        mousewheel: {
+          forceToAxis: true,
+        },
+        navigation: {
+          nextEl: `[id="${sectionId}"] .arrow-next`,
+          prevEl: `[id="${sectionId}"] .arrow-prev`,
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: slidesVisible,
+            spaceBetween: slideSpace,
+          },
+        },
+      });
+
+      // Add event listeners to height icons
+      let slideIcons = parentSection.querySelectorAll('.sock-height-icon');
+      for (let i = 0; i < slideIcons.length; i++) {
+        let slideIcon = slideIcons[i];
+        slideIcon.addEventListener('click', function () {
+          swiper.slideToLoop(i);
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initSwiper();
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Carousel - Sock Height",
+  "settings": [
+    {
+      "type": "number",
+      "id": "slides_visible_desktop",
+      "label": "Slides Visible Desktop",
+      "default": 3
+    },
+    {
+      "type": "number",
+      "id": "slides_visible_mobile",
+      "label": "Slides Visible Mobile",
+      "default": 1
+    },
+    {
+      "type": "number",
+      "id": "slide_space_desktop",
+      "label": "Slide Spacing Desktop",
+      "default": 20
+    },
+    {
+      "type": "number",
+      "id": "slide_space_mobile",
+      "label": "Slide Spacing Mobile",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sock_height",
+      "name": "Sock Height",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title Text"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Body Text</p>"
+        },
+        {
+          "type": "text",
+          "id": "cta_btn_text_1",
+          "label": "CTA Button Text - 1",
+          "default": "CTA 1"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url_1",
+          "label": "CTA Button URL - 1"
+        },
+        {
+          "type": "text",
+          "id": "cta_btn_text_2",
+          "label": "CTA Button Text - 2",
+          "default": "CTA 2"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url_2",
+          "label": "CTA Button URL - 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carousel - Sock Height"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,215 @@
+<!-- /templates/customers/account.liquid -->
+{% comment %}
+  For all available customer liquid tags:
+    - http://docs.shopify.com/themes/liquid-variables/customer
+{% endcomment %}
+
+{% assign last_order = customer.orders.last %}
+
+<div class="wrapper-account">
+  <div class="container-nav-account">
+    <header>
+      <h1>{{ 'customer.account.title' | t }}</h1>
+    </header>
+    <div class="nav-header-account">
+      <div class="nav-header-circle">
+        <span>
+          {{ customer.first_name | first | upcase -}}
+          {{- customer.last_name | first | upcase }}
+        </span>
+      </div>
+      <div class="nav-header-content">
+        <span
+          >Hi {{ customer.first_name }}
+          {{ customer.last_name | first | upcase }}.</span
+        >
+        <span class="account-subtitle"
+          ><strong><span data-lion-points>...</span></strong> rewards points</span
+        >
+      </div>
+    </div>
+    <div class="nav-links-account">
+      <a href="/account/" data-content="order-history">My Account</a>
+      <a href="/account/addresses" data-content="addresses">Addresses</a>
+      <a href="/pages/rewards" data-content="rewards">Rewards</a>
+      <a class="active" href="/account?view=buy-it-again" data-content="buy-it-again">Buy it Again</a>
+    </div>
+    <div class="nav-logout account-subtitle">
+      {{ 'layout.customer.log_out' | t | customer_logout_link }}
+    </div>
+  </div>
+  <div class="container-content-account">
+    <header>
+      <h1>{{ 'customer.account.title' | t }}</h1>
+    </header>
+    <div class="content-account active" data-content="buy-it-again">
+      <h4>{{ 'customer.buy_it_again.title' | t }}</h4>
+      <a href="https://feetures.com/apps/rebuy/reorder?shopify_order_id={{ last_order.order_number }}" class="btn">
+        {{- 'customer.buy_it_again.re_order' | t -}}
+      </a>
+      <div data-rebuy-id="92223" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+      <br>
+      <h4>{{ 'customer.buy_it_again.may_also_like' | t }}</h4>
+      <div data-rebuy-id="92226"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wrapper-account {
+    width: 100%;
+    min-height: 75vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: stretch;
+    padding-top: 4rem;
+  }
+  .container-nav-account {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-right: 3rem;
+  }
+  .container-nav-account header {
+    display: none;
+  }
+  .nav-header-account {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+    padding-right: 3rem;
+  }
+  .nav-header-circle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #224b50;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  .nav-header-circle span {
+    margin: 0;
+    padding: 0;
+  }
+  .nav-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .nav-links-account {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .nav-links-account a {
+    cursor: pointer;
+    padding-top: 0.25rem;
+    border: 2px solid white;
+  }
+  .nav-links-account a.active {
+    font-weight: bold;
+  }
+  .account-subtitle {
+    font-size: 14px;
+  }
+  .nav-logout {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .container-content-account {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .container-content-account header {
+    display: block;
+  }
+  .content-account {
+    width: 100%;
+    display: none;
+  }
+  .content-account.active {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  @media (max-width: 800px) {
+    .wrapper-account {
+      flex-direction: column;
+      padding-top: 2rem;
+    }
+    .container-nav-account {
+      width: 100%;
+      align-items: center;
+    }
+    .container-nav-account header {
+      display: block;
+    }
+    .nav-header-account {
+      padding-right: 0;
+    }
+    .nav-links-account {
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      border: none;
+      padding: 0;
+    }
+    .nav-links-account a {
+      width: calc(50% - 0.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f3f0eb;
+      margin: 0.25rem;
+      padding-bottom: 0.25rem;
+      font-size: 14px;
+    }
+    .nav-links-account a.active {
+      border: 2px solid black;
+      font-weight: normal;
+    }
+    .nav-logout {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: underline;
+      font-size: 0.9rem;
+      padding: 0 0 2rem 0;
+    }
+    .container-content-account {
+      width: 100%;
+    }
+    .container-content-account header {
+      display: none;
+    }
+    .content-account .btn {
+      width: 100%;
+    }
+
+    .container-content-account .table-wrap {
+      width: 100%;
+    }
+  }
+</style>

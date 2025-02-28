@@ -1,0 +1,407 @@
+<style>
+  .carousel-sock-category-wrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 5%;
+    gap: 20px;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-title-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-title {
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .carousel-sock-category-wrapper .swiper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-card {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-image {
+    width: calc(50% - 50px);
+    aspect-ratio: 1;
+    position: relative;
+    background-color: #ececec;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-text {
+    width: calc(50% - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-feature {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-feature-image {
+    width: 85px;
+    aspect-ratio: 1;
+    position: relative;
+    border-radius: 100%;
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-feature-image img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .carousel-sock-category-wrapper .sock-category-feature-text {
+  }
+
+  .carousel-sock-category-wrapper .sock-category-best-for {
+  }
+
+  .carousel-sock-category-wrapper .sock-category-button-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .carousel-sock-category-wrapper button.arrow-prev,
+  .carousel-sock-category-wrapper button.arrow-next {
+    position: absolute;
+    width: 50px;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #31555b;
+    border-radius: 100%;
+    z-index: 3;
+  }
+
+  .carousel-sock-category-wrapper button.arrow-prev svg,
+  .carousel-sock-category-wrapper button.arrow-next svg {
+    width: auto;
+    height: 65%;
+  }
+
+  .carousel-sock-category-wrapper button.arrow-prev {
+    top: calc(50% - 25px + 30px);
+    left: 0;
+  }
+
+  .carousel-sock-category-wrapper button.arrow-prev svg {
+    transform: rotate(180deg);
+  }
+
+  .carousel-sock-category-wrapper button.arrow-next {
+    top: calc(50% - 25px + 30px);
+    right: 0;
+  }
+
+  @media screen and (max-width: 580px) {
+    .carousel-sock-category-wrapper {
+      width: 100vw;
+      left: calc(50% - 50vw);
+      background: #000;
+      padding: 0;
+      padding-top: 30px;
+      padding-bottom: 80px;
+      color: #fff;
+    }
+
+    .carousel-sock-category-wrapper h2 {
+      color: #fff;
+      text-align: center;
+    }
+
+    .carousel-sock-category-wrapper .sock-category-title-container {
+      padding: 0 20px;
+    }
+
+    .carousel-sock-category-wrapper .sock-category-card {
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .carousel-sock-category-wrapper .sock-category-image {
+      width: 100%;
+    }
+
+    .carousel-sock-category-wrapper .sock-category-text {
+      width: 100%;
+      color: #fff;
+    }
+
+    .carousel-sock-category-wrapper .sock-category-button-wrapper {
+      justify-content: center;
+    }
+
+    .carousel-sock-category-wrapper a.btn {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .carousel-sock-category-wrapper button.arrow-prev,
+    .carousel-sock-category-wrapper button.arrow-next {
+      top: unset;
+      bottom: 30px;
+      background: #fff;
+    }
+
+    .carousel-sock-category-wrapper button.arrow-prev path,
+    .carousel-sock-category-wrapper button.arrow-next path {
+      fill: #31555b;
+    }
+
+    .carousel-sock-category-wrapper button.arrow-prev {
+      left: calc(50% - 55px);
+    }
+
+    .carousel-sock-category-wrapper button.arrow-next {
+      right: calc(50% - 55px);
+    }
+  }
+</style>
+
+<div class="carousel-sock-category-wrapper">
+  <h2>{{ section.settings.title }}</h2>
+  <div class="sock-category-title-container">
+    {% for block in section.blocks %}
+      <span class="sock-category-title">{{ block.settings.title }}</span>
+    {% endfor %}
+  </div>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div class="sock-category-card">
+            <div class="sock-category-image">
+              {% if block.settings.image %}
+                {{ block.settings.image | image_url: width: '800' | image_tag }}
+              {% endif %}
+            </div>
+            <div class="sock-category-text">
+              {{ block.settings.headline }}
+              <strong>Key Features:</strong>
+              {% if block.settings.icon_key_one %}
+                <div class="sock-category-feature">
+                  <div class="sock-category-feature-image">
+                    {{ block.settings.icon_key_one | image_url: width: '400' | image_tag }}
+                  </div>
+                  <div class="sock-category-feature-text">
+                    {{ block.settings.key_feature_one_body }}
+                  </div>
+                </div>
+              {% endif %}
+              {% if block.settings.icon_key_two %}
+                <div class="sock-category-feature">
+                  <div class="sock-category-feature-image">
+                    {{ block.settings.icon_key_two | image_url: width: '400' | image_tag }}
+                  </div>
+                  <div class="sock-category-feature-text">
+                    {{ block.settings.key_feature_two_body }}
+                  </div>
+                </div>
+              {% endif %}
+              <div class="sock-category-best-for">
+                {{ block.settings.best_for_body }}
+              </div>
+              <div class="sock-category-button-wrapper">
+                <a href="{{ block.settings.cta_btn_url_1 }}" class="btn">{{ block.settings.cta_btn_text_1 }}</a>
+                <a href="{{ block.settings.cta_btn_url_2 }}" class="btn">{{ block.settings.cta_btn_text_2 }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <button class="arrow-prev">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.748 34.89">
+      <path d="M-7,33.89a1,1,0,0,1-.686-.273A1,1,0,0,1-7.727,32.2L7.143,16.445-7.727.686A1,1,0,0,1-7.686-.727a1,1,0,0,1,1.414.041L9.893,16.445-6.273,33.576A1,1,0,0,1-7,33.89Z" transform="translate(9.855)" fill="#fff"></path>
+    </svg>
+  </button>
+  <button class="arrow-next">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.748 34.89">
+      <path d="M-7,33.89a1,1,0,0,1-.686-.273A1,1,0,0,1-7.727,32.2L7.143,16.445-7.727.686A1,1,0,0,1-7.686-.727a1,1,0,0,1,1.414.041L9.893,16.445-6.273,33.576A1,1,0,0,1-7,33.89Z" transform="translate(9.855)" fill="#fff"></path>
+    </svg>
+  </button>
+</div>
+
+<script>
+  // If wrapper to scope variables for load in from section rendering API
+  if (true) {
+    let script = document.currentScript;
+    let parentSection = script.parentElement;
+    let sectionId = parentSection.id;
+
+    let initSwiper = function () {
+      let swiper = new Swiper(`[id="${sectionId}"] .swiper`, {
+        centeredSlides: true,
+        loop: true,
+        spaceBetween: 175,
+        slidesPerView: 1,
+        watchSlidesProgress: true,
+        mousewheel: {
+          forceToAxis: true,
+        },
+        navigation: {
+          nextEl: `[id="${sectionId}"] .arrow-next`,
+          prevEl: `[id="${sectionId}"] .arrow-prev`,
+        },
+      });
+
+      // Add event listeners to height icons
+      let slideIcons = parentSection.querySelectorAll('.sock-category-title');
+      for (let i = 0; i < slideIcons.length; i++) {
+        let slideIcon = slideIcons[i];
+        slideIcon.addEventListener('click', function () {
+          swiper.slideToLoop(i);
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initSwiper();
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Carousel - Sock Category",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Title Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sock_category",
+      "name": "Sock Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Category"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "headline",
+          "label": "headline",
+          "default": "<p><strong>Headline</strong><br>Headline text here</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_key_one",
+          "label": "Key Feature Icon - 1"
+        },
+        {
+          "type": "richtext",
+          "id": "key_feature_one_body",
+          "label": "Key Feature body - 1",
+          "default": "<p><strong>Feature 1</strong><br>Key feature text here</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_key_two",
+          "label": "Key Feature Icon - 2"
+        },
+        {
+          "type": "richtext",
+          "id": "key_feature_two_body",
+          "label": "Key Feature body - 2",
+          "default": "<p><strong>Feature 2</strong><br>Key feature text here</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "best_for_body",
+          "label": "Best for section text",
+          "default": "<p><strong>Best for:</strong> Running, walking, cycling, and daily wear</p>"
+        },
+        {
+          "type": "text",
+          "id": "cta_btn_text_1",
+          "label": "CTA Button Text - 1",
+          "default": "CTA 1"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url_1",
+          "label": "CTA Button URL - 1"
+        },
+        {
+          "type": "text",
+          "id": "cta_btn_text_2",
+          "label": "CTA Button Text - 2",
+          "default": "CTA 2"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url_2",
+          "label": "CTA Button URL - 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carousel - Sock Category"
+    }
+  ]
+}
+{% endschema %}

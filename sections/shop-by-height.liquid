@@ -1,0 +1,360 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+          padding-top: {{ section.settings.padding_top | times: 0.60 | round: 0 }}px;
+          padding-bottom: {{ section.settings.padding_bottom | times: 0.60 | round: 0 }}px;
+        }
+
+    @media screen and (min-width: 480px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+
+    }
+
+    .feeturesShopByHeightParent__headline {
+      text-align: center;
+      margin: 0 auto 15px auto;
+    }
+
+    .feeturesShopByHeight {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .feeturesShopByHeightItem {
+      max-width: 220px;
+      text-align: center;
+    }
+
+    .feeturesShopByHeightItem__headline {
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    @media (min-width: 768px) {
+      .feeturesShopByHeightLower {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .feeturesShopByHeightItem__btns {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+
+    .feeturesShopByHeightItem__img {
+      position: relative;
+    }
+
+    .feeturesShopByHeightItem__btns.mobile__btns {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      margin-top: 0px !important;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      /* background: #808080c7; */
+      border-radius: 3px;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .feeturesShopByHeightItem__btns.mobile__btns a {
+      margin: 0 0 10px 0 !important;
+      line-height: 18px;
+      font-size: 16px;
+      width: 160px;
+      padding: 8px 10px 10px 10px !important;
+    }
+
+    .feeturesShopByHeightItem__btns.mobile__btns a:last-of-type {
+      margin: 0 !important
+    }
+
+    @media screen and (max-width: 480px) {
+      .desktop__btns {
+        display: none !important;
+      }
+      .feeturesShopByHeightItem__headline {
+        font-size: 16px;
+      }
+
+      .feeturesShopByHeight {
+        justify-content: space-between;
+      }
+
+      .feeturesShopByHeightItem__btns.mobile__btns a {
+        margin: 0 0 10px 0 !important;
+        line-height: 18px;
+        font-size: 12px;
+        width: 100px;
+        padding: 5px !important;
+      }
+    }
+
+    {%- if section.blocks.size == 2 -%}
+        #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+            width: 50%;
+        }
+
+        @media (max-width: 768px) {
+          #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+            width: 100%;
+          }
+        }
+    {%- endif -%}
+
+    {%- if section.blocks.size == 2 -%}
+        #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+            width: 33.3%;
+        }
+
+        @media (max-width: 768px) {
+          #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+            width: 100%;
+          }
+        }
+    {%- endif -%}
+
+
+
+    {%- if section.blocks.size == 4 -%}
+        #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+            width: 25%;
+        }
+        @media (max-width: 768px) {
+          #shopify-section-{{section.id}}  .feeturesShopByHeight {
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+          #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+            width: calc(50% - 10px);
+          }
+
+          #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem:nth-child(2n) {
+              margin-left: 10px;
+          }
+
+          #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem:nth-child(2n-1) {
+              margin-right: 5px;
+          }
+        }
+    {%- endif -%}
+
+    {%- if section.blocks.size == 6 -%}
+        #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+          width: calc(16% - 15px);
+        }
+
+        @media (max-width: 991px) {
+          #shopify-section-{{section.id}}  .feeturesShopByHeight {
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+
+          #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+            width: calc(33% - 15px);
+            margin-bottom: 10px;
+          }
+
+          .feeturesShopByHeightItem {
+            max-width: 260px;
+          }
+
+          @media (max-width: 400px) {
+            #shopify-section-{{section.id}} .feeturesShopByHeight .feeturesShopByHeightItem {
+              height: 150px;
+            }
+          }
+        }
+
+    {%- endif -%}
+
+
+    #shopify-section-{{section.id}}  .feeturesShopByHeight .feeturesShopByHeightItem {
+      background-color: {{section.settings.background_color | default: "#ffffff" }};
+    }
+{%- endstyle -%}
+
+{% if section.blocks.size > 0 %}
+  <section id="{{ settings.custom_section_id }}" class="section-{{ section.id }}-padding">
+    <div class="wrapper">
+      {% if section.settings.headline != blank %}
+        <h3 class="feeturesShopByHeightParent__headline">{{ section.settings.headline }}</h3>
+      {% endif %}
+      <div class="feeturesShopByHeight">
+        {% for block in section.blocks %}
+          {% if block.type == 'collection' %}
+            <div class="feeturesShopByHeightItem">
+              <div class="feeturesShopByHeightItem__img">
+                {% if block.settings.image %}
+                  {{
+                    block.settings.image.src
+                    | image_url: width: 1060
+                    | image_tag: class: '', preload: true, style: 'height: auto'
+                  }}
+                {% endif %}
+                <div class="feeturesShopByHeightItem__btns mobile__btns" style="display: none">
+                  {% if block.settings.btn_1_url != blank and block.settings.btn_1_text != blank %}
+                    <a
+                      class="btn"
+                      href="{{block.settings.btn_1_url}}"
+                      {% if block.settings.btn_1_aria != blank %}
+                        aria-label="{{block.settings.btn_1_aria}}"
+                      {% endif %}
+                    >
+                      {{- block.settings.btn_1_text -}}
+                    </a>
+                  {% endif %}
+                  {% if block.settings.btn_2_url != blank and block.settings.btn_2_text != blank %}
+                    <a
+                      class="btn"
+                      href="{{block.settings.btn_2_url}}"
+                      {% if block.settings.btn_2_aria != blank %}
+                        aria-label="{{block.settings.btn_2_aria}}"
+                      {% endif %}
+                    >
+                      {{- block.settings.btn_2_text -}}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="feeturesShopByHeightLower">
+                <h2 class="feeturesShopByHeightItem__headline">{{ block.settings.headline }}</h2>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<script>
+  const featuresCollectionsItems = document.querySelectorAll('.feeturesShopByHeightItem__img');
+
+  featuresCollectionsItems.forEach((item, index) => {
+    const mobileBtns = item.querySelector('.mobile__btns');
+
+    // Function to toggle the display of mobile__btns
+    const toggleMobileBtns = () => {
+      if (mobileBtns.style.display === 'none' || mobileBtns.style.display === '') {
+        mobileBtns.style.display = 'flex';
+      } else {
+        mobileBtns.style.display = 'none';
+      }
+    };
+
+    // Add click event listener
+    item.addEventListener('click', toggleMobileBtns);
+
+    // Add hover event listeners
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      item.addEventListener('mouseenter', toggleMobileBtns);
+      item.addEventListener('mouseleave', toggleMobileBtns);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Feetures Shop by Height",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Section Headline"
+    },
+    {
+      "type": "text",
+      "id": "custom_section_id",
+      "label": "Custom Section ID (For A/B Testing)"
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Collection Image (528x428 ideally)"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Collection Headline"
+        },
+        {
+          "type": "text",
+          "id": "btn_1_text",
+          "label": "Button #1 Text"
+        },
+        {
+          "type": "text",
+          "id": "btn_1_aria",
+          "label": "Button #1 ARIA Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_1_url",
+          "label": "Button #1 URL"
+        },
+        {
+          "type": "text",
+          "id": "btn_2_text",
+          "label": "Button #2 Text (optional)"
+        },
+        {
+          "type": "text",
+          "id": "btn_2_aria",
+          "label": "Button #2 ARIA Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_2_url",
+          "label": "Button #2 URL (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures Shop by Height",
+      "category": "Feetures"
+    }
+  ]
+}
+{% endschema %}

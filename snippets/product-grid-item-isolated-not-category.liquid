@@ -1,0 +1,167 @@
+{% unless width %}
+  {%- assign width = 310 -%}
+{% endunless %}
+{% unless height %}
+  {%- assign height = 415 -%}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{% capture img_id_class %}ProductImage-{{ product.featured_media.id }}{% endcapture %}
+{% capture img_wrapper_id %}ProductImageWrapper-{{ product.featured_media.id }}{% endcapture %}
+{%- assign featured_image = product.featured_media.preview_image %}
+{%- assign img_url = featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+{%- capture sale_msg -%}
+  {%- if product.title contains "Pack" -%}
+    Bundle Savings
+  {%- elsif on_sale -%}
+    Select Colors {{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}% off
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="grid-product__wrapper grid-product__wrapper--not-category">
+  <div class="grid-product__image-wrapper">
+    <a
+      class="grid-product__image-link"
+      href="{{ product.url | within: collection }}"
+      data-image-link
+    >
+      {% comment %}
+        {% include 'image-style' with image: featured_image, small_style: true, width: width, height: height, wrapper_id: img_wrapper_id, img_id_class: img_id_class %}
+      {% endcomment %}
+      <!-- <div id="{{ img_wrapper_id }}" class="product--wrapper"> -->
+      <!-- style="padding-top:{{ 1 | divided_by: featured_image.aspect_ratio | times: 100 }}%;" -->
+      <!-- <div> -->
+      <!--
+        <img class="product--image lazyload {{ img_id_class }}"
+        data-src="{{ img_url }}"
+        data-widths="[180, 370, 590, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+        data-aspectratio="{{ featured_image.aspect_ratio }}"
+        data-sizes="auto"
+        alt="{{ featured_image.alt | escape }}"
+        data-image>
+      -->
+      <img
+        loading="lazy"
+        class="product--image {{ img_id_class }}"
+        src="{{ product.featured_image | img_url: '347x389' }}"
+        alt="{{ product.featured_image.alt | escape }}"
+        data-image
+      >
+      <!-- </div> -->
+      <!-- </div> -->
+      <!--
+        <noscript>
+          <img class="grid-product__image" src="{{ featured_image.src | img_url: '1024x' }}" alt="{{ featured_image.alt | escape }}">
+        </noscript>
+      -->
+    </a>
+
+    {% if sold_out %}
+      <div class="grid-product__sold-out">
+        <p>{{ 'products.product.sold_out_html' | t }}</p>
+      </div>
+    {% elsif on_sale %}
+      <div class="grid-product__on-sale">
+        <p>Sale</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <a href="{{ product.url | within: collection }}" class="grid-product__meta">
+    <span class="grid-product__title">{{ product.title }}</span>
+    <div class="grid__price">
+      {% if on_sale %}
+        {% if product.title contains 'Pack' or product.title contains 'pack' %}
+          <span class="grid__price-actual">{{ product.price | money_without_trailing_zeros }}</span>
+          <strike class="grid__price-compare">{{ product.compare_at_price | money_without_trailing_zeros }}</strike>
+        {% else %}
+          <span class="grid__price-actual">{{ product.price_max | money_without_trailing_zeros }}</span>
+        {% endif %}
+      {% else %}
+        <span class="grid__price-actual">{{ product.price | money_without_trailing_zeros }}</span>
+      {% endif %}
+    </div>
+    <div class="grid-product__sale-msg">
+      {% if product.title contains 'Pack' or product.title contains 'pack' %}
+        Bundle Savings
+      {% elsif on_sale %}
+        {{ sale_msg }}
+      {% endif %}
+    </div>
+
+    <!--
+      <span class="grid-product__price-wrap">
+        <span class="grid-product__price">
+          {% if on_sale %}
+            <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+          {% else %}
+             <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+          {% endif %}
+          {% if product.price_varies %}
+            {{ product.price_min | money_without_trailing_zeros }}
+            <span class="icon-fallback-text">
+              <span class="icon icon-plus grid-product__price-min" aria-hidden="true"></span>
+              <span class="fallback-text">+</span>
+            </span>
+          {% else %}
+            {{ product.price | money_without_trailing_zeros }}
+          {% endif %}
+        </span>
+
+        {%- if product.price_varies == false and variant.unit_price_measurement -%}
+          {%- capture unit_price_separator -%}
+            <span aria-hidden="true">/</span><span class="visually-hidden">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+          {%- endcapture -%}
+
+          {%- capture unit_price_base_unit -%}
+            <span>
+              {%- if variant.unit_price_measurement.reference_value != 1 -%}
+                {{- variant.unit_price_measurement.reference_value -}}
+              {%- endif -%}
+              {{ variant.unit_price_measurement.reference_unit }}
+            </span>
+          {%- endcapture -%}
+          <span class="product-unit-price">
+            <span class="visually-hidden">{{ 'products.general.unit_price' | t }}</span>
+            <span>{{ variant.unit_price | money }}</span>{{- unit_price_separator -}}{{- unit_price_base_unit -}}
+          </span>
+        {%- endif -%}
+      </span>
+    -->
+  </a>
+
+  {% assign variant_option1 = '' %}
+  {% for variant in product.variants %}
+    {% assign temp = variant.option1 | append: '||' %}
+    {% unless variant_option1 contains temp %}
+      {% assign variant_option1 = variant_option1 | append: temp %}
+    {% endunless %}
+  {% endfor %}
+  {% assign variant_colors = variant_option1 | split: '||' %}
+
+  <a href="{{ product.url | within: collection }}" class="grid-product__variants">
+    {% for variant_color in variant_colors %}
+      {% assign variant_color_swatch_asset = variant_color
+        | prepend: 'swatch-'
+        | append: '.png'
+        | replace: ' ', '-'
+        | downcase
+      %}
+      <div class="variant-selector">
+        <img class="" loading="lazy" src="{{variant_color_swatch_asset | asset_url}}" alt="{{variant_color}}">
+      </div>
+    {% endfor %}
+  </a>
+</div>

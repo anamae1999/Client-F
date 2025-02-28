@@ -1,0 +1,588 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "e765a22c-d95f-4442-af4d-68bb52300b2b": {
+      "type": "feetures-hero",
+      "blocks": {
+        "template--14630613221448__e765a22c-d95f-4442-af4d-68bb52300b2b-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Social_Impact.png"
+          }
+        },
+        "b9eb5272-ad1c-41b5-b57b-d99c81f6c0a3": {
+          "type": "headline",
+          "settings": {
+            "headline": "We Believe People Are Meant to Move",
+            "headline_color": "#ffffff",
+            "headline_mobile_size": 33,
+            "headline_size": 56
+          }
+        },
+        "bab6ea97-4b45-4a09-8440-e6cac1317de5": {
+          "type": "eyebrow_text",
+          "settings": {
+            "eyebrow_text": "And we want to help you do just that",
+            "eyebrow_color": "#ffffff",
+            "eyebrow_mobile_size": 20,
+            "eyebrow_size": 24
+          }
+        },
+        "2697f41a-d08e-4fd0-a4f8-75fef9f04a36": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/merino_10.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--14630613221448__e765a22c-d95f-4442-af4d-68bb52300b2b-desktop_image-1",
+        "b9eb5272-ad1c-41b5-b57b-d99c81f6c0a3",
+        "bab6ea97-4b45-4a09-8440-e6cac1317de5",
+        "2697f41a-d08e-4fd0-a4f8-75fef9f04a36"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x600",
+        "vertical_alignment_desktop": "bottom",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "top",
+        "horizontal_alignment_mobile": "center",
+        "cta_top_margin": "130px"
+      }
+    },
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "44452239-a81d-4791-8e83-60f45e312177": {
+          "type": "headline",
+          "settings": {
+            "headline": "Social Impact",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>At Feetures, we create socks designed for every kind of athlete and we believe all people are Meant to Move. It’s our mission to inspire and support that passion in everyone. We also recognize that we have a role to play as an industry thought leader. As a result, we’ve partnered with many like-minded organizations over the years. Below are some organizations that we are proud to support presently...<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "44452239-a81d-4791-8e83-60f45e312177",
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "288fbe07-33cc-484b-a930-78e31e3fc82c": {
+      "type": "feetures-logos",
+      "blocks": {
+        "ea7a5c74-dffc-4447-9271-e139a249c093": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/RoofAbove.jpg",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/LetMeRun.jpg",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "99ea2433-9438-41fe-966d-395059abf1a4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Samaritan.jpg",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "842a552d-d026-4cfa-a7b1-53da96bf5989": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/RIDC.jpg",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "db55c43e-61ef-4026-8d84-1baafc55ce37": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/AccesstoSuccess.jpg",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "673d26c5-59e2-4079-8455-8c4c53072b43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/TakeTheLead.jpg",
+            "url": "",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "ea7a5c74-dffc-4447-9271-e139a249c093",
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105",
+        "99ea2433-9438-41fe-966d-395059abf1a4",
+        "842a552d-d026-4cfa-a7b1-53da96bf5989",
+        "db55c43e-61ef-4026-8d84-1baafc55ce37",
+        "673d26c5-59e2-4079-8455-8c4c53072b43"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 8,
+        "heading": ""
+      }
+    },
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h3>Community Outreach<\/h3><\/div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1"
+      ],
+      "custom_css": [
+        "h2 {padding-top: 20px;}"
+      ],
+      "settings": {
+      }
+    },
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/DSC_0123_1.jpg"
+          }
+        },
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5": {
+          "type": "headline",
+          "settings": {
+            "headline": "Let Me Run",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "5f722017-8140-441e-80e1-b28491dfa2b2": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Let Me Run is a nonprofit wellness program that inspires boys to be themselves, be active, and belong. With a comprehensive curriculum that applies the power of running, the program encourages boys to develop their psychological, emotional and social health, in addition to their physical health.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 16,
+            "body_size": 16
+          }
+        },
+        "cta_btn_JYRgPt": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Learn More",
+            "cta_btn_url": "https:\/\/www.letmerun.org\/",
+            "new_tab": true,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1",
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5",
+        "5f722017-8140-441e-80e1-b28491dfa2b2",
+        "cta_btn_JYRgPt"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    },
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/422706587_774325481390238_9208003707477936551_n.jpg"
+          }
+        },
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427": {
+          "type": "headline",
+          "settings": {
+            "headline": "Access 2 Success",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "cd535363-ed57-4739-a3ee-f0c995666962": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Access to success mission is to provide sustainable programs that generate positive change for Nigerian children and their communities.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        },
+        "cta_btn_3Mzpgj": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Learn More",
+            "cta_btn_url": "https:\/\/a2sfoundation.org\/",
+            "new_tab": true,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361",
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427",
+        "cd535363-ed57-4739-a3ee-f0c995666962",
+        "cta_btn_3Mzpgj"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "feetures_image_text_4FBEpQ": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "desktop_image_jWeWmf": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/400111798_18015745453937913_9034850394036955119_n.jpg"
+          }
+        },
+        "headline_HRGz6Q": {
+          "type": "headline",
+          "settings": {
+            "headline": "A Roof Above",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "body_copy_4xjUfL": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>A Roof Above's mission is to unite the community to end homelessness, one life at a time.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        },
+        "cta_btn_rpLQih": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Learn More",
+            "cta_btn_url": "https:\/\/www.roofabove.org\/",
+            "new_tab": true,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "desktop_image_jWeWmf",
+        "headline_HRGz6Q",
+        "body_copy_4xjUfL",
+        "cta_btn_rpLQih"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/346673362_159533460404082_6805133732305287113_n.jpg"
+          }
+        },
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200": {
+          "type": "headline",
+          "settings": {
+            "headline": "Running Industry Diversity Coalition",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>At the RIDC, we're an educational, nonprofit organization with a mission to unite the running industry to improve the inclusion, visibility, and access for Black, Indigenous, and People of Color (BIPOC). <\/p><p>Beyond running—we're dedicated to championing transformative change within the sport. We partner with brands, race events, retailers, and run clubs to ignite unparalleled advancements for Black, Indigenous, and other people of color in the running industry.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        },
+        "cta_btn_fWqNwe": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Learn More",
+            "cta_btn_url": "https:\/\/www.runningdiversity.com\/",
+            "new_tab": true,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1",
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200",
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e",
+        "cta_btn_fWqNwe"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "feetures_image_text_4xGKeY": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "desktop_image_dAD68L": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/367960285_3027629367374316_8889399434206420263_n.jpg"
+          }
+        },
+        "headline_XCGpeN": {
+          "type": "headline",
+          "settings": {
+            "headline": "Take the Lead",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "body_copy_DaH68R": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Take The Lead is the first-ever running-industry retreat centering the experience of women and femme of color with the mission to validate, support, and lead change they want to see in the running industry. Take The Lead was co-founded in 2022 by Alison Mariella Désir and Martha M. Garcia. <\/p><p>Take the Lead is returning in 2023 with the continued mission to provide women and femme of color who work in the running industry with career development programming, community building, and mentorship opportunities that center our experiences and identities.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 20
+          }
+        },
+        "cta_btn_Fh7Wb8": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Learn More",
+            "cta_btn_url": "https:\/\/www.taketheleadwomen.com\/",
+            "new_tab": true,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "desktop_image_dAD68L",
+        "headline_XCGpeN",
+        "body_copy_DaH68R",
+        "cta_btn_Fh7Wb8"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "feetures_image_text_Adb6ga": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "headline_e8hXWn": {
+          "type": "headline",
+          "settings": {
+            "headline": "Samaritan's Feet",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "body_copy_eBfMVP": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Samaritan's Feet is a humanitarian aid organization that serves and inspires hope by providing shoes to those in need around the world.<br\/><br\/>Since its founding in 2003, Samaritan's Feet and its partners have served over 10.1 million people across 109 countries and over 600 U.S. cities.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 20
+          }
+        },
+        "desktop_image_8XKzRc": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/414224489_1094269365084295_8259702668400001101_n.jpg"
+          }
+        },
+        "cta_btn_6Ba6rw": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Learn More",
+            "cta_btn_url": "https:\/\/samaritansfeet.org\/",
+            "new_tab": true,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "headline_e8hXWn",
+        "body_copy_eBfMVP",
+        "desktop_image_8XKzRc",
+        "cta_btn_6Ba6rw"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "feetures_quote_carousel_Wbxjpg": {
+      "type": "feetures-quote-carousel",
+      "blocks": {
+        "quote_BLfp7w": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Quarter_hiking_socks.png",
+            "link": "shopify:\/\/products\/merino-10-cushion-quarter",
+            "text": "<p>\"They are awesome! My dad wore wool socks for tennis. Now I understand why! They are cool and comfortable. With the extra padding of the Feetures I couldn’t ask for a better sock. The fit is excellent and the sock holds its shape.\"<\/p>",
+            "author": "Jon C."
+          }
+        },
+        "quote_ERkmLU": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Merino-4_5d2b801c-e1bc-4703-b4b7-2a705fea72c9.jpg",
+            "link": "shopify:\/\/products\/merino-ultra-light-no-show-tab",
+            "text": "<p>\"These Merino wool no show socks are so soft and cushioned! I prefer them over the other cushioned socks because of the softness. They stay up on the heel and hug my foot so nicely! Best no show sock ever purchased.\"<\/p>",
+            "author": "Melody H."
+          }
+        },
+        "quote_cDEBhk": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Mini_Crew_hiking_socks.png",
+            "link": "shopify:\/\/products\/elite-cushion-mini-crew",
+            "text": "<p>\"Super soft Merino blend, provides excellent comfort in all weather conditions from Short runs to 16 hour shifts. Combined with the Feetures awesome customer service and lifetime guarantee its a no brainer!\"<\/p>",
+            "author": "Michael K."
+          }
+        },
+        "quote_cNRK7G": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/379288737_18384565021001933_2895525749771892846_n.jpg",
+            "link": "shopify:\/\/products\/merino-light-cushion-crew",
+            "text": "<p>\"The Merino 10 cushion is hands down the most comfortable, softest, best fitting sock I have tried. They are my go-to sock for long runs, recovery runs, and racing. They just work!\"<\/p>",
+            "author": "Cory M."
+          }
+        },
+        "quote_xi9NBm": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/370639607_668685218526797_422917670841168372_n.jpg",
+            "link": "shopify:\/\/products\/merino-10-ultra-light-mini-crew",
+            "text": "<p>\"Love them! Extra cushioning in all the right places without making the sock too thick and bulky. No more blisters from rubbing shoes on long hikes.\"<\/p>",
+            "author": "Tami W."
+          }
+        }
+      },
+      "block_order": [
+        "quote_BLfp7w",
+        "quote_ERkmLU",
+        "quote_cDEBhk",
+        "quote_cNRK7G",
+        "quote_xi9NBm"
+      ],
+      "disabled": true,
+      "settings": {
+        "headline": "Testimonials",
+        "cta_btn_text": "Shop Women's",
+        "cta_btn_url": "shopify:\/\/collections\/womens-merino-socks-collection",
+        "cta_btn_text_2": "Shop Men's",
+        "cta_btn_url_2": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "padding_top": 0,
+        "padding_bottom": 32
+      }
+    },
+    "03642916-6dd5-4af1-94f4-7e5323edf355": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "",
+        "image1": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Quarter_hiking_socks.png",
+        "image2": "shopify:\/\/shop_images\/EM55468-3_1200x1200_7353cc50-2c83-440e-9a9e-0c782814a492.jpg",
+        "image3": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Mini_Crew_hiking_socks.png",
+        "image4": "shopify:\/\/shop_images\/Merino-4_5d2b801c-e1bc-4703-b4b7-2a705fea72c9.jpg",
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "e765a22c-d95f-4442-af4d-68bb52300b2b",
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a",
+    "288fbe07-33cc-484b-a930-78e31e3fc82c",
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca",
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd",
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596",
+    "feetures_image_text_4FBEpQ",
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090",
+    "feetures_image_text_4xGKeY",
+    "feetures_image_text_Adb6ga",
+    "feetures_quote_carousel_Wbxjpg",
+    "03642916-6dd5-4af1-94f4-7e5323edf355"
+  ]
+}

@@ -1,0 +1,212 @@
+{% if page.handle == 'joseph-gaither' %}
+    {% assign author = 'Joe Gaither' %}
+{% elsif page.handle == 'alexis-mendible' %}
+  {% assign author = 'Alexis Mendible' %}
+{% endif -%}
+
+<style>
+    .articles-wrap {
+        max-width: 704px;
+        padding: 48px 24px;
+        margin: 0 auto;
+        list-style: none;
+    }
+
+    .articles-wrap ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    .articles-wrap li {
+        list-style: none;
+    }
+
+    .articles-wrap p {
+        margin-top: 4px;
+        color: #757575;
+    }
+
+    .articles-wrap h2 {
+        margin-bottom: 32px;
+    }
+
+    .articles-wrap article {
+        margin-bottom: 32px;
+    }
+
+    .article__item--title {
+        margin: 0px !important;
+    }
+
+    .article__item--title a {
+        display: block;
+        text-decoration: underline !important;
+        color: inherit;
+        font-weight: bold;
+        line-height: 24px;
+        -webkit-font-smoothing: antialiased;
+        font-size: 18px;
+        border-bottom: none !important;
+    }
+
+    .grid::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    .grid__item {
+        float: left;
+    }
+
+    .grid__item.three-fifths {
+        width: 60%;
+    }
+
+    .grid__item.two-fifths {
+        width: 40%;
+    }
+</style>
+
+<!-- /templates/page.liquid -->
+{% if page.metafields.accentuate.hero_image != blank %}
+  <div class="content-page-hero">
+    <img src="{{page.metafields.accentuate.hero_image}}">
+  </div>
+{% endif %}
+<div class="grid">
+  <div class="grid__item large--five-sixths push--large--one-twelfth">
+
+    <div class="section-header  {%if page.metafields.accentuate.hide_page_heading%} visually-hidden{%endif%}">
+      <h1 style="text-align: center">{{ page.title }}</h1>
+    </div>
+
+    <div class="grid">
+      <div class="grid__item large--four-fifths push--large--one-tenth">
+        <div class="rte rte--nomargin rte--indented-images">
+          {{ page.content }}
+
+          <div class="articles-wrap">
+
+            <h2>More articles from this author</h2>
+
+            <ul>
+                {% assign blog = blogs['feetures-blog'] %}
+                {% paginate blog.articles by 250 %}
+                    {% for article in blog.articles limit: 250 %}
+                        {% if article.author == author -%}
+                            <li>
+                                <article class="grid">
+                                    <div class="grid__item three-fifths">
+                                        <h3 class="article__item--title">
+                                            <a href="{{ article.url }}">{{ article.title }}</a>
+                                        </h3>
+                                        <p>{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+                                        <time datetime="{{ article.created_at | date: "%d, %b, %Y" }}">{{ article.created_at | date: "%d, %b, %Y" }}</time>
+
+                                    </div>
+                                    <div class="grid__item two-fifths">
+                                        <picture>
+                                            <source media="(max-width: 375px)"
+                                                    srcset="{{ article.image | img_url: '103x86', crop: 'center' }},
+                        {{ article.image | img_url: '103x86', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(max-width: 480px)"
+                                                    srcset="{{ article.image | img_url: '146x122', crop: 'center' }},
+                        {{ article.image | img_url: '146x122', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(max-width: 659px)"
+                                                    srcset="{{ article.image | img_url: '217x181', crop: 'center' }},
+                        {{ article.image | img_url: '217x181', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(min-width: 660px)"
+                                                    srcset="{{ article.image | img_url: '146x122', crop: 'center' }},
+                        {{ article.image | img_url: '146x122', crop: 'center', scale: 2 }} 2x">
+                                            <img src="{{ article.image | img_url: '146x122', crop: 'center' }}" alt="{{ article.title }}">
+                                        </picture>
+                                    </div>
+                                </article>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% assign sp_paginate_by = paginate.page_size %}{% endpaginate %}
+
+              {% assign blog = blogs['news'] %}
+                {% paginate blog.articles by 250 %}
+                    {% for article in blog.articles limit: 250 %}
+                        {% if article.author == author -%}
+                            <li>
+                                <article class="grid">
+                                    <div class="grid__item three-fifths">
+                                        <h3 class="article__item--title">
+                                            <a href="{{ article.url }}">{{ article.title }}</a>
+                                        </h3>
+                                        <p>{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+                                        <time datetime="{{ article.created_at | date: "%d, %b, %Y" }}">{{ article.created_at | date: "%d, %b, %Y" }}</time>
+
+                                    </div>
+                                    <div class="grid__item two-fifths">
+                                        <picture>
+                                            <source media="(max-width: 375px)"
+                                                    srcset="{{ article.image | img_url: '103x86', crop: 'center' }},
+                        {{ article.image | img_url: '103x86', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(max-width: 480px)"
+                                                    srcset="{{ article.image | img_url: '146x122', crop: 'center' }},
+                        {{ article.image | img_url: '146x122', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(max-width: 659px)"
+                                                    srcset="{{ article.image | img_url: '217x181', crop: 'center' }},
+                        {{ article.image | img_url: '217x181', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(min-width: 660px)"
+                                                    srcset="{{ article.image | img_url: '146x122', crop: 'center' }},
+                        {{ article.image | img_url: '146x122', crop: 'center', scale: 2 }} 2x">
+                                            <img src="{{ article.image | img_url: '146x122', crop: 'center' }}" alt="{{ article.title }}">
+                                        </picture>
+                                    </div>
+                                </article>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% assign sp_paginate_by = paginate.page_size %}{% endpaginate %}
+
+              {% assign blog = blogs['our-atheletes'] %}
+                {% paginate blog.articles by 250 %}
+                    {% for article in blog.articles limit: 250 %}
+                        {% if article.author == author -%}
+                            <li>
+                                <article class="grid">
+                                    <div class="grid__item three-fifths">
+                                        <h3 class="article__item--title">
+                                            <a href="{{ article.url }}">{{ article.title }}</a>
+                                        </h3>
+                                        <p>{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+                                        <time datetime="{{ article.created_at | date: "%d, %b, %Y" }}">{{ article.created_at | date: "%d, %b, %Y" }}</time>
+
+                                    </div>
+                                    <div class="grid__item two-fifths">
+                                        <picture>
+                                            <source media="(max-width: 375px)"
+                                                    srcset="{{ article.image | img_url: '103x86', crop: 'center' }},
+                        {{ article.image | img_url: '103x86', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(max-width: 480px)"
+                                                    srcset="{{ article.image | img_url: '146x122', crop: 'center' }},
+                        {{ article.image | img_url: '146x122', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(max-width: 659px)"
+                                                    srcset="{{ article.image | img_url: '217x181', crop: 'center' }},
+                        {{ article.image | img_url: '217x181', crop: 'center', scale: 2 }} 2x">
+                                            <source media="(min-width: 660px)"
+                                                    srcset="{{ article.image | img_url: '146x122', crop: 'center' }},
+                        {{ article.image | img_url: '146x122', crop: 'center', scale: 2 }} 2x">
+                                            <img src="{{ article.image | img_url: '146x122', crop: 'center' }}" alt="{{ article.title }}">
+                                        </picture>
+                                    </div>
+                                </article>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% assign sp_paginate_by = paginate.page_size %}{% endpaginate %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+</div>

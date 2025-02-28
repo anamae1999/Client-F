@@ -1,0 +1,67 @@
+<section>
+    <div class="wrapper feeturesMissionWrapper">
+        <div class="feeturesMission">
+            <img class="feeturesMission__img lazyload"
+                data-sizes="
+                    (max-width: 767px) 100vw,
+                    (max-width: 1500px) 38.86vw,
+                    (max-width: 1705px) 39vw,
+                    667px
+                "
+                data-srcset="
+                    {{ section.settings.image | img_url: '667x572'}} 667w,
+                    {{ section.settings.image | img_url: '500x'  }} 500w,
+                    {{ section.settings.image | img_url: '400x' }} 400w,
+                    {{ section.settings.image | img_url: '300x' }} 300w,
+                    {{ section.settings.image | img_url: '200x' }} 200w
+                " 
+                data-src="{{section.settings.image | img_url: '667x572'}}" 
+                alt="{{section.settings.image.alt}}">
+            <div class="feeturesMissionInfo">
+                <h3 class="feeturesMissionInfo__headline">{{section.settings.headline}}</h3>
+                <p class="feeturesMissionInfo__description">{{section.settings.description}}</p>
+                <p class="feeturesMissionInfo__tagline">{{section.settings.tagline}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+"name": "Feetures Mission",
+"settings": [
+    {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline"
+    },
+    {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+    },
+    {
+        "type": "text",
+        "id": "tagline",
+        "label": "Tagline"
+    },
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image (750x640)"
+    }
+],
+"presets": [
+    {
+        "name": "Feetures Mission",
+        "category": "Feetures"
+    }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,712 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "e765a22c-d95f-4442-af4d-68bb52300b2b": {
+      "type": "feetures-hero",
+      "blocks": {
+        "template--14630613221448__e765a22c-d95f-4442-af4d-68bb52300b2b-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Merino_LP_Header_v2.jpg"
+          }
+        },
+        "bab6ea97-4b45-4a09-8440-e6cac1317de5": {
+          "type": "eyebrow_text",
+          "settings": {
+            "eyebrow_text": "Feetures Merino 10 Socks",
+            "eyebrow_color": "#ffffff",
+            "eyebrow_mobile_size": 20,
+            "eyebrow_size": 24
+          }
+        },
+        "b9eb5272-ad1c-41b5-b57b-d99c81f6c0a3": {
+          "type": "headline",
+          "settings": {
+            "headline": "The most technically advanced wool sock ever",
+            "headline_color": "#ffffff",
+            "headline_mobile_size": 33,
+            "headline_size": 56
+          }
+        },
+        "ab8baa05-9ef1-404a-90c2-3d83debd830a": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "shopify:\/\/collections\/womens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "3c0256cd-3b2c-4043-b505-67bbbfa43693": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "2697f41a-d08e-4fd0-a4f8-75fef9f04a36": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/merino_10.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--14630613221448__e765a22c-d95f-4442-af4d-68bb52300b2b-desktop_image-1",
+        "bab6ea97-4b45-4a09-8440-e6cac1317de5",
+        "b9eb5272-ad1c-41b5-b57b-d99c81f6c0a3",
+        "ab8baa05-9ef1-404a-90c2-3d83debd830a",
+        "3c0256cd-3b2c-4043-b505-67bbbfa43693",
+        "2697f41a-d08e-4fd0-a4f8-75fef9f04a36"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x600",
+        "vertical_alignment_desktop": "bottom",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "top",
+        "horizontal_alignment_mobile": "center",
+        "cta_top_margin": "130px"
+      }
+    },
+    "288fbe07-33cc-484b-a930-78e31e3fc82c": {
+      "type": "feetures-logos",
+      "blocks": {
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_1_250x94_a5c8df9d-c28f-4737-ab6c-1b3357a89fef.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "842a552d-d026-4cfa-a7b1-53da96bf5989": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_3_250x94_4ce9e062-650b-4c7a-b50b-6686e3b6cee7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "ea7a5c74-dffc-4447-9271-e139a249c093": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_4_250x94_b66a6798-4efc-4bac-aca3-7f48d338e198.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "99ea2433-9438-41fe-966d-395059abf1a4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_2_250x94_ec014e0b-e3a1-45d3-8265-7d2bdb310d43.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "db55c43e-61ef-4026-8d84-1baafc55ce37": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_6_250x94_e025bb97-d471-4bc0-b967-61f6b44bdcac.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "673d26c5-59e2-4079-8455-8c4c53072b43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_5_250x94_78417c4e-5e5c-4a7f-85be-de8b93f566b7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105",
+        "842a552d-d026-4cfa-a7b1-53da96bf5989",
+        "ea7a5c74-dffc-4447-9271-e139a249c093",
+        "99ea2433-9438-41fe-966d-395059abf1a4",
+        "db55c43e-61ef-4026-8d84-1baafc55ce37",
+        "673d26c5-59e2-4079-8455-8c4c53072b43"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 8,
+        "heading": ""
+      }
+    },
+    "c8e19544-ad9d-4052-a8cc-d840ebd077e2": {
+      "type": "feetures-hero",
+      "blocks": {
+        "template--14630613221448__c8e19544-ad9d-4052-a8cc-d840ebd077e2-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Merino_LP_Header_v3.jpg"
+          }
+        },
+        "8d0a48d9-9b4f-4fd5-9126-df24fe0c7e39": {
+          "type": "eyebrow_text",
+          "settings": {
+            "eyebrow_text": "Game changing Merino",
+            "eyebrow_color": "",
+            "eyebrow_mobile_size": 16,
+            "eyebrow_size": 16
+          }
+        },
+        "af49513f-14ef-491b-9402-b25446936868": {
+          "type": "headline",
+          "settings": {
+            "headline": "Merino Wool + Tencel",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "72cc142e-9912-4b84-9817-01226d70f292": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>With a rarefied 200-needle thread count, the merino sock is comfier, stretchier, drier, and more durable than ever before.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 18
+          }
+        },
+        "cta_btn_Y9tdQJ": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "shopify:\/\/collections\/womens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "cta_btn_qBJwGp": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "mobile_image_4aAHYH": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/merino-wool-unprocessed-shutterstock_339662966.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--14630613221448__c8e19544-ad9d-4052-a8cc-d840ebd077e2-desktop_image-1",
+        "8d0a48d9-9b4f-4fd5-9126-df24fe0c7e39",
+        "af49513f-14ef-491b-9402-b25446936868",
+        "72cc142e-9912-4b84-9817-01226d70f292",
+        "cta_btn_Y9tdQJ",
+        "cta_btn_qBJwGp",
+        "mobile_image_4aAHYH"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x800",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "center",
+        "vertical_alignment_mobile": "center",
+        "horizontal_alignment_mobile": "center",
+        "cta_top_margin": ""
+      }
+    },
+    "advanced_content_4q8mnC": {
+      "type": "advanced-content",
+      "blocks": {
+        "html_zjxeTb": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\">\n<h5>Over 800 5-Star Reviews<\/h5>\n<h3><span style=\"color: #FFC72A\">★★★★★<\/span><\/h3> <\/div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "html_zjxeTb"
+      ],
+      "settings": {
+      }
+    },
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h3>Here's How it Works<\/h3><\/div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1"
+      ],
+      "custom_css": [
+        "h2 {padding-top: 20px;}"
+      ],
+      "settings": {
+      }
+    },
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Man_and_woman_wearing_Feetures_Merino_wool_socks.png"
+          }
+        },
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5": {
+          "type": "headline",
+          "settings": {
+            "headline": "Keeps Feet Warm & Dry",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "5f722017-8140-441e-80e1-b28491dfa2b2": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Our distinct blend of merino wool and tencel fibers creates a more advanced merino sock that insulates when wet—keeping your feet warm in wet, cool conditions.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1",
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5",
+        "5f722017-8140-441e-80e1-b28491dfa2b2"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 20,
+        "padding_bottom": 16
+      }
+    },
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/MidnightMoss_1080x_jpg.webp"
+          }
+        },
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427": {
+          "type": "headline",
+          "settings": {
+            "headline": "Anatomical Fit",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "cd535363-ed57-4739-a3ee-f0c995666962": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>These socks are designed with left and right fit, for a custom-like feel, delivering maximum comfort and protection by eliminating blisters.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        },
+        "cta_btn_AcNdBB": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "shopify:\/\/collections\/womens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "cta_btn_TPRQfJ": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361",
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427",
+        "cd535363-ed57-4739-a3ee-f0c995666962",
+        "cta_btn_AcNdBB",
+        "cta_btn_TPRQfJ"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "feetures_image_text_4FBEpQ": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "desktop_image_jWeWmf": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/SpicyPlum_1024x1024_27974f90-8569-4e29-9cd0-83789cb1db84.jpg"
+          }
+        },
+        "headline_HRGz6Q": {
+          "type": "headline",
+          "settings": {
+            "headline": "Targeted Compression",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "body_copy_4xjUfL": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Compression bands in the arch gently lift and support where you need it most, for superior comfort and fit.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "desktop_image_jWeWmf",
+        "headline_HRGz6Q",
+        "body_copy_4xjUfL"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Merino_LP_v5.jpg"
+          }
+        },
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200": {
+          "type": "headline",
+          "settings": {
+            "headline": "High Density Cushioning",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Extra protection in high impact areas, for added durability and comfort over uneven terrain.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        },
+        "cta_btn_gYKiKK": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "shopify:\/\/collections\/womens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "cta_btn_fWqNwe": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "shopify:\/\/collections\/mens-merino-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1",
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200",
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e",
+        "cta_btn_gYKiKK",
+        "cta_btn_fWqNwe"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/Merino_LP_v4.jpg"
+          }
+        },
+        "44452239-a81d-4791-8e83-60f45e312177": {
+          "type": "headline",
+          "settings": {
+            "headline": "Reinforced Heel & Toe",
+            "headline_color": "",
+            "headline_mobile_size": 24,
+            "headline_size": 36
+          }
+        },
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>Added durability in these high-wear areas means these socks are built to last.<\/p>",
+            "body_copy_color": "",
+            "body_mobile_size": 20,
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1",
+        "44452239-a81d-4791-8e83-60f45e312177",
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5": {
+      "type": "feetures-brand-statement",
+      "blocks": {
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Merino_10_Fibers_tech_3.png",
+            "headline": "Merino 10 Fibers",
+            "text": "Naturally regulate temperature to keep your feet dry, comfortable and odor-free."
+          }
+        },
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Targeted_Compression_tech_2.jpg",
+            "headline": "Targeted Compression",
+            "text": "In the arch provides superior comfort and support."
+          }
+        },
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Anatomical_Design_tech_1.jpg",
+            "headline": "Anatomical Design",
+            "text": "Enhances fit and reduces the risk of blisters."
+          }
+        }
+      },
+      "block_order": [
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6",
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17",
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002"
+      ],
+      "settings": {
+        "headline": "Plus, all the other tech that makes Feetures socks the best available",
+        "image": "shopify:\/\/shop_images\/merino-illustration_800x_v2.png"
+      }
+    },
+    "feetures_quote_carousel_Wbxjpg": {
+      "type": "feetures-quote-carousel",
+      "blocks": {
+        "quote_BLfp7w": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Quarter_hiking_socks.png",
+            "link": "shopify:\/\/products\/merino-10-cushion-quarter",
+            "text": "<p>\"They are awesome! My dad wore wool socks for tennis. Now I understand why! They are cool and comfortable. With the extra padding of the Feetures I couldn’t ask for a better sock. The fit is excellent and the sock holds its shape.\"<\/p>",
+            "author": "Jon C."
+          }
+        },
+        "quote_ERkmLU": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Merino-4_5d2b801c-e1bc-4703-b4b7-2a705fea72c9.jpg",
+            "link": "shopify:\/\/products\/merino-ultra-light-no-show-tab",
+            "text": "<p>\"These Merino wool no show socks are so soft and cushioned! I prefer them over the other cushioned socks because of the softness. They stay up on the heel and hug my foot so nicely! Best no show sock ever purchased.\"<\/p>",
+            "author": "Melody H."
+          }
+        },
+        "quote_cDEBhk": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Mini_Crew_hiking_socks.png",
+            "link": "shopify:\/\/products\/elite-cushion-mini-crew",
+            "text": "<p>\"Super soft Merino blend, provides excellent comfort in all weather conditions from Short runs to 16 hour shifts. Combined with the Feetures awesome customer service and lifetime guarantee its a no brainer!\"<\/p>",
+            "author": "Michael K."
+          }
+        },
+        "quote_cNRK7G": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/379288737_18384565021001933_2895525749771892846_n.jpg",
+            "link": "shopify:\/\/products\/merino-light-cushion-crew",
+            "text": "<p>\"The Merino 10 cushion is hands down the most comfortable, softest, best fitting sock I have tried. They are my go-to sock for long runs, recovery runs, and racing. They just work!\"<\/p>",
+            "author": "Cory M."
+          }
+        },
+        "quote_xi9NBm": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/370639607_668685218526797_422917670841168372_n.jpg",
+            "link": "shopify:\/\/products\/merino-10-ultra-light-mini-crew",
+            "text": "<p>\"Love them! Extra cushioning in all the right places without making the sock too thick and bulky. No more blisters from rubbing shoes on long hikes.\"<\/p>",
+            "author": "Tami W."
+          }
+        }
+      },
+      "block_order": [
+        "quote_BLfp7w",
+        "quote_ERkmLU",
+        "quote_cDEBhk",
+        "quote_cNRK7G",
+        "quote_xi9NBm"
+      ],
+      "settings": {
+        "headline": "Testimonials",
+        "cta_btn_text": "Shop Women's",
+        "cta_btn_url": "shopify:\/\/collections\/womens-merino-socks-collection",
+        "cta_btn_text_2": "Shop Men's",
+        "cta_btn_url_2": "shopify:\/\/collections\/mens-merino-socks-collection",
+        "padding_top": 0,
+        "padding_bottom": 32
+      }
+    },
+    "f68c6052-ad63-4822-88a6-4d5515796d61": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h2>Testimonials will go here<\/h2><\/div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        },
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca": {
+          "type": "html",
+          "settings": {
+            "code": "<p>\"They are awesome! My dad wore wool socks for tennis. Now I understand why! They are cool and comfortable. With the extra padding of the Feetures I couldn’t ask for a better sock. The fit is excellent and the sock holds its shape.\" - Jon C.\n<\/p>\n\n<p>\"These Merino wool no show socks are so soft and cushioned! I prefer them over the other cushioned socks because of the softness. They stay up on the heel and hug my foot so nicely! Best no show sock ever purchased.\" - Melody H.<\/p>\n\n<p>\"Super soft Merino blend, provides excellent comfort in all weather conditions from Short runs to 16 hour shifts. Combined with the Feetures awesome customer service and lifetime guarantee its a no brainer!\" - Michael K.<\/p>\n\n<p>\"The Merino 10 cushion is hands down the most comfortable, softest, best fitting sock I have tried. They are my go-to sock for long runs, recovery runs, and racing. They just work!\" - Cory M.\n<\/p>\n\n<p>\"Love them! Extra cushioning in all the right places without making the sock too thick and bulky. No more blisters from rubbing shoes on long hikes.\" - Tami W.<\/p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1",
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Try Merino 10 Socks Today",
+        "collection": "womens-merino-socks-collection",
+        "cta_btn_text": "",
+        "cta_btn_url": "",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "03642916-6dd5-4af1-94f4-7e5323edf355": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "",
+        "image1": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Quarter_hiking_socks.png",
+        "image2": "shopify:\/\/shop_images\/EM55468-3_1200x1200_7353cc50-2c83-440e-9a9e-0c782814a492.jpg",
+        "image3": "shopify:\/\/shop_images\/Feetures_women_s_Merino_10_Max_Cushion_Mini_Crew_hiking_socks.png",
+        "image4": "shopify:\/\/shop_images\/Merino-4_5d2b801c-e1bc-4703-b4b7-2a705fea72c9.jpg",
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {
+      }
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "shogun-helper",
+    "main",
+    "e765a22c-d95f-4442-af4d-68bb52300b2b",
+    "288fbe07-33cc-484b-a930-78e31e3fc82c",
+    "c8e19544-ad9d-4052-a8cc-d840ebd077e2",
+    "advanced_content_4q8mnC",
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca",
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd",
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596",
+    "feetures_image_text_4FBEpQ",
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090",
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a",
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5",
+    "feetures_quote_carousel_Wbxjpg",
+    "f68c6052-ad63-4822-88a6-4d5515796d61",
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262",
+    "03642916-6dd5-4af1-94f4-7e5323edf355",
+    "shogun-optimizer"
+  ]
+}

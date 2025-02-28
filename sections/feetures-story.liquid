@@ -1,0 +1,104 @@
+{% if section.blocks.size > 0 %}
+<section>
+    <div class="wrapper">
+        <div class="feeturesStory {% if section.settings.include_numbers %}feeturesStory--include-count{%endif%}">
+            {% for block in section.blocks %}
+
+                {% if block.type == "headline" %}
+                    <h3 class="feeturesStory__headline">
+                        {{block.settings.headline}}
+                    </h3>
+                {% endif %}
+
+                {% if block.type == "body_copy" %}  
+                    <div class="feeturesStory__description">
+                        <p>
+                        {{block.settings.body_copy}}
+                        </p>
+                    </div>
+                {% endif %}
+                
+                {% if block.type == "story-item" %}
+                    <div class="feeturesStoryItem">
+                        <img class="feeturesStoryItem__img" src="{{ block.settings.image | img_url: '528x428'  }}" alt="{{block.settings.headline}}">
+                        <h4 class="feeturesStoryItem__headline">{{ block.settings.headline }}</h4>
+                        <p class="feeturesStoryItem__description">{{ block.settings.description }}</p>
+                    </div>
+                {% endif %}
+                
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+"name": "Feetures Story",
+"max_blocks": 50,
+"settings": [
+    {
+        "type": "checkbox",
+        "id": "include_numbers",
+        "label": "Include Numbers Above Story Images?"
+    }
+],
+"blocks": [
+    {
+        "type": "headline",
+        "name": "Headline",
+        "settings": [
+            {
+                "type": "text",
+                "id": "headline",
+                "label": "Headline"
+            }
+        ]
+    },
+    {
+        "type": "body_copy",
+        "name": "Body Copy",
+        "settings": [
+            {
+                "type": "text",
+                "id": "body_copy",
+                "label": "body copy"
+            }
+        ]
+    },
+    {
+        "type": "story-item",
+        "name": "Story Item",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Story Item Image (528x428 ideally)"
+            },
+            {
+                "type": "text",
+                "id": "headline",
+                "label": "Story Item Headline"
+            },
+            {
+                "type": "text",
+                "id": "description",
+                "label": "Story Item Description"
+            }
+        ]
+    }
+],
+"presets": [
+    {
+        "name": "Feetures Story",
+        "category": "Feetures"
+    }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

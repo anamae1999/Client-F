@@ -1,0 +1,527 @@
+<!-- /templates/collection.liquid -->
+{%- assign grid_item_width = 'medium--one-half large--one-third  xlarge--one-quarter' -%}
+{% assign lowercaseCollectionTitle = collection.title | downcase %}
+{% if lowercaseCollectionTitle contains "women" %}
+  {% assign collectionType = 'women' %}
+{% elsif lowercaseCollectionTitle contains "men" %}
+  {% assign collectionType  = 'men' %}
+{% elsif lowercaseCollectionTitle contains "youth" %}
+  {% assign collectionType = 'youth' %}
+{% endif %}
+<div class="collectionSection collectionSection--{{collectionType}}">
+  {%- if section.settings.show_collection_image and collection.image -%}
+    <div class="collectionHeroWrapper" {%if collection.metafields.accentuate.hero_image_bg_color != blank %}style="background-color:{{collection.metafields.accentuate.hero_image_bg_color}}"{% endif %}>
+      <div class="wrapper">
+        <div class="collectionHero">
+          <div class="collectionHero__left" >
+            <div class="collectionHero__content" style="margin-bottom: 48px;">
+              {%if collection.metafields.accentuate.the_parent_collection != blank %}
+                <a class="colletionHero__breadcrumb" href="{{ collections[collection.metafields.accentuate.the_parent_collection].url }}">
+                  {{ collections[collection.metafields.accentuate.the_parent_collection].title }}
+                </a>
+              {% endif %}
+              <h1 class="collectionHero__title">
+                {{ collection.title }}
+              </h1>
+              {%if collection.metafields.global.top_description != blank %}
+                <div class="desc_tag" style="color: white!important; margin-top:4px!important;">
+                  <p>{{ collection.metafields.global.top_description }}</p>
+                </div>
+              {% endif %}
+              {%if collection.metafields.global.top_description == blank and collection.metafields.global.description_tag != blank %}
+                <div class="desc_tag" style="color: white!important; margin-top:4px!important;">
+                  <p>{{ collection.metafields.global.description_tag }}</p>
+                </div>
+              {% endif %}
+              {%if collection.metafields.accentuate.subcollections != blank %}
+                {% assign selected_handles = collection.metafields.accentuate.subcollections | split: '|' %}
+                {% for selected_handle in selected_handles %}
+                  <a class="btn btn--white" href="{{ collections[selected_handle].url }}">
+                    {{ collections[selected_handle].title | remove: "Women's" | remove: "Men's" | remove: "Youth" | remove: "Socks" | remove: "Sock" }}
+                  </a>
+                {% endfor %}
+              {% endif %}
+
+            {% comment %}
+            {% if product.metafields.accentuate.bundle_reviews != blank %}
+              {% assign selected_handles = product.metafields.accentuate.bundle_reviews | split: '|' %}
+              {% for selected_handle in selected_handles %}
+                <ul class="spr-bundle-nav">
+                  {% for selected_handle in selected_handles %}
+                    <li class="spr-bundle-nav__item" data-product="{{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}">
+                      {{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}
+                    </li>
+                  {% endfor %}
+                </ul>
+                <div id="shopify-product-reviews" class="shopify-product-reviews" data-id="{{ all_products[selected_handle].id }}" data-product="{{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}">
+                  {{ all_products[selected_handle].metafields.spr.reviews }}
+                </div>
+              {% endfor %}
+            {% else %}
+              <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+            {% endif %}
+            {% endcomment %}
+
+            </div>
+          </div>
+          <div class="collectionHero__right">
+            <div class="collectionHero__imgWrapper">
+              <img 
+                srcset="{{ collection.image | img_url: '350x' }} 350w,
+                        {{ collection.image | img_url: '480x' }} 480w,
+                        {{ collection.image | img_url: '768x' }} 768w,
+                        {{ collection.image | img_url: '960x390' }} 960w"
+                sizes="(min-width: 2040px) 960px, 
+                       (min-width: 920px) calc(45.45vw + 42px), 
+                       calc(95vw + 45px)"
+                src="{{ collection.image | img_url: '960x390' }}"
+                alt="{{collection.image.alt}}"
+                importance="high"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+  <script>
+      window.collectionSectionProducts = window.collectionSectionProducts || {};
+      window.collectionHandle = window.collectionHandle || '{{collection.handle}}';
+      window.aLiquidAsset = window.aLiquidAsset || '{{'swatch-black.png'| asset_url }}';
+  </script>
+  <div class="wrapper">
+    <div id="collectionApp">
+      <div class="collection-action-bar">
+  
+        <div class="collection-action-bar__filter-btn">
+          {%include 'icon-filter.svg' %} <span>Filter</span> <span v-html="countFiltersSelected"></span>
+        </div>
+  
+        <div class="collection-action-bar__count" v-html="itemsCount"></div>
+        
+        <div class="collection-action-bar__filters">
+          <div class="filters-header">
+            <div class="filters-header__icon">
+              {%include 'icon-filter.svg' %}
+            </div>
+            <span>Filter</span>
+            <div class="filters-header__close">
+              {%include 'icon-x.svg' %}
+            </div>
+          </div>
+          
+          <div class="filter-item filter-item--size">
+            <div class="filter-item__label">
+              Size {% include 'chevron-right.svg' %}
+            </div>
+            
+            <ul class="filter-item__dropdown">
+              <li class="filter-item-option" data-filter-key="size" data-filter-value="S" 
+                :class="{disabled: filterDisabled('sizes','small'), 'filter-item-option--selected': filterSelected('sizes','small')}"
+                @click.stop.prevent="selectFilter('sizes','small')">
+                <b>S</b>
+                <span class="filter-item-option__size-description filter-item-option__size-description--women">
+                  Shoe size 4-6.5
+                </span>
+                <span class="filter-item-option__size-description filter-item-option__size-description--youth">
+                  Shoe size Y1-Y5
+                </span>
+              </li>
+              <li class="filter-item-option" data-filter-key="size" data-filter-value="M"
+                :class="{disabled: filterDisabled('sizes','medium'), 'filter-item-option--selected': filterSelected('sizes','medium')}"
+                @click.stop.prevent="selectFilter('sizes','medium')">
+                <b>M</b>
+                <span class="filter-item-option__size-description filter-item-option__size-description--women">
+                  Shoe size 7-9.5
+                </span>
+                <span class="filter-item-option__size-description filter-item-option__size-description--men">
+                  Shoe size 6-8.5
+                </span>
+                <span class="filter-item-option__size-description filter-item-option__size-description--youth">
+                  Shoe size Y5+
+                </span>
+              </li>
+              <li class="filter-item-option" data-filter-key="size" data-filter-value="L"
+                :class="{disabled: filterDisabled('sizes','large'), 'filter-item-option--selected': filterSelected('sizes','large')}"
+                @click.stop.prevent="selectFilter('sizes','large')">
+                <b>L</b>
+                <span class="filter-item-option__size-description filter-item-option__size-description--women">
+                  Shoe size 10-13
+                </span>
+                <span class="filter-item-option__size-description filter-item-option__size-description--men">
+                  Shoe size 9-12
+                </span>
+
+              </li>
+              <li class="filter-item-option" data-filter-key="size" data-filter-value="XL"
+                :class="{disabled: filterDisabled('sizes','xlarge'), 'filter-item-option--selected': filterSelected('sizes','xlarge')}"
+                @click.stop.prevent="selectFilter('sizes','xlarge')">
+                <b>XL</b>
+                <span class="filter-item-option__size-description filter-item-option__size-description--men">
+                  Shoe size 12.5-15.5
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="filter-item filter-item--height">
+            <div class="filter-item__label">
+              Sock Height {% include 'chevron-right.svg' %}
+            </div>
+            <ul class="filter-item__dropdown">
+              <li class="filter-item-option" data-filter-key="height" data-filter-value="hidden"
+                :class="{disabled: filterDisabled('height','hidden'), 'filter-item-option--selected': filterSelected('height','hidden')}"
+                @click.stop.prevent="selectFilter('height','hidden')">
+                <img class="lazyload" data-src="{{'icon-height-hidden.jpg' | asset_url }}" alt="Invisible Sock Height Icon">
+                <span>Invisible</span>
+              </li>
+              <li class="filter-item-option" data-filter-key="height" data-filter-value="tab"
+                :class="{disabled: filterDisabled('height','tab'), 'filter-item-option--selected': filterSelected('height','tab')}"
+                @click.stop.prevent="selectFilter('height','tab')">
+                <img class="lazyload" data-src="{{'icon-height-tab.jpg' | asset_url }}" alt="No Show Tab Sock Height Icon">
+                <span>Tab</span>
+              </li>
+              <li class="filter-item-option" data-filter-key="height" data-filter-value="quarter"
+                :class="{disabled: filterDisabled('height','quarter'), 'filter-item-option--selected': filterSelected('height','quarter')}"
+                @click.stop.prevent="selectFilter('height','quarter')">
+                <img class="lazyload" data-src="{{'icon-height-quarter.jpg' | asset_url }}" alt="Quarter Sock Height Icon">
+                <span>Quarter</span>
+              </li>
+              <li class="filter-item-option" data-filter-key="height" data-filter-value="mini crew"
+                :class="{disabled: filterDisabled('height','mini crew'), 'filter-item-option--selected': filterSelected('height','mini crew')}"
+                @click.stop.prevent="selectFilter('height','mini crew')">
+                <img class="lazyload" data-src="{{'icon-height-mini-crew.jpg' | asset_url }}" alt="Mini Crew Sock Height Icon">
+                <span>Mini Crew</span>
+              </li>
+              <li class="filter-item-option" data-filter-key="height" data-filter-value="crew"
+                :class="{disabled: filterDisabled('height','crew'), 'filter-item-option--selected': filterSelected('height','crew')}"
+                @click.stop.prevent="selectFilter('height','crew')">
+                <img class="lazyload" data-src="{{'icon-height-crew.jpg' | asset_url }}" alt="Crew Sock Height Icon">
+                <span>Crew</span>
+              </li>
+              <li class="filter-item-option" data-filter-key="height" data-filter-value="knee high"
+                :class="{disabled: filterDisabled('height','knee high'), 'filter-item-option--selected': filterSelected('height','knee high')}"
+                @click.stop.prevent="selectFilter('height','knee high')">
+                <img class="lazyload" data-src="{{'icon-height-knee.jpg' | asset_url }}" alt="Knee High Sock Height Icon">
+                <span>Knee High</span>
+              </li>
+            </ul>
+          </div>
+          <div class="filter-item filter-item--cushion">
+            <div class="filter-item__label">
+              Cushion {% include 'chevron-right.svg' %}
+            </div>
+            <ul class="filter-item__dropdown">
+              <li class="filter-item-option" data-filter-key="cushion" data-filter-value="ultra light"
+                :class="{disabled: filterDisabled('cushion','ultra light'), 'filter-item-option--selected': filterSelected('cushion','ultra light')}"
+                @click.stop.prevent="selectFilter('cushion','ultra light')">
+                Ultra Light
+              </li>
+              <li class="filter-item-option" data-filter-key="cushion" data-filter-value="light cushion"
+                :class="{disabled: filterDisabled('cushion','light cushion'), 'filter-item-option--selected': filterSelected('cushion','light cushion')}"
+                @click.stop.prevent="selectFilter('cushion','light cushion')">
+                Light
+              </li>
+<!--               <li class="filter-item-option" data-filter-key="cushion" data-filter-value="cushion"
+                :class="{disabled: filterDisabled('cushion','cushion'), 'filter-item-option--selected': filterSelected('cushion','cushion')}"
+                @click.stop.prevent="selectFilter('cushion','cushion')">
+                Cushion
+              </li> -->
+              <li class="filter-item-option" data-filter-key="cushion" data-filter-value="max cushion"
+                :class="{disabled: filterDisabled('cushion','max cushion'), 'filter-item-option--selected': filterSelected('cushion','max cushion')}"
+                @click.stop.prevent="selectFilter('cushion','max cushion')">
+                Max Cushion
+              </li>
+            </ul>
+          </div>
+          <div class="filter-item filter-item--color">
+            <div class="filter-item__label">
+              Color {% include 'chevron-right.svg' %}
+            </div>
+            <ul class="filter-item__dropdown">
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="black"
+                :class="{disabled: filterDisabled('colors','black'), 'filter-item-option--selected': filterSelected('colors','black')}"
+                @click.stop.prevent="selectFilter('colors','black')">
+                <img class="lazyload" data-src="{{'filter-swatch-black.png' | asset_url }}" alt="Black">
+                Black
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="brown"
+                :class="{disabled: filterDisabled('colors','brown'), 'filter-item-option--selected': filterSelected('colors','brown')}"
+                @click.stop.prevent="selectFilter('colors','brown')">
+                <img class="lazyload" data-src="{{'filter-swatch-brown.png' | asset_url }}" alt="Brown">
+                Brown
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="tan"
+                :class="{disabled: filterDisabled('colors','tan'), 'filter-item-option--selected': filterSelected('colors','tan')}"
+                @click.stop.prevent="selectFilter('colors','tan')">
+                <img class="lazyload" data-src="{{'filter-swatch-tan.png' | asset_url }}" alt="Tan">
+                Tan
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="gray"
+                :class="{disabled: filterDisabled('colors','gray'), 'filter-item-option--selected': filterSelected('colors','gray')}"
+                @click.stop.prevent="selectFilter('colors','gray')">
+                <img class="lazyload" data-src="{{'filter-swatch-gray.png' | asset_url }}" alt="Gray">
+                Gray
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="pink"
+                :class="{disabled: filterDisabled('colors','pink'), 'filter-item-option--selected': filterSelected('colors','pink')}"
+                @click.stop.prevent="selectFilter('colors','pink')">
+                <img class="lazyload" data-src="{{'filter-swatch-pink.png' | asset_url }}" alt="Pink">
+                Pink
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="red"
+                :class="{disabled: filterDisabled('colors','red'), 'filter-item-option--selected': filterSelected('colors','red')}"
+                @click.stop.prevent="selectFilter('colors','red')">
+                <img class="lazyload" data-src="{{'filter-swatch-red.png' | asset_url }}" alt="Red">
+                Red
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="yellow"
+                :class="{disabled: filterDisabled('colors','yellow'), 'filter-item-option--selected': filterSelected('colors','yellow')}"
+                @click.stop.prevent="selectFilter('colors','yellow')">
+                <img class="lazyload" data-src="{{'filter-swatch-yellow.png' | asset_url }}" alt="Yellow">
+                Yellow
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="blue"
+                :class="{disabled: filterDisabled('colors','blue'), 'filter-item-option--selected': filterSelected('colors','blue')}"
+                @click.stop.prevent="selectFilter('colors','blue')">
+                <img class="lazyload" data-src="{{'filter-swatch-blue.png' | asset_url }}" alt="Blue">
+                Blue
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="green"
+                :class="{disabled: filterDisabled('colors','green'), 'filter-item-option--selected': filterSelected('colors','green')}"
+                @click.stop.prevent="selectFilter('colors','green')">
+                <img class="lazyload" data-src="{{'filter-swatch-green.png' | asset_url }}" alt="Green">
+                Green
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="purple"
+                :class="{disabled: filterDisabled('colors','purple'), 'filter-item-option--selected': filterSelected('colors','purple')}"
+                @click.stop.prevent="selectFilter('colors','purple')">
+                <img class="lazyload" data-src="{{'filter-swatch-purple.png' | asset_url }}" alt="Purple">
+                Purple
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="orange"
+                :class="{disabled: filterDisabled('colors','orange'), 'filter-item-option--selected': filterSelected('colors','orange')}"
+                @click.stop.prevent="selectFilter('colors','orange')">
+                <img class="lazyload" data-src="{{'filter-swatch-orange.png' | asset_url }}" alt="Orange">
+                Orange
+              </li>
+              <li class="filter-item-option"  data-filter-key="color" data-filter-value="white"
+                :class="{disabled: filterDisabled('colors','white'), 'filter-item-option--selected': filterSelected('colors','white')}"
+                @click.stop.prevent="selectFilter('colors','white')">
+                <img class="lazyload" data-src="{{'filter-swatch-white.png' | asset_url }}" alt="White">
+                White
+              </li>
+            </ul>
+          </div>
+          <div class="filter-item filter-item--collection">
+            <div class="filter-item__label">
+              Collection {% include 'chevron-right.svg' %}
+            </div>
+            <ul class="filter-item__dropdown">
+              <li class="filter-item-option" data-filter-key="collection" data-filter-value="elite"
+                :class="{disabled: filterDisabled('collection','elite'), 'filter-item-option--selected': filterSelected('collection','elite')}"
+                @click.stop.prevent="selectFilter('collection','elite')">
+                Elite
+              </li>
+              <li class="filter-item-option" data-filter-key="collection" data-filter-value="high performance"
+                :class="{disabled: filterDisabled('collection','high performance'), 'filter-item-option--selected': filterSelected('collection','high performance')}"
+                @click.stop.prevent="selectFilter('collection','high performance')">
+                High Performance
+              </li>
+              <li class="filter-item-option"  data-filter-key="collection" data-filter-value="Merino 10"
+                :class="{disabled: filterDisabled('collection','merino 10'), 'filter-item-option--selected': filterSelected('collection','merino 10')}"
+                @click.stop.prevent="selectFilter('collection','merino 10')">
+                Merino10
+              </li>
+              <li class="filter-item-option"  data-filter-key="collection" data-filter-value="pf relief"
+                :class="{disabled: filterDisabled('collection','pf relief'), 'filter-item-option--selected': filterSelected('collection','pf relief')}"
+                @click.stop.prevent="selectFilter('collection','pf relief')">
+                Plantar Fasciitis Relief
+              </li>
+              <li class="filter-item-option"  data-filter-key="collection" data-filter-value="therapeutic"
+                :class="{disabled: filterDisabled('collection','therapeutic'), 'filter-item-option--selected': filterSelected('collection','therapeutic')}"
+                @click.stop.prevent="selectFilter('collection','therapeutic')">
+                Therapeutic
+              </li>
+              <li class="filter-item-option"  data-filter-key="collection" data-filter-value="graduated compression"
+                :class="{disabled: filterDisabled('collection','graduated compression'), 'filter-item-option--selected': filterSelected('collection','graduated compression')}"
+                @click.stop.prevent="selectFilter('collection','graduated compression')">
+                Graduated Compression
+              </li>
+              <li class="filter-item-option"  data-filter-key="collection" data-filter-value="everyday"
+                :class="{disabled: filterDisabled('collection','everyday'), 'filter-item-option--selected': filterSelected('collection','everyday')}"
+                @click.stop.prevent="selectFilter('collection','everyday')">
+                Everyday
+              </li>
+            </ul>
+          </div>
+          <div class="filters-footer">
+            <div class="filters-footer__clear" @click.stop.prevent="clearAllFilters">
+              <span v-if="someFiltersSelected">Clear All <span v-html="countFiltersSelected"></span></span>
+            </div>
+            <div class="filters-footer__show-products btn">
+              Show Products
+            </div>
+          </div>
+        </div>
+        <div class="collection-action-bar__sort">
+          {%- if section.settings.collection_sort_enable -%}
+            {%- include 'collection-sorting' -%}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="filter-badge-wrapper" :class="{'filter-badge-wrapper--active': someFiltersSelected}">
+        <template v-for="(filters, filterName) in selectedFilters">
+          <div class="filter-badge" v-for="filter in filters" v-bind:data-filter-key="filterName" v-bind:data-filter-value="filter">
+            <span v-html="filterName + ' '"></span>
+            <b v-html="filter"></b>
+            <svg class="filter-badge__x" @click.stop.prevent="deselectFilter(filterName,filter)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.828 12.828"><defs></defs><g fill="none" stroke="#000" stroke-linecap="round" stroke-width="2" data-name="Group 199"><path d="M1.414 1.414l10 10" data-name="Line 64"></path><path d="M11.414 1.414l-10 10" data-name="Line 65"></path></g></svg>
+          </div>
+        </template>
+        <div class="filter-badge-clear" @click.stop.prevent="clearAllFilters">
+          Clear All Filters
+        </div>
+      </div>
+      <div class="filter-empty-msg" v-if="filteredProducts.length == 0 && isLoaded"  v-html="noResultsFoundCopy">
+      </div>
+      <div class="collections-error-msg" v-if="errorOccured"  v-html="errorCopy">
+      </div>
+      <div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template" data-grid-type="{{ section.settings.collection_products_grid }}" :class="{'collections-loaded': isLoaded}">
+        <div class="collection__loading-animation loading-animation"></div>
+        {% if collection.metafields.accentuate.subcollections != blank or collection.metafields.accentuate.subcollections_override != blank  %}
+          {%if collection.metafields.accentuate.subcollections_override != blank  %}
+            {% assign selected_handles = collection.metafields.accentuate.subcollections_override | split: '|' %}
+          {%else %}
+            {% assign selected_handles = collection.metafields.accentuate.subcollections | split: '|' %}
+          {% endif %}
+          <script>
+              window.subCollectionBanners = window.subCollectionBanners || {};
+              window.subCollectionHandles = window.subCollectionHandles || [];
+          </script>
+          {% for selected_handle in selected_handles %}
+            {%- capture subCollectionBanner -%}
+            <div class="collectionGrid-item-collection__imgWrapper">
+              <img 
+                class="lazyload"
+                data-sizes="
+                    (max-width: 767px) 92.1vw,
+                    (max-width: 900px) 61.4vw,
+                    (max-width: 1075px) 62.3vw,
+                    (max-width: 1705px) 47.18vw,
+                    805px
+                "
+                data-srcset="
+                    {{ collections[selected_handle].image | img_url: '806x'  }} 806ww,
+                    {{ collections[selected_handle].image | img_url: '700x' }} 700w,
+                    {{ collections[selected_handle].image | img_url: '600x' }} 600w,
+                    {{ collections[selected_handle].image | img_url: '500x' }} 500w,
+                    {{ collections[selected_handle].image | img_url: '400x' }} 400w,
+                    {{ collections[selected_handle].image | img_url: '300x' }} 300w
+                " 
+                data-src="{{ collections[selected_handle].image | img_url: '806x398' }}" 
+                alt="{{collection.image.alt}}">
+            </div>
+            <div class="collectionGrid-item-collection__bottom">
+              <div class="collectionGrid-item-collection__title">
+                {{ collections[selected_handle].title | remove: "Women's" | remove: "Men's" | remove: "Youth" | remove: "Socks" | remove: "Sock" }}
+              </div>
+              <div class="collectionGrid-item-collection__description">
+                {{ collections[selected_handle].description }}
+              </div>
+            </div>
+            {%- endcapture -%}
+            <script>
+                window.subCollectionBanners['{{ selected_handle }}'] = '{{ subCollectionBanner | strip_newlines | escape }}';
+                window.subCollectionHandles.push('{{ selected_handle }}')
+            </script>
+            {% paginate collection.products by 10000 %}
+              {%- for product in collection.products -%}
+                {%- assign position = forloop.index -%}
+                {% for collection in product.collections %}
+                  {% if selected_handle == collection.handle %}
+                      {%- include 'product-grid-item-data', position: position, collection_handle: selected_handle -%}
+                      {%- break -%}
+                  {% endif %}
+                {% endfor %}
+              {%- endfor -%}
+            {% endpaginate %}
+          {% endfor %}
+        {% else %}
+          {% paginate collection.products by 10000 %}
+            {%- for product in collection.products -%}
+              {%- include 'product-grid-item-data', position: forloop.index -%}
+            {%- endfor -%}
+          {% endpaginate %}
+        {% endif %}
+        <collection-grid
+          :products="filteredProducts"
+          :sub-collection-banners="subCollectionBanners"
+          :is-filtered="isFiltered"
+        ></collection-grid>
+      </div>
+    </div>
+    {% include 'dp-additional-content' %}
+    {% if collection.metafields.accentuate.seo_content != blank %}
+      <div class="collectionSeoContent">
+        <div class="container">
+          {{ collection.metafields.accentuate.seo_content }}
+        </div>
+      </div>
+    {% endif %}
+    {% if collection.metafields.accentuate.seo_content != blank %}
+      <div class="collectionSeoContent">
+        <div class="container">
+          {{ collection.metafields.accentuate.seo_content }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Collection pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_sort_enable",
+      "label": "Enable collection sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_tags_enable",
+      "label": "Enable tag filtering"
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "select",
+      "id": "collection_products_grid",
+      "label": "Grid style",
+      "options": [
+        {
+          "value": "collage",
+          "label": "Collage"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "product_vendor_enable",
+      "label": "Show product vendor"
+    }
+  ]
+}
+{% endschema %}

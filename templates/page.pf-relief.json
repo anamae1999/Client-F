@@ -1,0 +1,507 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe": {
+      "type": "feetures-hero-half-half",
+      "blocks": {
+        "template--14603988828232__fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/MoveAsideMint-3.jpg"
+          }
+        },
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1": {
+          "type": "mobile_image",
+          "disabled": true,
+          "settings": {}
+        },
+        "1e78b988-d887-4d75-a164-a37ee0cfc219": {
+          "type": "eyebrow_text",
+          "settings": {
+            "eyebrow_text": "Feetures Plantar Fasciitis Relief Socks",
+            "eyebrow_color": "",
+            "eyebrow_size": 20
+          }
+        },
+        "e91ccce7-9616-4fef-8256-ea92f532d541": {
+          "type": "headline",
+          "settings": {
+            "headline": "Real Relief for Your Aching Heels and Arch",
+            "headline_color": "",
+            "headline_size": 48
+          }
+        },
+        "6a0c64d4-4302-44b1-9d63-6febfc385b87": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Women's",
+            "cta_btn_url": "shopify://collections/womens-pf-relief-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        },
+        "e82198a8-c9ab-492f-8978-d8565692dd45": {
+          "type": "cta_btn",
+          "settings": {
+            "cta_btn_text": "Shop Men's",
+            "cta_btn_url": "shopify://collections/mens-pf-relief-socks-collection",
+            "new_tab": false,
+            "cta_btn_text_color": "",
+            "cta_btn_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe-desktop_image-1",
+        "3d61b0cf-71f0-44fb-9f64-a936a1f9cfd1",
+        "1e78b988-d887-4d75-a164-a37ee0cfc219",
+        "e91ccce7-9616-4fef-8256-ea92f532d541",
+        "6a0c64d4-4302-44b1-9d63-6febfc385b87",
+        "e82198a8-c9ab-492f-8978-d8565692dd45"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "image_side": "left",
+        "background_color": "#f5f2ee",
+        "vertical_alignment_desktop": "center",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "center",
+        "horizontal_alignment_mobile": "left",
+        "cta_top_margin": ""
+      }
+    },
+    "288fbe07-33cc-484b-a930-78e31e3fc82c": {
+      "type": "feetures-logos",
+      "blocks": {
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Press_1_250x94_a5c8df9d-c28f-4737-ab6c-1b3357a89fef.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "842a552d-d026-4cfa-a7b1-53da96bf5989": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Press_3_250x94_4ce9e062-650b-4c7a-b50b-6686e3b6cee7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "ea7a5c74-dffc-4447-9271-e139a249c093": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Press_4_250x94_b66a6798-4efc-4bac-aca3-7f48d338e198.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "99ea2433-9438-41fe-966d-395059abf1a4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Press_2_250x94_ec014e0b-e3a1-45d3-8265-7d2bdb310d43.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "db55c43e-61ef-4026-8d84-1baafc55ce37": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Press_6_250x94_e025bb97-d471-4bc0-b967-61f6b44bdcac.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "673d26c5-59e2-4079-8455-8c4c53072b43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Press_5_250x94_78417c4e-5e5c-4a7f-85be-de8b93f566b7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105",
+        "842a552d-d026-4cfa-a7b1-53da96bf5989",
+        "ea7a5c74-dffc-4447-9271-e139a249c093",
+        "99ea2433-9438-41fe-966d-395059abf1a4",
+        "db55c43e-61ef-4026-8d84-1baafc55ce37",
+        "673d26c5-59e2-4079-8455-8c4c53072b43"
+      ],
+      "settings": {
+        "padding_top": 72,
+        "padding_bottom": 36,
+        "heading": ""
+      }
+    },
+    "f68c6052-ad63-4822-88a6-4d5515796d61": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h2>Testimonials will go here</h2></div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        },
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca": {
+          "type": "html",
+          "settings": {
+            "code": "<p>\"As soon as you put them on you feel the substantial support and relief for the overloaded plantar fascia. I plan to wear these as I recover from PF and I trust they will help me.\" - Manuel G.\n</p>\n\n<p>\"I have tried inserts for a while for my Plantar Fascitis but these socks have been a gift from God. They made such a huge difference the very first wearing. I have 8 pair and wear no other socks. I recommend them to all my friends.\" - Cat W.</p>\n\n<p>\"These socks are the best value. I have spent so much money on insoles and with these socks I dont even need them. I love the way they cradle my heel.\" - Catherine W.</p>\n\n<p>\"These are such great socks. My plantar fasciitis started acting up again and I wear these socks as much as possible. They greatly help and the support is amazing.\" - Ranee L\n</p>\n\n<p>\"My new favorite socks! I have been in agony with plantar fasciiitis and ankle pain until I got these.\" - Laura W.</p>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        },
+        "09273d50-4f52-4495-95b4-3086be7c75f6": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"yotpo yotpo-reviews-carousel\" data-background-color=\"transparent\" data-mode=\"top_rated\" data-type=\"per_product\" data-count=\"9\" data-show-bottomline=\"1\" data-show-navigation=\"1\" data-product-id=\"778747510894\"> </div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__f68c6052-ad63-4822-88a6-4d5515796d61-html-1",
+        "b84e1bca-7cc8-47db-b90f-ee0a4fe239ca",
+        "09273d50-4f52-4495-95b4-3086be7c75f6"
+      ],
+      "settings": {}
+    },
+    "f7c075f4-e326-4f2d-8fe6-c294dea78bd7": {
+      "type": "feetures-featured-collections",
+      "blocks": {
+        "c37cda3d-eb67-4f9b-8e4b-37be74d93f39": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/EM55468-2_24490bac-3027-434c-8387-4006bff3e70b.jpg",
+            "headline": "No Show Tab",
+            "description": "",
+            "btn_1_text": "Women's",
+            "btn_1_aria": "",
+            "btn_1_url": "#",
+            "btn_2_text": "Men's",
+            "btn_2_aria": "",
+            "btn_2_url": "#"
+          }
+        },
+        "32d62206-674c-4ce3-9804-a80d9a06ec6f": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/BluePinkMix_caacfaaa-7d3d-44c8-aece-32257d43dd19.jpg",
+            "headline": "Quarter",
+            "description": "",
+            "btn_1_text": "Women's",
+            "btn_1_aria": "Women's",
+            "btn_1_url": "shopify://pages/all-colors",
+            "btn_2_text": "Men's",
+            "btn_2_aria": "Men's",
+            "btn_2_url": "shopify://collections/all-1"
+          }
+        },
+        "30d5ae55-3d98-48de-8706-87d92e9c13e8": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/FA503619-1_97376051-6837-4af4-b4a0-82c438dd867b.jpg",
+            "headline": "Crew",
+            "description": "",
+            "btn_1_text": "Women's",
+            "btn_1_aria": "Women's",
+            "btn_1_url": "shopify://collections/active-socks",
+            "btn_2_text": "Men's",
+            "btn_2_aria": "",
+            "btn_2_url": "#"
+          }
+        }
+      },
+      "block_order": [
+        "c37cda3d-eb67-4f9b-8e4b-37be74d93f39",
+        "32d62206-674c-4ce3-9804-a80d9a06ec6f",
+        "30d5ae55-3d98-48de-8706-87d92e9c13e8"
+      ],
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "headline": "Relief at Any Height",
+        "background_color": "",
+        "mobile_alignment": "stack"
+      }
+    },
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca": {
+      "type": "advanced-content",
+      "blocks": {
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align:center;\"><h1>Here's How it Works</h1></div>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__978d9511-fbb8-47ad-810c-cc6ea5f128ca-html-1"
+      ],
+      "settings": {}
+    },
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/FA503616-1_61914da4-0e7b-47a1-b3e3-a72bcbbfb59b.jpg"
+          }
+        },
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427": {
+          "type": "headline",
+          "settings": {
+            "headline": "Anatomical Fit",
+            "headline_color": "",
+            "headline_size": 36
+          }
+        },
+        "cd535363-ed57-4739-a3ee-f0c995666962": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>How it works meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin.</p>",
+            "body_copy_color": "",
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "80592c0c-df5e-420e-86d8-3ec4e8b09361",
+        "6aca8c54-41c4-4161-81b7-e4eb69c13427",
+        "cd535363-ed57-4739-a3ee-f0c995666962"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1": {
+          "type": "desktop_image",
+          "disabled": true,
+          "settings": {}
+        },
+        "20fa25b4-0561-4d7e-a965-ec554a6b1e33": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/PF_Relief_Updated.mp4"
+          }
+        },
+        "44452239-a81d-4791-8e83-60f45e312177": {
+          "type": "headline",
+          "settings": {
+            "headline": "Extreme Arch Support",
+            "headline_color": "",
+            "headline_size": 36
+          }
+        },
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>How it works meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin.</p>",
+            "body_copy_color": "",
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a-desktop_image-1",
+        "20fa25b4-0561-4d7e-a965-ec554a6b1e33",
+        "44452239-a81d-4791-8e83-60f45e312177",
+        "f0c2ef4d-17b0-4ea3-a5da-1ada457e5d12"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/FA503616-1_61914da4-0e7b-47a1-b3e3-a72bcbbfb59b.jpg"
+          }
+        },
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5": {
+          "type": "headline",
+          "settings": {
+            "headline": "Heel & Achilles Tendon Support",
+            "headline_color": "",
+            "headline_size": 36
+          }
+        },
+        "5f722017-8140-441e-80e1-b28491dfa2b2": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>How it works meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin.</p>",
+            "body_copy_color": "",
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14603988828232__af99f169-f414-4cb5-b70d-1e99cfe161bd-desktop_image-1",
+        "d6a2b2fd-dd41-41c5-9048-9ddb583ca1d5",
+        "5f722017-8140-441e-80e1-b28491dfa2b2"
+      ],
+      "settings": {
+        "image_side": "right",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090": {
+      "type": "feetures-image-text",
+      "blocks": {
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/FA503617-3_e6b04bd7-7262-40c2-94dc-68e7917cc035.jpg"
+          }
+        },
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200": {
+          "type": "headline",
+          "settings": {
+            "headline": "High Density Cushioning",
+            "headline_color": "",
+            "headline_size": 36
+          }
+        },
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e": {
+          "type": "body_copy",
+          "settings": {
+            "body_copy": "<p>How it works meatloaf ullamco pork belly sed esse sausage pancetta anim do sirloin tongue frankfurter eiusmod. Turkey rump id doner. Sed duis flank tri-tip boudin.</p>",
+            "body_copy_color": "",
+            "body_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "template--14626412265544__40ea1d09-a54a-41f6-85cb-f1edcc71f090-desktop_image-1",
+        "b8d6d048-69e1-42d4-8976-8cf2795fb200",
+        "ed96366a-0dbc-4fef-956e-bbd1ca8b322e"
+      ],
+      "settings": {
+        "image_side": "left",
+        "background_color": "",
+        "cta_top_margin": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5": {
+      "type": "feetures-brand-statement",
+      "blocks": {
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify://shop_images/Seamless_Toe_copy.png",
+            "headline": "The Perfect Toe",
+            "text": "I like to row, row, row..."
+          }
+        },
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify://shop_images/new_iWick_Tech_Icons.png",
+            "headline": "Moisture-Wicking Fabric",
+            "text": "More of these sections can be added!"
+          }
+        },
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002": {
+          "type": "statement",
+          "settings": {
+            "image": "shopify://shop_images/lifetime-guarantee.png",
+            "headline": "Lifetime Guarantee",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "5c664d9f-4d28-4be9-930d-ad160ff7f2a6",
+        "2adfcaf1-e35e-42d6-ad0b-dd5fec971f17",
+        "1b11fb93-0734-421e-b2e9-5e51a33ba002"
+      ],
+      "settings": {
+        "headline": "Plus, all the other tech that makes Feetures socks the best available",
+        "image": "shopify://shop_images/EC505637-3_ec283abe-49c9-477b-937a-2fc5154f41a2.jpg"
+      }
+    },
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Try PF Relief Socks Today",
+        "collection": "womens-pf-relief-socks-collection",
+        "cta_btn_text": "",
+        "cta_btn_url": "",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "eb304014-09ed-4f8f-9a21-4cd48c899a84": {
+      "type": "feetures-video",
+      "settings": {
+        "video_id": "FT8oBCEY7b0",
+        "headline": "How to Wear",
+        "description": "And some cool text to go below the video section here."
+      }
+    },
+    "03642916-6dd5-4af1-94f4-7e5323edf355": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "",
+        "image1": "shopify://shop_images/FA503617-2.jpg",
+        "image2": "shopify://shop_images/BlueUSA-1_20fbca60-c24e-4d4f-bc4f-1e5c44090ed1.jpg",
+        "image3": "shopify://shop_images/MoveAsideMint-3_bda49bd8-50b3-4492-8629-57db5d951bbb.jpg",
+        "image4": "shopify://shop_images/EC505634-3_832c7d96-49a8-4857-abe2-034686f4ebb0.jpg",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "fcfd46c0-42a0-49c7-aa19-dc51fcbc6bbe",
+    "288fbe07-33cc-484b-a930-78e31e3fc82c",
+    "f68c6052-ad63-4822-88a6-4d5515796d61",
+    "f7c075f4-e326-4f2d-8fe6-c294dea78bd7",
+    "978d9511-fbb8-47ad-810c-cc6ea5f128ca",
+    "77cc6e0a-dd2b-4a71-a027-059c22d38596",
+    "5a3f75c5-9f1f-4cb9-8b74-75d63d74b63a",
+    "af99f169-f414-4cb5-b70d-1e99cfe161bd",
+    "40ea1d09-a54a-41f6-85cb-f1edcc71f090",
+    "cb6d8ff3-f606-43d7-a578-dcf657f688e5",
+    "a2ce1cc2-8942-4d5a-9488-74253f5b6262",
+    "eb304014-09ed-4f8f-9a21-4cd48c899a84",
+    "03642916-6dd5-4af1-94f4-7e5323edf355"
+  ]
+}

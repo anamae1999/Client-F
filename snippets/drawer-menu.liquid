@@ -1,0 +1,340 @@
+{% style %}
+  @media screen and (max-width: 768px) {
+    #shopify-section-header:has(.drawer.drawer--left.js-drawer-open):before {
+      position: absolute;
+      top: -10px;
+      right: 15px;
+      content: "\00d7";
+      font-size: 50px;
+      color: #FFF;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    li.mobile-nav__sublist-header {
+      padding: 5px 15px 5px 30px;
+    }
+
+    li.mobile-nav__sublist-header svg {
+      top: 10px;
+    }
+
+    .mobile-nav__sublist .mobile-nav__link {
+      padding: 5px 15px;
+    }
+
+    .link-height {
+      display: flex !important;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1px 15px !important;
+    }
+
+    .link-height:hover svg{
+      width: 60px;
+      height: 60px;
+    }
+
+    .link-height span {
+      font-size: 1rem;
+      font-weight: normal;
+    }
+
+    .dropdown-section.dropdown-section--secondary {
+      padding: 5px 0px;
+    }
+
+    :nth-child(1 of .mobile-nav__sublist .dropdown-section--secondary) {
+      padding-top: 20px;
+    }
+
+    .mobile-nav__sublist .dropdown-section--secondary:last-of-type {
+      padding-bottom: 20px;
+    }
+
+    .mobile-nav__sublist .secondary-dropdown-toggle {
+      padding: 3px 15px;
+    }
+
+    .mobile-nav__sublist .secondary-dropdown-menu li a {
+      padding: 3px 15px;
+    }
+
+    .mobile-nav__sublist .secondary-dropdown-menu {
+      padding: 0;
+    }
+
+    .wrapper-terciary-nav {
+      width: 100%;
+      display: inline-grid;
+      margin-left: 0;
+    }
+
+    .wrapper-terciary-nav .wrapper-image {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+    }
+
+    .wrapper-terciary-nav .dropdown-section--terciary {
+      width: 100%;
+      height: auto;
+    }
+  }
+{% endstyle %}
+
+<div class="drawer__inner drawer-left__inner">
+
+    {% if section.settings.drawer_search_enable %}
+      {% include 'search-bar', search_btn_style: 'btn--secondary', search_bar_location: 'search-bar--drawer' %}
+    {% endif %}
+
+    <ul class="mobile-nav">
+      {% for link in linklists[section.settings.main_menu_link_list].links %}
+        {%- assign main_index = forloop.index -%}
+        {% if link.links != blank %}
+          <li class="mobile-nav__item nav-{{ link.title }}">
+            <div class="mobile-nav__has-sublist">
+              <a
+                href="{{ link.url }}"
+                class="mobile-nav__link"
+                id="Label-{{ forloop.index }}"
+                {% unless request.page_type == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>{{ link.title | escape }}</a>
+              <div class="mobile-nav__toggle">
+                <button type="button" class="mobile-nav__toggle-btn" aria-controls="Linklist-{{ forloop.index }}" aria-expanded="false" aria-label="Expand {{ link.title | escape }} Menu">
+                  <span class="mobile-nav__toggle-open">
+                    {% include 'chevron-right.svg' %}
+                  </span>
+                </button>
+              </div>
+            </div>
+            <ul class="mobile-nav__sublist" id="Linklist-{{ forloop.index }}" aria-labelledby="Label-{{ forloop.index }}">
+              {% assign parent_index = forloop.index %}
+              <li class="mobile-nav__sublist-header">
+                {% include 'chevron-right.svg' %}
+                {{ link.title | escape }}
+              </li>
+              {% for childlink in link.links %}
+                {% if childlink.links != blank %}
+                  {% if childlink.url contains '-socks-by-height' %}
+                    {% for grandchildlink in childlink.links %}
+                      {% capture snippet_name %}icon-{{ grandchildlink.title | downcase | handleize }}{% endcapture %}
+                      <li>
+                        <a href="{{ grandchildlink.url }}" class="link-height">{% include snippet_name %}<span>{{ grandchildlink.title }}<span></a>
+                      </li>
+                    {% endfor %}
+                  {% else %}
+                    <li class="mobile-nav__item">
+                      <div class="mobile-nav__has-sublist">
+                        <a
+                          href="{{ childlink.url }}"
+                          class="mobile-nav__link"
+                          id="Label-{{ parent_index }}-{{ forloop.index }}"
+                          {% unless request.page_type == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>
+                            {{ childlink.title }}
+                        </a>
+                        <div class="mobile-nav__toggle" aria-hidden="true">
+                          <button type="button" class="mobile-nav__toggle-btn icon-fallback-text" aria-controls="Linklist-{{ parent_index }}-{{ forloop.index }}" aria-expanded="false" aria-label="Expand {{ childlink.title }} Menu">
+                            <span class="icon-fallback-text mobile-nav__toggle-open">
+                              <span class="icon icon-plus"></span>
+                              <span class="fallback-text">{{ 'general.drawers.expand_submenu' | t }} {{ link.title | escape }}</span>
+                            </span>
+                            <span class="icon-fallback-text mobile-nav__toggle-close" aria-hidden="true">
+                              <span class="icon icon-minus"></span>
+                              <span class="fallback-text">{{ 'general.drawers.collapse_submenu' | t }} {{ link.title | escape }}</span>
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                      <ul class="mobile-nav__sublist mobile-nav__subsublist" id="Linklist-{{ parent_index }}-{{ forloop.index }}" aria-labelledby="Label-{{ parent_index }}-{{ forloop.index }}" role="navigation">
+                        {% for grandchildlink in childlink.links %}
+                          <li class="mobile-nav__item">
+                            <a
+                              href="{{ grandchildlink.url }}"
+                              class="mobile-nav__link"
+                              {% unless request.page_type == 'index' %}{% if grandchildlink.active %}aria-current="page"{% endif %}{% endunless%}>
+                                {{ grandchildlink.title | escape }}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% endif %}
+                {% else %}
+                <li class="mobile-nav__item">
+                  <a
+                    href="{{ childlink.url }}"
+                    class="mobile-nav__link"
+                    {% unless request.page_type == 'index' %}{% if childlink.active %}aria-current="page"{% endif %}{% endunless%}>
+                      {{ childlink.title | escape }}
+                  </a>
+                </li>
+                {% endif %}
+              {% endfor %}
+              {% assign accentuate_dropdown_image_link = link.title|downcase|prepend: "dropdown_image_link_" %}
+              {% if shop.metafields.accentuate[accentuate_dropdown_image_link]%}
+                <li class="mobile-nav__item">
+                  <a class="mobile-nav__link" href="{{shop.metafields.accentuate[accentuate_dropdown_image_link].href}}">
+                    {{shop.metafields.accentuate[accentuate_dropdown_image_link].link_text}}
+                  </a>
+                </li>
+              {% endif %}
+
+              {% assign secondary_menu = link.title | downcase | prepend: "dev-menu-" %}
+              {% assign terciary_menu = link.title | downcase | prepend: "dev-menu-" | append: "-secondary" %}
+              {% for linklist in linklists %}
+                {% if linklist.handle == secondary_menu or linklist.handle == terciary_menu %}
+
+                  {% for link in linklists[linklist.handle].links %}
+
+                    <li class="dropdown-section dropdown-section--secondary">
+                      <button class="secondary-dropdown-toggle secondary-dropdown-toggle--expanded" aria-expanded="false" aria-controls="{{link.handle}}-{{main_index}}-{{forloop.index}}">
+                        {{link.title}}
+                      </button>
+
+                      <ul class="secondary-dropdown-menu" id="{{link.handle}}-{{main_index}}-{{forloop.index}}">
+                        {% if link.links != blank %}
+                          {% for child_link in link.links %}
+                            {% liquid
+                              if child_link.title contains '::'
+                                assign link_title = child_link.title | split: '::' | first
+                                assign feature_text = child_link.title | split: '::' | last
+                              else 
+                                assign link_title = child_link.title
+                                assign feature_text = ""
+                              endif
+                            %}
+                            <li><a href= "{{ child_link.url }}">{{ link_title }}{% if feature_text.size > 1 %}<span class="featured-badge" style="color: white; background-color: #BB3820; padding: 0 3px 2px 3px;     font-size: 14px;     margin-left: 5px;     font-weight: 600;">{{ feature_text }}</span>{% endif %}</a></li>
+                          {% endfor %}
+                        {% endif %}
+                      </ul>
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              {%- liquid
+                assign cta_block = null
+                for block in section.blocks
+                  if block.settings.parent == link.title and block.settings.image != blank and block.settings.image_url != blank
+                    assign cta_block = block
+                    break
+                  endif
+                endfor
+              -%}
+              {%- if cta_block != blank -%}
+                <div class="wrapper-terciary-nav">
+                  <a class="wrapper-image" href="{{ cta_block.settings.image_url }}">
+                    <img
+                      src="{{cta_block.settings.image | image_url: width: 300}}"
+                      loading="lazy"
+                      alt="Which Feetures?"
+                    >
+                  </a>
+                  <div class="dropdown-section--terciary">
+                    {%- if cta_block.settings.link_text_1 != blank -%}
+                      <a href="{{ cta_block.settings.url_1 }}">
+                        {{ cta_block.settings.link_text_1 }}
+                      </a>
+                    {%- endif -%}
+                    {%- if cta_block.settings.link_text_2 != blank -%}
+                      <a href="{{ cta_block.settings.url_2 }}">
+                        {{ cta_block.settings.link_text_2 }}
+                      </a>
+                    {%- endif -%}
+                    {%- if cta_block.settings.link_text_3 != blank -%}
+                      <a href="{{ cta_block.settings.url_3 }}">
+                        {{ cta_block.settings.link_text_3 }}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            </ul>
+          </li>
+
+          {% else %}
+
+          <li class="mobile-nav__item nav-{{ link.title }}">
+            <a
+              href="{{ link.url }}"
+              class="mobile-nav__link"
+              {% unless request.page_type == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>
+                {{ link.title | split: '::' | first | escape }}
+                {% if link.title contains '::' %}<span class="featured-badge" style="color: white; background-color: #BB3820; padding: 0 3px 2px 3px;     font-size: 14px;     margin-left: 3px;     font-weight: 600;">{{ link.title | split: '::' | last }}</span>{% endif %}
+            </a>
+          </li>
+
+        {% endif %}
+      {% endfor %}
+      {% comment %}
+        Spacer element
+      {% endcomment %}
+      <li class="mobile-nav__spacer"></li>
+
+      {% comment %}
+        If customer accounts are enabled, provide login and create account links
+      {% endcomment %}
+      <!-- {% for link in linklists[section.settings.drawer_bottom_link_list].links %}
+        <li class="mobile-nav__item mobile-nav__item--secondary"><a class="mobile-nav__link" href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %} -->
+      {% for link in linklists[section.settings.drawer_bottom_link_list].links %}
+        <li class="mobile-nav__item mobile-nav__item--secondary">
+          {% if link.links != blank %}
+            <div class="mobile-nav__has-dropdown">
+              <a href="" class="mobile-nav__link">{{link.title}}</a>
+
+              <div class="mobile-nav__toggle">
+                <button type="button" class="mobile-nav__toggle-btn" aria-controls="mobile-nav__item--secondary-{{ forloop.index }}" aria-expanded="false" aria-label="Expand {{ link.title }} Menu">
+                  <span class="mobile-nav__toggle-open">
+                    {% include 'chevron-right.svg' %}
+                  </span>
+                </button>
+              </div>
+            </div>
+            <ul class="mobile-nav__dropdown" id="mobile-nav__item--secondary-{{ forloop.index }}">
+              <!-- <li class="mobile-nav__sublist-header">
+                {% include 'chevron-right.svg' %}
+                {{ link.title | escape }}
+              </li> -->
+              {% for child_link in link.links %}
+                <li><a href= "{{ child_link.url }}" {%if child_link.url contains "http"%}target="_blank"{%endif%} >{{ child_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <a href="{{ link.url }}" class="mobile-nav__link">{{link.title}}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+
+      {% for link in linklists["pre-header-nav"].links %}
+        <li class="mobile-nav__item mobile-nav__item--secondary">
+          {% if link.links != blank %}
+            <div class="mobile-nav__has-dropdown">
+              <a href="" class="mobile-nav__link">{{link.title}}</a>
+              <div class="mobile-nav__toggle">
+                <button type="button" class="mobile-nav__toggle-btn" aria-controls="mobile-nav__item--secondary-{{ forloop.index }}" aria-expanded="false"  aria-label="Expand {{ link.title }} Menu">
+                  <span class="mobile-nav__toggle-open">
+                    {% include 'chevron-right.svg' %}
+                  </span>
+                </button>
+              </div>
+            </div>
+            <ul class="mobile-nav__dropdown" id="mobile-nav__item--secondary-{{ forloop.index }}">
+              <!-- <li class="mobile-nav__sublist-header">
+                {% include 'chevron-right.svg' %}
+                {{ link.title | escape }}
+              </li> -->
+              {% for child_link in link.links %}
+                <li><a href= "{{ child_link.url }}" {%if child_link.url contains "http"%}target="_blank"{%endif%} >{{ child_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <a href="{{ link.url }}" class="mobile-nav__link">{{link.title}}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+
+    </ul>
+    <!-- //mobile-nav -->
+  </div>

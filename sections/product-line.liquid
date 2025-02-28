@@ -1,0 +1,61 @@
+{% assign productLineString = product.metafields.accentuate.product_line
+    | downcase
+    | prepend: 'product_line_'
+    | replace: ' ', '_'
+    | replace: "'", ''
+  %}
+  {% assign productLineStringLength = productLineString | size %}
+  {% if productLineStringLength > 30 %}
+    {% comment %}Accentuate Fields have a max-length of 30, so accounting for that here{% endcomment %}
+    {% assign productLineString = productLineString | slice: 0, 30 %}
+  {% endif %}
+  {% assign productLine = shop.metafields.accentuate[productLineString] %}
+  {% if product.metafields.accentuate.product_line != blank %}
+    <div class="productLineDetailsWrapper">
+      <div class="wrapper">
+        <div class="productLineDetails">
+          <div class="productLineDetails__left">
+            <img
+              class="productLineDetails__logo"
+              src="{{ productLine.logo}}"
+              alt="{{product.metafields.accentuate.product_line}}"
+            >
+            <p class="productLineDetails__description">{{ productLine.description }}</p>
+
+            {% for item in productLine.items %}
+              <div class="productLineDetailsItem">
+                <div class="productLineDetailsItem__img">
+                  <img class="lazyload" data-src="{{item.img}}" alt="{{item.headline}}">
+                </div>
+                <div>
+                  <p class="productLineDetailsItem__headline">{{ item.headline }}</p>
+                  <p class="productLineDetailsItem__description">{{ item.text }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="productLineDetails__right">
+            <img
+              class="lazyload"
+              data-src="{{productLine.large_image}}"
+              alt="{{product.metafields.accentuate.product_line}} - {% for item in productLine.items %}{{item.headline}}{%unless forloop.last%},{%endunless%} {% endfor %}"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% schema %}
+  {
+    "name": "Product Line",
+    "settings": [
+    ],
+    "presets": [
+      {
+        "name": "Product Line",
+        "category": "Product"
+      }
+    ]
+  }
+  {% endschema %}

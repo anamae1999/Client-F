@@ -1,0 +1,1232 @@
+<!-- /templates/collection.liquid -->
+<style>
+  /* section level */
+  .collection-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0rem 2rem;
+  }
+  .low-opacity {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .action-bar-mobile {
+    display: none;
+  }
+  /* filter bar */
+  .collection-filter-sort-bar {
+    width: 100%;
+    max-width: 1650px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #f5f2ee;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0rem;
+  }
+  .collection-filter-sort-bar h6 {
+    margin: 0;
+    margin-right: 3rem;
+  }
+  .collection-filter-sort-bar .header-mobile {
+    display: none;
+  }
+  .collection-filter-sort-bar .footer-mobile {
+    display: none;
+  }
+  .collection-filter-sort-bar * hr {
+    display: none;
+  }
+  .filter-wrapper {
+    position: relative;
+  }
+  .filter-wrapper:has(.filter-label input[type='checkbox']:checked) .filter-options-list {
+    display: flex;
+  }
+  .filter-wrapper:hover .filter-options-list {
+    display: flex;
+  }
+  .filter-label {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  .filter-label:hover {
+    cursor: pointer;
+  }
+  .filter-label:has(input:focus) {
+    outline: auto;
+  }
+  .filter-label input {
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    -webkit-appearance: none !important;
+  }
+  .filter-label svg {
+    width: 5px;
+    transform: rotate(90deg);
+    top: -1px;
+    position: relative;
+    margin-left: 0.5rem;
+  }
+  .filter-label svg > * {
+    stroke: #000;
+  }
+  .filter-options-list {
+    width: 240px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: white;
+    padding: 1rem;
+    z-index: 9999;
+  }
+  .filter-options-list.color-list {
+    width: 480px;
+  }
+  .filter-options-list.color-list ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .filter-options-list ul {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 0.25rem;
+    row-gap: 0.25rem;
+    margin: 0;
+    list-style-type: none;
+  }
+  .filter-options-list li {
+    width: 100%;
+    margin: 0;
+  }
+  .filter-options-list ul li:has(* input[type='checkbox']:focus) {
+    outline: auto !important;
+  }
+  .filter-options-list li b {
+    margin-top: 0.1rem;
+    margin-right: 0.5rem;
+  }
+  .filter-options-list li label {
+    margin: 0;
+  }
+  .filter-options-list li img {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    border: 0.5px solid #d3d3d3;
+  }
+  .filter-options-list li label {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+    border: 1px solid #c5c5c5;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  .filter-options-list li > * {
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+  .filter-options-list li:hover {
+    background: #f3f3f3;
+  }
+  .filter-options-list li:has(input:checked) {
+    background: #f3f3f3;
+  }
+  .filter-options-list li:has(input:disabled) {
+    background: #d3d3d3;
+  }
+  .filter-options-list li input[type='checkbox'] {
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    -webkit-appearance: none !important;
+  }
+  .filter-group-display__price-range {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .sort-by-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 500;
+    margin-left: auto;
+  }
+  .sort-by-selector select {
+    font-weight: 500;
+    background: #f5f2ee;
+    margin: 0;
+    margin-left: 0.25rem;
+    padding-left: 0 0.25rem;
+  }
+  .sort-by-selector svg {
+    width: 5px;
+    transform: rotate(90deg);
+    top: -1px;
+    position: relative;
+    margin-left: 0.5rem;
+  }
+  .sort-by-selector svg > * {
+    stroke: #000;
+  }
+
+  /* filter badge bar */
+  .collection-filter-badge-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .collection-filter-badge-bar:not(:has(.filter-badge)) {
+    display: none;
+  }
+  .filter-badge {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.625rem 0.8rem;
+    border: 1px solid #c5c5c5;
+  }
+  .filter-badge svg {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-left: 0.25rem;
+  }
+  .filter-badge-active {
+    font-weight: 600;
+  }
+  .clear-filters {
+    text-decoration: underline;
+  }
+
+  /* product grid */
+  .product-grid {
+    width: 100%;
+    max-width: 1650px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    align-items: stretch;
+    justify-items: start;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    padding-bottom: 1rem;
+  }
+  @media screen and (max-width: 1075px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .collection-wrapper {
+      padding: 0;
+    }
+    .low-opacity {
+      opacity: 1;
+      pointer-events: none;
+    }
+    .action-bar-mobile {
+      width: calc(100% - 1rem);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0.5rem;
+    }
+    .action-bar-mobile h6 {
+      margin: 0;
+    }
+    [data-filter-slider-open] {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      font-weight: 500;
+      background: #f5f2ee;
+      padding: 0.5rem 1.5rem;
+    }
+    [data-filter-slider-open] svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 0.5rem;
+    }
+    .sort-by-selector {
+      width: auto;
+      position: relative;
+      background: #f5f2ee;
+      padding: 0.5rem 1.5rem;
+      margin: 0;
+    }
+    .sort-by-selector:has(select:focus) {
+      outline: auto;
+    }
+    .sort-by-selector select {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0;
+      opacity: 0;
+      text-overflow: clip;
+    }
+    .collection-filter-sort-bar {
+      width: 100vw;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: -100vw;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      background: #fff;
+      margin: 0;
+      overflow-y: scroll;
+      transition: left 0.5s;
+      z-index: 9999;
+      padding-top: calc(48px + 0.5rem); /* Set to header-mobile height plus pad to enable scroll */
+      padding-bottom: calc(48px + 0.5rem); /* Set to footer-mobile height plus pad to enable scroll */
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    .collection-filter-sort-bar.active {
+      left: 0;
+    }
+    .collection-filter-sort-bar h6 {
+      display: none;
+    }
+    .collection-filter-sort-bar * hr {
+      display: block;
+      width: 100%;
+      border: none;
+      border-top: 1px solid #c5c5c5;
+      margin: 0;
+      margin-top: 1rem;
+    }
+    .collection-filter-sort-bar .header-mobile {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: -100vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem;
+      background: #fff;
+      border-bottom: 1px solid #c5c5c5;
+      transition: left 0.5s;
+      z-index: 99999;
+    }
+    .collection-filter-sort-bar .header-mobile.active {
+      left: 0;
+    }
+    .collection-filter-sort-bar .header-mobile .filter-icon-label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    .collection-filter-sort-bar .header-mobile .filter-icon-label svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 0.5rem;
+    }
+    .collection-filter-sort-bar .header-mobile [data-filter-slider-close] svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    .collection-filter-sort-bar .footer-mobile {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: -100vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border-top: 1px solid #c5c5c5;
+      transition: left 0.5s;
+      z-index: 99999;
+    }
+    .collection-filter-sort-bar .footer-mobile.active {
+      left: 0;
+    }
+    .collection-filter-sort-bar .footer-mobile [data-filter-clear-button] {
+      padding: 1rem;
+    }
+    .collection-filter-sort-bar .footer-mobile [data-filter-slider-apply] {
+      width: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: #000;
+      padding: 1rem;
+    }
+    .filter-wrapper {
+      width: 100%;
+    }
+    .filter-label {
+      padding: 1rem 0rem;
+    }
+    .filter-label input {
+      display: none !important;
+    }
+    .filter-label span {
+      font-weight: 500;
+    }
+    .filter-label svg {
+      display: none;
+    }
+    .filter-options-list {
+      width: 100%;
+      position: relative;
+      top: 0;
+      display: flex;
+      padding: 0px;
+    }
+    .filter-options-list.color-list {
+      width: 100%;
+    }
+    .filter-options-list ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 0.25rem;
+      row-gap: 0.25rem;
+    }
+    .filter-options-list.color-list ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 0.25rem;
+      row-gap: 0.25rem;
+    }
+    .filter-options-list li {
+      width: 100%;
+    }
+    .filter-options-list li label {
+      padding: 0.25rem 0.5rem;
+    }
+    .collection-filter-sort-bar .sort-by-selector {
+      display: none;
+    }
+    .collection-filter-badge-bar {
+      margin: 0.5rem;
+    }
+    .filter-badge {
+      padding: 0.25rem;
+    }
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 0.5rem;
+      row-gap: 0.5rem;
+    }
+  }
+</style>
+
+{% assign collection_filter_list_order = 'Elite,High Performance,Merino 10,Plantar Fasciitis Relief,Therapeutic,Graduated Compression,Everyday'
+  | split: ','
+  | reverse
+%}
+{% assign grid_item_width = 'medium--one-half large--one-third  xlarge--one-quarter' %}
+{% assign lowercase_collection_title = collection.title | downcase %}
+{% if lowercase_collection_title contains 'women' %}
+  {% assign collection_type = 'women' %}
+{% elsif lowercase_collection_title contains 'men' %}
+  {% assign collection_type = 'men' %}
+{% endif %}
+{% assign collection_ads = collection.metafields.custom.collection_ads.value.ads %}
+{% assign active_filter_count = 0 %}
+{% for filter in collection.filters %}
+  {% assign active_filter_count = active_filter_count | plus: filter.active_values.size %}
+{% endfor %}
+
+<div class="collectionSection collectionSection--{{collection_type}}">
+  {% if section.settings.show_collection_image and collection.image %}
+    <div
+      class="collectionHeroWrapper"
+      {% if collection.metafields.accentuate.hero_image_bg_color != blank %}
+        style="background-color:{{collection.metafields.accentuate.hero_image_bg_color}}"
+      {% endif %}
+    >
+      <div class="wrapper">
+        <div class="collectionHero">
+          <div class="collectionHero__left">
+            <div class="collectionHero__content" style="margin-bottom: 48px;">
+              {% if collection.metafields.accentuate.the_parent_collection != blank %}
+                <a
+                  class="colletionHero__breadcrumb"
+                  href="{{ collections[collection.metafields.accentuate.the_parent_collection].url }}"
+                >
+                  {{ collections[collection.metafields.accentuate.the_parent_collection].title }}
+                </a>
+              {% endif %}
+              <h1 class="collectionHero__title">
+                {{ collection.title }}
+              </h1>
+              {% if collection.metafields.global.top_description != blank %}
+                <div class="desc_tag" style="color: white!important; margin-top:4px!important;">
+                  <p>{{ collection.metafields.global.top_description }}</p>
+                </div>
+              {% endif %}
+              {% if collection.metafields.global.top_description == blank
+                and collection.metafields.global.description_tag != blank
+              %}
+                <div class="desc_tag" style="color: white!important; margin-top:4px!important;">
+                  <p>{{ collection.metafields.global.description_tag }}</p>
+                </div>
+              {% endif %}
+              {% if collection.metafields.accentuate.subcollections != blank %}
+                {% assign selected_handles = collection.metafields.accentuate.subcollections | split: '|' %}
+                {% for selected_handle in selected_handles %}
+                  <a class="btn btn--white" href="{{ collections[selected_handle].url }}">
+                    {{
+                      collections[selected_handle].title
+                      | remove: "Women's"
+                      | remove: "Men's"
+                      | remove: 'Socks'
+                      | remove: 'Sock'
+                    }}
+                  </a>
+                {% endfor %}
+              {% endif %}
+
+              {% comment %}
+                {% if product.metafields.accentuate.bundle_reviews != blank %}
+                  {% assign selected_handles = product.metafields.accentuate.bundle_reviews | split: '|' %}
+                  {% for selected_handle in selected_handles %}
+                    <ul class="spr-bundle-nav">
+                      {% for selected_handle in selected_handles %}
+                        <li class="spr-bundle-nav__item" data-product="{{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}">
+                          {{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    <div id="shopify-product-reviews" class="shopify-product-reviews" data-id="{{ all_products[selected_handle].id }}" data-product="{{ all_products[selected_handle].metafields.accentuate.bundle_review_label }}">
+                      {{ all_products[selected_handle].metafields.spr.reviews }}
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+                {% endif %}
+              {% endcomment %}
+            </div>
+          </div>
+          <div class="collectionHero__right">
+            <div class="collectionHero__imgWrapper">
+              <img
+                srcset="
+                  {{ collection.image | img_url: '350x' }} 350w,
+                  {{ collection.image | img_url: '480x' }} 480w,
+                  {{ collection.image | img_url: '768x' }} 768w,
+                  {{ collection.image | img_url: '960x390' }} 960w
+                "
+                sizes="
+                  (min-width: 2040px) 960px,
+                  (min-width: 920px) calc(45.45vw + 42px),
+                  calc(95vw + 45px)
+                "
+                src="{{ collection.image | img_url: '960x390' }}"
+                alt="{{collection.image.alt}}"
+                importance="high"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <script>
+    window.collectionSectionProducts = window.collectionSectionProducts || {};
+    window.collectionHandle = window.collectionHandle || '{{collection.handle}}';
+    window.aLiquidAsset = window.aLiquidAsset || '{{'swatch-black.png'| asset_url }}';
+  </script>
+  <div class="collection-wrapper">
+    <div class="action-bar-mobile">
+      <button data-filter-slider-open>
+        {% include 'icon-filter.svg' %}Filter{% if active_filter_count > 0 %} ({{ active_filter_count }}){% endif %}
+      </button>
+      <h6>{{ collection.products_count }} items</h6>
+      <div class="sort-by-selector">
+        <label for="sort-by">Sort by</label>
+        {% assign selected = collection.sort_by | default: collection.default_sort_by %}
+        <select name="sort_by" id="sorting-mobile">
+          {% for option in collection.sort_options %}
+            <option
+              value="{{ option.value }}"
+              {% if option.value == selected %}
+                selected
+              {% endif %}
+            >
+              {{ option.name }}
+            </option>
+          {% endfor %}
+        </select>
+        {% include 'chevron-right.svg' %}
+      </div>
+    </div>
+    <form class="collection-filter-sort-bar">
+      <div class="header-mobile">
+        <div class="filter-icon-label">{% include 'icon-filter.svg' %}Filter</div>
+        <button data-filter-slider-close>{% include 'icon-x.svg' %}</button>
+      </div>
+      <h6>{{ collection.products_count }} items</h6>
+      {% for filter in collection.filters %}
+        <div class="filter-wrapper">
+          <label class="filter-label" for="FilterLabel-{{ filter.label }}">
+            <input
+              type="checkbox"
+              name="{{ filter.label }}"
+              id="FilterLabel-{{ filter.label }}"
+              tabindex="0"
+              aria-label="Filter by {{ filter.label }}"
+            >
+            <span>{{ filter.label }}</span>
+            {% include 'chevron-right.svg' %}
+          </label>
+          <div class="filter-options-list{% if filter.label == "Color" %} color-list{% endif %}">
+            {% comment %}
+              <div>
+                <p>{{ filter.active_values.size }} selected</p>
+                {% if filter.active_values.size > 0 %}
+                  <p><a href="{{ filter.url_to_remove }}">Reset</a></p>
+                {% endif %}
+              </div>
+            {% endcomment %}
+            {% case filter.type %}
+              {% when 'boolean' %}
+                <ul>
+                  <li>
+                    <label for="Filter-{{ filter.param_name }}-{{ filter.true_value.value }}">
+                      <input
+                        type="checkbox"
+                        name="{{ filter.param_name }}"
+                        value="{{ filter.true_value.value }}"
+                        id="Filter-{{ filter.param_name }}"
+                        {% if filter.true_value.active %}
+                          checked
+                        {% endif %}
+                        {% if filter.true_value.count == 0 and filter.true_value.active == false %}
+                          disabled
+                        {% endif %}
+                        tabindex="0"
+                        aria-label="{{ filter.label }} {{ filter.true_value.value }} input"
+                      >
+                      {{ filter.true_value.label -}}
+                    </label>
+                  </li>
+                  <li>
+                    <label for="Filter-{{ filter.param_name }}-{{ filter.false_value.value }}">
+                      <input
+                        type="checkbox"
+                        name="{{ filter.param_name }}"
+                        value="{{ filter.false_value.value }}"
+                        id="Filter-{{ filter.param_name }}"
+                        {% if filter.false_value.active %}
+                          checked
+                        {% endif %}
+                        {% if filter.false_value.count == 0 and filter.false_value.active == false %}
+                          disabled
+                        {% endif %}
+                        tabindex="0"
+                        aria-label="{{ filter.label }} {{ filter.true_value.value }} input"
+                      >
+                      {{ filter.false_value.label -}}
+                    </label>
+                  </li>
+                </ul>
+                {% comment %}
+                  <div>
+                    <input type="submit" value="Apply">
+                  </div>
+                {% endcomment %}
+                <hr>
+              {% when 'list' %}
+                <ul>
+                  {% for filter_value in filter.values %}
+                    <li
+                      data-filter-info="{{ filter_value.label }}"
+                      {% if filter.label == 'Collection' %}
+                        {% for order_value in collection_filter_list_order %}
+                          {% if order_value == filter_value.label %}
+                            style="order: -{{ forloop.index }};"
+                            {% break %}
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                      {% if collection.handle contains 'women' %}
+                        {% if filter_value.label == 'XLARGE' %}
+                          style="display: none"
+                        {% endif %}
+                      {% elsif collection.handle contains 'men' %}
+                        {% if filter_value.label == 'SMALL' %}
+                          style="display: none"
+                        {% endif %}
+                      {% endif %}
+                    >
+                      <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                        <input
+                          type="checkbox"
+                          name="{{ filter_value.param_name }}"
+                          value="{{ filter_value.value }}"
+                          id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                          {% if filter_value.active %}
+                            checked
+                          {% endif %}
+                          {% if filter_value.count == 0 and filter_value.active == false %}
+                            disabled
+                          {% endif %}
+                          tabindex="0"
+                          aria-label="{{ filter.label }} {{ filter_value.value }} input"
+                        >
+                        <span>
+                          {% case filter_value.display.type %}
+                            {% when 'colors' %}
+                              {% liquid
+                                assign size_limit = filter_value.display.value.size | at_most: 4
+                                assign rotation = '0deg'
+                                if size_limit == 2
+                                  assign rotation = '45deg'
+                                endif
+
+                                assign angle_increment = 360 | divided_by: size_limit
+                                assign angle = 0
+                              %}
+                              {% capture conic_gradient %}
+                            {% for color in filter_value.display.value limit: size_limit %}
+                              {{ color }} {{ angle }}deg{% assign angle = angle | plus: angle_increment %} {{ angle }}deg{% unless forloop.last %}, {% endunless %}
+                            {% endfor %}
+                          {% endcapture %}
+                              <span
+                                style="
+                                  width: 25px;
+                                  height: 25px;
+                                  border-radius: 50%;
+                                  display: flex;
+                                  justify-content: center;
+                                  align-items: center;
+                                  background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                "
+                              ></span>
+                            {% when 'image' %}
+                              {{
+                                filter_value.display.value
+                                | image_url: width: 25
+                                | image_tag: alt: filter_value.display.value.alt
+                              }}
+                            {% else %}
+                              <span class="visual-display__child"></span>
+                          {% endcase %}
+                        </span>
+                        {% case filter.label %}
+                          {% when 'Size' %}
+                            {% if filter_value.label == 'SMALL' %}
+                              <b>S</b>
+                              {% if collection.handle contains 'women' %}
+                                Shoe size 4-6.5
+                              {% elsif collection.handle contains 'men' %}
+
+                              {% else %}
+                                W 4-6.5
+                              {% endif %}
+                            {% elsif filter_value.label == 'MEDIUM' %}
+                              <b>M</b>
+                              {% if collection.handle contains 'women' %}
+                                Shoe size 7-9.5
+                              {% elsif collection.handle contains 'men' %}
+                                Shoe size 6-8.5
+                              {% else %}
+                                W 7-9.5 M 6-8.5
+                              {% endif %}
+                            {% elsif filter_value.label == 'LARGE' %}
+                              <b>L</b>
+                              {% if collection.handle contains 'women' %}
+                                Shoe size 10-13
+                              {% elsif collection.handle contains 'men' %}
+                                Shoe size 9-12
+                              {% else %}
+                                W 10-13 M 9-12
+                              {% endif %}
+                            {% elsif filter_value.label == 'XLARGE' %}
+                              <b>XL</b>
+                              {% if collection.handle contains 'women' %}
+                              {% elsif collection.handle contains 'men' %}
+                                Shoe size 12.5-15.5
+                              {% else %}
+                                M 12.5-15.5
+                              {% endif %}
+                            {% endif %}
+                          {% when 'Sock Height' %}
+                            {% assign height_handleized = filter_value.label | downcase | handleize %}
+                            {% capture height_icon_image_file %}icon-height-{{ height_handleized }}.jpg{% endcapture %}
+                            {% assign height_icon_image_url = height_icon_image_file | asset_url %}
+                            {% if height_icon_image_url %}
+                              <img
+                                class="lazyload height-img"
+                                data-src="{{ height_icon_image_url }}"
+                                alt="{{ filter_value.label }} Sock Height Icon"
+                              >
+                              {{ filter_value.label }}
+                            {% endif %}
+                          {% when 'Color' %}
+                            {% assign color_downcased = filter_value.label | downcase %}
+                            {% capture color_swatch_image_file %}filter-swatch-{{ color_downcased }}.png{% endcapture %}
+                            {% assign color_swatch_image_url = color_swatch_image_file | asset_url %}
+                            {% if color_swatch_image_url %}
+                              <img class="lazyload" data-src="{{color_swatch_image_url}}" alt="{{ color_downcased }}">
+                              {{ filter_value.label | capitalize }}
+                            {% endif %}
+                          {% else %}
+                            {{ filter_value.label }}
+                        {% endcase %}
+                      </label>
+                    </li>
+                  {% endfor %}
+                </ul>
+                {% comment %}
+                  <div>
+                    <input type="submit" value="Apply">
+                  </div>
+                {% endcomment %}
+                <hr>
+              {% when 'price_range' %}
+                <div class="filter-group-display__price-range">
+                  <div class="filter-group-display__price-range-from">
+                    <span>{{ cart.currency.symbol }}</span>
+                    <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+                    <input
+                      name="{{ filter.min_value.param_name }}"
+                      id="Filter-{{ filter.min_value.param_name }}"
+                      {% if filter.min_value.value %}
+                        value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                      {% endif %}
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      tabindex="0"
+                      aria-label="{{ filter.param_name }}-{{ filter.true_value.value }}-input"
+                    >
+                  </div>
+                  <div class="filter-group-display__price-range-to">
+                    <span>{{ cart.currency.symbol }}</span>
+                    <label for="Filter-{{ filter.max_value.param_name }}">To</label>
+                    <input
+                      name="{{ filter.max_value.param_name }}"
+                      id="Filter-{{ filter.max_value.param_name }}"
+                      {% if filter.max_value.value %}
+                        value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                      {% endif %}
+                      type="number"
+                      placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      tabindex="0"
+                      aria-label="{{ filter.param_name }}-{{ filter.true_value.value }}-input"
+                    >
+                  </div>
+                </div>
+                {% comment %}
+                  <div class="filter-group-display__submit">
+                    <input type="submit" value="Apply">
+                  </div>
+                {% endcomment %}
+                <hr>
+            {% endcase %}
+          </div>
+        </div>
+      {% endfor %}
+      <div class="sort-by-selector">
+        <label for="sort-by">Sort by</label>
+        {% assign selected = collection.sort_by | default: collection.default_sort_by %}
+        <select name="sort_by" id="sorting">
+          {% for option in collection.sort_options %}
+            <option
+              value="{{ option.value }}"
+              {% if option.value == selected %}
+                selected
+              {% endif %}
+            >
+              {{ option.name }}
+            </option>
+          {% endfor %}
+        </select>
+        {% include 'chevron-right.svg' %}
+      </div>
+      <div class="footer-mobile">
+        {% if active_filter_count > 0 %}
+          <a data-filter-clear-button href="{{ collection.url }}?sort_by={{ collection.sort_by }}">
+            Clear All ({{ active_filter_count }})
+          </a>
+        {% else -%}
+          <a data-filter-slider-close href="#" style="padding: 1rem;">Clear All</a>
+        {% endif %}
+        <button data-filter-slider-apply>Apply Filters</button>
+      </div>
+    </form>
+    <div class="collection-filter-badge-bar">
+      {% for filter in collection.filters %}
+        {% if filter.type == 'price_range' %}
+          {% if filter.min_value.value != null or filter.max_value.value != null %}
+            <div class="filter-badge">
+              <a href="{{ filter.url_to_remove | remove: "undefined" }}">
+                {% assign min_value = filter.min_value.value | default: 0 %}
+                {% assign max_value = filter.max_value.value | default: filter.range_max %}
+                {{ min_value | money }} - {{ max_value | money }}
+                {% include 'icon-x.svg' %}
+              </a>
+            </div>
+          {% endif %}
+        {% else %}
+          {% for filter_value in filter.active_values %}
+            <div class="filter-badge">
+              <a href="{{ filter_value.url_to_remove | remove: "undefined" }}">
+                {{ filter.label }}: <span class="filter-badge-active">{{ filter_value.label }}</span>
+                {% include 'icon-x.svg' %}
+              </a>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+      <a data-filter-clear-button class="clear-filters" href="{{ collection.url }}?sort_by={{ collection.sort_by }}"
+        >Clear All Filters</a
+      >
+    </div>
+    {% paginate collection.products by 500 %}
+      <div id="Product-Grid" class="product-grid">
+        {% for product in collection.products %}
+          {% if active_filter_count == 0 %}
+            {% assign collection_ad = collection_ads | where: 'index', forloop.index0 | first %}
+            {% if collection_ad %}
+              {% render 'collection-ad-grid-item', collection_ad: collection_ad %}
+            {% endif %}
+          {% endif %}
+          {% render 'product-grid-item', product: product, collection: collection %}
+        {% endfor %}
+      </div>
+    {% endpaginate %}
+
+  </div>
+  
+</div>
+ {% comment %}
+ {% render 'dp-additional-content' %}
+    {% if collection.metafields.accentuate.seo_content != blank %}
+      <div class="collectionSeoContent">
+        <div class="container">
+          {{ collection.metafields.accentuate.seo_content }}
+        </div>
+      </div>
+    {% endif %}
+   {% endcomment %}
+    
+{% schema %}
+{
+  "name": "Collection pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_sort_enable",
+      "label": "Enable collection sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_tags_enable",
+      "label": "Enable tag filtering"
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "select",
+      "id": "collection_products_grid",
+      "label": "Grid style",
+      "options": [
+        {
+          "value": "collage",
+          "label": "Collage"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "product_vendor_enable",
+      "label": "Show product vendor"
+    }
+  ]
+}
+{% endschema %}
+<script>
+  'use strict';
+  if (true) {
+    let currentUrl = window.location.href;
+    let collectionHandle = currentUrl.split('/collections/')[1].split('?')[0];
+    let filterBar = document.querySelector('.collection-filter-sort-bar');
+    let filterHeader = filterBar.querySelector('.header-mobile');
+    let filterFooter = filterBar.querySelector('.footer-mobile');
+    let filterClearButtons = document.querySelectorAll('[data-filter-clear-button]');
+    let filterBadges = document.querySelectorAll('.filter-badge a');
+    let filterInputs = document.querySelectorAll('[id^="Filter-"]');
+    let filterLabelInputs = document.querySelectorAll('[id^="FilterLabel-"]');
+    let sortSelectors = document.querySelectorAll('select[name="sort_by"]');
+    let mobileFilterOpenButton = document.querySelector('[data-filter-slider-open]');
+    let mobileFilterCloseButtons = document.querySelectorAll('[data-filter-slider-close]');
+    let mobileFilterApplyButton = document.querySelector('[data-filter-slider-apply]');
+
+    let toggleMobileSliderActive = function (isOpen) {
+      if (isOpen) {
+        filterBar.classList.remove('active');
+        filterHeader.classList.remove('active');
+        filterFooter.classList.remove('active');
+        document.body.style.overflowY = 'scroll';
+      } else {
+        filterBar.classList.add('active');
+        filterHeader.classList.add('active');
+        filterFooter.classList.add('active');
+        document.body.style.overflowY = 'hidden';
+      }
+    };
+
+    let updateUrlParams = function (filterParams, sortParams) {
+      let newUrl = '';
+      let cleanUrl = window.location.href.split('?').shift();
+      let searchString = '?';
+      searchString += filterParams ? filterParams.substring(1) : '';
+      searchString += filterParams ? sortParams : sortParams.substring(1);
+      newUrl = cleanUrl + searchString;
+      window.history.pushState(null, null, newUrl);
+    };
+
+    let addMobileOpenButtonListener = function () {
+      mobileFilterOpenButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        toggleMobileSliderActive();
+      });
+    };
+
+    let addMobileCloseButtonListener = function () {
+      for (let i = 0; i < mobileFilterCloseButtons.length; i++) {
+        let mobileFilterCloseButton = mobileFilterCloseButtons[i];
+        mobileFilterCloseButton.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          toggleMobileSliderActive(true);
+        });
+      }
+    };
+
+    let addMobileApplyButtonListener = function () {
+      mobileFilterApplyButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        let filterParams = getFilterParams();
+        let sortParams = getSortParams();
+        updateUrlParams(filterParams, sortParams);
+        refreshCollection(collectionHandle, filterParams, sortParams);
+        toggleMobileSliderActive(true);
+      });
+    };
+
+    let addClearButtonListeners = function () {
+      for (let i = 0; i < filterClearButtons.length; i++) {
+        let filterClearButton = filterClearButtons[i];
+        filterClearButton.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          let sortParams = getSortParams();
+          updateUrlParams('', sortParams);
+          refreshCollection(collectionHandle, '', sortParams);
+        });
+      }
+    };
+
+    let addFilterBadgeListeners = function () {
+      for (let i = 0; i < filterBadges.length; i++) {
+        let filterBadge = filterBadges[i];
+        filterBadge.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          if (filterBadge.href) {
+            let filterParams = '&' + filterBadge.href.split('?').pop();
+            updateUrlParams(filterParams, '');
+            refreshCollection(collectionHandle, filterParams, '');
+          }
+        });
+      }
+    };
+
+    let addFilterInputListeners = function () {
+      for (let i = 0; i < filterInputs.length; i++) {
+        let filterInput = filterInputs[i];
+        let eventType = 'click';
+        if (filterInput.type == 'number') {
+          eventType = 'change';
+        }
+        filterInput.addEventListener(eventType, function (event) {
+          if (document.body.clientWidth > 767) {
+            let filterParams = getFilterParams();
+            let sortParams = getSortParams();
+            updateUrlParams(filterParams, sortParams);
+            refreshCollection(collectionHandle, filterParams, sortParams);
+          }
+        });
+      }
+    };
+
+    let addFilterLabelInputListeners = function () {
+      for (let i = 0; i < filterLabelInputs.length; i++) {
+        let filterLabelInput = filterLabelInputs[i];
+        filterLabelInput.addEventListener('click', function (event) {
+          if (document.body.clientWidth > 400) {
+            for (let j = 0; j < filterLabelInputs.length; j++) {
+              if (event.target != filterLabelInputs[j]) {
+                filterLabelInputs[j].checked = false;
+              }
+            }
+          }
+        });
+        filterLabelInput.parentElement.addEventListener('mouseenter', function (event) {
+          if (document.body.clientWidth > 400) {
+            for (let j = 0; j < filterLabelInputs.length; j++) {
+              if (event.target != filterLabelInputs[j]) {
+                filterLabelInputs[j].checked = false;
+              }
+            }
+          }
+        });
+      }
+    };
+
+    let addSortSelectListeners = function () {
+      for (let i = 0; i < sortSelectors.length; i++) {
+        let sortSelector = sortSelectors[i];
+        sortSelector.addEventListener('change', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          let mainSortSelect = sortSelectors[0];
+          mainSortSelect.value = sortSelector.value;
+          let filterParams = getFilterParams();
+          let sortParams = getSortParams();
+          updateUrlParams(filterParams, sortParams);
+          refreshCollection(collectionHandle, filterParams, sortParams);
+        });
+      }
+    };
+
+    let getFilterParams = function () {
+      let filterParamString = '';
+      let activeFilters = [...filterInputs].filter(
+        (input) =>
+          (input.type == 'checkbox' && input.checked == true) || (input.type == 'number' && input.value != null)
+      );
+      for (let i = 0; i < activeFilters.length; i++) {
+        let activeFilter = activeFilters[i];
+        let filterParamLabel = activeFilter.name;
+        let filterParamValue = activeFilter.value;
+        filterParamString += `&${filterParamLabel}=${filterParamValue}`;
+      }
+      return filterParamString;
+    };
+
+    let getSortParams = function () {
+      let sortParamString = '';
+      let sortParamLabel = sortSelectors[0].name;
+      let sortParamValue = sortSelectors[0].value;
+      sortParamString = `&${sortParamLabel}=${sortParamValue}`;
+      return sortParamString;
+    };
+
+    let refreshCollection = function (collectionHandle, filterParams, sortParams) {
+      let sectionId = '{{ section.id }}';
+      let sectionCurrent = document.getElementById(`shopify-section-${sectionId}`);
+      sectionCurrent.classList.add('low-opacity');
+      fetch(`/collections/${collectionHandle}/?sections=${sectionId}${filterParams}${sortParams}`)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          let sectionHTML = responseJson[sectionId];
+          let sectionNew = document.createElement('div');
+          let sectionParent = sectionCurrent.parentElement;
+          sectionNew.innerHTML = sectionHTML;
+          sectionParent.replaceChild(sectionNew.firstChild, sectionCurrent);
+          Array.from(
+            sectionParent.querySelectorAll(
+              `#shopify-section-${sectionId} script, shopify-section-${sectionId} * script`
+            )
+          ).forEach((oldScript) => {
+            let newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach((attr) => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+          });
+        })
+        .catch((error) => console.error('something went wrong!'))
+        .finally();
+    };
+
+    window.addEventListener('popstate', function (event) {
+      let urlParams = window.location.search;
+      let filterSortParams = `&${urlParams.substring(1)}`;
+      refreshCollection(collectionHandle, filterSortParams, '');
+    });
+
+    // Initializers
+    addMobileOpenButtonListener();
+    addMobileCloseButtonListener();
+    addMobileApplyButtonListener();
+    addClearButtonListeners();
+    addFilterBadgeListeners();
+    addFilterInputListeners();
+    addFilterLabelInputListeners();
+    addSortSelectListeners();
+  }
+</script>

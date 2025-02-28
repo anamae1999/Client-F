@@ -1,0 +1,64 @@
+<section>
+    <div class="wrapper">
+        <div class="feeturesVideoWithQuote">
+            <div class="feeturesVideoWithQuote__videoWrapper">
+                <div class="feeturesVideoWithQuote__play-icon">
+                    <span class="visually-hidden">Click To Play Video</span>
+                </div>
+                <img class="feeturesVideoWithQuote__cover-img" aria-label="Click To Pla Video" src="{{section.settings.image | img_url: '1640x920'}}">
+                <div class="video-wrapper">
+                    <iframe id="feeturesVideoWithQuotePlayer"
+                            width="1142" 
+                            height="642"
+                            src="https://www.youtube.com/embed/{{section.settings.video_id}}?enablejsapi=1&origin=https://{{shop.domain}}"
+                            frameborder="0"
+                            title="{{section.settings.iframe_title}}"
+                    ></iframe>
+                </div>
+            </div>
+            <div class="feeturesVideoWithQuote__quote">
+                {{section.settings.quote}}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+"name": "Feetures Video & Quote",
+"settings": [
+    {
+        "type": "text",
+        "id": "video_id",
+        "label": "Youtube Video ID"
+    },
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Video Cover Image (1640x920)"
+    },
+    {
+        "type": "textarea",
+        "id": "quote",
+        "label": "Quote"
+    },
+    {
+        "type": "text",
+        "id": "iframe_title",
+        "label": "iframe Title"
+    }
+],
+"presets": [
+    {
+        "name": "Feetures Video & Quote",
+        "category": "Feetures"
+    }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,420 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+          padding-top: {{ section.settings.padding_top | times: 0.60 | round: 0 }}px;
+          padding-bottom: {{ section.settings.padding_bottom | times: 0.60 | round: 0 }}px;
+        }
+
+    @media screen and (min-width: 480px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+
+    }
+
+    @media (min-width: 768px) {
+      .feeturesCollectionsLower {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .feeturesCollectionsItem__btns {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    {% if section.settings.button_placement == 'over' %}
+
+    .feeturesCollectionsItem__img {
+      position: relative;
+    }
+
+    .feeturesCollectionsItem__btns.mobile__btns {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      margin-top: 0px !important;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: #808080c7;
+      border-radius: 3px;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .feeturesCollectionsItem__btns.mobile__btns a {
+      margin: 0 0 10px 0 !important;
+      line-height: 18px;
+    }
+
+    .feeturesCollectionsItem__btns.mobile__btns a:last-of-type {
+      margin: 0 !important
+    }
+
+    @media screen and (max-width: 480px) {
+      .desktop__btns {
+        display: none !important;
+      }
+    }
+
+    {% else %}
+
+
+    {% endif %}
+
+
+    {%- if section.blocks.size == 2 -%}
+        #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: 50%;
+        }
+
+        @media (max-width: 768px) {
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: 100%;
+          }
+        }
+    {%- endif -%}
+
+    {%- if section.blocks.size == 2 -%}
+        #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: 33.3%;
+        }
+
+        @media (max-width: 768px) {
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: 100%;
+          }
+        }
+    {%- endif -%}
+
+    {% if section.settings.mobile_alignment == "stack" %}
+
+
+    {%- if section.blocks.size == 4 -%}
+        #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: 25%;
+        }
+        @media (max-width: 768px) {
+          #shopify-section-{{section.id}}  .feeturesCollections {
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: calc(50% - 10px);
+          }
+
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem:nth-child(2n) {
+              margin-left: 10px;
+          }
+
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem:nth-child(2n-1) {
+              margin-right: 5px;
+          }
+        }
+    {%- endif -%}
+
+    {%- if section.blocks.size == 6 -%}
+        #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: 16%;
+        }
+
+        @media (max-width: 768px) {
+          #shopify-section-{{section.id}}  .feeturesCollections {
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem {
+            width: calc(50% - 10px);
+          }
+
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem:nth-child(2n) {
+              margin-left: 10px;
+          }
+
+          #shopify-section-{{section.id}} .feeturesCollections .feeturesCollectionsItem:nth-child(2n-1) {
+              margin-right: 5px;
+          }
+        }
+
+    {%- endif -%}
+
+    {% endif %}
+
+    #shopify-section-{{section.id}}  .feeturesCollections .feeturesCollectionsItem {
+      background-color: {{section.settings.background_color | default: "#ffffff" }};
+    }
+
+    {% if section.settings.mobile_alignment == "scroll" %}
+            #shopify-section-{{section.id}} .feeturesCollections {
+                flex-direction: row;
+                flex-wrap: nowrap;
+            }
+
+            #shopify-section-{{section.id}} .feeturesCollectionsItem {
+              align-items: start;
+              margin-right: 16px;
+            }
+
+            #shopify-section-{{section.id}} .feeturesCollectionsItem:last-of-type {
+              margin-right: 0px;
+            }
+
+            @media (max-width: 786px) {
+              #shopify-section-{{section.id}} .feeturesCollections {
+                overflow-x: scroll;
+              }
+
+              #shopify-section-{{section.id}} .wrapper {
+                padding-right: 0px;
+              }
+
+              #shopify-section-{{section.id}} .feeturesCollectionsItem {
+              width: 144px !important;
+              min-width: 144px !important;
+              }
+        }
+    {% endif %}
+{%- endstyle -%}
+
+{% if section.blocks.size > 0 %}
+  <section class="section-{{ section.id }}-padding">
+    <div class="wrapper">
+      {% if section.settings.headline != blank %}
+        <h3 class="feeturesCollectionsParent__headline">{{ section.settings.headline }}</h3>
+      {% endif %}
+      <div class="feeturesCollections">
+        {% for block in section.blocks %}
+          {% if block.type == 'collection' %}
+            <div class="feeturesCollectionsItem">
+              <div class="feeturesCollectionsItem__img">
+                {{
+                  block.settings.image.src
+                  | image_url: width: 1060
+                  | image_tag: class: '', preload: true, style: 'height: auto'
+                }}
+
+                {% if section.settings.button_placement == 'over' %}
+                  <div class="feeturesCollectionsItem__btns mobile__btns" style="display: none">
+                    {% if block.settings.btn_1_url != blank and block.settings.btn_1_text != blank %}
+                      <a
+                        class="btn"
+                        href="{{block.settings.btn_1_url}}"
+                        {% if block.settings.btn_1_aria != blank %}
+                          aria-label="{{block.settings.btn_1_aria}}"
+                        {% endif %}
+                      >
+                        {{- block.settings.btn_1_text -}}
+                      </a>
+                    {% endif %}
+                    {% if block.settings.btn_2_url != blank and block.settings.btn_2_text != blank %}
+                      <a
+                        class="btn"
+                        href="{{block.settings.btn_2_url}}"
+                        {% if block.settings.btn_2_aria != blank %}
+                          aria-label="{{block.settings.btn_2_aria}}"
+                        {% endif %}
+                      >
+                        {{- block.settings.btn_2_text -}}
+                      </a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="feeturesCollectionsLower">
+                <h2 class="feeturesCollectionsItem__headline">{{ block.settings.headline }}</h2>
+                {% if section.settings.button_placement == 'below' %}
+                  <p class="feeturesCollectionsItem__description">{{ block.settings.description }}</p>
+                {% endif %}
+              </div>
+              {% if section.settings.button_placement == 'below' %}
+                <div class="feeturesCollectionsItem__btns">
+                  {% if block.settings.btn_1_url != blank and block.settings.btn_1_text != blank %}
+                    <a
+                      class="btn"
+                      href="{{block.settings.btn_1_url}}"
+                      {% if block.settings.btn_1_aria != blank %}
+                        aria-label="{{block.settings.btn_1_aria}}"
+                      {% endif %}
+                    >
+                      {{- block.settings.btn_1_text -}}
+                    </a>
+                  {% endif %}
+                  {% if block.settings.btn_2_url != blank and block.settings.btn_2_text != blank %}
+                    <a
+                      class="btn"
+                      href="{{block.settings.btn_2_url}}"
+                      {% if block.settings.btn_2_aria != blank %}
+                        aria-label="{{block.settings.btn_2_aria}}"
+                      {% endif %}
+                    >
+                      {{- block.settings.btn_2_text -}}
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% if section.settings.button_placement == 'over' %}
+  <script>
+    const featuresCollectionsItems{{ section.id }} = document.querySelectorAll('.feeturesCollectionsItem__img');
+
+    featuresCollectionsItems{{ section.id }}.forEach((item, index) => {
+      const mobileBtns = item.querySelector('.mobile__btns');
+
+      // Function to toggle the display of mobile__btns
+      const toggleMobileBtns = () => {
+        if (mobileBtns.style.display === 'none' || mobileBtns.style.display === '') {
+          mobileBtns.style.display = 'flex';
+        } else {
+          mobileBtns.style.display = 'none';
+        }
+      };
+
+      // Add click event listener
+      item.addEventListener('click', toggleMobileBtns);
+
+      // Add hover event listeners
+      if (window.matchMedia("(min-width: 768px)").matches) {
+
+      item.addEventListener('mouseenter', toggleMobileBtns);
+      item.addEventListener('mouseleave', toggleMobileBtns);
+      }
+    });
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Feetures Collections",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Section Headline"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Card Background Color (bottom)"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "options": [
+        { "value": "scroll", "label": "Scroll" },
+        { "value": "stack", "label": "Stack" }
+      ],
+      "label": "Alignment (Scroll or Stack)"
+    },
+    {
+      "type": "select",
+      "id": "button_placement",
+      "options": [
+        { "value": "over", "label": "Over Image (On Click)" },
+        { "value": "below", "label": "Below Image" }
+      ],
+      "label": "Button Placement"
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Collection Image (528x428 ideally)"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Collection Headline"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Collection Description"
+        },
+        {
+          "type": "text",
+          "id": "btn_1_text",
+          "label": "Button #1 Text"
+        },
+        {
+          "type": "text",
+          "id": "btn_1_aria",
+          "label": "Button #1 ARIA Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_1_url",
+          "label": "Button #1 URL"
+        },
+        {
+          "type": "text",
+          "id": "btn_2_text",
+          "label": "Button #2 Text (optional)"
+        },
+        {
+          "type": "text",
+          "id": "btn_2_aria",
+          "label": "Button #2 ARIA Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_2_url",
+          "label": "Button #2 URL (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures Collections",
+      "category": "Feetures"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

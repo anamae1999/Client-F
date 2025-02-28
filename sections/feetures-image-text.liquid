@@ -1,0 +1,373 @@
+{% if section.blocks.size > 0 %}
+  {%- style -%}
+    {%- if section.settings.cta_top_margin != blank -%}
+        #shopify-section-{{section.id}} .feeturesHero__cta {
+            margin-top: {{section.settings.cta_top_margin}};
+        }
+    {%- endif -%}
+
+    .section-id-{{section.id}}-padding  {
+        padding-top: {{section.settings.padding_top}}px;
+        padding-bottom: {{section.settings.padding_bottom}}px;
+    }
+
+    #shopify-section-{{section.id}} .wrapper--image-text {
+      background-color: {{ section.settings.background_color }};
+    }
+
+    @media (max-width: 480px) {
+        .section-id-{{section.id}}-padding {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+    }
+
+    {% if section.settings.image_side == "right" %}
+        @media (min-width: 480px) {
+            #shopify-section-{{section.id}} .feeturesHero--image-text {
+                flex-direction: row-reverse;
+            }
+        }
+    {% endif %}
+  {%- endstyle -%}
+
+  <section class="feeturesHero--image-text wrapper section-id-{{section.id}}-padding">
+    {% for block in section.blocks %}
+      {% if block.type == 'desktop_image' %}
+        {{
+          block.settings.desktop_image.src
+          | image_url: width: 1920
+          | image_tag: class: 'feeturesHero__img feeturesHero__img--desktop', preload: true
+        }}
+      {% endif %}
+      {% if block.type == 'mobile_image' %}
+        {{
+          block.settings.mobile_image.src
+          | image_url: width: 1400
+          | image_tag: class: 'feeturesHero__img feeturesHero__img--mobile', preload: true
+        }}
+      {% endif %}
+      {% if block.type == 'video' %}
+        {{ block.settings.video | video_tag: autoplay: 'true', loop: 'true', class: 'feeturesHero__img', style: '' }}
+      {% endif %}
+    {% endfor %}
+    <div
+      class="wrapper--image-text justify-center"
+    >
+      {% for block in section.blocks %}
+        {% if block.type == 'eyebrow_text' %}
+          {%- if block.settings.eyebrow_text != blank -%}
+            <span
+              class="
+                feeturesHero__eyebrow_text
+                md-text-left
+                {% if section.settings.horizontal_alignment_mobile == 'left' %}text-left{%endif%}
+                {% if section.settings.horizontal_alignment_mobile == 'center' %}text-center{%endif%}
+                {% if section.settings.horizontal_alignment_mobile == 'right' %}text-right{%endif%}
+              "
+              {% if block.settings.eyebrow_color != blank or block.settings.eyebrow_size != blank %}
+                style="color:{{block.settings.eyebrow_color}}; font-size: clamp({{block.settings.eyebrow_mobile_size | divided_by: 16.0 }}rem, 2vw, {{block.settings.eyebrow_size | divided_by: 16.0 }}rem);"
+              {% endif %}
+            >
+              {{ block.settings.eyebrow_text }}
+            </span>
+          {%- endif -%}
+        {% endif %}
+
+        {% if block.type == 'headline' %}
+          {%- if block.settings.headline != blank -%}
+            <h1
+              class="
+                feeturesHero__heading
+                md-text-left
+                {% if section.settings.horizontal_alignment_mobile == 'left' %}text-left{%endif%}
+                {% if section.settings.horizontal_alignment_mobile == 'center' %}text-center{%endif%}
+                {% if section.settings.horizontal_alignment_mobile == 'right' %}text-right{%endif%}
+              "
+              {% if block.settings.headline_color != blank or block.settings.headline_size != blank %}
+                style="font-weight: bold; color:{{block.settings.headline_color}}; font-size: clamp({{block.settings.headline_mobile_size | divided_by: 16.0 }}rem, 3vw, {{block.settings.headline_size | divided_by: 16.0 }}rem) !important;"
+              {% endif %}
+            >
+              {{ block.settings.headline }}
+            </h1>
+          {%- else -%}
+            <h1 class="hide">Feetures</h1>
+          {%- endif -%}
+        {% endif %}
+
+        {% if block.type == 'body_copy' %}
+          <p
+            class="
+              feeturesHero__text
+              md-text-left
+              {% if section.settings.horizontal_alignment_mobile == 'left' %}text-left{%endif%}
+              {% if section.settings.horizontal_alignment_mobile == 'center' %}text-center{%endif%}
+              {% if section.settings.horizontal_alignment_mobile == 'right' %}text-right{%endif%}
+            "
+            {% if block.settings.body_copy_color != blank or block.settings.body_size != blank %}
+              style="color:{{block.settings.body_copy_color}}; font-size: clamp({{block.settings.body_mobile_size | divided_by: 16.0 }}rem, 2vw, {{block.settings.body_size | divided_by: 16.0 }}rem) !important;"
+            {% endif %}
+          >
+            {{ block.settings.body_copy }}
+          </p>
+        {% endif %}
+      {% endfor %}
+      <div class="feeturesHero__cta">
+        {% for block in section.blocks %}
+          {% if block.type == 'cta_btn' %}
+            <a
+              class="btn"
+              href="{{block.settings.cta_btn_url}}"
+              {% if block.settings.new_tab %}
+                target="_blank"
+              {% endif %}
+              style="{%if block.settings.cta_btn_text_color != blank%} color:{{block.settings.cta_btn_text_color}};{%endif%} {%if block.settings.cta_btn_bg_color != blank%} background-color:{{block.settings.cta_btn_bg_color}}{%endif%}"
+            >
+              {{- block.settings.cta_btn_text -}}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Feetures - Image + Text",
+  "settings": [
+    {
+      "type": "select",
+      "id": "image_side",
+      "options": [
+        { "value": "left", "label": "Left Side" },
+        { "value": "right", "label": "Right Side" }
+      ],
+      "label": "Image Side (Left or Right))"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "text",
+      "id": "cta_top_margin",
+      "label": "CTA Top Margin on Mobile",
+      "info": "Adjust CTAs top margin on mobile in pixels. e.g. 150px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "video"
+        }
+      ]
+    },
+    {
+      "type": "desktop_image",
+      "name": "Desktop Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "desktop image"
+        }
+      ]
+    },
+    {
+      "type": "mobile_image",
+      "name": "Mobile Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "mobile image"
+        }
+      ]
+    },
+    {
+      "type": "eyebrow_text",
+      "name": "Eyebrow Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow_text",
+          "label": "eyebrow text"
+        },
+        {
+          "type": "color",
+          "id": "eyebrow_color",
+          "label": "eyebrow color"
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_mobile_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Eyebrow Mobile Font Size (in pixels)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "eyebrow_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Eyebrow Desktop Font Size (in pixels)",
+          "default": 16
+        }
+      ]
+    },
+    {
+      "type": "headline",
+      "name": "Headline",
+      "settings": [
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "headline"
+        },
+        {
+          "type": "color",
+          "id": "headline_color",
+          "label": "headline color"
+        },
+        {
+          "type": "range",
+          "id": "headline_mobile_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Headline Mobile Font Size (in pixels)",
+          "default": 36
+        },
+        {
+          "type": "range",
+          "id": "headline_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Headline Desktop Font Size (in pixels)",
+          "default": 36
+        }
+      ]
+    },
+    {
+      "type": "body_copy",
+      "name": "Body Copy",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "body_copy",
+          "label": "body copy"
+        },
+        {
+          "type": "color",
+          "id": "body_copy_color",
+          "label": "body copy color"
+        },
+        {
+          "type": "range",
+          "id": "body_mobile_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Body Mobile Font Size (in pixels)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "body_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Body Desktop Font Size (in pixels)",
+          "default": 20
+        }
+      ]
+    },
+
+    {
+      "type": "cta_btn",
+      "name": "CTA Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "cta_btn_text",
+          "label": "CTA Button Text"
+        },
+        {
+          "type": "url",
+          "id": "cta_btn_url",
+          "label": "CTA Button URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "new_tab",
+          "label": "Open in New Tab?"
+        },
+        {
+          "type": "color",
+          "id": "cta_btn_text_color",
+          "label": "CTA Button Text Color"
+        },
+        {
+          "type": "color",
+          "id": "cta_btn_bg_color",
+          "label": "CTA Button Background Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures - Image + Text",
+      "category": "Feetures",
+      "blocks": [
+        {
+          "type": "desktop_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

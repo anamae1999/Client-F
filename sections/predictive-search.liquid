@@ -1,0 +1,309 @@
+{%- if predictive_search.performed -%}
+  <div id="predictive-search-results">
+    {%- if predictive_search.resources.queries.size > 0 or predictive_search.resources.products.size > 0 -%}
+      <div class="search--left">
+        <h3 id="predictive-search-products">Suggestions</h3>
+        <ul role="listbox" aria-labelledby="predictive-search-queries" class="list-unstyled predictive-queries">
+          {%- if predictive_search.resources.queries.size > 0 -%}
+            {%- for query in predictive_search.resources.queries limit: 6 -%}
+              <li
+                id="predictive-search-option-query-{{ forloop.index }}"
+                class="predictive-search__list-item"
+                role="option"
+                aria-selected="false"
+              >
+                <span class="icomoon icomoon-search" aria-hidden="true"></span>
+                <a href="{{ query.url }}" class="predictive-search__item link link--text" tabindex="-1">
+                  <div class="predictive-search__item-content predictive-search__item-content--centered">
+                    <p
+                      class="predictive-search__item-heading predictive-search__item-query-result"
+                      aria-label="{{ query.text }}"
+                    >
+                      {{ query.styled_text }}
+                    </p>
+                  </div>
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            <li
+              id="predictive-search-option-query-{{ forloop.index }}"
+              class="predictive-search__list-item"
+              role="option"
+              aria-selected="false"
+            >
+              No keywords found
+            </li>
+          {%- endif -%}
+        </ul>
+
+        {%- if predictive_search.resources.articles.size > 0 -%}
+          <h3 id="predictive-search-products">Blog Posts</h3>
+          <ul role="listbox" aria-labelledby="predictive-search-queries" class="list-unstyled predictive-queries">
+          {%- for article in predictive_search.resources.articles limit: 5 -%}
+            <li
+              id="predictive-search-option-query-{{ forloop.index }}"
+              class="predictive-search__list-item"
+              role="option"
+              aria-selected="false"
+            >
+              <a href="{{ query.url }}" class="predictive-search__item link blog-link link--text" tabindex="-1">
+            {{ article.title }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        {%- endif  -%}
+
+
+      </div>
+
+      {%- if predictive_search.resources.products.size > 0 -%}
+        <div class="search--right">
+          <h3 id="predictive-search-products">Products</h3>
+          <ul role="listbox" aria-labelledby="predictive-search-products" class="list-unstyled predictive-products">
+            {%- for product in predictive_search.resources.products limit: 8 -%}
+              <li class="search--product" role="option">
+                <a href="{{ product.url }}" class="predictive-search-product-wrapper">
+                  {{ product | image_url: width: 300 | image_tag }}
+                  <span class="grid-product__title">{{ product.title }}</span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <button class="predictive-search-term-button">
+            See all results for “{{ predictive_search.terms | downcase }}”
+            <svg
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/>
+            </svg>
+          </button>
+        </div>
+      {%- endif -%}
+     
+    {%- else -%}
+      <p class="search--no-results">
+        <button class="predictive-search-term-button">
+          See all results for “{{ predictive_search.terms | downcase }}”
+          <svg
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            stroke-linejoin="round"
+            stroke-miterlimit="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/>
+          </svg>
+        </button>
+      </p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+<style>
+  .search-box {
+    position: relative;
+  }
+
+  #predictive-search {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    width: 100%;
+    background: white;
+    background-color: white;
+    z-index: 3;
+    border-bottom-right-radius: var(--popup-corner-radius);
+    box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset)
+      var(--popup-shadow-blur-radius) rgba(var(--color-shadow), var(--popup-shadow-opacity));
+  }
+
+  /* inside of predictive search results div have two columns on desktop */
+  #predictive-search-results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .search--left {
+    width: 20%;
+  }
+
+  .search--right {
+    width: 80%;
+  }
+
+  h3#predictive-search-products {
+    font-size: 1rem;
+    text-align: left;
+  }
+  predictive-search h3 {
+    font-size: 1rem;
+    padding: 10px 20px 0 20px;
+  }
+
+  .predictive-search__list-item {
+    display: flex;
+  }
+
+  .predictive-search__list-item a {
+    margin-left: 10px;
+  }
+
+  .search--no-results {
+    padding: 10px 20px 20px 20px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0px 20px 10px 20px;
+  }
+
+  .predictive-products li {
+    padding: 5px 10px 0 0;
+  }
+
+  .predictive-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  .search--product {
+    width: 24%;
+  }
+
+  .search--product a {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search--product a span {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .predictive-search__list-item a.blog-link {
+    margin-left: 0px;
+    text-align: left;
+  }
+
+  .predictive-search__item-query-result {
+    font-size: 0.9rem;
+  }
+
+  .predictive-search__item-query-result mark {
+    color: black;
+    font-weight: bold;
+    background-color: transparent;
+  }
+
+  .predictive-search-product-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .predictive-search-product-wrapper span {
+    font-size: 0.9rem;
+  }
+
+  .predictive-search-product-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  predictive-search a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .predictive-search-term-button {
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .predictive-search-term-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .predictive-search-term-button svg {
+    width: 25px;
+    margin-left: 10px;
+  }
+
+  @media (max-width: 767px) {
+    h3#predictive-search-products {
+      display: none;
+    }
+
+    .predictive-search__item-query-result {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+    .search-input--wrapper {
+      width: 91%;
+    }
+
+    .predictive-search-product-wrapper span {
+      font-size: 1rem;
+    }
+    predictive-search {
+      position: absolute;
+      z-index: 99999999999;
+      width: calc(100% - 10px);
+      margin: 0 !important;
+      padding: 0px;
+      left: 0px;
+    }
+    .predictive-products,
+    .predictive-queries {
+      margin-top: 5px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+
+    #predictive-search-results {
+      flex-direction: column;
+    }
+
+    .search--left,
+    .search--right {
+      width: 100%;
+    }
+
+    .search--product {
+      width: 100%;
+    }
+
+    /* mobile image styling for search results */
+
+    .search--product a {
+      flex-direction: row;
+    }
+    .predictive-search-product-wrapper img {
+      max-width: 60px;
+      margin-right: 10px;
+    }
+  }
+</style>
+
+<script></script>

@@ -1,0 +1,261 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ea385b0b-94e5-4489-b4d0-7997b108208f": {
+      "type": "feetures-hero",
+      "blocks": {
+        "mobile_image_HjJW46": {
+          "type": "mobile_image",
+          "settings": {
+            "mobile_image": "shopify:\/\/shop_images\/Mobile_44c3dada-b157-4332-9fcf-325bc21e8005.jpg"
+          }
+        },
+        "template--14603988828232__ea385b0b-94e5-4489-b4d0-7997b108208f-desktop_image-1": {
+          "type": "desktop_image",
+          "settings": {
+            "desktop_image": "shopify:\/\/shop_images\/OptOut.jpg"
+          }
+        },
+        "headline_N96PKR": {
+          "type": "headline",
+          "settings": {
+            "headline": "",
+            "headline_color": "",
+            "headline_mobile_size": 36,
+            "headline_size": 36
+          }
+        },
+        "b33b385a-97ae-4d6b-a6fa-a89347b23ac2": {
+          "type": "video",
+          "disabled": true,
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/Mt_Baker.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "mobile_image_HjJW46",
+        "template--14603988828232__ea385b0b-94e5-4489-b4d0-7997b108208f-desktop_image-1",
+        "headline_N96PKR",
+        "b33b385a-97ae-4d6b-a6fa-a89347b23ac2"
+      ],
+      "settings": {
+        "desktop_image_dimensions": "1920x800",
+        "vertical_alignment_desktop": "bottom",
+        "horizontal_alignment_desktop": "left",
+        "vertical_alignment_mobile": "bottom",
+        "horizontal_alignment_mobile": "center",
+        "cta_top_margin": "0"
+      }
+    },
+    "f7c075f4-e326-4f2d-8fe6-c294dea78bd7": {
+      "type": "feetures-featured-collections",
+      "blocks": {
+        "c37cda3d-eb67-4f9b-8e4b-37be74d93f39": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mini_Crew.jpg",
+            "headline": "Elite No Show Tab Mini Crew",
+            "description": "",
+            "btn_1_text": "Shop Men",
+            "btn_1_aria": "Shop Men",
+            "btn_1_url": "shopify:\/\/products\/elite-light-cushion-mini-crew",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        },
+        "32d62206-674c-4ce3-9804-a80d9a06ec6f": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/BluePinkMix_caacfaaa-7d3d-44c8-aece-32257d43dd19.jpg",
+            "headline": "Shop Bundles",
+            "description": "",
+            "btn_1_text": "Men",
+            "btn_1_aria": "Men",
+            "btn_1_url": "shopify:\/\/pages\/all-colors",
+            "btn_2_text": "Women",
+            "btn_2_aria": "Women",
+            "btn_2_url": "shopify:\/\/collections\/all-1"
+          }
+        },
+        "30d5ae55-3d98-48de-8706-87d92e9c13e8": {
+          "type": "collection",
+          "settings": {
+            "headline": "Another One",
+            "description": "",
+            "btn_1_text": "Men",
+            "btn_1_aria": "Men",
+            "btn_1_url": "shopify:\/\/collections\/active-socks",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        },
+        "c0f59b11-43c3-47c6-a456-93a940b9c42b": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/MintPlumMix.jpg",
+            "headline": "Headline",
+            "description": "This is a short collection description lorem ipsum dolor sit amet adipiscing elit nullam est.",
+            "btn_1_text": "Shop Now",
+            "btn_1_aria": "",
+            "btn_1_url": "#",
+            "btn_2_text": "Shop Now",
+            "btn_2_aria": "",
+            "btn_2_url": "#"
+          }
+        },
+        "35495c33-04d1-41c0-b6ab-70a21cca000a": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mint-Charcoal-Mix.jpg",
+            "headline": "",
+            "description": "",
+            "btn_1_text": "",
+            "btn_1_aria": "",
+            "btn_1_url": "",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        },
+        "4d4df0d1-90d8-4a43-b4d3-f3b20de4fba3": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Moss-Charcoal-Mix.jpg",
+            "headline": "",
+            "description": "",
+            "btn_1_text": "",
+            "btn_1_aria": "",
+            "btn_1_url": "",
+            "btn_2_text": "",
+            "btn_2_aria": "",
+            "btn_2_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "c37cda3d-eb67-4f9b-8e4b-37be74d93f39",
+        "32d62206-674c-4ce3-9804-a80d9a06ec6f",
+        "30d5ae55-3d98-48de-8706-87d92e9c13e8",
+        "c0f59b11-43c3-47c6-a456-93a940b9c42b",
+        "35495c33-04d1-41c0-b6ab-70a21cca000a",
+        "4d4df0d1-90d8-4a43-b4d3-f3b20de4fba3"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "headline": "Some of Our Favorites",
+        "background_color": "",
+        "mobile_alignment": "stack",
+        "button_placement": "over"
+      }
+    },
+    "feetures_product_carousel_WEADc7": {
+      "type": "feetures-product-carousel",
+      "settings": {
+        "headline": "Best Sellers",
+        "collection": "best-sellers",
+        "cta_btn_text": "",
+        "cta_btn_url": "",
+        "cta_btn_text_2": "",
+        "cta_btn_url_2": ""
+      }
+    },
+    "288fbe07-33cc-484b-a930-78e31e3fc82c": {
+      "type": "feetures-logos",
+      "blocks": {
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_1_250x94_a5c8df9d-c28f-4737-ab6c-1b3357a89fef.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "842a552d-d026-4cfa-a7b1-53da96bf5989": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_3_250x94_4ce9e062-650b-4c7a-b50b-6686e3b6cee7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "ea7a5c74-dffc-4447-9271-e139a249c093": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_4_250x94_b66a6798-4efc-4bac-aca3-7f48d338e198.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "99ea2433-9438-41fe-966d-395059abf1a4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_2_250x94_ec014e0b-e3a1-45d3-8265-7d2bdb310d43.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "db55c43e-61ef-4026-8d84-1baafc55ce37": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_6_250x94_e025bb97-d471-4bc0-b967-61f6b44bdcac.webp",
+            "url": "",
+            "new_tab": false
+          }
+        },
+        "673d26c5-59e2-4079-8455-8c4c53072b43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Press_5_250x94_78417c4e-5e5c-4a7f-85be-de8b93f566b7.webp",
+            "url": "",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "3ad23e2b-2f0a-46e1-9244-7ad3bbced105",
+        "842a552d-d026-4cfa-a7b1-53da96bf5989",
+        "ea7a5c74-dffc-4447-9271-e139a249c093",
+        "99ea2433-9438-41fe-966d-395059abf1a4",
+        "db55c43e-61ef-4026-8d84-1baafc55ce37",
+        "673d26c5-59e2-4079-8455-8c4c53072b43"
+      ],
+      "settings": {
+        "padding_top": 12,
+        "padding_bottom": 16,
+        "heading": "Recommended By"
+      }
+    },
+    "03642916-6dd5-4af1-94f4-7e5323edf355": {
+      "type": "feetures-ugc-images",
+      "settings": {
+        "headline": "Feetures Sole Circle",
+        "image1": "shopify:\/\/shop_images\/UGC_3.jpg",
+        "image2": "shopify:\/\/shop_images\/UGC_4.jpg",
+        "image3": "shopify:\/\/shop_images\/UGC_2.jpg",
+        "image4": "shopify:\/\/shop_images\/UGC_1.jpg",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ea385b0b-94e5-4489-b4d0-7997b108208f",
+    "f7c075f4-e326-4f2d-8fe6-c294dea78bd7",
+    "feetures_product_carousel_WEADc7",
+    "288fbe07-33cc-484b-a930-78e31e3fc82c",
+    "03642916-6dd5-4af1-94f4-7e5323edf355"
+  ]
+}

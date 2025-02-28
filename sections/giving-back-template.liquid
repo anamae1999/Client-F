@@ -1,0 +1,119 @@
+<div class="giving-back">
+	{% if section.settings.image != blank %}
+		<div class="page-hero">
+			<img src="{{ section.settings.image | img_url: '1920x' }}" alt="{{ block.settings.image.alt }}"/>
+			{% if section.settings.headline != blank %}
+				<h1 class="page-hero__headline">
+					{{section.settings.headline}}
+				</h1>
+			{% endif %}
+		</div>
+	{% endif %}
+	{% if section.settings.page_title != blank %}
+		<div class="section-header">
+			<h1>{{section.settings.page_title}}</h1>
+		</div>
+	{% endif %}
+	{% for block in section.blocks %}
+		<div class="giving-back-content-item  {% cycle '', 'giving-back-content-item--rev' %}">
+			<div class="giving-back-content-item__text {% if block.settings.image != blank or block.settings.video != blank %}giving-back-content-item__text--share{% endif %}">
+				{% if block.settings.title != blank %}
+					<h3>
+						{{ block.settings.title }}
+					</h3>
+				{% endif %}
+				{% if block.settings.content != blank %}
+					<div class="rte">
+						{{ block.settings.content }}
+					</div>
+				{% endif %}
+			</div> 
+			{% if block.settings.video != blank %}
+				<div class="giving-back-content-item__video">
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe src="https://player.vimeo.com/video/{{ block.settings.video }}?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>	
+					</div>
+				</div>
+			{% elsif block.settings.image != blank %}
+				<div class="giving-back-content-item__img">
+					<img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}"/>
+				</div> 
+			{% endif %}			
+		</div>
+	{% endfor %}
+
+	<div class="giving-back__footer-images">
+		<img src="{{ section.settings.footer_img_1 | img_url: '500x' }}" alt="{{ section.settings.footer_img_1.alt }}">
+		<img src="{{ section.settings.footer_img_2 | img_url: '500x' }}" alt="{{ section.settings.footer_img_2.alt }}">
+		<img src="{{ section.settings.footer_img_3 | img_url: '500x' }}" alt="{{ section.settings.footer_img_3.alt }}">
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Giving Back Page Content",
+		"class": "page-content",
+		"settings": [
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Header Image"
+			},
+			{ 
+				"type": "text",
+				"id": "headline",
+				"label": "Header Text (optional)"
+			},
+			{ 
+				"type": "text",
+				"id": "page_title",
+				"label": "Page Title"
+			},
+			{ 
+				"type": "image_picker",
+				"id": "footer_img_1",
+				"label": "Footer Image 1"
+			},
+			{ 
+				"type": "image_picker",
+				"id": "footer_img_2",
+				"label": "Footer Image 2"
+			},
+			{ 
+				"type": "image_picker",
+				"id": "footer_img_3",
+				"label": "Footer Image 3"
+			}
+		],
+		"blocks": [
+			{
+				"type": "page_content",
+				"name": "Content Section",
+				"settings": [
+					{
+						"id": "title",
+						"type": "text",
+						"label": "Subtitle"
+					},					
+					{
+						"id": "content",
+						"type": "richtext",
+						"label": "Paragraph"
+					},
+					{
+						"type": "text",
+						"id": "video",
+						"label": "Video Embed",
+						"info": "Only add the Vimeo ID (should be the numbers after the '/' in the URL"
+					},					
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Content Image",
+						"info": "If a video was added, the image will not show"
+					}																			
+				]
+			}
+		]			
+	}
+{% endschema %}

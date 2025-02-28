@@ -1,0 +1,358 @@
+{% style %}
+  .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.60 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.60 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 480px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+
+    @media (max-width: 768px) {
+        .section-{{ section.id }}-padding .wrapper {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        .section-{{ section.id }}-padding .section-header {
+            padding: 0 15px;
+        }
+    }
+
+    .comparisonHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .comparisonRow-title {
+    font-weight: 500;
+  }
+
+  .comparisonRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+  }
+
+  .comparisonRow-item {
+    {% if section.settings.column_2_title != blank and section.settings.column_3_title != blank %}
+        width: 33%;
+    {% elsif section.settings.column_2_title != blank %}
+        width: 50%;
+    {% else %}
+        width: 100%;
+    {% endif %}
+    padding: 10px 20px;
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  .comparisonChartWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comparisonColumnWrapper {
+    {% if section.settings.column_2_title != blank and section.settings.column_3_title != blank %}
+        width: 30%;
+    {% elsif section.settings.column_2_title != blank %}
+        width: 50%;
+    {% else %}
+        width: 100%;
+    {% endif %}
+    text-align: {{ section.settings.text_alignment }};
+    padding: 10px;
+  }
+
+  .comparisonColumnWrapper a {
+    background: black;
+    padding: 12px 15px;
+    border-radius: 2px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  .comparisonColumnWrapper h4 {
+    font-size: 16px;
+  }
+
+  .comparisonRow-title {
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #f5f2ee;
+  }
+
+  .comparisonColumnWrapper img {
+    width: 100%;
+  }
+
+  .comparisonRow {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .comparisonHeader {
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-left: auto;
+      padding: 10px;
+    }
+
+    .comparisonColumnWrapper a {
+      font-size: 16px;
+    }
+
+    .comparisonRow {
+      padding: 20px 15px;
+    }
+
+    .comparisonRow-title {
+      width: 40%;
+      font-size: 24px;
+      background-color: transparent;
+    }
+
+    .comparisonRow-item {
+      {% if section.settings.column_2_title != blank and section.settings.column_3_title != blank %}
+          width: 20%;
+      {% elsif section.settings.column_2_title != blank %}
+          width: 30%;
+      {% else %}
+          width: 100%;
+      {% endif %}
+      padding: 10px;
+      text-align: {{ section.settings.text_alignment }};
+    }
+
+    .comparisonRow.even {
+      background-color: #f5f2ee;
+    }
+  }
+{% endstyle %}
+
+<section class="feeturesComparison__wrapper section-{{ section.id }}-padding">
+  <div class="wrapper">
+    {% if section.settings.heading != blank %}
+      <div class="section-header text-center">
+        <h2 class="h1 section-header__title">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+    <div class="comparisonChartWrapper">
+      <div class="comparisonHeader">
+        <div class="comparisonColumnWrapper">
+          {% if section.settings.column_1_image != blank %}
+            <img
+              src="{{ section.settings.column_1_image | img_url: '320x150' }}"
+              alt="{{section.settings.column_1_image.alt }}"
+              loading="lazy"
+            >
+          {% endif %}
+          {% if section.settings.column_1_title != blank %}
+            <h4>{{ section.settings.column_1_title }}</h4>
+          {% endif %}
+          {% if section.settings.column_1_link != blank %}
+            <a href="{{ section.settings.column_1_link }}">{{ section.settings.column_1_cta_text }}</a>
+          {% endif %}
+        </div>
+        {% if section.settings.column_2_title != blank %}
+          <div class="comparisonColumnWrapper">
+            {% if section.settings.column_2_image != blank %}
+              <img
+                src="{{ section.settings.column_2_image | img_url: '320x150' }}"
+                alt="{{section.settings.column_2_image.alt }}"
+                loading="lazy"
+              >
+            {% endif %}
+            {% if section.settings.column_2_title != blank %}
+              <h4>{{ section.settings.column_2_title }}</h4>
+            {% endif %}
+            {% if section.settings.column_2_link != blank %}
+              <a href="{{ section.settings.column_2_link }}">{{ section.settings.column_2_cta_text }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if section.settings.column_3_title != blank %}
+          <div class="comparisonColumnWrapper">
+            {% if section.settings.column_3_image != blank %}
+              <img
+                src="{{ section.settings.column_3_image | img_url: '320x150' }}"
+                alt="{{section.settings.column_3_image.alt }}"
+                loading="lazy"
+              >
+            {% endif %}
+            {% if section.settings.column_3_title != blank %}
+              <h4>{{ section.settings.column_3_title }}</h4>
+            {% endif %}
+            {% if section.settings.column_3_link != blank %}
+              <a href="{{ section.settings.column_3_link }}">{{ section.settings.column_3_cta_text }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      {% for block in section.blocks %}
+        <div class="comparisonRow {% cycle 'even', 'odd' %}">
+          <div class="comparisonRow-title">{{ block.settings.headline }}</div>
+          <div class="comparisonRow-item">{{ block.settings.item_1 }}</div>
+          {% if section.settings.column_2_title != blank %}
+            <div class="comparisonRow-item">{{ block.settings.item_2 }}</div>
+          {% endif %}
+          {% if section.settings.column_3_title != blank %}
+            <div class="comparisonRow-item">{{ block.settings.item_3 }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feetures Comparison Chart",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "label": "Text alignment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_1_image",
+      "label": "Column 1 Image (320x150 ideally)"
+    },
+    {
+      "type": "text",
+      "id": "column_1_title",
+      "label": "Column 1 Title"
+    },
+    {
+      "type": "text",
+      "id": "column_1_cta_text",
+      "label": "Column 1 CTA"
+    },
+    {
+      "type": "url",
+      "id": "column_1_link",
+      "label": "Column 1 Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_2_image",
+      "label": "Column 2 Image (320x150 ideally)"
+    },
+    {
+      "type": "text",
+      "id": "column_2_title",
+      "label": "Column 2 Title"
+    },
+    {
+      "type": "text",
+      "id": "column_2_cta_text",
+      "label": "Column 2 CTA"
+    },
+    {
+      "type": "url",
+      "id": "column_2_link",
+      "label": "Column 2 Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_3_image",
+      "label": "Column 3 Image (320x150 ideally)"
+    },
+    {
+      "type": "text",
+      "id": "column_3_title",
+      "label": "Column 3 Title"
+    },
+    {
+      "type": "text",
+      "id": "column_3_cta_text",
+      "label": "Column 3 CTA"
+    },
+    {
+      "type": "url",
+      "id": "column_3_link",
+      "label": "Column 3 Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Row Title"
+        },
+        {
+          "type": "html",
+          "id": "item_1",
+          "label": "Column 1 Text/SVG"
+        },
+        {
+          "type": "html",
+          "id": "item_2",
+          "label": "Column 2 Text/SVG"
+        },
+        {
+          "type": "html",
+          "id": "item_3",
+          "label": "Column 3 Text/SVG"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feetures Comparison Chart",
+      "category": "Feetures"
+    }
+  ]
+}
+{% endschema %}
+
+{% javascript %}
+{% endjavascript %}
